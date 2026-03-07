@@ -16,9 +16,36 @@ Standalone [OpenAI Codex CLI](https://chatgpt.com/features/codex) extension for 
 
 ## Installation
 
-This is a standalone extension directory. Unlike the project-scaffolded `.codex/` setup (created by `arckit init --ai codex`), this extension is installed once and used across all your projects.
+### Option 1: CLI (Recommended)
 
-### Step 1: Commands (prompts)
+The ArcKit CLI scaffolds a complete project with commands, skills, agents, and MCP config in one step:
+
+```bash
+# Install the CLI
+pip install git+https://github.com/tractorjuice/arc-kit.git
+# Or with uv
+uv tool install arckit-cli --from git+https://github.com/tractorjuice/arc-kit.git
+
+# Create a new project
+arckit init my-project --ai codex
+cd my-project
+codex --auto
+```
+
+This creates a project with:
+
+- `.codex/prompts/` -- 57 slash commands
+- `.codex/agents/` -- 6 agent configs (research, datascout, cloud providers, framework)
+- `.codex/config.toml` -- MCP servers and agent roles
+- `.agents/skills/` -- 4 skills (architecture workflow, Mermaid, PlantUML, Wardley mapping)
+- `.arckit/templates/` -- document templates
+- `.arckit/scripts/` -- helper scripts
+
+### Option 2: Standalone Extension (manual)
+
+This repo can also be used as a standalone extension installed once and shared across projects.
+
+**Step 1: Commands (prompts)**
 
 Set the `CODEX_HOME` environment variable to point at this directory:
 
@@ -29,7 +56,7 @@ export CODEX_HOME="/path/to/arckit-codex"
 
 This makes all 57 ArcKit commands available as `/prompts:arckit.X` in every Codex session.
 
-### Step 2: Skills
+**Step 2: Skills**
 
 Copy the `skills/` directory into your Codex agents directory:
 
@@ -39,7 +66,7 @@ cp -r /path/to/arckit-codex/skills/* ~/.agents/skills/
 
 Skills are automatically activated when Codex detects a matching context. You can also reference them explicitly with `$skill-name` in your prompts.
 
-### Step 3: MCP Servers and Agents
+**Step 3: MCP Servers and Agents**
 
 Merge the contents of `config.toml` into your global Codex configuration:
 
