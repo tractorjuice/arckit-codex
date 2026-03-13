@@ -56,7 +56,7 @@ If an artifact does not fit neatly into a phase, place it in the most relevant o
 
 Create `projects/{PID}-{name}/framework/` with phase subdirectories. Only create phases that have artifacts:
 
-```
+```text
 framework/
 ├── phase-1-foundation/
 ├── phase-2-requirements-and-data/
@@ -167,10 +167,15 @@ Return ONLY a concise summary to the caller including:
 - The Document Map in FWRK overview should list ALL artifacts, not just the ones in the framework directory
 - **Markdown escaping**: When writing less-than or greater-than comparisons, always include a space after `<` or `>` (e.g., `< 3 artifacts`, `> 30 artifacts`) to prevent markdown renderers from interpreting them as HTML tags
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 ## Suggested Next Steps
 
 After completing this command, consider running:
 
 - `$arckit-glossary` -- Generate glossary of framework terminology
 - `$arckit-maturity-model` -- Create maturity model for framework adoption
-

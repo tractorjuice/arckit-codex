@@ -763,6 +763,57 @@
             background: #005a30;  /* darker green — no variable needed */
         }
 
+        /* Vendor Scores */
+        .app-dashboard-scores-section {
+            margin-bottom: 1.5rem;
+        }
+        .app-dashboard-scores-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+        }
+        .app-dashboard-scores-date {
+            font-size: 0.8125rem;
+            color: var(--text-muted, #505a5f);
+        }
+        .app-dashboard-score-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.375rem;
+        }
+        .app-dashboard-score-bar-label {
+            min-width: 150px;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .app-dashboard-score-bar-track {
+            flex: 1;
+            height: 18px;
+            background: var(--surface-secondary, #f3f2f1);
+            border-radius: 3px;
+            margin: 0 0.5rem;
+        }
+        .app-dashboard-score-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        .app-dashboard-score-bar-pct {
+            min-width: 40px;
+            text-align: right;
+            font-size: 0.875rem;
+            font-weight: bold;
+        }
+        .app-dashboard-score-cell {
+            text-align: center;
+            font-weight: bold;
+            border-radius: 3px;
+            padding: 2px 6px;
+        }
+
         @media (max-width: 900px) {
             .app-dashboard-kpis {
                 grid-template-columns: repeat(2, 1fr);
@@ -1482,6 +1533,140 @@
             outline: 3px solid var(--color-focus);
             outline-offset: 0;
         }
+
+        /* ── Dependency Map ── */
+        .app-depmap-container {
+            border: 1px solid var(--border-main);
+            border-radius: 4px;
+            background: var(--bg-surface);
+            overflow: hidden;
+        }
+        .app-depmap-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-main);
+            background: var(--bg-surface-alt);
+        }
+        .app-depmap-controls label {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .app-depmap-controls select {
+            font-size: 14px;
+            padding: 4px 8px;
+            border: 1px solid var(--border-main);
+            border-radius: 4px;
+            background: var(--bg-surface);
+            color: var(--text-primary);
+        }
+        .app-depmap-svg {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+        }
+        .app-depmap-node {
+            cursor: pointer;
+            transition: opacity 0.15s;
+        }
+        .app-depmap-node rect {
+            transition: stroke-width 0.15s;
+        }
+        .app-depmap-node:hover rect {
+            stroke-width: 2.5;
+        }
+        .app-depmap-node.orphan rect {
+            stroke-dasharray: 4,3;
+        }
+        .app-depmap-node.dimmed {
+            opacity: 0.15;
+        }
+        .app-depmap-edge {
+            fill: none;
+            stroke-width: 1.5;
+            opacity: 0.3;
+            transition: opacity 0.15s;
+        }
+        .app-depmap-edge.highlighted {
+            opacity: 1;
+            stroke-width: 2;
+        }
+        .app-depmap-edge.dimmed {
+            opacity: 0.06;
+        }
+        .app-depmap-tooltip {
+            position: fixed;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-main);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 12px;
+            line-height: 1.4;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            pointer-events: none;
+            z-index: 1000;
+            max-width: 260px;
+        }
+        .app-depmap-tooltip strong {
+            display: block;
+            margin-bottom: 2px;
+            color: var(--text-primary);
+        }
+        .app-depmap-tooltip span {
+            color: var(--text-secondary);
+        }
+        .app-depmap-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 10px 16px;
+            border-top: 1px solid var(--border-main);
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        .app-depmap-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .app-depmap-legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        .app-depmap-empty {
+            text-align: center;
+            padding: 48px 16px;
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        .app-depmap-layout-toggle {
+            display: inline-flex;
+            border: 1px solid var(--border-main);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .app-depmap-layout-toggle button {
+            border: none;
+            background: var(--bg-surface);
+            color: var(--text-primary);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            cursor: pointer;
+        }
+        .app-depmap-layout-toggle button:not(:last-child) {
+            border-right: 1px solid var(--border-main);
+        }
+        .app-depmap-layout-toggle button.active {
+            background: var(--text-primary);
+            color: var(--bg-surface);
+        }
+        .app-depmap-layout-toggle button:hover:not(.active) {
+            background: var(--bg-surface-alt);
+        }
     </style>
 </head>
 <body class="govuk-template__body">
@@ -1499,6 +1684,7 @@
                 <a href="#dashboard" id="dashboard-link" class="app-header__dashboard-link">Dashboard</a>
                 <a href="#guides" id="guides-link" class="app-header__guides-link">Guides</a>
                 <a href="#roles" id="roles-link" class="app-header__guides-link">Roles</a>
+                <a href="#dependency-map" id="depmap-link" class="app-header__guides-link">Document Map</a>
                 <a href="https://tractorjuice.github.io/arc-kit/">ArcKit</a>
                 <span class="app-version-badge">v{{VERSION}}</span>
                 <a href="{{REPO_URL}}" target="_blank" rel="noopener" class="app-icon-link" aria-label="Repository" title="Repository">
@@ -2014,7 +2200,7 @@
             });
 
             // Sort categories
-            const categoryOrder = ['Discovery', 'Planning', 'Architecture', 'Governance', 'Compliance', 'Operations', 'Procurement', 'Research', 'Other'];
+            const categoryOrder = ['Getting Started', 'Discovery', 'Planning', 'Architecture', 'Governance', 'Compliance', 'Operations', 'Procurement', 'Integrations', 'Reporting'];
             const sortedCategories = Object.keys(byCategory).sort((a, b) => {
                 const aIdx = categoryOrder.indexOf(a);
                 const bIdx = categoryOrder.indexOf(b);
@@ -2134,6 +2320,7 @@
         let TYPE_CATEGORIES = {};
 
         const CATEGORY_COLORS = {
+            'Getting Started': '#4c6272',
             Discovery: '#1d70b8',
             Planning: '#00703c',
             Architecture: '#f47738',
@@ -2141,7 +2328,8 @@
             Compliance: '#5694ca',
             Operations: '#28a197',
             Procurement: '#d53880',
-            Research: '#4c6272',
+            Integrations: '#4c2c92',
+            Reporting: '#85994b',
             Other: '#b1b4b6'
         };
 
@@ -2223,14 +2411,6 @@
                 ? Math.round(projectMetrics.reduce((sum, p) => sum + p.coverage, 0) / projectMetrics.length)
                 : 0;
 
-            // Guide maturity
-            const guideCounts = { live: 0, beta: 0, alpha: 0, experimental: 0 };
-            (manifest.guides || []).forEach(g => {
-                if (g.status && guideCounts.hasOwnProperty(g.status)) {
-                    guideCounts[g.status]++;
-                }
-            });
-
             // Governance coverage (portfolio-wide)
             const GOVERNANCE_TYPES = {
                 'Requirements (REQ)': 'REQ',
@@ -2273,7 +2453,6 @@
                 avgCoverage,
                 categoryCounts,
                 projectMetrics,
-                guideCounts,
                 governanceCoverage
             };
         }
@@ -2335,6 +2514,82 @@
                     <ul class="app-dashboard-legend">${legendHtml}</ul>
                 </div>
             `;
+        }
+
+        function scoreColor(score) {
+            if (score >= 2.5) return '#00703c';
+            if (score >= 1.5) return '#f47738';
+            if (score >= 0.5) return '#f47738';
+            return '#d4351c';
+        }
+
+        function renderVendorScores(manifest) {
+            let html = '';
+            const projects = (manifest.projects || []).filter(p => p.vendorScores);
+            if (projects.length === 0) return '';
+
+            projects.forEach(project => {
+                const vs = project.vendorScores;
+                const categories = vs.categories || [];
+                const vendors = vs.vendors || [];
+                if (vendors.length === 0) return;
+
+                const dateStr = vs.lastUpdated
+                    ? new Date(vs.lastUpdated).toLocaleDateString()
+                    : '';
+
+                // Table header
+                let catHeaders = categories.map(c => `<th>${escapeHtml(c)}</th>`).join('');
+                let tableRows = '';
+                vendors.forEach(v => {
+                    const pct = v.maxPossible > 0
+                        ? Math.round((v.totalRaw / v.maxPossible) * 100)
+                        : 0;
+                    let catCells = categories.map(c => {
+                        const avg = (v.categoryAverages && v.categoryAverages[c]) || 0;
+                        return `<td><span class="app-dashboard-score-cell" style="background:${scoreColor(avg)}20;color:${scoreColor(avg)}">${avg.toFixed(1)}</span></td>`;
+                    }).join('');
+                    tableRows += `<tr>
+                        <td>${escapeHtml(v.name)}</td>
+                        <td style="font-weight:bold">${v.totalWeighted.toFixed(2)}</td>
+                        <td>${v.totalRaw}/${v.maxPossible}</td>
+                        ${catCells}
+                    </tr>`;
+                });
+
+                // Score bars
+                let bars = '';
+                vendors.forEach(v => {
+                    const pct = v.maxPossible > 0
+                        ? Math.round((v.totalRaw / v.maxPossible) * 100)
+                        : 0;
+                    bars += `
+                        <div class="app-dashboard-score-bar">
+                            <div class="app-dashboard-score-bar-label">${escapeHtml(v.name)}</div>
+                            <div class="app-dashboard-score-bar-track">
+                                <div class="app-dashboard-score-bar-fill" style="width:${pct}%;background:${scoreColor(v.totalWeighted)}"></div>
+                            </div>
+                            <div class="app-dashboard-score-bar-pct">${pct}%</div>
+                        </div>
+                    `;
+                });
+
+                html += `
+                    <div class="app-dashboard-panel app-dashboard-scores-section" style="margin-bottom:1.5rem;">
+                        <div class="app-dashboard-scores-header">
+                            <h3>Vendor Scores &mdash; ${escapeHtml(project.name)}</h3>
+                            ${dateStr ? `<span class="app-dashboard-scores-date">Updated: ${dateStr}</span>` : ''}
+                        </div>
+                        <table class="app-dashboard-table">
+                            <thead><tr><th>Vendor</th><th>Weighted</th><th>Raw</th>${catHeaders}</tr></thead>
+                            <tbody>${tableRows}</tbody>
+                        </table>
+                        ${bars}
+                    </div>
+                `;
+            });
+
+            return html;
         }
 
         function showDashboard(healthData) {
@@ -2464,7 +2719,10 @@
                 `;
             }
 
-            // Row 4: Guide maturity + Governance checklist
+            // Row 3.5: Vendor Scores
+            html += renderVendorScores(manifest);
+
+            // Row 4: Governance checklist
             let checklistHtml = '';
             Object.entries(m.governanceCoverage).forEach(([label, info]) => {
                 const icon = info.present
@@ -2478,10 +2736,6 @@
 
             html += `
                 <div class="app-dashboard-panels">
-                    <div class="app-dashboard-panel">
-                        <h3>Guide Maturity</h3>
-                        <div id="dashboard-guide-chart"></div>
-                    </div>
                     <div class="app-dashboard-panel">
                         <h3>Governance Coverage</h3>
                         <ul class="app-dashboard-checklist">${checklistHtml}</ul>
@@ -2565,11 +2819,6 @@
                 .map(([label, color]) => ({ label, value: m.categoryCounts[label] || 0, color }));
             renderDonutChart('dashboard-category-chart', categoryData);
 
-            const guideColors = { live: '#00703c', beta: '#1d70b8', alpha: '#f47738', experimental: '#912b88' };
-            const guideData = Object.entries(guideColors)
-                .map(([label, color]) => ({ label: label.charAt(0).toUpperCase() + label.slice(1), value: m.guideCounts[label] || 0, color }));
-            renderDonutChart('dashboard-guide-chart', guideData);
-
             // Wire up dashboard links to navigate to documents
             content.querySelectorAll('.app-dashboard-link').forEach(link => {
                 link.addEventListener('click', (e) => {
@@ -2582,6 +2831,765 @@
                         a.classList.toggle('active', a.dataset.path === path);
                     });
                 });
+            });
+
+            // Clear active states in sidebar
+            document.querySelectorAll('#nav-container a').forEach(a => a.classList.remove('active'));
+
+            // Scroll to top
+            document.getElementById('main-content').scrollTo(0, 0);
+        }
+
+        // ============================================
+        // Dependency Map
+        // ============================================
+        function showDependencyMap() {
+            const content = document.getElementById('content');
+            const toc = document.getElementById('toc');
+            toc.style.display = 'none';
+
+            if (!manifest.dependencyGraph || Object.keys(manifest.dependencyGraph.nodes).length === 0) {
+                content.textContent = '';
+                const h1 = document.createElement('h1');
+                h1.textContent = 'Dependency Map';
+                content.appendChild(h1);
+                const empty = document.createElement('div');
+                empty.className = 'app-depmap-empty';
+                const p1 = document.createElement('p');
+                p1.textContent = 'No dependency graph data available.';
+                const p2 = document.createElement('p');
+                p2.textContent = 'Run /arckit:pages in a project with ARC documents to generate the graph.';
+                empty.appendChild(p1);
+                empty.appendChild(p2);
+                content.appendChild(empty);
+                document.getElementById('main-content').scrollTo(0, 0);
+                return;
+            }
+
+            const { nodes, edges } = manifest.dependencyGraph;
+            const nodeIds = Object.keys(nodes);
+
+            // Build connected set for orphan detection
+            const connectedIds = new Set();
+            for (const e of edges) {
+                connectedIds.add(e.from);
+                for (const nid of nodeIds) {
+                    if (nid.startsWith(e.to)) connectedIds.add(nid);
+                }
+            }
+
+            // Build project list for filter
+            const projectSet = new Set(nodeIds.map(id => nodes[id].project));
+            const projects = [...projectSet].sort();
+
+            const CATEGORY_ORDER = [
+                'Getting Started', 'Discovery', 'Planning', 'Architecture', 'Governance',
+                'Compliance', 'Operations', 'Procurement', 'Integrations', 'Reporting', 'Other'
+            ];
+
+            // Check if any nodes have valid dates (for timeline toggle)
+            const hasValidDates = nodeIds.some(id => {
+                const d = nodes[id].createdDate;
+                return d && !isNaN(new Date(d).getTime());
+            });
+
+            let currentLayout = 'category';
+            if (hasValidDates) {
+                const stored = localStorage.getItem('arckit-depmap-layout');
+                if (stored === 'timeline') currentLayout = 'timeline';
+            }
+
+            // Build controls DOM
+            content.textContent = '';
+            const h1 = document.createElement('h1');
+            h1.textContent = 'Dependency Map';
+            content.appendChild(h1);
+
+            const container = document.createElement('div');
+            container.className = 'app-depmap-container';
+
+            const controls = document.createElement('div');
+            controls.className = 'app-depmap-controls';
+
+            const layoutLabel = document.createElement('label');
+            layoutLabel.textContent = 'Layout:';
+            layoutLabel.style.cssText = 'font-size:14px;font-weight:700;color:var(--text-primary)';
+            controls.appendChild(layoutLabel);
+
+            const toggleWrap = document.createElement('div');
+            toggleWrap.className = 'app-depmap-layout-toggle';
+
+            const btnCategory = document.createElement('button');
+            btnCategory.textContent = 'Category';
+            btnCategory.className = currentLayout === 'category' ? 'active' : '';
+            toggleWrap.appendChild(btnCategory);
+
+            if (hasValidDates) {
+                const btnTimeline = document.createElement('button');
+                btnTimeline.textContent = 'Timeline';
+                btnTimeline.className = currentLayout === 'timeline' ? 'active' : '';
+                toggleWrap.appendChild(btnTimeline);
+
+                btnTimeline.addEventListener('click', () => {
+                    currentLayout = 'timeline';
+                    localStorage.setItem('arckit-depmap-layout', 'timeline');
+                    btnCategory.className = '';
+                    btnTimeline.className = 'active';
+                    renderGraph(select.value);
+                });
+            }
+
+            btnCategory.addEventListener('click', () => {
+                currentLayout = 'category';
+                localStorage.setItem('arckit-depmap-layout', 'category');
+                btnCategory.className = 'active';
+                const btnT = toggleWrap.querySelector('button:nth-child(2)');
+                if (btnT) btnT.className = '';
+                renderGraph(select.value);
+            });
+
+            controls.appendChild(toggleWrap);
+
+            const label = document.createElement('label');
+            label.setAttribute('for', 'depmap-project-filter');
+            label.textContent = 'Project:';
+            controls.appendChild(label);
+
+            const select = document.createElement('select');
+            select.id = 'depmap-project-filter';
+            const optAll = document.createElement('option');
+            optAll.value = '';
+            optAll.textContent = 'All Projects';
+            select.appendChild(optAll);
+            for (const p of projects) {
+                const opt = document.createElement('option');
+                opt.value = p;
+                opt.textContent = p;
+                select.appendChild(opt);
+            }
+            controls.appendChild(select);
+
+            const statsSpan = document.createElement('span');
+            statsSpan.id = 'depmap-stats';
+            statsSpan.style.cssText = 'margin-left:auto;font-size:12px;color:var(--text-secondary)';
+            controls.appendChild(statsSpan);
+
+            container.appendChild(controls);
+
+            const svgWrap = document.createElement('div');
+            svgWrap.id = 'depmap-svg-wrap';
+            svgWrap.style.cssText = 'overflow-x:auto;padding:16px';
+            container.appendChild(svgWrap);
+
+            const legendEl = document.createElement('div');
+            legendEl.className = 'app-depmap-legend';
+            legendEl.id = 'depmap-legend';
+            container.appendChild(legendEl);
+
+            content.appendChild(container);
+
+            // Render legend using DOM
+            for (const cat of CATEGORY_ORDER) {
+                if (!CATEGORY_COLORS[cat]) continue;
+                const item = document.createElement('span');
+                item.className = 'app-depmap-legend-item';
+                const swatch = document.createElement('span');
+                swatch.className = 'app-depmap-legend-swatch';
+                swatch.style.background = CATEGORY_COLORS[cat];
+                item.appendChild(swatch);
+                item.appendChild(document.createTextNode(' ' + cat));
+                legendEl.appendChild(item);
+            }
+
+            // Tooltip element
+            const tooltip = document.createElement('div');
+            tooltip.className = 'app-depmap-tooltip';
+            tooltip.style.display = 'none';
+            document.body.appendChild(tooltip);
+
+            // ── Timeline utilities ──
+            function computeDateBuckets(filteredIds) {
+                const validDates = [];
+                for (const id of filteredIds) {
+                    const d = nodes[id].createdDate;
+                    if (!d) continue;
+                    const parsed = new Date(d);
+                    if (isNaN(parsed.getTime())) continue;
+                    validDates.push(parsed);
+                }
+                if (validDates.length === 0) return null;
+
+                validDates.sort((a, b) => a - b);
+                const minDate = validDates[0];
+                const maxDate = validDates[validDates.length - 1];
+                const rangeDays = (maxDate - minDate) / 86400000;
+
+                let granularity, buckets;
+
+                if (rangeDays < 90) {
+                    granularity = 'weekly';
+                    buckets = generateWeeklyBuckets(minDate, maxDate);
+                } else if (rangeDays <= 547) {
+                    granularity = 'monthly';
+                    buckets = generateMonthlyBuckets(minDate, maxDate);
+                } else {
+                    granularity = 'quarterly';
+                    buckets = generateQuarterlyBuckets(minDate, maxDate);
+                }
+
+                return { granularity, buckets };
+            }
+
+            function generateWeeklyBuckets(minDate, maxDate) {
+                const buckets = [];
+                const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                const start = new Date(minDate);
+                const day = start.getDay();
+                const diff = day === 0 ? -6 : 1 - day;
+                start.setDate(start.getDate() + diff);
+                start.setHours(0, 0, 0, 0);
+
+                const end = new Date(maxDate);
+                end.setHours(23, 59, 59, 999);
+
+                let current = new Date(start);
+                while (current <= end) {
+                    const weekStart = new Date(current);
+                    const weekEnd = new Date(current);
+                    weekEnd.setDate(weekEnd.getDate() + 6);
+                    weekEnd.setHours(23, 59, 59, 999);
+
+                    const weekNum = Math.ceil(weekStart.getDate() / 7);
+                    const label = 'W' + weekNum + ' ' + MONTHS[weekStart.getMonth()];
+
+                    buckets.push({ label, start: weekStart, end: weekEnd });
+                    current.setDate(current.getDate() + 7);
+                }
+                return buckets;
+            }
+
+            function generateMonthlyBuckets(minDate, maxDate) {
+                const buckets = [];
+                const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                let y = minDate.getFullYear(), m = minDate.getMonth();
+                const endY = maxDate.getFullYear(), endM = maxDate.getMonth();
+
+                while (y < endY || (y === endY && m <= endM)) {
+                    const start = new Date(y, m, 1);
+                    const end = new Date(y, m + 1, 0, 23, 59, 59, 999);
+                    const label = MONTHS[m] + ' ' + y;
+                    buckets.push({ label, start, end });
+                    m++;
+                    if (m > 11) { m = 0; y++; }
+                }
+                return buckets;
+            }
+
+            function generateQuarterlyBuckets(minDate, maxDate) {
+                const buckets = [];
+                let y = minDate.getFullYear();
+                let q = Math.floor(minDate.getMonth() / 3);
+                const endY = maxDate.getFullYear();
+                const endQ = Math.floor(maxDate.getMonth() / 3);
+
+                while (y < endY || (y === endY && q <= endQ)) {
+                    const startMonth = q * 3;
+                    const start = new Date(y, startMonth, 1);
+                    const end = new Date(y, startMonth + 3, 0, 23, 59, 59, 999);
+                    const label = 'Q' + (q + 1) + ' ' + y;
+                    buckets.push({ label, start, end });
+                    q++;
+                    if (q > 3) { q = 0; y++; }
+                }
+                return buckets;
+            }
+
+            function assignNodeToBucket(node, buckets) {
+                if (!node.createdDate) return -1;
+                const d = new Date(node.createdDate);
+                if (isNaN(d.getTime())) return -1;
+                for (let i = 0; i < buckets.length; i++) {
+                    if (d >= buckets[i].start && d <= buckets[i].end) return i;
+                }
+                return -1;
+            }
+
+            function renderNodes(svg, filteredIds, positions, connectedIds, NS) {
+                const nodeW = 110, nodeH = 44;
+
+                for (const id of filteredIds) {
+                    const node = nodes[id];
+                    const pos = positions[id];
+                    if (!pos) continue;
+                    const color = CATEGORY_COLORS[TYPE_CATEGORIES[node.type] || 'Other'] || CATEGORY_COLORS.Other;
+                    const isOrphan = !connectedIds.has(id);
+
+                    const shortTitle = (node.title || '').length > 16
+                        ? node.title.substring(0, 15) + '\u2026'
+                        : (node.title || id);
+
+                    const g = document.createElementNS(NS, 'g');
+                    g.setAttribute('class', 'app-depmap-node' + (isOrphan ? ' orphan' : ''));
+                    g.dataset.id = id;
+                    g.dataset.path = node.path;
+
+                    const rect = document.createElementNS(NS, 'rect');
+                    rect.setAttribute('x', pos.x);
+                    rect.setAttribute('y', pos.y);
+                    rect.setAttribute('width', nodeW);
+                    rect.setAttribute('height', nodeH);
+                    rect.setAttribute('rx', '4');
+                    rect.setAttribute('fill', 'var(--bg-surface, #fff)');
+                    rect.setAttribute('stroke', color);
+                    rect.setAttribute('stroke-width', '1.5');
+                    g.appendChild(rect);
+
+                    const typeText = document.createElementNS(NS, 'text');
+                    typeText.setAttribute('x', pos.x + nodeW / 2);
+                    typeText.setAttribute('y', pos.y + 16);
+                    typeText.setAttribute('text-anchor', 'middle');
+                    typeText.setAttribute('font-size', '11');
+                    typeText.setAttribute('font-weight', '700');
+                    typeText.setAttribute('fill', color);
+                    typeText.textContent = node.type;
+                    g.appendChild(typeText);
+
+                    const titleText = document.createElementNS(NS, 'text');
+                    titleText.setAttribute('x', pos.x + nodeW / 2);
+                    titleText.setAttribute('y', pos.y + 30);
+                    titleText.setAttribute('text-anchor', 'middle');
+                    titleText.setAttribute('font-size', '8');
+                    titleText.setAttribute('fill', 'var(--text-secondary, #666)');
+                    titleText.textContent = shortTitle;
+                    g.appendChild(titleText);
+
+                    // Last-modified indicator dot
+                    if (node.lastModified) {
+                        const lmDate = new Date(node.lastModified);
+                        if (!isNaN(lmDate.getTime())) {
+                            const daysAgo = (Date.now() - lmDate.getTime()) / 86400000;
+                            let dotColor = null;
+                            if (daysAgo < 7) dotColor = '#00703c';
+                            else if (daysAgo < 30) dotColor = '#f47738';
+                            if (dotColor) {
+                                const dot = document.createElementNS(NS, 'circle');
+                                dot.setAttribute('cx', pos.x + nodeW - 6);
+                                dot.setAttribute('cy', pos.y + 6);
+                                dot.setAttribute('r', '3');
+                                dot.setAttribute('fill', dotColor);
+                                g.appendChild(dot);
+                            }
+                        }
+                    }
+
+                    // Event listeners
+                    g.addEventListener('mouseenter', () => {
+                        const nodeId = g.dataset.id;
+                        const connNodes = new Set([nodeId]);
+                        svg.querySelectorAll('.app-depmap-edge').forEach(p => {
+                            if (p.dataset.from === nodeId || p.dataset.to === nodeId) {
+                                p.classList.add('highlighted');
+                                connNodes.add(p.dataset.from);
+                                connNodes.add(p.dataset.to);
+                            } else {
+                                p.classList.add('dimmed');
+                            }
+                        });
+                        svg.querySelectorAll('.app-depmap-node').forEach(n => {
+                            if (!connNodes.has(n.dataset.id)) n.classList.add('dimmed');
+                        });
+
+                        const nd = nodes[nodeId];
+                        if (nd) {
+                            const ttTitle = document.createElement('strong');
+                            ttTitle.textContent = nd.title || nodeId;
+                            const ttMeta = document.createElement('span');
+                            ttMeta.textContent = nd.type + ' \u00b7 ' + nd.project + ' \u00b7 ' + (nd.status || 'No status') + ' \u2014 Severity: ' + (nd.severity || 'LOW');
+                            tooltip.textContent = '';
+                            tooltip.appendChild(ttTitle);
+                            tooltip.appendChild(ttMeta);
+                            tooltip.style.display = 'block';
+                            const r = g.getBoundingClientRect();
+                            tooltip.style.left = (r.right + 8) + 'px';
+                            tooltip.style.top = r.top + 'px';
+                        }
+                    });
+
+                    g.addEventListener('mouseleave', () => {
+                        svg.querySelectorAll('.app-depmap-edge').forEach(p => {
+                            p.classList.remove('highlighted', 'dimmed');
+                        });
+                        svg.querySelectorAll('.app-depmap-node').forEach(n => {
+                            n.classList.remove('dimmed');
+                        });
+                        tooltip.style.display = 'none';
+                    });
+
+                    g.addEventListener('click', () => {
+                        const docPath = g.dataset.path;
+                        if (docPath) {
+                            tooltip.style.display = 'none';
+                            window.location.hash = docPath;
+                        }
+                    });
+
+                    svg.appendChild(g);
+                }
+            }
+
+            function renderGraph(filterProject) {
+                const statsEl = document.getElementById('depmap-stats');
+
+                // Filter nodes
+                const filteredIds = filterProject
+                    ? nodeIds.filter(id => nodes[id].project === filterProject || nodes[id].project.startsWith('000-'))
+                    : [...nodeIds];
+
+                if (filteredIds.length === 0) {
+                    svgWrap.textContent = '';
+                    const emptyMsg = document.createElement('div');
+                    emptyMsg.className = 'app-depmap-empty';
+                    emptyMsg.textContent = 'No documents in this project.';
+                    svgWrap.appendChild(emptyMsg);
+                    statsEl.textContent = '';
+                    return;
+                }
+
+                // Group by category
+                const catGroups = {};
+                for (const id of filteredIds) {
+                    const node = nodes[id];
+                    if (!node) continue;
+                    const cat = (node.type && TYPE_CATEGORIES[node.type]) || 'Other';
+                    if (!catGroups[cat]) catGroups[cat] = [];
+                    catGroups[cat].push(id);
+                }
+
+                // Sort within each category by project then type
+                for (const cat of Object.keys(catGroups)) {
+                    catGroups[cat].sort((a, b) => {
+                        const na = nodes[a], nb = nodes[b];
+                        return (na.project || '').localeCompare(nb.project || '') || (na.type || '').localeCompare(nb.type || '');
+                    });
+                }
+
+                // Filter edges to visible nodes
+                const filteredSet = new Set(filteredIds);
+                const visibleEdges = edges.filter(e => {
+                    if (!filteredSet.has(e.from)) return false;
+                    return filteredIds.some(id => id.startsWith(e.to));
+                });
+
+                if (currentLayout === 'timeline') {
+                    renderTimelineLayout(filteredIds, catGroups, connectedIds, visibleEdges, filteredSet);
+                } else {
+                    renderCategoryLayout(filteredIds, catGroups, connectedIds, visibleEdges, filteredSet);
+                }
+            }
+
+            function renderCategoryLayout(filteredIds, catGroups, connectedIds, visibleEdges, filteredSet) {
+                const statsEl = document.getElementById('depmap-stats');
+
+                // Layout constants
+                const nodeW = 110, nodeH = 44;
+                const gapX = 16, gapY = 24;
+                const rowPadTop = 30, rowPadBot = 14, rowGapY = 10;
+                const labelW = 110, padL = 16, padR = 16, padT = 16;
+                const maxCols = 8;
+
+                // Compute positions with wrapping
+                const positions = {};
+                let y = padT;
+                const rowBands = [];
+
+                for (const cat of CATEGORY_ORDER) {
+                    const ids = catGroups[cat];
+                    if (!ids || ids.length === 0) continue;
+
+                    const numRows = Math.ceil(ids.length / maxCols);
+                    const rowH = rowPadTop + numRows * nodeH + (numRows - 1) * rowGapY + rowPadBot;
+
+                    rowBands.push({ cat, y, h: rowH });
+
+                    for (let i = 0; i < ids.length; i++) {
+                        const col = i % maxCols;
+                        const row = Math.floor(i / maxCols);
+                        positions[ids[i]] = {
+                            x: padL + labelW + col * (nodeW + gapX),
+                            y: y + rowPadTop + row * (nodeH + rowGapY),
+                        };
+                    }
+                    y += rowH + gapY;
+                }
+
+                const usedCols = Math.min(maxCols, Math.max(...Object.keys(catGroups).map(c => catGroups[c] ? catGroups[c].length : 0), 1));
+                const svgW = padL + labelW + usedCols * nodeW + (usedCols - 1) * gapX + padR;
+                const svgH = y - gapY + padT;
+
+                statsEl.textContent = filteredIds.length + ' nodes, ' + visibleEdges.length + ' edges';
+
+                // Build SVG
+                const NS = 'http://www.w3.org/2000/svg';
+                const svg = document.createElementNS(NS, 'svg');
+                svg.setAttribute('class', 'app-depmap-svg');
+                svg.setAttribute('viewBox', '0 0 ' + svgW + ' ' + svgH);
+                svg.setAttribute('width', svgW);
+                svg.setAttribute('height', svgH);
+
+                // Row backgrounds
+                for (const band of rowBands) {
+                    const color = CATEGORY_COLORS[band.cat] || CATEGORY_COLORS.Other;
+                    const bg = document.createElementNS(NS, 'rect');
+                    bg.setAttribute('x', 0);
+                    bg.setAttribute('y', band.y);
+                    bg.setAttribute('width', svgW);
+                    bg.setAttribute('height', band.h);
+                    bg.setAttribute('fill', color);
+                    bg.setAttribute('opacity', '0.06');
+                    bg.setAttribute('rx', '4');
+                    svg.appendChild(bg);
+
+                    const lbl = document.createElementNS(NS, 'text');
+                    lbl.setAttribute('x', padL);
+                    lbl.setAttribute('y', band.y + 18);
+                    lbl.setAttribute('font-size', '11');
+                    lbl.setAttribute('font-weight', '700');
+                    lbl.setAttribute('fill', color);
+                    lbl.textContent = band.cat;
+                    svg.appendChild(lbl);
+                }
+
+                // Edges
+                for (const e of visibleEdges) {
+                    const fromPos = positions[e.from];
+                    if (!fromPos) continue;
+                    const toId = filteredIds.find(id => id.startsWith(e.to));
+                    if (!toId) continue;
+                    const toPos = positions[toId];
+                    if (!toPos) continue;
+
+                    const x1 = fromPos.x + nodeW / 2;
+                    const y1 = fromPos.y + nodeH;
+                    const x2 = toPos.x + nodeW / 2;
+                    const y2 = toPos.y;
+
+                    const dy = Math.abs(y2 - y1) * 0.4;
+                    const color = CATEGORY_COLORS[TYPE_CATEGORIES[nodes[e.from].type] || 'Other'] || CATEGORY_COLORS.Other;
+
+                    const path = document.createElementNS(NS, 'path');
+                    path.setAttribute('class', 'app-depmap-edge');
+                    path.dataset.from = e.from;
+                    path.dataset.to = toId;
+                    path.setAttribute('d', 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + (y1 + dy) + ' ' + x2 + ',' + (y2 - dy) + ' ' + x2 + ',' + y2);
+                    path.setAttribute('stroke', color);
+                    svg.appendChild(path);
+                }
+
+                // Nodes
+                renderNodes(svg, filteredIds, positions, connectedIds, NS);
+
+                svgWrap.textContent = '';
+                svgWrap.appendChild(svg);
+            }
+
+            function renderTimelineLayout(filteredIds, catGroups, connectedIds, visibleEdges, filteredSet) {
+                const statsEl = document.getElementById('depmap-stats');
+                const bucketResult = computeDateBuckets(filteredIds);
+
+                // Fallback to category if no valid dates
+                if (!bucketResult) {
+                    renderCategoryLayout(filteredIds, catGroups, connectedIds, visibleEdges, filteredSet);
+                    return;
+                }
+
+                const { buckets } = bucketResult;
+
+                // Layout constants
+                const nodeW = 110, nodeH = 44;
+                const gapX = 16, gapY = 24;
+                const rowPadTop = 30, rowPadBot = 14, rowGapY = 10;
+                const labelW = 110, padL = 16, padR = 16, padT = 16;
+                const colW = nodeW + gapX;
+                const headerH = 24;
+
+                // Total columns = date buckets + optional "No Date"
+                const hasUndated = filteredIds.some(id => assignNodeToBucket(nodes[id], buckets) === -1);
+                const totalCols = buckets.length + (hasUndated ? 1 : 0);
+
+                // Assign nodes to cells: { catKey: { colIdx: [nodeIds] } }
+                const cells = {};
+                for (const id of filteredIds) {
+                    const node = nodes[id];
+                    const cat = (node.type && TYPE_CATEGORIES[node.type]) || 'Other';
+                    const colIdx = assignNodeToBucket(node, buckets);
+                    const actualCol = colIdx === -1 ? buckets.length : colIdx;
+                    if (!cells[cat]) cells[cat] = {};
+                    if (!cells[cat][actualCol]) cells[cat][actualCol] = [];
+                    cells[cat][actualCol].push(id);
+                }
+
+                // Sort within each cell by project then type
+                for (const cat of Object.keys(cells)) {
+                    for (const col of Object.keys(cells[cat])) {
+                        cells[cat][col].sort((a, b) => {
+                            const na = nodes[a], nb = nodes[b];
+                            return (na.project || '').localeCompare(nb.project || '') || (na.type || '').localeCompare(nb.type || '');
+                        });
+                    }
+                }
+
+                // Compute row heights (expand for stacked nodes)
+                const positions = {};
+                let y = padT + headerH;
+                const rowBands = [];
+
+                for (const cat of CATEGORY_ORDER) {
+                    if (!catGroups[cat] || catGroups[cat].length === 0) continue;
+
+                    // Find max stack in any column for this category
+                    let maxStack = 1;
+                    if (cells[cat]) {
+                        for (const col of Object.keys(cells[cat])) {
+                            maxStack = Math.max(maxStack, cells[cat][col].length);
+                        }
+                    }
+
+                    const numRows = maxStack;
+                    const rowH = rowPadTop + numRows * nodeH + (numRows - 1) * rowGapY + rowPadBot;
+                    rowBands.push({ cat, y, h: rowH });
+
+                    // Position nodes
+                    if (cells[cat]) {
+                        for (const [colStr, ids] of Object.entries(cells[cat])) {
+                            const col = parseInt(colStr, 10);
+                            for (let i = 0; i < ids.length; i++) {
+                                positions[ids[i]] = {
+                                    x: padL + labelW + col * colW,
+                                    y: y + rowPadTop + i * (nodeH + rowGapY),
+                                };
+                            }
+                        }
+                    }
+
+                    y += rowH + gapY;
+                }
+
+                const svgW = padL + labelW + totalCols * colW + padR;
+                const svgH = y - gapY + padT;
+
+                statsEl.textContent = filteredIds.length + ' nodes, ' + visibleEdges.length + ' edges';
+
+                // Build SVG
+                const NS = 'http://www.w3.org/2000/svg';
+                const svg = document.createElementNS(NS, 'svg');
+                svg.setAttribute('class', 'app-depmap-svg');
+                svg.setAttribute('viewBox', '0 0 ' + svgW + ' ' + svgH);
+                svg.setAttribute('width', svgW);
+                svg.setAttribute('height', svgH);
+
+                // Column headers
+                for (let i = 0; i < buckets.length; i++) {
+                    const cx = padL + labelW + i * colW + colW / 2;
+                    const hdr = document.createElementNS(NS, 'text');
+                    hdr.setAttribute('x', cx);
+                    hdr.setAttribute('y', padT + headerH - 6);
+                    hdr.setAttribute('text-anchor', 'middle');
+                    hdr.setAttribute('font-size', '10');
+                    hdr.setAttribute('font-weight', '600');
+                    hdr.setAttribute('fill', 'var(--text-secondary, #666)');
+                    hdr.textContent = buckets[i].label;
+                    svg.appendChild(hdr);
+                }
+
+                // "No Date" header
+                if (hasUndated) {
+                    const cx = padL + labelW + buckets.length * colW + colW / 2;
+                    const hdr = document.createElementNS(NS, 'text');
+                    hdr.setAttribute('x', cx);
+                    hdr.setAttribute('y', padT + headerH - 6);
+                    hdr.setAttribute('text-anchor', 'middle');
+                    hdr.setAttribute('font-size', '10');
+                    hdr.setAttribute('font-weight', '600');
+                    hdr.setAttribute('fill', '#b1b4b6');
+                    hdr.textContent = 'No Date';
+                    svg.appendChild(hdr);
+                }
+
+                // Column separator lines
+                for (let i = 1; i < totalCols; i++) {
+                    const lx = padL + labelW + i * colW - gapX / 2;
+                    const line = document.createElementNS(NS, 'line');
+                    line.setAttribute('x1', lx);
+                    line.setAttribute('y1', padT + headerH);
+                    line.setAttribute('x2', lx);
+                    line.setAttribute('y2', svgH - padT);
+                    line.setAttribute('stroke', 'var(--border-main, #e8e8e8)');
+                    line.setAttribute('stroke-width', '1');
+                    line.setAttribute('opacity', '0.3');
+                    svg.appendChild(line);
+                }
+
+                // Row backgrounds
+                for (const band of rowBands) {
+                    const color = CATEGORY_COLORS[band.cat] || CATEGORY_COLORS.Other;
+                    const bg = document.createElementNS(NS, 'rect');
+                    bg.setAttribute('x', 0);
+                    bg.setAttribute('y', band.y);
+                    bg.setAttribute('width', svgW);
+                    bg.setAttribute('height', band.h);
+                    bg.setAttribute('fill', color);
+                    bg.setAttribute('opacity', '0.06');
+                    bg.setAttribute('rx', '4');
+                    svg.appendChild(bg);
+
+                    const lbl = document.createElementNS(NS, 'text');
+                    lbl.setAttribute('x', padL);
+                    lbl.setAttribute('y', band.y + 18);
+                    lbl.setAttribute('font-size', '11');
+                    lbl.setAttribute('font-weight', '700');
+                    lbl.setAttribute('fill', color);
+                    lbl.textContent = band.cat;
+                    svg.appendChild(lbl);
+                }
+
+                // Edges
+                for (const e of visibleEdges) {
+                    const fromPos = positions[e.from];
+                    if (!fromPos) continue;
+                    const toId = filteredIds.find(id => id.startsWith(e.to));
+                    if (!toId) continue;
+                    const toPos = positions[toId];
+                    if (!toPos) continue;
+
+                    const x1 = fromPos.x + nodeW / 2;
+                    const y1 = fromPos.y + nodeH;
+                    const x2 = toPos.x + nodeW / 2;
+                    const y2 = toPos.y;
+                    const dy = Math.abs(y2 - y1) * 0.4;
+                    const color = CATEGORY_COLORS[TYPE_CATEGORIES[nodes[e.from].type] || 'Other'] || CATEGORY_COLORS.Other;
+
+                    const path = document.createElementNS(NS, 'path');
+                    path.setAttribute('class', 'app-depmap-edge');
+                    path.dataset.from = e.from;
+                    path.dataset.to = toId;
+                    path.setAttribute('d', 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + (y1 + dy) + ' ' + x2 + ',' + (y2 - dy) + ' ' + x2 + ',' + y2);
+                    path.setAttribute('stroke', color);
+                    svg.appendChild(path);
+                }
+
+                // Nodes
+                renderNodes(svg, filteredIds, positions, connectedIds, NS);
+
+                svgWrap.textContent = '';
+                svgWrap.appendChild(svg);
+            }
+
+            // Initial render
+            renderGraph('');
+
+            // Filter handler
+            select.addEventListener('change', () => {
+                renderGraph(select.value);
             });
 
             // Clear active states in sidebar
@@ -3531,6 +4539,13 @@
                     closeMobileSidebar();
                 });
 
+                // Setup dependency map link
+                document.getElementById('depmap-link').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.hash = 'dependency-map';
+                    closeMobileSidebar();
+                });
+
                 // Handle initial hash or load dashboard
                 if (window.location.hash) {
                     const path = window.location.hash.slice(1);
@@ -3540,6 +4555,8 @@
                         showGuidesIndex();
                     } else if (path === 'roles') {
                         showRolesIndex();
+                    } else if (path === 'dependency-map') {
+                        showDependencyMap();
                     } else {
                         loadDocument(path);
 
@@ -3593,6 +4610,8 @@
                 showGuidesIndex();
             } else if (path === 'roles') {
                 showRolesIndex();
+            } else if (path === 'dependency-map') {
+                showDependencyMap();
             } else if (path) {
                 loadDocument(path);
 
