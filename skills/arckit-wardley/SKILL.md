@@ -46,9 +46,13 @@ $ARGUMENTS
 
 - **STKE** (Stakeholder Analysis) — Extract: Business drivers, stakeholder goals, priorities, success metrics
 - **RSCH** / **AWRS** / **AZRS** (Research) — Extract: Vendor landscape, build vs buy analysis, TCO comparisons
+- **WVCH** (Value Chain) — Extract: Anchor (user need), components, visibility scores, dependencies
 
 **OPTIONAL** (read if available, skip silently if missing):
 
+- **WDOC** (Doctrine Assessment) — Extract: Doctrine maturity scores, capability gaps, improvement priorities
+- **WCLM** (Climate Assessment) — Extract: Climatic pattern impacts, evolution predictions, inertia factors
+- **WGAM** (Gameplay Analysis) — Extract: Selected strategic plays, execution steps
 - **DATA** (Data Model) — Extract: Data components, storage technology, data flow patterns
 - **TCOP** (TCoP Review) — Extract: UK Government compliance requirements, reuse opportunities
 - **AIPB** (AI Playbook) — Extract: AI component risk levels, human oversight requirements
@@ -203,6 +207,36 @@ style wardley
 - Dependencies: `ComponentA -> ComponentB` means A depends on B
 - Evolution movement: `evolve ComponentName 0.85 label Target State`
 - Use `pipeline` to show components moving through evolution stages
+
+### Mermaid Wardley Map (Enhanced)
+
+After generating the OWM code block, generate a Mermaid `wardley-beta` equivalent inside a `<details>` block (as shown in the template). The Mermaid version adds sourcing strategy decorators derived from the Build vs Buy analysis:
+
+- Components with evolution < 0.50 that are strategic differentiators: `(build)`
+- Components procured from market (Product stage): `(buy)`
+- Components outsourced to vendors: `(outsource)`
+- Commodity/utility components: no decorator (or `(buy)` if via G-Cloud/marketplace)
+- Components with identified inertia: append `(inertia)`
+
+**Pipeline translation**: Convert OWM `pipeline Name [vis, evo_start, evo_end]` to Mermaid's named-child format where pipeline variants are identified:
+
+```text
+pipeline Parent {
+  component "Variant A" [evo_a]
+  component "Variant B" [evo_b]
+}
+```
+
+**Syntax differences from OWM** (apply these when translating):
+
+- Start with `wardley-beta` keyword (not `style wardley` at end)
+- Add `size [1100, 800]` after title
+- Wrap note text in double quotes: `note "text" [vis, evo]`
+- Annotations use comma separator: `annotation N,[vis, evo] "text"`
+- Add `annotations [0.05, 0.05]` to position the annotation list
+- Remove `style wardley` line
+- Remove the `label` keyword and any text after the target evolution number on `evolve` lines (Mermaid does not support evolve labels)
+- Use ` ```mermaid ` as the code fence language identifier (not ` ```wardley-beta ` or ` ```text `)
 
 ### Strategic Analysis
 
@@ -387,9 +421,10 @@ The footer should be populated with:
 The Wardley Map document must include:
 
 2. **Map Visualization Code**:
-   - Complete Wardley Map in OnlineWardleyMaps syntax
+   - Complete Wardley Map in OnlineWardleyMaps syntax (primary)
    - URL: https://create.wardleymaps.ai
    - Instructions to paste code into create.wardleymaps.ai
+   - Mermaid `wardley-beta` equivalent in collapsible `<details>` block with sourcing decorators (`build`/`buy`/`outsource`/`inertia`)
 
 3. **Component Inventory**:
    - All components with visibility, evolution, stage classification
@@ -552,6 +587,61 @@ evolve Benefits Rules Engine 0.68 label Move to product in 18m
 
 style wardley
 ```
+
+<details>
+<summary>Mermaid Wardley Map</summary>
+
+```mermaid
+wardley-beta
+title DWP Benefits Eligibility Chatbot - Procurement Strategy
+size [1100, 800]
+
+anchor Citizen [0.95, 0.63]
+
+component Benefits Eligibility Guidance [0.92, 0.25] (build)
+component Conversational Interface [0.85, 0.38] (build)
+component Human Review Queue [0.82, 0.45] (build)
+component GPT-4 LLM Service [0.68, 0.72] (buy)
+component Benefits Rules Engine [0.65, 0.42] (build)
+component Bias Testing Framework [0.62, 0.35] (build)
+component GOV.UK Notify [0.55, 0.92] (buy)
+component GOV.UK Design System [0.72, 0.75] (buy)
+component Authentication [0.48, 0.68] (buy)
+component DWP Benefits Database [0.45, 0.52] (build) (inertia)
+component Cloud Hosting AWS [0.28, 0.95] (buy)
+component PostgreSQL RDS [0.25, 0.92] (buy)
+
+Citizen -> Benefits Eligibility Guidance
+Benefits Eligibility Guidance -> Conversational Interface
+Benefits Eligibility Guidance -> Human Review Queue
+Conversational Interface -> GPT-4 LLM Service
+Conversational Interface -> Benefits Rules Engine
+Human Review Queue -> GOV.UK Notify
+Conversational Interface -> GOV.UK Design System
+Conversational Interface -> Authentication
+Benefits Rules Engine -> DWP Benefits Database
+Benefits Rules Engine -> Bias Testing Framework
+GPT-4 LLM Service -> Cloud Hosting AWS
+DWP Benefits Database -> PostgreSQL RDS
+PostgreSQL RDS -> Cloud Hosting AWS
+
+pipeline Benefits Eligibility Guidance {
+  component "Text-Based Guidance" [0.25]
+  component "Conversational AI Guidance" [0.55]
+}
+
+evolve GPT-4 LLM Service 0.85
+evolve Benefits Rules Engine 0.68
+
+note "HIGH-RISK AI - Human oversight mandatory" [0.35, 0.25]
+note "Use GOV.UK services - do not build" [0.85, 0.92]
+note "G-Cloud procurement for commodity/product" [0.75, 0.15]
+
+annotations [0.05, 0.05]
+annotation 1,[0.48, 0.45] "Build custom - competitive advantage"
+```
+
+</details>
 
 **Strategic Analysis**:
 
@@ -733,3 +823,6 @@ After completing this command, consider running:
 - `$arckit-roadmap` -- Create strategic roadmap from evolution analysis
 - `$arckit-strategy` -- Synthesise Wardley insights into architecture strategy
 - `$arckit-research` -- Research vendors for Custom-Built components *(when Custom-Built components identified that need market research)*
+- `$arckit-wardley.doctrine` -- Assess organizational doctrine maturity
+- `$arckit-wardley.gameplay` -- Identify strategic plays from the map
+- `$arckit-wardley.climate` -- Assess climatic patterns affecting components
