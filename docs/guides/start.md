@@ -50,7 +50,7 @@ Output: Console only (no file created). This is a navigation aid, not a governan
 
 ```text
 ArcKit — Enterprise Architecture Governance Toolkit
-Version 2.10.0 | 64 commands | Plugin mode
+Version 2.10.0 | 67 commands | Plugin mode
 
 Your AI-powered assistant for architecture governance, vendor procurement,
 and compliance — all driven by templates and traceability.
@@ -166,7 +166,7 @@ Each command automatically creates numbered project directories (001-\*, 002-\*)
 | Cloud Migration | Platform strategy | `aws-research` / `azure-research` → `platform-design` → `wardley` |
 | Data Platform | Data architecture | `data-model` → `datascout` → `data-mesh-contract` |
 
-See [WORKFLOW-DIAGRAMS.md](../../WORKFLOW-DIAGRAMS.md) for visual workflow diagrams.
+See [WORKFLOW-DIAGRAMS.md](../WORKFLOW-DIAGRAMS.md) for visual workflow diagrams.
 
 ---
 
