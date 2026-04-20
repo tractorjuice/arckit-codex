@@ -466,6 +466,18 @@ All artifacts must pass these 10 checks:
 - DSFR applicability assessed for citizen-facing services
 - Executive summary compliance table populated per referential
 
+### IRN -- Indice de Résilience Numérique Self-Assessment
+
+- All 8 IRN pillars present (RES-1 through RES-8)
+- Organisational layers in scope determined (5 layers, each marked in/out of scope with justification)
+- R/NR scoring placeholders created — AI must NOT pre-fill scores; official aDRI grid must be applied by the assessor
+- Link to official aDRI repository displayed prominently (gitlab.com/digitalresilienceinitiative/adri-irn)
+- Licence incompatibility note (CC BY-NC-ND 4.0 vs MIT) and living-repo rationale included in document
+- Scoring summary matrix (8 pillars × 5 layers) present
+- Preliminary observations from project artifacts noted (not from reproduced aDRI criteria)
+- Document classified OFFICIAL-SENSITIVE (dependency mapping reveals strategic vulnerabilities)
+- IRN framework version referenced (verify current version at official repository)
+
 ### CNIL -- French GDPR / CNIL Assessment
 
 - CNIL cookie guidelines (Délibération 2020-091) assessed — reject button prominence, no cookie wall, 6-month validity
@@ -580,3 +592,55 @@ All artifacts must pass these 10 checks:
 - Exceptions to publication obligation documented with justification (security, trade secret, third-party IP)
 - Reused components register populated (source, version, licence, integration method)
 - Circulaire PM n°6264-SG (2021) compliance — evidence that reuse was assessed before commissioning new development
+
+### ATDSG -- Austrian Data Protection Assessment
+
+- DSG (BGBl. I 165/1999) and applicable sector laws (ELGA-G, GTelG 2012, ArbVG §96a) identified
+- Datenschutzbehörde (DSB) identified as supervisory authority; BVwG appeal pathway noted
+- §§12–13 DSG image-processing regime assessed if CCTV/imagery in scope (labelling, 72h retention)
+- ELGA-G / GTelG 2012 interoperability addressed if health data in scope
+- §96a ArbVG Betriebsvereinbarung requirement flagged if employee monitoring potential
+- §§7–8 DSG research exemptions addressed if scientific research use case
+- Austrian age of digital consent applied at 14 years (§4(4) DSG, not GDPR default 16)
+- DPO mandatory determination performed (public body / large-scale monitoring / large-scale special category)
+- DSB notification of DPO contact via dsb.gv.at assessed
+- 72-hour breach notification to DSB process assessed
+- Post-Schrems II Transfer Impact Assessment applied
+- Items requiring practitioner verification marked `[NEEDS VERIFICATION]`
+- Document classified OFFICIAL-SENSITIVE
+
+### ATNISG -- Austrian NISG (NIS2) Assessment
+
+- Entity classification determined (Essential / Important / Out of scope) per NIS2 Annex I/II
+- Austrian sectoral authority identified (E-Control / FMA / BMK / ELGA / BMI / other)
+- Previous NISG 2018 Betreiber wesentlicher Dienste status captured with transition implications
+- All ten NIS2 Article 21 minimum security measures assessed with maturity and gap
+- Incident reporting channel established (GovCERT.gv.at and/or sectoral CERT)
+- 24-hour / 72-hour / intermediate / 1-month reporting capability readiness assessed
+- Cross-reporting to DSB for personal data breaches addressed
+- Supply chain security obligations including any AT sectoral secondary rules assessed
+- Business continuity (BCP, backup testing, RTO/RPO) assessed
+- Supervision posture (ex ante for Essential / ex post for Important) captured
+- Penalty ceilings and BVwG appeal pathway noted (with verification flag pending current text)
+- KSÖ / NCSC-AT coordination addressed as appropriate
+- DORA overlap flagged for financial sector entities
+- Items requiring practitioner verification marked `[NEEDS VERIFICATION]`
+
+### BVERGG -- Austrian Public Procurement (BVergG 2018)
+
+- Auftraggeber classification confirmed (klassisch / Sektorenauftraggeber / subventioniert §4)
+- Threshold tier determined with current EU Oberschwellenwerte verified against latest regulation
+- Value aggregation (§13 BVergG) and §9 BVergG exceptions explicitly assessed
+- Procedure selected with BVergG 2018 justification (especially for non-open procedures)
+- Leistungsbeschreibung traced to REQ (FR-xxx / NFR-xxx / INT-xxx)
+- Eignungskriterien proportionate under §20 BVergG (not overly restrictive)
+- Ausschlussgründe (§78 BVergG) verification method documented
+- Zuschlagskriterien weighted with transparent scoring; Bestbieterprinzip used unless lowest-price justified
+- SLA terms, vertragliche Regelungen, and penalty regime (Vertragsstrafe) drafted
+- Art. 28 GDPR + DSG processor clauses included where personal data processed
+- NISG supply-chain clauses included where contracting authority is Essential/Important
+- ANKÖ publication plan (plus TED for Oberschwellen) set
+- Angebotsfrist per §87 BVergG respected; Stillhaltefrist modelled in timeline
+- BVwG / LVwG review venue documented with application fee reference
+- Vergabeakt structure defined for Rechnungshof / EU audit defensibility
+- Items requiring practitioner verification marked `[NEEDS VERIFICATION]`
