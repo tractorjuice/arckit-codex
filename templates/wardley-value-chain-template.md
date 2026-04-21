@@ -136,6 +136,8 @@ component {InfrastructureF} [0.12, 0.90]
 {ComponentC} -> {InfrastructureF}
 ```
 
+> When substituting placeholders, wrap the replacement in double quotes if it contains any character outside `[A-Za-z0-9_()& ]` (e.g. hyphens, dots, slashes) or starts with a digit. Simple multi-word names stay unquoted.
+
 </details>
 
 ---

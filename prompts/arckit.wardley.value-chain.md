@@ -313,6 +313,7 @@ After generating the OWM code block, generate a Mermaid `wardley-beta` equivalen
 
 - Start with `wardley-beta` keyword (not `style wardley` at end)
 - Add `size [1100, 800]` after title
+- **Quote names that contain non-simple characters.** A name is "simple" (safe unquoted) if it matches `[A-Za-z][A-Za-z0-9_()& ]*` — letters, digits, underscores, parens, ampersands, and spaces. Anything else — hyphens, dots, slashes, colons, apostrophes, commas, `.NET`, `GPT-4`, `GOV.UK`, `Real-Time`, `C#`, `F#`, `Zero-Trust`, `End-to-End`, etc. — **must** be wrapped in double quotes, including when used on either side of a link arrow. Hyphens especially: unquoted, they are tokenised as the start of `->` and break rendering. Simple multi-word names like `Data Processing` stay unquoted.
 - Wrap note text in double quotes: `note "text" [vis, evo]`
 - Remove `style wardley` line
 - Use ` ```mermaid ` as the code fence language identifier

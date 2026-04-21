@@ -232,6 +232,7 @@ pipeline Parent {
 
 - Start with `wardley-beta` keyword (not `style wardley` at end)
 - Add `size [1100, 800]` after title
+- **Quote names that contain non-simple characters.** A name is "simple" (safe unquoted) if it matches `[A-Za-z][A-Za-z0-9_()& ]*` — letters, digits, underscores, parens, ampersands, and spaces. Anything else — hyphens, dots, slashes, colons, apostrophes, commas, `.NET`, `GPT-4`, `GOV.UK`, `Real-Time`, `C#`, `F#`, `Zero-Trust`, `End-to-End`, etc. — **must** be wrapped in double quotes everywhere they appear (component / anchor declarations, both sides of `->` link arrows, `evolve` targets, and `pipeline` parents). Hyphens especially: unquoted, they are tokenised as the start of `->` and break rendering. Simple multi-word names like `Data Processing` stay unquoted.
 - Wrap note text in double quotes: `note "text" [vis, evo]`
 - Annotations use comma separator: `annotation N,[vis, evo] "text"`
 - Add `annotations [0.05, 0.05]` to position the annotation list
@@ -612,11 +613,11 @@ anchor Citizen [0.95, 0.63]
 component Benefits Eligibility Guidance [0.92, 0.25] (build)
 component Conversational Interface [0.85, 0.38] (build)
 component Human Review Queue [0.82, 0.45] (build)
-component GPT-4 LLM Service [0.68, 0.72] (buy)
+component "GPT-4 LLM Service" [0.68, 0.72] (buy)
 component Benefits Rules Engine [0.65, 0.42] (build)
 component Bias Testing Framework [0.62, 0.35] (build)
-component GOV.UK Notify [0.55, 0.92] (buy)
-component GOV.UK Design System [0.72, 0.75] (buy)
+component "GOV.UK Notify" [0.55, 0.92] (buy)
+component "GOV.UK Design System" [0.72, 0.75] (buy)
 component Authentication [0.48, 0.68] (buy)
 component DWP Benefits Database [0.45, 0.52] (build) (inertia)
 component Cloud Hosting AWS [0.28, 0.95] (buy)
@@ -625,23 +626,23 @@ component PostgreSQL RDS [0.25, 0.92] (buy)
 Citizen -> Benefits Eligibility Guidance
 Benefits Eligibility Guidance -> Conversational Interface
 Benefits Eligibility Guidance -> Human Review Queue
-Conversational Interface -> GPT-4 LLM Service
+Conversational Interface -> "GPT-4 LLM Service"
 Conversational Interface -> Benefits Rules Engine
-Human Review Queue -> GOV.UK Notify
-Conversational Interface -> GOV.UK Design System
+Human Review Queue -> "GOV.UK Notify"
+Conversational Interface -> "GOV.UK Design System"
 Conversational Interface -> Authentication
 Benefits Rules Engine -> DWP Benefits Database
 Benefits Rules Engine -> Bias Testing Framework
-GPT-4 LLM Service -> Cloud Hosting AWS
+"GPT-4 LLM Service" -> Cloud Hosting AWS
 DWP Benefits Database -> PostgreSQL RDS
 PostgreSQL RDS -> Cloud Hosting AWS
 
 pipeline Benefits Eligibility Guidance {
   component "Text-Based Guidance" [0.25]
-  component "Conversational AI Guidance" [0.55]
+  component Conversational AI Guidance [0.55]
 }
 
-evolve GPT-4 LLM Service 0.85
+evolve "GPT-4 LLM Service" 0.85
 evolve Benefits Rules Engine 0.68
 
 note "HIGH-RISK AI - Human oversight mandatory" [0.35, 0.25]
