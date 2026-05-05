@@ -8,6 +8,19 @@
 
 ## Quick Start
 
+### Step 0: Make sure Claude Code is up to date
+
+ArcKit v4.14.0 needs Claude Code **v2.1.121 or later**. From a terminal:
+
+```bash
+claude install latest
+claude --version
+```
+
+If `claude` isn't on your PATH yet, follow the [official Claude Code install guide](https://docs.claude.com/en/docs/claude-code/quickstart) first, then run `claude install latest`. ArcKit will warn you at session start if your client is below the supported floor.
+
+### Step 1: Run the workflow
+
 ```bash
 # Step 1: Get oriented — see project status and available commands
 /arckit.start
