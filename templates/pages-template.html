@@ -2178,6 +2178,17 @@
                             });
                         });
                     }
+
+                    if (project.dataSourceProfiles) {
+                        project.dataSourceProfiles.forEach(doc => {
+                            allDocuments.push({
+                                ...doc,
+                                project: projectName,
+                                category: 'Data Source Profiles',
+                                searchText: `${doc.title} data source profile api dataset ${projectName}`.toLowerCase()
+                            });
+                        });
+                    }
                 });
             }
         }
@@ -4182,6 +4193,12 @@
             if (project.techNotes && project.techNotes.length > 0) {
                 listHtml += `<li class="app-nav-category">Tech Notes</li>`;
                 listHtml += renderVersionedDocList(project.techNotes);
+            }
+
+            // Data Source Profiles
+            if (project.dataSourceProfiles && project.dataSourceProfiles.length > 0) {
+                listHtml += `<li class="app-nav-category">Data Source Profiles</li>`;
+                listHtml += renderVersionedDocList(project.dataSourceProfiles);
             }
 
             // External Documents (mention only - not clickable)
