@@ -5,14 +5,14 @@
 codex_hooks = true
 
 # ── Lifecycle Hooks ─────────────────────────────────
-# Install hook scripts to $HOME/.codex/hooks for this standalone config.
+# Resolve hook scripts from the git root so Codex can start in subdirectories.
 
 [[hooks.SessionStart]]
 matcher = "startup|resume|clear"
 
 [[hooks.SessionStart.hooks]]
 type = "command"
-command = "node $HOME/.codex/hooks/arckit-codex-hook.mjs SessionStart"
+command = 'node "$(git rev-parse --show-toplevel)/.codex/hooks/arckit-codex-hook.mjs" SessionStart'
 timeout = 10
 statusMessage = "Loading ArcKit context"
 
@@ -20,7 +20,7 @@ statusMessage = "Loading ArcKit context"
 
 [[hooks.UserPromptSubmit.hooks]]
 type = "command"
-command = "node $HOME/.codex/hooks/arckit-codex-hook.mjs UserPromptSubmit"
+command = 'node "$(git rev-parse --show-toplevel)/.codex/hooks/arckit-codex-hook.mjs" UserPromptSubmit'
 timeout = 10
 statusMessage = "Checking ArcKit prompt"
 
@@ -29,7 +29,7 @@ matcher = "Bash|apply_patch|Edit|Write"
 
 [[hooks.PreToolUse.hooks]]
 type = "command"
-command = "node $HOME/.codex/hooks/arckit-codex-hook.mjs PreToolUse"
+command = 'node "$(git rev-parse --show-toplevel)/.codex/hooks/arckit-codex-hook.mjs" PreToolUse'
 timeout = 10
 statusMessage = "Checking ArcKit file policy"
 
@@ -38,7 +38,7 @@ matcher = "apply_patch|Edit|Write"
 
 [[hooks.PostToolUse.hooks]]
 type = "command"
-command = "node $HOME/.codex/hooks/arckit-codex-hook.mjs PostToolUse"
+command = 'node "$(git rev-parse --show-toplevel)/.codex/hooks/arckit-codex-hook.mjs" PostToolUse'
 timeout = 10
 statusMessage = "Updating ArcKit metadata"
 
@@ -47,7 +47,7 @@ matcher = "mcp__.*"
 
 [[hooks.PermissionRequest.hooks]]
 type = "command"
-command = "node $HOME/.codex/hooks/arckit-codex-hook.mjs PermissionRequest"
+command = 'node "$(git rev-parse --show-toplevel)/.codex/hooks/arckit-codex-hook.mjs" PermissionRequest'
 timeout = 10
 statusMessage = "Checking ArcKit MCP policy"
 
@@ -55,7 +55,7 @@ statusMessage = "Checking ArcKit MCP policy"
 
 [[hooks.Stop.hooks]]
 type = "command"
-command = "node $HOME/.codex/hooks/arckit-codex-hook.mjs Stop"
+command = 'node "$(git rev-parse --show-toplevel)/.codex/hooks/arckit-codex-hook.mjs" Stop'
 timeout = 10
 statusMessage = "Recording ArcKit session"
 

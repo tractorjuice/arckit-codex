@@ -45,7 +45,26 @@ This creates a project with:
 - `.arckit/schemas/` -- handoff schemas for research and scoring workflows
 - `.arckit/scripts/` -- helper scripts
 
-### Option 2: Standalone Extension (manual)
+### Option 2: Codex Plugin Bundle
+
+Install ArcKit as a Codex plugin from the standalone marketplace repository:
+
+```bash
+codex plugin marketplace add tractorjuice/arckit-codex
+```
+
+Enable Codex lifecycle hooks in your user or project config:
+
+```toml
+[features]
+codex_hooks = true
+```
+
+Restart Codex, open the plugin directory, choose **ArcKit Plugins**, then install
+and enable **ArcKit**. The plugin manifest points to bundled skills, MCP server
+config, and `hooks/hooks.json`.
+
+### Option 3: Standalone Extension (manual)
 
 This repo can also be used as a standalone extension installed once and shared across projects.
 
@@ -65,20 +84,21 @@ This makes all 116 ArcKit commands available as `$arckit-*` skills plus 4 refere
 
 **Step 2: MCP Servers and Agents**
 
-Merge the contents of `config.toml` into your global Codex configuration:
+Merge the contents of `config.toml` into your project Codex configuration:
 
 ```bash
-# If you don't have a global config yet, copy directly
-cp /path/to/arckit-codex/config.toml ~/.codex/config.toml
+# If you don't have a project config yet, copy directly
+mkdir -p .codex
+cp /path/to/arckit-codex/config.toml .codex/config.toml
 
-# If you already have a config, manually merge the [mcp_servers] and [agents] sections
+# If you already have a config, manually merge the [mcp_servers], [agents], and [hooks] sections
 ```
 
 Copy the agent prompt files referenced by `config.toml`:
 
 ```bash
-mkdir -p ~/.codex/agents
-cp -r /path/to/arckit-codex/agents/* ~/.codex/agents/
+mkdir -p .codex/agents
+cp -r /path/to/arckit-codex/agents/* .codex/agents/
 ```
 
 **Step 3: Lifecycle Hooks**
@@ -86,8 +106,8 @@ cp -r /path/to/arckit-codex/agents/* ~/.codex/agents/
 Copy the Codex hook runner referenced by `config.toml`:
 
 ```bash
-mkdir -p ~/.codex/hooks
-cp /path/to/arckit-codex/hooks/arckit-codex-hook.mjs ~/.codex/hooks/
+mkdir -p .codex/hooks
+cp /path/to/arckit-codex/hooks/arckit-codex-hook.mjs .codex/hooks/
 ```
 
 The hook wiring in `config.toml` enables:
@@ -110,10 +130,6 @@ cp /path/to/arckit-codex/scripts/validate-handoff.mjs .arckit/scripts/
 ```
 
 MCP servers require no API keys except for Google Developer Knowledge (`GOOGLE_API_KEY`) and Data Commons (`DATA_COMMONS_API_KEY`). AWS Knowledge and Microsoft Learn work without authentication.
-
-### Option 3: Codex Plugin Bundle
-
-`arckit-codex/` also contains a Codex plugin manifest at `.codex-plugin/plugin.json`. It points to bundled skills, MCP server config, and `hooks/hooks.json` for Codex installations that load local plugins directly.
 
 ## Skills
 
