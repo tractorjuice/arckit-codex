@@ -2,15 +2,28 @@
 
 > **Guide Origin**: Official | **ArcKit Version**: [VERSION]
 
-`/arckit.start` and `/arckit.init` are your entry points to ArcKit. Start gives you orientation and routes you to the right workflow; init creates the project structure.
+The `start` and `init` commands are your entry points to ArcKit. Start gives you orientation and routes you to the right workflow; init creates the project structure.
+
+Command syntax depends on your AI platform:
+
+| Platform | Start | Init | Principles |
+| --- | --- | --- | --- |
+| Claude Code / OpenCode | `/arckit.start` | `/arckit.init` | `/arckit.principles` |
+| Gemini CLI | `/arckit:start` | `/arckit:init` | `/arckit:principles` |
+| Codex CLI | `$arckit-start` | `$arckit-init` | `$arckit-principles` |
+| GitHub Copilot | `/arckit-start` | `/arckit-init` | `/arckit-principles` |
+
+Examples below use Claude Code / OpenCode syntax. Translate commands using the table above for other platforms.
 
 ---
 
 ## Quick Start
 
-### Step 0: Make sure Claude Code is up to date
+### Step 0: Check your platform setup
 
-ArcKit v4.14.0 needs Claude Code **v2.1.121 or later**. From a terminal:
+If ArcKit is already installed and enabled for your platform, skip to Step 1.
+
+For Claude Code, ArcKit v4.14.0 needs Claude Code **v2.1.121 or later**. From a terminal:
 
 ```bash
 claude install latest
@@ -19,17 +32,39 @@ claude --version
 
 If `claude` isn't on your PATH yet, follow the [official Claude Code install guide](https://docs.claude.com/en/docs/claude-code/quickstart) first, then run `claude install latest`. ArcKit will warn you at session start if your client is below the supported floor.
 
+For Codex CLI, install or upgrade the ArcKit plugin marketplace and enable plugin hooks:
+
+```bash
+# First install
+codex plugin marketplace add tractorjuice/arckit-codex
+
+# Existing install
+codex plugin marketplace upgrade arckit
+
+# Required for plugin-bundled lifecycle hooks
+codex features enable hooks
+codex features enable plugin_hooks
+```
+
+Restart Codex, run `/plugins`, choose **ArcKit Plugins**, then install and enable **ArcKit**.
+
+For Gemini CLI, OpenCode CLI, and GitHub Copilot, use the platform-specific install steps on the [Getting Started page](https://arckit.org/getting-started.html).
+
 ### Step 1: Run the workflow
 
 ```bash
-# Step 1: Get oriented — see project status and available commands
+# Claude Code / OpenCode: get oriented, initialize, then create principles
 /arckit.start
-
-# Step 2: Initialize project structure (if no projects/ directory exists)
 /arckit.init
-
-# Step 3: Create architecture principles (prerequisite for most commands)
 /arckit.principles
+```
+
+For Codex CLI, the same workflow is:
+
+```bash
+$arckit-start
+$arckit-init
+$arckit-principles
 ```
 
 ---
