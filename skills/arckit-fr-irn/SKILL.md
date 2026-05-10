@@ -66,7 +66,7 @@ If no artifacts exist, include all 5 layers and note that scope confirmation is 
 
 ### Step 3: Read Template
 
-- **First**, check if `.arckit/templates/fr-irn-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/fr-irn-template.md` exists in the project root
 - **If found**: use the user's customised template
 - **If not found**: use `.arckit/templates/fr-irn-template.md`
 

@@ -49,7 +49,7 @@ $ARGUMENTS
 
 ### 1c. **Interactive Configuration**
 
-Before creating the ADR, use the **AskUserQuestion** tool to gather key decision parameters. **Skip any question where the user has already provided a clear answer in their arguments.**
+Before creating the ADR, ask the user for key decision parameters. **Skip any question where the user has already provided a clear answer in their arguments.**
 
 **Gathering rules** (apply to all questions in this section):
 
@@ -94,7 +94,7 @@ Apply the user's selections: the escalation level determines the governance foru
 
 ### 4. **Read the template** (with user override support)
 
-- **First**, check if `.arckit/templates/adr-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/adr-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/adr-template.md` (default)
 

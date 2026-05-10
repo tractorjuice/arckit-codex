@@ -71,7 +71,7 @@ DENSITY INTERPRETATION
    - Projects missing whole categories: <list, if any>
 
 ▶ Recommended actions
-   - <bullet list — for each project with <50% compliance readiness, suggest the top missing /arckit:* command>
+   - <bullet list — for each project with <50% compliance readiness, suggest the top missing $arckit-* command>
 ```
 
 ### Step 3: Stop

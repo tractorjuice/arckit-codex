@@ -104,7 +104,7 @@ This command creates a **Strategic Outline Business Case (SOBC)** following HM T
 7. **Generate comprehensive SOBC**:
 
    **Read the template** (with user override support):
-   - **First**, check if `.arckit/templates/sobc-template.md` exists in the project root
+   - **First**, check if `.arckit/templates-custom/sobc-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)
    - **If not found**: Read `.arckit/templates/sobc-template.md` (default)
 

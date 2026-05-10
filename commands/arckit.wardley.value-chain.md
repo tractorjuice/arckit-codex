@@ -224,7 +224,7 @@ Before generating output, validate the value chain against these criteria.
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/wardley-value-chain-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/wardley-value-chain-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/wardley-value-chain-template.md` (default)
 

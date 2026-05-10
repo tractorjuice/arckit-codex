@@ -68,7 +68,7 @@ Read all documents from Step 0. From the artifacts, extract:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/fr-anssi-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/fr-anssi-template.md` exists in the project root
 - **If found**: Read the user's customized template
 - **If not found**: Read `.arckit/templates/fr-anssi-template.md`
 
@@ -198,7 +198,7 @@ Next steps:
 ## Important Notes
 
 - **Both public and private sector**: The ANSSI guide d'hygiène applies to all French organisations — public, private, OIV, OSE, SME. Priority and obligation level differ (OIV must apply all measures; others treat them as strongly recommended).
-- **OIV / OSE obligations**: For OIV systems (SIIV), the hygiene measures are a baseline minimum. The sectoral arrêté sectoriel may impose additional measures. For OSE under NIS2, Article 21 measures overlap significantly — run `/arckit.eu-nis2` to avoid duplication.
+- **OIV / OSE obligations**: For OIV systems (SIIV), the hygiene measures are a baseline minimum. The sectoral arrêté sectoriel may impose additional measures. For OSE under NIS2, Article 21 measures overlap significantly — run `$arckit-eu-nis2` to avoid duplication.
 - **ANSSI cloud recommendations are separate from SecNumCloud**: The cloud recommendations assess the security of the architecture; SecNumCloud is a provider qualification programme. Both are relevant for cloud-hosted sensitive systems.
 - **CERT-FR subscription (Measure 41)**: Free subscription at cert.ssi.gouv.fr — flag this if not already done; it costs nothing and provides critical threat intelligence.
 

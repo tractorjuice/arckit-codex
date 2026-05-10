@@ -65,7 +65,7 @@ $ARGUMENTS
    3. Review ADR-002 decision rationale against updated requirement
    ```
 
-5. **Recommend specific `/arckit:` commands** for HIGH severity impacts:
+5. **Recommend specific `$arckit-` commands** for HIGH severity impacts:
    - SECD impacted → `$arckit-secure`
    - DPIA impacted → `$arckit-dpia`
    - TCOP impacted → `$arckit-tcop`

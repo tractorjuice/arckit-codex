@@ -36,7 +36,7 @@ $ARGUMENTS
    - **TCOP** (TCoP Review) — Extract: Technology governance findings relevant to design review
 
    **Read the template** (with user override support):
-   - **First**, check if `.arckit/templates/hld-review-template.md` exists in the project root
+   - **First**, check if `.arckit/templates-custom/hld-review-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)
    - **If not found**: Read `.arckit/templates/hld-review-template.md` (default)
 

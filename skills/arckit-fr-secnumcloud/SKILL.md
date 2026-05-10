@@ -59,7 +59,7 @@ Read all documents from Step 0. Extract and note key data classification levels,
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/fr-secnumcloud-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/fr-secnumcloud-template.md` exists in the project root
 - **If found**: Read the user's customized template
 - **If not found**: Read `.arckit/templates/fr-secnumcloud-template.md`
 

@@ -232,7 +232,7 @@ Focus: Phase III/IV maturity targets. Embed continuous improvement as a cultural
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/wardley-doctrine-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/wardley-doctrine-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/wardley-doctrine-template.md` (default)
 

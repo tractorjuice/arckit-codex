@@ -20,6 +20,12 @@ description: "[COMMUNITY] Generate a First Nations OCAP® (Ownership, Control, A
 > Métis, and Inuit communities**. The architect must engage FNIGC and community representatives
 > before relying on any OCAP determinations made here.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect generating a First Nations OCAP® sovereignty assessment for a federal information system that processes Indigenous data.
 
 ## Process
@@ -31,7 +37,7 @@ You are an enterprise architect generating a First Nations OCAP® sovereignty as
    - `.arckit/templates/_partials/RENDERING.md`
 2. Read the template:
    - **First**, check `.arckit/templates-custom/ca-ocap-template.md` (user override)
-   - **Then**, `.arckit/templates/ca-ocap-template.md`
+   - **Then**, `.arckit/templates-custom/ca-ocap-template.md`
    - **Fallback**, `.arckit/templates/ca-ocap-template.md`
 3. Use `scripts/bash/generate-document-id.sh <PROJECT_ID> OCAP --filename` for the artefact filename.
 4. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`. Use the Canadian classification scheme (UNCLASSIFIED / Protected A / Protected B / Protected C / CONFIDENTIAL / SECRET / TOP SECRET) — replace the standard UK line in the header. Note that OCAP-relevant artefacts may carry community-protected information that exceeds the federal classification scheme; mark accordingly and flag in the Open Items section.

@@ -150,11 +150,12 @@ Scan for external (non-ArcKit) documents the user may have provided:
 
 **Important**: This agent works without external documents. They enhance output quality but are never blocking.
 
-- **Citation traceability**: When referencing content from external documents, follow the citation instructions in `${CLAUDE_PLUGIN_ROOT}/references/citation-instructions.md`. Place inline citation markers (e.g., `[PP-C1]`) next to findings informed by source documents and populate the "External References" section in the template.
+- **Citation traceability**: When referencing content from external documents, follow the citation instructions in `.arckit/references/citation-instructions.md`. Place inline citation markers (e.g., `[PP-C1]`) next to findings informed by source documents and populate the "External References" section in the template.
 
 ### Step 2: Read Template
 
-- Read `${CLAUDE_PLUGIN_ROOT}/templates/research-findings-template.md` for output structure
+- First, check `.arckit/templates-custom/research-findings-template.md` (user override)
+- If not found, read `.arckit/templates/research-findings-template.md` (default)
 
 ### Step 3: Extract and Categorize Requirements
 
@@ -294,7 +295,7 @@ Use Glob to find existing `projects/{project-dir}/research/ARC-{PROJECT_ID}-RSCH
 
 ### Step 10: Write the Document
 
-Before writing the file, read `${CLAUDE_PLUGIN_ROOT}/references/quality-checklist.md` and verify all **Common Checks** plus the **RSCH** per-type checks pass. Fix any failures before proceeding.
+Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **RSCH** per-type checks pass. Fix any failures before proceeding.
 
 **Use the Write tool** to save the complete document to `projects/{project-dir}/research/ARC-{PROJECT_ID}-RSCH-v${VERSION}.md` following the template structure.
 
@@ -346,7 +347,7 @@ Examples:
 
 1. For each vendor evaluated in depth (3+ data points gathered — e.g., pricing, features, compliance), check whether a vendor profile already exists:
    Use Glob to check for existing `projects/{project-dir}/vendors/*{vendor-slug}*` files.
-2. **If no profile exists**: Read the vendor profile template at `${CLAUDE_PLUGIN_ROOT}/templates/vendor-profile-template.md` and create a new file at `projects/{project-dir}/vendors/{vendor-slug}-profile.md`. Populate all sections from the research findings. Set `Confidence` based on the depth of data gathered (high = 5+ data points, medium = 3-4, low = fewer).
+2. **If no profile exists**: Read the vendor profile template at `.arckit/templates/vendor-profile-template.md` and create a new file at `projects/{project-dir}/vendors/{vendor-slug}-profile.md`. Populate all sections from the research findings. Set `Confidence` based on the depth of data gathered (high = 5+ data points, medium = 3-4, low = fewer).
 3. **If a profile exists**: Read the existing profile and apply these merge rules per section:
    - **Overview**: Keep existing text; append new strategic insights only if vendor positioning has materially changed
    - **Products & Services**: Merge new product lines; do not remove old ones (append "(deprecated as of YYYY-MM-DD)" if a product is no longer available)
@@ -360,7 +361,7 @@ Examples:
 
 4. For each significant technology finding (a technology, protocol, or standard researched with 2+ substantive facts), check whether a tech note already exists:
    Use Glob to check for existing `projects/{project-dir}/tech-notes/*{topic-slug}*` files.
-5. **If no tech note exists**: Read the tech note template at `${CLAUDE_PLUGIN_ROOT}/templates/tech-note-template.md` and create a new file at `projects/{project-dir}/tech-notes/{topic-slug}.md`. Populate from research findings.
+5. **If no tech note exists**: Read the tech note template at `.arckit/templates/tech-note-template.md` and create a new file at `projects/{project-dir}/tech-notes/{topic-slug}.md`. Populate from research findings.
 6. **If a tech note exists**: Read the existing note and apply these merge rules per section:
    - **Summary**: Update only if understanding has significantly changed; otherwise keep existing
    - **Key Findings**: Append new findings; mark outdated ones with "(superseded as of YYYY-MM-DD)" rather than removing
@@ -426,7 +427,7 @@ Return ONLY a concise summary including:
 
 ## Toolchain
 
-- **Templates** — `${CLAUDE_PLUGIN_ROOT}/templates/research-findings-template.md` · `${CLAUDE_PLUGIN_ROOT}/templates/vendor-profile-template.md`
-- **Helpers** — `${CLAUDE_PLUGIN_ROOT}/scripts/bash/create-project.sh` (project resolution) · `${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh` (document ID allocation)
+- **Templates** — `.arckit/templates/research-findings-template.md` (override at `.arckit/templates-custom/research-findings-template.md`) · `.arckit/templates/vendor-profile-template.md`
+- **Helpers** — `.arckit/scripts/bash/create-project.sh` (project resolution) · `.arckit/scripts/bash/generate-document-id.sh` (document ID allocation)
 - **External tools** — `WebSearch` · `WebFetch` (vendor research, no MCP)
 - **Related commands** — `/arckit:requirements` (input) · `/arckit:evaluate` (downstream) · `/arckit:score` (downstream) · `/arckit:gcloud-search` (G-Cloud cross-check)

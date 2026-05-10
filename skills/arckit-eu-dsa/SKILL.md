@@ -62,7 +62,7 @@ Read all documents from Step 0. Identify:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/eu-dsa-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/eu-dsa-template.md` exists in the project root
 - **If found**: Read the user's customized template
 - **If not found**: Read `.arckit/templates/eu-dsa-template.md`
 
@@ -194,7 +194,7 @@ Next steps:
 - **VLOP designation is Commission-driven**: The European Commission formally designates VLOPs and VLOSEs. Self-assessment of the 45M threshold triggers notification obligations — the Commission then decides.
 - **Micro/small enterprise exemptions are real**: Platforms with < 50 employees AND < €10M annual turnover are exempted from some platform-specific obligations (Article 21 out-of-court dispute settlement, Article 27 recommender transparency requirements).
 - **ARCOM is proactive**: ARCOM has published detailed DSA compliance guidance for French-established providers. Consult ARCOM guidance alongside this assessment.
-- **Recommender systems and AI Act overlap**: Recommender systems may simultaneously fall under DSA (transparency) and AI Act (high-risk if employment/benefits context). Run `/arckit.eu-ai-act` if AI-driven.
+- **Recommender systems and AI Act overlap**: Recommender systems may simultaneously fall under DSA (transparency) and AI Act (high-risk if employment/benefits context). Run `$arckit-eu-ai-act` if AI-driven.
 - **Use Write Tool**: DSA assessments vary significantly by tier. Always use the Write tool.
 
 ## Key References

@@ -27,7 +27,7 @@ $ARGUMENTS
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/project-plan-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/project-plan-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/project-plan-template.md` (default)
 

@@ -46,7 +46,7 @@ $ARGUMENTS
 
 ### Step 0c: Interactive Configuration
 
-Before generating the DPIA, use the **AskUserQuestion** tool to gather the assessment scope. **Skip if the user has already specified scope in their arguments.**
+Before generating the DPIA, ask the user for the assessment scope. **Skip if the user has already specified scope in their arguments.**
 
 **Gathering rules** (apply to all questions in this section):
 
@@ -92,7 +92,7 @@ Read the DPIA template:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/dpia-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/dpia-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/dpia-template.md` (default)
 

@@ -345,7 +345,7 @@ Create the gameplay analysis document using the template:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/wardley-gameplay-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/wardley-gameplay-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/wardley-gameplay-template.md` (default)
 

@@ -70,7 +70,7 @@ Read the platform design template:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/platform-design-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/platform-design-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/platform-design-template.md` (default)
 

@@ -89,7 +89,8 @@ Detect if UK Government project (look for "UK Government", "Ministry of", "Depar
 
 ### Step 3: Read Template
 
-- Read `.arckit/templates/azure-research-template.md` for output structure
+- First, check `.arckit/templates-custom/azure-research-template.md` (user override)
+- If not found, read `.arckit/templates/azure-research-template.md` (default)
 
 ### Step 4: Extract Requirements for Azure Mapping
 
@@ -267,7 +268,7 @@ Return ONLY a concise summary including:
 
 ## Toolchain
 
-- **Templates** — `.arckit/templates/azure-research-template.md`
+- **Templates** — `.arckit/templates/azure-research-template.md` (override at `.arckit/templates-custom/azure-research-template.md`)
 - **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/bash/generate-document-id.sh`
 - **MCP server** — `microsoft-learn` (docs search, docs fetch, code sample search)
 - **External tools** — `WebSearch` · `WebFetch` (STANDALONE-mode fallback when MCP unavailable)

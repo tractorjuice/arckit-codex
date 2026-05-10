@@ -65,7 +65,7 @@ Read all documents from Step 0. Extract key information for the procurement file
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/at-bvergg-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/at-bvergg-template.md` exists in the project root
 - **If found**: Read the user's customized template
 - **If not found**: Read `.arckit/templates/at-bvergg-template.md`
 

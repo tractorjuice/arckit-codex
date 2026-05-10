@@ -70,7 +70,10 @@ Find the project directory in `projects/` (user may specify name/number, otherwi
 
 ### Step 3: Read Template
 
-Read `.arckit/templates/gov-reuse-template.md` for the output structure.
+Read the template with user override support:
+
+- First, check `.arckit/templates-custom/gov-reuse-template.md` (user override)
+- If not found, read `.arckit/templates/gov-reuse-template.md` (default)
 
 ### Step 4: Extract Capabilities as Search Targets
 
@@ -271,7 +274,7 @@ Return ONLY a concise summary including:
 
 ## Toolchain
 
-- **Templates** — `.arckit/templates/gov-reuse-template.md`
+- **Templates** — `.arckit/templates/gov-reuse-template.md` (override at `.arckit/templates-custom/gov-reuse-template.md`)
 - **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/bash/generate-document-id.sh`
 - **MCP server** — `govreposcrape` (`search_uk_gov_code` over 24,500+ UK government repositories)
 - **External tools** — `WebFetch` (GitHub repo pages for deeper assessment)

@@ -10,7 +10,7 @@ description: This skill should be used when the user asks how to start an archit
 Guides users through project onboarding using adaptive-depth questions and recommends a tailored command sequence.
 
 <HARD-GATE>
-Do NOT run any `/arckit:*` commands during this process. Your only output is a recommended command plan. The user decides when and what to execute. This applies regardless of how simple the project seems.
+Do NOT run any `$arckit-*` commands during this process. Your only output is a recommended command plan. The user decides when and what to execute. This applies regardless of how simple the project seems.
 </HARD-GATE>
 
 ## Anti-Patterns
@@ -25,7 +25,7 @@ A 30-command sequence helps nobody. The skill's job is to recommend the *right* 
 
 ## Process
 
-Follow these steps in order. Ask questions one at a time using AskUserQuestion. Prefer multiple-choice options.
+Follow these steps in order. Ask questions one at a time by asking the user. Prefer multiple-choice options.
 
 ### Step 1: Detect Project State
 
@@ -56,7 +56,7 @@ Project State: No project structure found. Starting fresh.
 
 ### Step 2: Triage Questions
 
-Ask these questions one at a time. Each uses AskUserQuestion with multiple-choice options.
+Ask these questions one at a time. Each uses multiple-choice options.
 
 **Question 1 — Sector:**
 

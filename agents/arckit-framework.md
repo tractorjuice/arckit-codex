@@ -104,15 +104,14 @@ For each artifact found, catalogue:
 
 If fewer than 3 artifacts are found, warn the user that more artifacts are needed for a meaningful framework and suggest which commands to run first.
 
-- **Citation traceability**: When referencing content from external documents, follow the citation instructions in `${CLAUDE_PLUGIN_ROOT}/references/citation-instructions.md`. Place inline citation markers (e.g., `[PP-C1]`) next to findings informed by source documents and populate the "External References" section in the template.
+- **Citation traceability**: When referencing content from external documents, follow the citation instructions in `.arckit/references/citation-instructions.md`. Place inline citation markers (e.g., `[PP-C1]`) next to findings informed by source documents and populate the "External References" section in the template.
 
 **Requisite Variety Assessment**: After cataloguing, identify the distinct concern domains present in the project (e.g., security, data governance, integration, compliance, operations, user experience). Compare these against the artifact types available. If the project's system variety significantly exceeds the framework's control variety — for example, requirements reference security, data privacy, and operational resilience but no RISK, DPIA, or OPS artifacts exist — flag the specific gaps and recommend commands to close them. Record this assessment for use in the Design Philosophy section of the FWRK overview.
 
 ### Step 2: Read the Template
 
 - Check if `.arckit/templates-custom/framework-overview-template.md` exists in the project root (user override)
-- If not found: Check `.arckit/templates/framework-overview-template.md` (user override)
-- If not found: Read `${CLAUDE_PLUGIN_ROOT}/templates/framework-overview-template.md` (default)
+- If not found: Read `.arckit/templates/framework-overview-template.md` (default)
 
 ### Step 3: Analyse and Categorise Artifacts into Phases
 
@@ -157,7 +156,7 @@ This phase contains the following artifacts:
 
 Determine version: Use Glob to check for existing `projects/{PID}-{name}/framework/ARC-{PID}-FWRK-v*.md` files. If none exist, use VERSION="1.0". If an existing version is found, read it and determine the appropriate increment (minor for refreshed content, major for structural changes).
 
-Before writing, read `${CLAUDE_PLUGIN_ROOT}/references/quality-checklist.md` and verify all **Common Checks** plus any FWRK-specific checks pass. Fix any failures before proceeding.
+Before writing, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus any FWRK-specific checks pass. Fix any failures before proceeding.
 
 Write `projects/{PID}-{name}/framework/ARC-{PID}-FWRK-v{VERSION}.md` using the template. Populate:
 
@@ -249,7 +248,7 @@ Return ONLY a concise summary to the caller including:
 
 ## Toolchain
 
-- **Templates** — `${CLAUDE_PLUGIN_ROOT}/templates/framework-overview-template.md` · `${CLAUDE_PLUGIN_ROOT}/templates/framework-executive-guide-template.md` (overrides at `.arckit/templates-custom/...`)
-- **Helpers** — `${CLAUDE_PLUGIN_ROOT}/scripts/bash/create-project.sh` · `${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh`
+- **Templates** — `.arckit/templates/framework-overview-template.md` · `.arckit/templates/framework-executive-guide-template.md` (overrides at `.arckit/templates-custom/...`)
+- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/bash/generate-document-id.sh`
 - **External tools** — none (no web, no MCP — synthesis only)
 - **Related commands** — `/arckit:navigator` (project coverage) · `/arckit:traceability` (cross-reference validation) · `/arckit:strategy` (executive synthesis)

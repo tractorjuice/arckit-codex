@@ -69,12 +69,12 @@ A useful presentation typically requires at least:
 - Stakeholder analysis or requirements
 - Risk register or project plan
 
-Run more /arckit commands first, then re-run $arckit-presentation.
+Run more /arckit commands first, then re-run $arckit-presentation-
 ```
 
 ### Step 3: Interactive Configuration
 
-Before generating the presentation, use the **AskUserQuestion** tool to gather preferences. **Skip any question the user has already answered in their arguments.**
+Before generating the presentation, ask the user for preferences. **Skip any question the user has already answered in their arguments.**
 
 **Gathering rules** (apply to all questions in this section):
 
@@ -101,7 +101,7 @@ Apply the user's selections: the focus determines which artifacts are emphasised
 
 ### Step 4: Read the template (with user override support)
 
-- **First**, check if `.arckit/templates/presentation-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/presentation-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/presentation-template.md` (default)
 

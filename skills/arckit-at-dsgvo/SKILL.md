@@ -5,7 +5,7 @@ description: "[COMMUNITY] Assess Austrian DSG / DSGVO obligations — Datenschut
 
 > ⚠️ **Community-contributed command** — not part of the officially-maintained ArcKit baseline. Output should be reviewed by qualified DSB-Beauftragter / DPO / Rechtsabteilung before reliance. Citations to Datenschutzbehörde (DSB) / EU regulations may lag the current text — verify against the source. Some citations are marked `[NEEDS VERIFICATION]` and should be confirmed by an Austrian data protection practitioner before external use.
 
-You are helping an enterprise architect generate an **Austrian Data Protection Assessment** — the Austrian-specific GDPR layer applied by the Datenschutzbehörde (DSB) under the Datenschutzgesetz (DSG 2018, BGBl. I Nr. 165/1999 as amended). Run this after `/arckit.eu-rgpd` to add Austrian obligations that go beyond the EU GDPR baseline.
+You are helping an enterprise architect generate an **Austrian Data Protection Assessment** — the Austrian-specific GDPR layer applied by the Datenschutzbehörde (DSB) under the Datenschutzgesetz (DSG 2018, BGBl. I Nr. 165/1999 as amended). Run this after `$arckit-eu-rgpd` to add Austrian obligations that go beyond the EU GDPR baseline.
 
 ## User Input
 
@@ -24,7 +24,7 @@ $ARGUMENTS
 - **DATA** (Data Model) — Extract: all entities with personal data, special category data (besondere Kategorien), data subjects, data flows, retention periods, third-party processors
   - If missing: warn that an AT DSG assessment requires a data model to identify personal data categories
 - **RGPD** (EU RGPD Assessment) — Extract: legal basis mapping, DPIA screening results, DPO determination, international transfer analysis
-  - If missing: warn that `/arckit.at-dsgvo` should be run after `/arckit.eu-rgpd` for best results. Proceed with available data.
+  - If missing: warn that `$arckit-at-dsgvo` should be run after `$arckit-eu-rgpd` for best results. Proceed with available data.
 
 **RECOMMENDED** (read if available, note if missing):
 
@@ -67,7 +67,7 @@ Read all documents from Step 0. Identify:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/at-dsgvo-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/at-dsgvo-template.md` exists in the project root
 - **If found**: Read the user's customized template
 - **If not found**: Read `.arckit/templates/at-dsgvo-template.md`
 
@@ -105,7 +105,7 @@ Read all documents from Step 0. Identify:
    - Elektronische Gesundheitsakte (ELGA-G) interoperability requirements
    - GTelG 2012 telematics interop for data exchange between health providers
    - Art. 9(2) GDPR legal basis selection — in AT typically §§7–8 DSG + ELGA-G
-   - DPIA mandatory flag: special category data + large scale → run `/arckit.dpia`
+   - DPIA mandatory flag: special category data + large scale → run `$arckit-dpia`
    - Opt-out vs opt-in for ELGA participation — controller's integration obligations
    - If no health data: include section header with "N/A — no health data identified"
 
@@ -204,7 +204,7 @@ Next steps:
 
 ## Important Notes
 
-- **Run after eu-rgpd**: This command adds the Austrian layer on top of the EU GDPR baseline. For best results, run `/arckit.eu-rgpd` first, then this command.
+- **Run after eu-rgpd**: This command adds the Austrian layer on top of the EU GDPR baseline. For best results, run `$arckit-eu-rgpd` first, then this command.
 - **Austrian age of digital consent is 14, not 16**: Austria chose the lower limit allowed by GDPR (§4(4) DSG). Do not apply the GDPR default of 16.
 - **§§12–13 DSG on image processing is unique**: AT retained a standalone image-processing regime when harmonising with GDPR, with specific labelling and retention rules. This is not covered by the EU GDPR baseline and must be assessed separately if any CCTV/imagery is in scope.
 - **ArbVG §96a Betriebsvereinbarung is separate from GDPR**: Employee monitoring capability requires a works-council agreement even where GDPR lawfulness is established. Flag if employee monitoring is possible.

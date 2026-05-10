@@ -72,7 +72,7 @@ Read all documents from Step 0. Extract:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/fr-code-reuse-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/fr-code-reuse-template.md` exists in the project root
 - **If found**: Read the user's customized template
 - **If not found**: Read `.arckit/templates/fr-code-reuse-template.md`
 
@@ -145,7 +145,7 @@ For each component, produce a decision with justification:
 - **Reuse as-is**: Component meets requirements without modification; integrate directly
 - **Fork and adapt**: Component partially meets requirements; fork and adapt with a commitment to contribute improvements back
 - **Assemble from SILL components**: No single component meets needs but SILL software can be assembled to cover requirements
-- **Procure**: No suitable public code exists; proceed to procurement via `/arckit.fr-marche-public`
+- **Procure**: No suitable public code exists; proceed to procurement via `$arckit-fr-marche-public`
 - **Build from scratch**: No existing solution; custom development required — document justification as required by Circulaire 2021
 
 #### Step 4g: Contribution-Back Plan

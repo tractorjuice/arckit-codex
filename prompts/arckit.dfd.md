@@ -244,7 +244,7 @@ Before writing the file, read `.arckit/references/quality-checklist.md` and veri
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/dfd-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/dfd-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/dfd-template.md` (default)
 

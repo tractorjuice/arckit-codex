@@ -55,7 +55,7 @@ More artifacts = better evidence = more accurate assessment:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/principles-compliance-assessment-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/principles-compliance-assessment-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/principles-compliance-assessment-template.md` (default)
 

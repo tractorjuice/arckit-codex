@@ -42,7 +42,7 @@ Since August 2023, ALL Defence capabilities, technology infrastructure, and digi
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/mod-secure-by-design-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/mod-secure-by-design-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/mod-secure-by-design-template.md` (default)
 

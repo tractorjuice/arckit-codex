@@ -25,7 +25,7 @@ $ARGUMENTS
      6. Set `PROJECT_ID` = the 3-digit number, `PROJECT_PATH` = the new directory path
 
 2. **Read the template** (with user override support):
-   - **First**, check if `.arckit/templates/stakeholder-drivers-template.md` exists in the project root
+   - **First**, check if `.arckit/templates-custom/stakeholder-drivers-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)
    - **If not found**: Read `.arckit/templates/stakeholder-drivers-template.md` (default)
    - **Update Template Version**: Replace the version in the template metadata line with `{ARCKIT_VERSION}` from the session context

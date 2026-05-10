@@ -766,7 +766,7 @@ Create the architecture diagram document using the template:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/architecture-diagram-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/architecture-diagram-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/architecture-diagram-template.md` (default)
 

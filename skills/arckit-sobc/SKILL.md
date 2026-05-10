@@ -81,7 +81,7 @@ This command creates a **Strategic Outline Business Case (SOBC)** following HM T
 
 6. **Interactive Configuration**:
 
-   Before generating the SOBC, use the **AskUserQuestion** tool to gather appraisal preferences. **Skip any question the user has already answered in their arguments.**
+   Before generating the SOBC, ask the user for appraisal preferences. **Skip any question the user has already answered in their arguments.**
 
    **Gathering rules** (apply to all questions in this section):
    - Ask the most important question first; fill in secondary details from context or reasonable defaults.
@@ -105,7 +105,7 @@ This command creates a **Strategic Outline Business Case (SOBC)** following HM T
 7. **Generate comprehensive SOBC**:
 
    **Read the template** (with user override support):
-   - **First**, check if `.arckit/templates/sobc-template.md` exists in the project root
+   - **First**, check if `.arckit/templates-custom/sobc-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)
    - **If not found**: Read `.arckit/templates/sobc-template.md` (default)
 
@@ -391,7 +391,7 @@ Use the template at `.arckit/templates/sobc-template.md` as the structure. Fill 
 
 **CRITICAL - Token Efficiency**:
 
-To avoid exceeding Claude Code's 32K token output limit, you MUST use the following strategy:
+To avoid exceeding Codex output limits, you MUST use the following strategy:
 
 ### 1. Generate SOBC Document
 

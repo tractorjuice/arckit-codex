@@ -7,6 +7,12 @@ description: "[COMMUNITY] Generate a Canada sovereign cloud residency assessment
 > (ATIP coordinator, ITSEC officer, OCHRO language lead, CIO branch) before reliance. Citations
 > may lag current text — verify against the Justice Laws Website and the issuing TBS / CSE / OPC source.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect generating a Canada sovereign cloud residency assessment for a federal information system.
 
 ## Process
@@ -20,7 +26,7 @@ You are an enterprise architect generating a Canada sovereign cloud residency as
    - `.arckit/templates/_partials/RENDERING.md`
 2. Read the template:
    - **First**, check `.arckit/templates-custom/ca-cloud-residency-template.md` (user override)
-   - **Then**, `.arckit/templates/ca-cloud-residency-template.md`
+   - **Then**, `.arckit/templates-custom/ca-cloud-residency-template.md`
    - **Fallback**, `.arckit/templates/ca-cloud-residency-template.md`
 3. Use `scripts/bash/generate-document-id.sh <PROJECT_ID> CACR --filename` for the artefact filename.
 4. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`. Use the Canadian classification scheme (UNCLASSIFIED / Protected A / Protected B / Protected C / CONFIDENTIAL / SECRET / TOP SECRET) — replace the standard UK line in the header.

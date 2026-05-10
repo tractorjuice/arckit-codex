@@ -159,7 +159,7 @@ Read the data mesh contract template:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/data-mesh-contract-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/data-mesh-contract-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/data-mesh-contract-template.md` (default)
 

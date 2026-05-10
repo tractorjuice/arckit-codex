@@ -14,7 +14,7 @@ $ARGUMENTS
 ## Instructions
 
 1. **Read the template** (with user override support):
-   - **First**, check if `.arckit/templates/architecture-principles-template.md` exists in the project root
+   - **First**, check if `.arckit/templates-custom/architecture-principles-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)
    - **If not found**: Read `.arckit/templates/architecture-principles-template.md` (default)
 

@@ -37,10 +37,12 @@ $ARGUMENTS
    - **DPIA** (Data Protection Impact Assessment) — Extract: Data protection requirements for vendor assessment
 
 3. **Read the templates** (with user override support):
-   - **First**, check if `.arckit/templates/evaluation-criteria-template.md` exists in the project root
+   - **First**, check if `.arckit/templates-custom/evaluation-criteria-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)
    - **If not found**: Read `.arckit/templates/evaluation-criteria-template.md` (default)
-   - **Also read** the scoring template: check `.arckit/templates/vendor-scoring-template.md` first, then `.arckit/templates/vendor-scoring-template.md`
+   - **Also read** the scoring template:
+     - **First**, check `.arckit/templates-custom/vendor-scoring-template.md` (user override)
+     - **If not found**: Read `.arckit/templates/vendor-scoring-template.md` (default)
 
    > **Tip**: Users can customize templates with `/arckit:customize evaluate`
 

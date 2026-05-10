@@ -5,6 +5,12 @@ description: "[COMMUNITY] Generate a UAE IAS Statement of Applicability against 
 
 > ⚠️ **Community-contributed command** — not part of the officially-maintained ArcKit baseline. Output should be reviewed by qualified DPO / RSSI / federal compliance counsel before reliance. Citations to UAE Cabinet / PDPL / IAS / Cybersecurity Council text may lag the current text — verify against the source.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect generating a UAE IAS Statement of Applicability for a federal entity or Critical Information Infrastructure (CII) operator.
 
 ## Process
@@ -15,7 +21,7 @@ You are an enterprise architect generating a UAE IAS Statement of Applicability 
    - `.arckit/templates/_partials/RENDERING.md`
 2. Read the template:
    - **First**, check `.arckit/templates-custom/uae-ias-template.md` (user override)
-   - **Then**, `.arckit/templates/uae-ias-template.md`
+   - **Then**, `.arckit/templates-custom/uae-ias-template.md`
    - **Fallback**, `.arckit/templates/uae-ias-template.md`
 3. Use `scripts/bash/generate-document-id.sh IAS --filename` for the artefact filename.
 4. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`.
@@ -42,5 +48,5 @@ UAE Information Assurance Standard (IAS), published by the UAE Cybersecurity Cou
 
 After completing this command, consider running:
 
-- `$arckit-risks` -- IAS gaps and risk-treatment plan feed the project risk register.
+- `$arckit-risk` -- IAS gaps and risk-treatment plan feed the project risk register.
 - `$arckit-uae-cloud-residency` -- IAS technical controls (T-family) constrain residency and CSP choice.

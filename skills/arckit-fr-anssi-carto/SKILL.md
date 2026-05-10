@@ -24,7 +24,7 @@ $ARGUMENTS
 **MANDATORY** (warn if missing):
 
 - **REQ** (Requirements) — Extract: system functional description, integration requirements (INT-xxx), deployment environment (cloud/on-premise/hybrid), user population, data flows to external parties
-  - If missing: STOP — cartography requires a minimum understanding of the system. Run `/arckit.requirements` first.
+  - If missing: STOP — cartography requires a minimum understanding of the system. Run `$arckit-requirements` first.
 
 **RECOMMENDED** (read if available, note if missing):
 
@@ -68,7 +68,7 @@ Read all documents from Step 0. Extract:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/fr-anssi-carto-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/fr-anssi-carto-template.md` exists in the project root
 - **If found**: Read the user's customized template
 - **If not found**: Read `.arckit/templates/fr-anssi-carto-template.md`
 
@@ -194,7 +194,7 @@ Next steps:
 - **Four levels are complementary, not alternatives**: The value of ANSSI cartography is the ability to trace from a business asset (Level 1) through the application (Level 2) and infrastructure (Level 3) down to the network exposure (Level 4). Completing only one or two levels produces an incomplete picture.
 - **EBIOS synergy**: If an EBIOS Risk Manager study is planned or exists, the cartography feeds directly into Workshop 3 (ecosystem map) and Workshop 4 (operational scenarios). The VM-xx IDs should be consistent between the two documents.
 - **Living document**: The cartography must be updated when the IS architecture changes significantly. A stale cartography is worse than no cartography — it gives false confidence. Set a review trigger on major architectural change.
-- **Visual diagrams**: This command produces a structured text cartography. Use `/arckit.diagram` to generate visual Mermaid or PlantUML diagrams from the cartography data for presentations and homologation dossiers.
+- **Visual diagrams**: This command produces a structured text cartography. Use `$arckit-diagram` to generate visual Mermaid or PlantUML diagrams from the cartography data for presentations and homologation dossiers.
 
 ## Key References
 

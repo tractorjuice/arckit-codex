@@ -4,6 +4,12 @@ description: "[COMMUNITY] Assess sovereign cloud residency under the UAE Nationa
 
 > ⚠️ **Community-contributed command** — not part of the officially-maintained ArcKit baseline. Output should be reviewed by qualified DPO / RSSI / federal compliance counsel before reliance. Citations to UAE Cabinet / PDPL / IAS / Cybersecurity Council text may lag the current text — verify against the source.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect assessing UAE sovereign cloud residency under the National Cloud Security Policy v2.
 
 ## Process
@@ -15,7 +21,7 @@ You are an enterprise architect assessing UAE sovereign cloud residency under th
    - `.arckit/templates/_partials/RENDERING.md`
 2. Read the template:
    - **First**, check `.arckit/templates-custom/uae-cloud-residency-template.md` (user override)
-   - **Then**, `.arckit/templates/uae-cloud-residency-template.md`
+   - **Then**, `.arckit/templates-custom/uae-cloud-residency-template.md`
    - **Fallback**, `.arckit/templates/uae-cloud-residency-template.md`
 3. Use `scripts/bash/generate-document-id.sh CRES --filename` for the artefact filename.
 4. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`.

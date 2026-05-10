@@ -61,7 +61,7 @@ Read all documents from Step 0. Identify:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/eu-dsa-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/eu-dsa-template.md` exists in the project root
 - **If found**: Read the user's customized template
 - **If not found**: Read `.arckit/templates/eu-dsa-template.md`
 

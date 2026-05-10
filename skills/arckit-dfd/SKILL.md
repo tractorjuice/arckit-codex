@@ -62,7 +62,7 @@ Read existing project artifacts to understand what to diagram:
 
 ## Step 1c: Interactive Configuration
 
-If the user has **not** specified a DFD level in their arguments, use the **AskUserQuestion** tool to ask:
+If the user has **not** specified a DFD level in their arguments, ask the user:
 
 **Gathering rules** (apply to all questions in this section):
 
@@ -245,7 +245,7 @@ Before writing the file, read `.arckit/references/quality-checklist.md` and veri
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/dfd-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/dfd-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/dfd-template.md` (default)
 

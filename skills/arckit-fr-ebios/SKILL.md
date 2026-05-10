@@ -22,7 +22,7 @@ $ARGUMENTS
 **MANDATORY** (warn if missing):
 
 - **REQ** (Requirements) — Extract: system description, functional architecture, integration points (INT-xxx), security requirements (NFR-SEC-xxx), classification level, OIV/OSE designation
-  - If missing: STOP — EBIOS Risk Manager requires a clear system description and architecture. Run `/arckit.requirements` first.
+  - If missing: STOP — EBIOS Risk Manager requires a clear system description and architecture. Run `$arckit-requirements` first.
 
 **RECOMMENDED** (read if available, note if missing):
 
@@ -67,7 +67,7 @@ Read all documents from Step 0. From the artifacts, extract:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/fr-ebios-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/fr-ebios-template.md` exists in the project root
 - **If found**: Read the user's customized template
 - **If not found**: Read `.arckit/templates/fr-ebios-template.md`
 

@@ -342,7 +342,7 @@ Create the climate assessment document using the template:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/wardley-climate-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/wardley-climate-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/wardley-climate-template.md` (default)
 

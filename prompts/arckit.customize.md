@@ -12,12 +12,12 @@ $ARGUMENTS
 
 ## Overview
 
-ArcKit uses document templates to generate consistent architecture artifacts. Users can customize these templates by copying them to `.arckit/templates/`. When a template exists in the custom directory, it takes precedence over the default template.
+ArcKit uses document templates to generate consistent architecture artifacts. Users can customize these templates by copying them to `.arckit/templates-custom/`. When a template exists in the custom directory, it takes precedence over the default template.
 
 **Template locations:**
 
 - **Defaults**: `.arckit/templates/` (shipped with ArcKit, refreshed by `arckit init`)
-- **User overrides**: `.arckit/templates/` (your customizations, preserved across updates)
+- **User overrides**: `.arckit/templates-custom/` (your customizations, preserved across updates)
 
 ## Instructions
 
@@ -94,13 +94,13 @@ Display as a table:
 3. **Update the origin banner**: Before writing, change the `Template Origin` line from `Official` to `Custom` and add a `Based On` reference:
    - Find: ``> **Template Origin**: Official | **ArcKit Version**: [VERSION] | **Command**: `/arckit.{command}` ``
    - Replace with: ``> **Template Origin**: Custom | **Based On**: `/arckit.{command}` | **ArcKit Version**: [VERSION]``
-4. Use the Write tool to save it to `.arckit/templates/{name}-template.{ext}` (the directory will be created automatically)
+4. Use the Write tool to save it to `.arckit/templates-custom/{name}-template.{ext}` (the directory will be created automatically)
 5. If the source template does not exist, inform the user and suggest running `/arckit:customize list`
 
 **Copy all templates:**
 
 1. Use Glob to find all `.arckit/templates/*-template.md` and `.arckit/templates/*-template.html` files
-2. For each template found, use Read to load it, update the origin banner (change `Template Origin: Official` to `Template Origin: Custom | Based On: /arckit.{command}`), and Write to save it to `.arckit/templates/`
+2. For each template found, use Read to load it, update the origin banner (change `Template Origin: Official` to `Template Origin: Custom | Based On: /arckit.{command}`), and Write to save it to `.arckit/templates-custom/`
 
 ### 4. **Show Template Info**
 
@@ -118,13 +118,13 @@ After copying, explain:
 ```markdown
 ## Template Customization Guide
 
-Your template has been copied to `.arckit/templates/`. You can now customize it.
+Your template has been copied to `.arckit/templates-custom/`. You can now customize it.
 
 ### How It Works
 
 When you run an ArcKit command (e.g., `/arckit:requirements`):
 
-1. Command checks: Does `.arckit/templates/requirements-template.md` exist?
+1. Command checks: Does `.arckit/templates-custom/requirements-template.md` exist?
 2. **If YES** → Uses YOUR customized template
 3. **If NO** → Uses default from `.arckit/templates/`
 
@@ -161,7 +161,7 @@ When you run an ArcKit command (e.g., `/arckit:requirements`):
 
 When ArcKit CLI updates with new template features:
 - Default templates in `.arckit/templates/` are refreshed by `arckit init`
-- Your customizations in `.arckit/templates/` are **preserved**
+- Your customizations in `.arckit/templates-custom/` are **preserved**
 - Compare your templates with defaults periodically to adopt new features
 
 To see the current default template, use the Read tool on `.arckit/templates/{name}-template.md`.
@@ -170,7 +170,7 @@ To compare your customization with the default, read both files and compare the 
 
 ### Reverting to Default
 
-To stop using a custom template and revert to default, delete `.arckit/templates/{name}-template.md`.
+To stop using a custom template and revert to default, delete `.arckit/templates-custom/{name}-template.md`.
 
 ```
 
@@ -183,13 +183,13 @@ After completing the request, show:
 
 **Action**: [Listed templates / Copied X template(s)]
 
-**Location**: `.arckit/templates/`
+**Location**: `.arckit/templates-custom/`
 
 **Files**:
 - [List of files copied or available]
 
 **Next Steps**:
-1. Edit the template(s) in `.arckit/templates/`
+1. Edit the template(s) in `.arckit/templates-custom/`
 2. Run the corresponding `/arckit:*` command
 3. Your customized template will be used automatically
 

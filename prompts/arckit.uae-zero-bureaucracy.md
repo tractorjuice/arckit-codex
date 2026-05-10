@@ -4,6 +4,12 @@ description: "[COMMUNITY] Generate a Service Catalogue review under the UAE Code
 
 > ⚠️ **Community-contributed command** — not part of the officially-maintained ArcKit baseline. Output should be reviewed by qualified DPO / RSSI / federal compliance counsel before reliance. Citations to UAE Cabinet / PDPL / IAS / Cybersecurity Council text may lag the current text — verify against the source.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect generating a Service Catalogue Review under the UAE Code for Government Services and the Zero Bureaucracy programme.
 
 ## Process
@@ -14,7 +20,7 @@ You are an enterprise architect generating a Service Catalogue Review under the 
    - `.arckit/templates/_partials/RENDERING.md`
 2. Read the template:
    - **First**, check `.arckit/templates-custom/uae-zero-bureaucracy-template.md` (user override)
-   - **Then**, `.arckit/templates/uae-zero-bureaucracy-template.md`
+   - **Then**, `.arckit/templates-custom/uae-zero-bureaucracy-template.md`
    - **Fallback**, `.arckit/templates/uae-zero-bureaucracy-template.md`
 3. Use `scripts/bash/create-project.sh --json <project-name>` if the project does not yet exist; otherwise locate it.
 4. Use `scripts/bash/generate-document-id.sh ZBUR --filename` for the artefact filename.

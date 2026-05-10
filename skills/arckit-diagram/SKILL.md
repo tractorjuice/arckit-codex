@@ -44,7 +44,7 @@ Read existing artifacts from the project context to understand what to diagram:
 
 ## Step 1c: Interactive Configuration
 
-**IMPORTANT**: Ask **both** questions below in a **single AskUserQuestion call** so the user sees them together. Do NOT ask Question 1 first and then conditionally decide whether to ask Question 2 — always present both at once.
+**IMPORTANT**: Ask **both** questions below in a **single message** so the user sees them together. Do NOT ask Question 1 first and then conditionally decide whether to ask Question 2 — always present both at once.
 
 **Gathering rules** (apply to all questions in this section):
 
@@ -68,9 +68,9 @@ Read existing artifacts from the project context to understand what to diagram:
 
 **Skip rules** (only skip questions the user already answered in their arguments):
 
-- User specified type only (e.g., `/arckit.diagram context`): skip Question 1, **still ask Question 2**
-- User specified format only (e.g., `/arckit.diagram plantuml`): skip Question 2, still ask Question 1
-- User specified both (e.g., `/arckit.diagram context plantuml`): skip both questions
+- User specified type only (e.g., `$arckit-diagram context`): skip Question 1, **still ask Question 2**
+- User specified format only (e.g., `$arckit-diagram plantuml`): skip Question 2, still ask Question 1
+- User specified both (e.g., `$arckit-diagram context plantuml`): skip both questions
 - If neither is specified, ask both questions together in one call
 
 If the user selects Deployment for Question 1, ignore the Question 2 answer — Deployment is Mermaid-only.
@@ -767,7 +767,7 @@ Create the architecture diagram document using the template:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/architecture-diagram-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/architecture-diagram-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/architecture-diagram-template.md` (default)
 

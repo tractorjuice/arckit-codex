@@ -489,13 +489,13 @@ $arckit-health SINCE=2026-06-01
 
 Useful for planning — "what will be stale by June?"
 
-### Example 5: Continuous Monitoring with `/loop`
+### Example 5: Repeat Monitoring
 
-```bash
-/loop 30m $arckit-health SEVERITY=HIGH
+```text
+$arckit-health SEVERITY=HIGH
 ```
 
-Runs the health check every 30 minutes during your session, surfacing HIGH severity findings as they appear. Useful during long architecture sessions where multiple artifacts are being created or updated. Requires Claude Code v2.1.97+.
+Re-run this health check periodically during long architecture sessions to surface HIGH severity findings as artifacts change. Codex does not provide a built-in loop command; use a scheduler if you need automation.
 
 ---
 

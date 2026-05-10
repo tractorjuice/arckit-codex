@@ -24,7 +24,7 @@ The Technology Code of Practice is a set of 13 criteria to help government desig
 Generate a comprehensive TCoP review document by:
 
 1. **Loading the template** (with user override support):
-   - **First**, check if `.arckit/templates/tcop-review-template.md` exists in the project root
+   - **First**, check if `.arckit/templates-custom/tcop-review-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)
    - **If not found**: Read `.arckit/templates/tcop-review-template.md` (default)
 

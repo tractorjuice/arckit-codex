@@ -86,7 +86,8 @@ Scan for external (non-ArcKit) documents the user may have provided:
 
 ### Step 2: Read Template
 
-- Read `.arckit/templates/datascout-template.md` for output structure
+- First, check `.arckit/templates-custom/datascout-template.md` (user override)
+- If not found, read `.arckit/templates/datascout-template.md` (default)
 
 ### Step 3: Extract Data Needs from Requirements
 
@@ -457,7 +458,7 @@ Return ONLY a concise summary including:
 
 ## Toolchain
 
-- **Templates** — `.arckit/templates/datascout-template.md`
+- **Templates** — `.arckit/templates/datascout-template.md` (override at `.arckit/templates-custom/datascout-template.md`)
 - **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/bash/generate-document-id.sh`
 - **External tools** — `WebSearch` · `WebFetch` (no MCP)
 - **Related commands** — `/arckit:requirements` (input) · `/arckit:data-model` (downstream) · `/arckit:dpia` (downstream privacy assessment)

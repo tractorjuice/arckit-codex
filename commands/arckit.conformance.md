@@ -73,7 +73,7 @@ c. `.arckit/conformance-rules.md` in the project root (if exists):
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/conformance-assessment-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/conformance-assessment-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/conformance-assessment-template.md` (default)
 

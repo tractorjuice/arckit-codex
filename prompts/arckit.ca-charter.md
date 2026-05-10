@@ -12,6 +12,12 @@ description: "[COMMUNITY] Generate a Canada Charter rights design review — s.2
 > citations against the current Justice Laws Website text and Commissioner's published guidance
 > before relying on this output.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect generating a Canada Charter Rights Design Review for a federal system that materially engages Charter-protected interests.
 
 ## Process
@@ -25,7 +31,7 @@ You are an enterprise architect generating a Canada Charter Rights Design Review
    - `.arckit/templates/_partials/RENDERING.md`
 2. Read the template:
    - **First**, check `.arckit/templates-custom/ca-charter-template.md` (user override)
-   - **Then**, `.arckit/templates/ca-charter-template.md`
+   - **Then**, `.arckit/templates-custom/ca-charter-template.md`
    - **Fallback**, `.arckit/templates/ca-charter-template.md`
 3. Use `scripts/bash/generate-document-id.sh <PROJECT_ID> CHRT --filename` for the artefact filename.
 4. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`. Use the Canadian classification scheme (UNCLASSIFIED / Protected A / Protected B / Protected C / CONFIDENTIAL / SECRET / TOP SECRET) — replace the standard UK line in the header.

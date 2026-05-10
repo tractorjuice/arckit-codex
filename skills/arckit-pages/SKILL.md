@@ -416,7 +416,7 @@ Create `docs/manifest.json` with the discovered structure:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/pages-template.html` exists in the project root
+- **First**, check if `.arckit/templates-custom/pages-template.html` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/pages-template.html` (default)
 

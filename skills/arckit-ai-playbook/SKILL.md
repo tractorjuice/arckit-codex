@@ -70,7 +70,7 @@ $ARGUMENTS
      - Extract: Data protection context, lawful basis, privacy risks
 
    **Read the template** (with user override support):
-   - **First**, check if `.arckit/templates/uk-gov-ai-playbook-template.md` exists in the project root
+   - **First**, check if `.arckit/templates-custom/uk-gov-ai-playbook-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)
    - **If not found**: Read `.arckit/templates/uk-gov-ai-playbook-template.md` (default)
 

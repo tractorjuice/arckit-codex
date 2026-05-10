@@ -33,7 +33,7 @@ $ARGUMENTS
    > If the hook data is not present, fall back to reading all artifacts manually.
 
    **Read the template** (with user override support):
-   - **First**, check if `.arckit/templates/traceability-matrix-template.md` exists in the project root
+   - **First**, check if `.arckit/templates-custom/traceability-matrix-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)
    - **If not found**: Read `.arckit/templates/traceability-matrix-template.md` (default)
 

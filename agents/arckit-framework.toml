@@ -68,7 +68,6 @@ If fewer than 3 artifacts are found, warn the user that more artifacts are neede
 ### Step 2: Read the Template
 
 - Check if `.arckit/templates-custom/framework-overview-template.md` exists in the project root (user override)
-- If not found: Check `.arckit/templates/framework-overview-template.md` (user override)
 - If not found: Read `.arckit/templates/framework-overview-template.md` (default)
 
 ### Step 3: Analyse and Categorise Artifacts into Phases

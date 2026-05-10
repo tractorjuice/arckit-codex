@@ -68,7 +68,7 @@ Load the strategy template structure:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/architecture-strategy-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/architecture-strategy-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/architecture-strategy-template.md` (default)
 

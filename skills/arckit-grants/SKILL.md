@@ -124,7 +124,7 @@ Include a rationale for each score explaining what matches and what gaps exist.
 ### Step 7: Read Template and Write Report
 
 1. **Read the template** (with user override support):
-   - **First**, check if `.arckit/templates/grants-template.md` exists in the project root
+   - **First**, check if `.arckit/templates-custom/grants-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)
    - **If not found**: Read `.arckit/templates/grants-template.md` (default)
 
@@ -206,7 +206,7 @@ Return ONLY a concise summary including:
 
 ## Toolchain
 
-- **Templates** — `.arckit/templates/grants-template.md` (override at `.arckit/templates/grants-template.md`)
+- **Templates** — `.arckit/templates/grants-template.md` (override at `.arckit/templates-custom/grants-template.md`)
 - **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/bash/generate-document-id.sh`
 - **External tools** — `WebSearch` · `WebFetch` (no MCP)
 - **Related commands** — `$arckit-requirements` (input) · `$arckit-stakeholders` (input) · `$arckit-sobc` (downstream business case)
@@ -218,3 +218,4 @@ After completing this command, consider running:
 - `$arckit-sobc` -- Feed grant funding data into Economic Case
 - `$arckit-plan` -- Create project plan aligned to grant milestones
 - `$arckit-risk` -- Add grant-specific risks (rejection, compliance, reporting)
+- `$arckit-adr` -- Record funding-mix decisions

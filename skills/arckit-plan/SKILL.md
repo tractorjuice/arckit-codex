@@ -28,7 +28,7 @@ $ARGUMENTS
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/project-plan-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/project-plan-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/project-plan-template.md` (default)
 
@@ -55,7 +55,7 @@ Read existing project artifacts to tailor the plan:
 
 ## Step 1c: Interactive Configuration
 
-Before determining project parameters, use the **AskUserQuestion** tool to gather user preferences. **Skip any question where the user has already specified their preference in the arguments.**
+Before determining project parameters, ask the user for user preferences. **Skip any question where the user has already specified their preference in the arguments.**
 
 **Gathering rules** (apply to all questions in this section):
 

@@ -112,7 +112,10 @@ Extract the search query from the user's arguments. The query is what follows th
 
 ### Step 3: Read Template
 
-Read `${CLAUDE_PLUGIN_ROOT}/templates/gov-code-search-template.md` for the output structure.
+Read the template with user override support:
+
+- First, check `.arckit/templates-custom/gov-code-search-template.md` (user override)
+- If not found, read `.arckit/templates/gov-code-search-template.md` (default)
 
 ### Step 4: Initial Search
 
@@ -245,7 +248,7 @@ Use Glob to find existing `projects/{project-dir}/research/ARC-{PROJECT_ID}-GCSR
 
 ### Step 13: Quality Check
 
-Before writing, read `${CLAUDE_PLUGIN_ROOT}/references/quality-checklist.md` and verify all **Common Checks** plus the **GCSR** per-type checks pass. Fix any failures before proceeding.
+Before writing, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **GCSR** per-type checks pass. Fix any failures before proceeding.
 
 ### Step 14: Write Output
 
@@ -301,8 +304,8 @@ Return ONLY a concise summary including:
 
 ## Toolchain
 
-- **Templates** — `${CLAUDE_PLUGIN_ROOT}/templates/gov-code-search-template.md`
-- **Helpers** — `${CLAUDE_PLUGIN_ROOT}/scripts/bash/create-project.sh` · `${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh`
+- **Templates** — `.arckit/templates/gov-code-search-template.md` (override at `.arckit/templates-custom/gov-code-search-template.md`)
+- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/bash/generate-document-id.sh`
 - **MCP server** — `govreposcrape` (`search_uk_gov_code` over 24,500+ UK government repositories)
 - **External tools** — `WebFetch` (deeper inspection of top hits)
 - **Related commands** — `/arckit:gov-reuse` (capability-driven reuse) · `/arckit:gov-landscape` (domain landscape)

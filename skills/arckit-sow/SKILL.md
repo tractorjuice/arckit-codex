@@ -46,7 +46,7 @@ $ARGUMENTS
      - Extract: Risks requiring vendor mitigation, risk allocation
 
 3. **Read the template** (with user override support):
-   - **First**, check if `.arckit/templates/sow-template.md` exists in the project root
+   - **First**, check if `.arckit/templates-custom/sow-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)
    - **If not found**: Read `.arckit/templates/sow-template.md` (default)
 
@@ -61,7 +61,7 @@ $ARGUMENTS
 
 5. **Interactive Configuration**:
 
-   Before generating the SOW, use the **AskUserQuestion** tool to gather procurement preferences. **Skip any question the user has already answered in their arguments.**
+   Before generating the SOW, ask the user for procurement preferences. **Skip any question the user has already answered in their arguments.**
 
    **Gathering rules** (apply to all questions in this section):
    - Ask the most important question first; fill in secondary details from context or reasonable defaults.

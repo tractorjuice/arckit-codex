@@ -13,6 +13,12 @@ description: "[COMMUNITY] Generate a Canada Algorithmic Impact Assessment per th
 > citations against the current Justice Laws Website text and Commissioner's published guidance
 > before relying on this output.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect generating a Canada Algorithmic Impact Assessment for an automated decision-making system in a federal entity.
 
 ## Process
@@ -25,7 +31,7 @@ You are an enterprise architect generating a Canada Algorithmic Impact Assessmen
    - `.arckit/templates/_partials/RENDERING.md`
 2. Read the template:
    - **First**, check `.arckit/templates-custom/ca-aia-template.md` (user override)
-   - **Then**, `.arckit/templates/ca-aia-template.md`
+   - **Then**, `.arckit/templates-custom/ca-aia-template.md`
    - **Fallback**, `.arckit/templates/ca-aia-template.md`
 3. Use `scripts/bash/generate-document-id.sh <PROJECT_ID> AIA --filename` for the artefact filename.
 4. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`. Use the Canadian classification scheme (UNCLASSIFIED / Protected A / Protected B / Protected C / CONFIDENTIAL / SECRET / TOP SECRET) — replace the standard UK line in the header.

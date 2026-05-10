@@ -57,11 +57,11 @@ Follow these steps in order when the user asks to create or analyze a Wardley Ma
 
 ### Step 1: Gather Context
 
-Use the AskUserQuestion tool to interactively gather the information needed to create the map. Ask up to 3 questions at a time.
+ask the user for the information needed to create the map. Ask up to 3 questions at a time.
 
 **First, identify the anchor and scope:**
 
-Use AskUserQuestion to ask:
+ask the user:
 
 - **Who is the primary user?** — Options might include: "External customers", "Internal developers", "Business analysts", or let the user specify
 - **What is the user need?** — e.g., "Purchase products online", "Deploy applications reliably", "Generate analytical reports"
@@ -69,7 +69,7 @@ Use AskUserQuestion to ask:
 
 **Then, gather strategic context:**
 
-Use AskUserQuestion to ask:
+ask the user:
 
 - **What is the primary goal?** — Options: "Identify investment priorities", "Evaluate build vs. buy", "Assess competitive position", "Plan technology evolution"
 - **What industry/domain?** — Let the user specify (affects how components are positioned on the evolution axis)
@@ -84,7 +84,7 @@ Work backwards from the user need. List every component required to deliver it, 
 - Map both **technical and business** components
 - Ask: "What components are needed?", "What does each depend on?", "What is hidden from the user?"
 
-If component identification is uncertain, use AskUserQuestion to ask the user about key capabilities, technologies, and processes in their domain.
+If component identification is uncertain, ask the user the user about key capabilities, technologies, and processes in their domain.
 
 ### Step 3: Position on Evolution
 
@@ -99,7 +99,7 @@ Key questions for each component:
 
 Avoid common mistakes: don't position based on age (use market maturity), don't confuse internal unfamiliarity with market-wide genesis, and always consider industry context.
 
-If positioning is ambiguous for key components, use AskUserQuestion to clarify with the user — e.g., "Is your recommendation engine a custom differentiator or are you using an off-the-shelf product?"
+If positioning is ambiguous for key components, ask the user to clarify — e.g., "Is your recommendation engine a custom differentiator or are you using an off-the-shelf product?"
 
 ### Step 4: Add Movement
 
@@ -113,7 +113,7 @@ Add arrows showing how components are evolving. All components naturally drift r
 
 After drawing the map, apply the analysis checklist below, then review gameplay patterns in [references/gameplay-patterns.md](references/gameplay-patterns.md) and climatic patterns in [references/climatic-patterns.md](references/climatic-patterns.md) to identify strategic moves.
 
-Use AskUserQuestion to confirm priorities with the user before finalizing recommendations — e.g., "The map suggests these three strategic moves. Which areas are most important to your organization right now?"
+ask the user to confirm priorities with the user before finalizing recommendations — e.g., "The map suggests these three strategic moves. Which areas are most important to your organization right now?"
 
 ### Step 6: Quantitative Analysis (Optional)
 
@@ -266,10 +266,10 @@ This skill handles **conversational** Wardley Mapping — quick questions, evolu
 
 For **formal architecture documents** with document control, project integration, UK Government compliance (TCoP, GDS, AI Playbook), and OnlineWardleyMaps syntax for https://create.wardleymaps.ai, use the ArcKit Wardley suite:
 
-- `/arckit.wardley.value-chain` — Decompose user needs into value chains (WVCH artifact)
-- `/arckit.wardley` — Create strategic Wardley Maps (WARD artifact)
-- `/arckit.wardley.doctrine` — Assess organizational doctrine maturity across 4 phases, 40+ principles (WDOC artifact)
-- `/arckit.wardley.gameplay` — Analyze strategic plays from 60+ gameplay patterns with D&D alignment (WGAM artifact)
-- `/arckit.wardley.climate` — Assess 32 climatic patterns across 6 categories with prediction horizons (WCLM artifact)
+- `$arckit-wardley-value-chain` — Decompose user needs into value chains (WVCH artifact)
+- `$arckit-wardley` — Create strategic Wardley Maps (WARD artifact)
+- `$arckit-wardley-doctrine` — Assess organizational doctrine maturity across 4 phases, 40+ principles (WDOC artifact)
+- `$arckit-wardley-gameplay` — Analyze strategic plays from 60+ gameplay patterns with D&D alignment (WGAM artifact)
+- `$arckit-wardley-climate` — Assess 32 climatic patterns across 6 categories with prediction horizons (WCLM artifact)
 
 These generate versioned artifacts saved to your project directory with full traceability to requirements and architecture principles. Each command works standalone but gets richer when sibling artifacts exist.

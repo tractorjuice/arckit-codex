@@ -114,7 +114,10 @@ Find the project directory in `projects/` (user may specify name/number, otherwi
 
 ### Step 2: Read Template
 
-Read `${CLAUDE_PLUGIN_ROOT}/templates/gov-landscape-template.md` for the output structure.
+Read the template with user override support:
+
+- First, check `.arckit/templates-custom/gov-landscape-template.md` (user override)
+- If not found, read `.arckit/templates/gov-landscape-template.md` (default)
 
 ### Step 3: Define the Domain
 
@@ -311,7 +314,7 @@ Use Glob to find existing `projects/{project-dir}/research/ARC-{PROJECT_ID}-GLND
 
 ### Step 16: Quality Check
 
-Before writing, read `${CLAUDE_PLUGIN_ROOT}/references/quality-checklist.md` and verify all **Common Checks** plus the **GLND** per-type checks pass. Fix any failures before proceeding.
+Before writing, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **GLND** per-type checks pass. Fix any failures before proceeding.
 
 ### Step 17: Write Output
 
@@ -373,8 +376,8 @@ Return ONLY a concise summary including:
 
 ## Toolchain
 
-- **Templates** — `${CLAUDE_PLUGIN_ROOT}/templates/gov-landscape-template.md`
-- **Helpers** — `${CLAUDE_PLUGIN_ROOT}/scripts/bash/create-project.sh` · `${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh`
+- **Templates** — `.arckit/templates/gov-landscape-template.md` (override at `.arckit/templates-custom/gov-landscape-template.md`)
+- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/bash/generate-document-id.sh`
 - **MCP server** — `govreposcrape` (`search_uk_gov_code` over 24,500+ UK government repositories)
 - **External tools** — `WebFetch` (organisation profiles, contributor pages, repo READMEs)
 - **Related commands** — `/arckit:gov-reuse` (capability-driven reuse) · `/arckit:gov-code-search` (focused queries)

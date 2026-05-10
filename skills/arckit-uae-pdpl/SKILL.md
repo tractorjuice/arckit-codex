@@ -5,6 +5,12 @@ description: "[COMMUNITY] Generate a UAE PDPL (Federal Decree-Law 45/2021) compl
 
 > ⚠️ **Community-contributed command** — not part of the officially-maintained ArcKit baseline. Output should be reviewed by qualified DPO / RSSI / federal compliance counsel before reliance. Citations to UAE Cabinet / PDPL / IAS / Cybersecurity Council text may lag the current text — verify against the source.
 
+## User Request
+
+```text
+$ARGUMENTS
+```
+
 You are an enterprise architect generating a UAE PDPL Compliance Assessment for a federal entity.
 
 ## Process
@@ -15,7 +21,7 @@ You are an enterprise architect generating a UAE PDPL Compliance Assessment for 
    - `.arckit/templates/_partials/RENDERING.md`
 2. Read the template:
    - **First**, check `.arckit/templates-custom/uae-pdpl-template.md` (user override)
-   - **Then**, `.arckit/templates/uae-pdpl-template.md`
+   - **Then**, `.arckit/templates-custom/uae-pdpl-template.md`
    - **Fallback**, `.arckit/templates/uae-pdpl-template.md`
 3. Use `scripts/bash/generate-document-id.sh PDPL --filename` for the artefact filename.
 4. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`.
@@ -47,6 +53,6 @@ The PDPL Executive Regulation status MUST be flagged as "verified as of [date]" 
 
 After completing this command, consider running:
 
-- `$arckit-risks` -- DPIA outputs feed the risk register's privacy and regulatory entries.
+- `$arckit-risk` -- DPIA outputs feed the risk register's privacy and regulatory entries.
 - `$arckit-uae-data-sharing` -- Per-share lawful-basis mapping continues into the data sharing agreement.
 - `$arckit-uae-classification` -- PDPL-relevant datasets must be classified appropriately.

@@ -146,7 +146,7 @@ Extract project metadata:
 
 ### Step 2c: Interactive Configuration
 
-Before generating the backlog, use the **AskUserQuestion** tool to gather user preferences. **Skip any question where the user has already specified their choice via the arguments above** (e.g., if they wrote `PRIORITY=risk`, do not ask about prioritization).
+Before generating the backlog, ask the user for user preferences. **Skip any question where the user has already specified their choice via the arguments above** (e.g., if they wrote `PRIORITY=risk`, do not ask about prioritization).
 
 **Gathering rules** (apply to all questions in this section):
 

@@ -1,0 +1,80 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ./hooks/arckit-codex-hook.mjs SessionStart",
+            "timeout": 10,
+            "statusMessage": "Loading ArcKit context"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ./hooks/arckit-codex-hook.mjs UserPromptSubmit",
+            "timeout": 10,
+            "statusMessage": "Checking ArcKit prompt"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|apply_patch|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ./hooks/arckit-codex-hook.mjs PreToolUse",
+            "timeout": 10,
+            "statusMessage": "Checking ArcKit file policy"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "apply_patch|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ./hooks/arckit-codex-hook.mjs PostToolUse",
+            "timeout": 10,
+            "statusMessage": "Updating ArcKit metadata"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ./hooks/arckit-codex-hook.mjs PermissionRequest",
+            "timeout": 10,
+            "statusMessage": "Checking ArcKit MCP policy"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ./hooks/arckit-codex-hook.mjs Stop",
+            "timeout": 10,
+            "statusMessage": "Recording ArcKit session"
+          }
+        ]
+      }
+    ]
+  }
+}

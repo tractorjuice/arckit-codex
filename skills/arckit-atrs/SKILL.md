@@ -54,7 +54,7 @@ $ARGUMENTS
      - Extract: Data protection assessment, lawful basis, privacy risks
 
    **Read the template** (with user override support):
-   - **First**, check if `.arckit/templates/uk-gov-atrs-template.md` exists in the project root
+   - **First**, check if `.arckit/templates-custom/uk-gov-atrs-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)
    - **If not found**: Read `.arckit/templates/uk-gov-atrs-template.md` (default)
 

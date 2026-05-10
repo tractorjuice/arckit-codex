@@ -48,7 +48,7 @@ $ARGUMENTS
    - **Citation traceability**: When referencing content from external documents, follow the citation instructions in `.arckit/references/citation-instructions.md`. Place inline citation markers (e.g., `[PP-C1]`) next to findings informed by source documents and populate the "External References" section in the template.
 
 4. **Read the template** (with user override support):
-   - **First**, check if `.arckit/templates/requirements-template.md` exists in the project root
+   - **First**, check if `.arckit/templates-custom/requirements-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)
    - **If not found**: Read `.arckit/templates/requirements-template.md` (default)
    - **Update Template Version**: Replace the version in the template metadata line with `{ARCKIT_VERSION}` from the session context

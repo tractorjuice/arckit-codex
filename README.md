@@ -36,10 +36,13 @@ That's it -- no environment variables, no config files. Codex auto-discovers ski
 
 This creates a project with:
 
-- `.agents/skills/` -- 67 skills (63 commands + 4 reference skills, auto-discovered by Codex)
-- `.codex/agents/` -- 6 agent configs (research, datascout, cloud providers, framework)
-- `.codex/config.toml` -- MCP servers and agent roles
+- `.agents/skills/` -- 120 skills (116 commands + 4 reference skills, auto-discovered by Codex)
+- `.codex/agents/` -- 10 agent configs (research, datascout, gov reuse, grants, cloud providers, framework)
+- `.codex/hooks/` -- ArcKit lifecycle hooks for context injection, secret checks, file guardrails, and MCP approval policy
+- `.codex/config.toml` -- 5 MCP servers, agent roles, and hook wiring
 - `.arckit/templates/` -- document templates
+- `.arckit/templates-custom/` -- project-specific template overrides
+- `.arckit/schemas/` -- handoff schemas for research and scoring workflows
 - `.arckit/scripts/` -- helper scripts
 
 ### Option 2: Standalone Extension (manual)
@@ -58,7 +61,7 @@ cp -r /path/to/arckit-codex/skills/* .agents/skills/
 cp -r /path/to/arckit-codex/skills/* ~/.agents/skills/
 ```
 
-This makes all 63 ArcKit commands available as `$arckit-*` skills plus 4 reference skills.
+This makes all 116 ArcKit commands available as `$arckit-*` skills plus 4 reference skills.
 
 **Step 2: MCP Servers and Agents**
 
@@ -71,11 +74,50 @@ cp /path/to/arckit-codex/config.toml ~/.codex/config.toml
 # If you already have a config, manually merge the [mcp_servers] and [agents] sections
 ```
 
+Copy the agent prompt files referenced by `config.toml`:
+
+```bash
+mkdir -p ~/.codex/agents
+cp -r /path/to/arckit-codex/agents/* ~/.codex/agents/
+```
+
+**Step 3: Lifecycle Hooks**
+
+Copy the Codex hook runner referenced by `config.toml`:
+
+```bash
+mkdir -p ~/.codex/hooks
+cp /path/to/arckit-codex/hooks/arckit-codex-hook.mjs ~/.codex/hooks/
+```
+
+The hook wiring in `config.toml` enables:
+
+- `SessionStart` context injection for ArcKit projects and recent session memory
+- `UserPromptSubmit` secret detection and ArcKit context injection when `$arckit-*` skills are invoked
+- `UserPromptSubmit` artifact graph context for `$arckit-health`, `$arckit-traceability`, `$arckit-analyze`, `$arckit-search`, `$arckit-impact`, `$arckit-navigator`, and `$arckit-graph-report`
+- `PreToolUse` guardrails for `apply_patch`, `Edit`, `Write`, and simple `Bash` writes to credential files
+- `PreToolUse` ARC artifact filename enforcement and `vendors/scores.json` validation
+- `PostToolUse` provenance stamping and `docs/manifest.json` maintenance for changed project artifacts
+- `PermissionRequest` auto-approval for ArcKit knowledge MCP servers
+- `Stop` session memory capture in `.arckit/memory/sessions.md`
+
+For deterministic research workflows, also copy the bundled schemas and validator:
+
+```bash
+mkdir -p .arckit/schemas .arckit/scripts
+cp -r /path/to/arckit-codex/schemas/* .arckit/schemas/
+cp /path/to/arckit-codex/scripts/validate-handoff.mjs .arckit/scripts/
+```
+
 MCP servers require no API keys except for Google Developer Knowledge (`GOOGLE_API_KEY`) and Data Commons (`DATA_COMMONS_API_KEY`). AWS Knowledge and Microsoft Learn work without authentication.
+
+### Option 3: Codex Plugin Bundle
+
+`arckit-codex/` also contains a Codex plugin manifest at `.codex-plugin/plugin.json`. It points to bundled skills, MCP server config, and `hooks/hooks.json` for Codex installations that load local plugins directly.
 
 ## Skills
 
-All 63 commands are available as skills, invoked with `$arckit-<command>` in Codex CLI. Additionally, 4 reference skills provide domain knowledge.
+All 116 commands are available as skills, invoked with `$arckit-<command>` in Codex CLI. Additionally, 4 reference skills provide domain knowledge.
 
 ### Reference Skills
 
@@ -86,7 +128,9 @@ All 63 commands are available as skills, invoked with `$arckit-<command>` in Cod
 | **plantuml-syntax** | `$plantuml-syntax` | PlantUML syntax including C4-PlantUML, sequence, class, activity, deployment diagrams, and layout patterns |
 | **wardley-mapping** | `$wardley-mapping` | Wardley Mapping concepts: evolution stages, gameplay patterns, doctrine, build vs buy, quantitative scoring |
 
-### Command Skills
+### Command Skill Examples
+
+The examples below cover the most common workflows. The generated `skills/arckit-*/` directories are the source of truth for the full command set.
 
 #### Foundation and Governance
 
@@ -183,13 +227,17 @@ Agents run as autonomous sub-processes to handle research-intensive tasks. They 
 | **arckit-aws-research** | AWS service research via AWS Knowledge MCP (service matching, Well-Architected guidance, Security Hub controls) |
 | **arckit-azure-research** | Azure service research via Microsoft Learn MCP (service matching, Well-Architected guidance, Security Benchmark controls) |
 | **arckit-gcp-research** | Google Cloud research via Google Developer Knowledge MCP (service matching, Architecture Framework guidance) |
+| **arckit-gov-code-search** | Focused semantic search across UK government repositories |
+| **arckit-gov-landscape** | Domain landscape mapping across UK government repositories and organisations |
+| **arckit-gov-reuse** | UK government code reuse assessment by capability |
+| **arckit-grants** | UK grant and funding opportunity research |
 | **arckit-framework** | Transform project artifacts into a structured framework with phased organization, overview document, and executive guide |
 
 Each agent has a system prompt (`agents/arckit-{name}.md`) and a TOML configuration (`agents/arckit-{name}.toml`).
 
 ## MCP Servers
 
-Four Model Context Protocol servers are configured in `config.toml` to provide cloud platform and data knowledge:
+Five Model Context Protocol servers are configured in `config.toml` to provide cloud platform, data, and UK government repository knowledge:
 
 | Server | URL | Auth Required |
 |--------|-----|---------------|
@@ -197,6 +245,7 @@ Four Model Context Protocol servers are configured in `config.toml` to provide c
 | **microsoft-learn** | `https://learn.microsoft.com/api/mcp` | No |
 | **google-developer-knowledge** | `https://developerknowledge.googleapis.com/mcp` | Yes (`GOOGLE_API_KEY`) |
 | **datacommons-mcp** | `https://api.datacommons.org/mcp` | Yes (`DATA_COMMONS_API_KEY`) |
+| **govreposcrape** | `https://govreposcrape-api-1060386346356.us-central1.run.app/mcp` | No |
 
 ## Differences from Claude Code
 
@@ -207,9 +256,9 @@ Four Model Context Protocol servers are configured in `config.toml` to provide c
 | **Skills** | Supported (plugin skills/) | Supported (`.agents/skills/`, auto-discovered) |
 | **Agents** | Supported (Task tool) | Experimental (multi-agent flag) |
 | **MCP servers** | Supported (plugin config) | Supported (`config.toml`) |
-| **Hooks** | Supported (plugin hooks/) | Not supported |
+| **Hooks** | Supported (plugin hooks/) | Supported (`hooks/hooks.json` and `config.toml`) |
 | **Approval modes** | Automatic | `--auto`, `--read-only`, `--network` |
-| **Template paths** | `${CLAUDE_PLUGIN_ROOT}/templates/` | `.arckit/templates/` |
+| **Template paths** | `${CLAUDE_PLUGIN_ROOT}/templates/` defaults, `.arckit/templates-custom/` overrides | `.arckit/templates/` defaults, `.arckit/templates-custom/` overrides |
 | **Installation** | Marketplace plugin | CLI (`arckit init --ai codex`) or manual file copy |
 
 ## File Structure
@@ -218,32 +267,40 @@ Four Model Context Protocol servers are configured in `config.toml` to provide c
 arckit-codex/
 ├── README.md              # This file
 ├── VERSION                # Extension version (tracks plugin)
-├── config.toml            # MCP servers + agent configuration
-├── skills/                # 67 skills (63 commands + 4 reference)
+├── .codex-plugin/
+│   └── plugin.json        # Codex plugin manifest
+├── .mcp.json              # Codex plugin MCP server configuration
+├── config.toml            # MCP servers, hooks, and agent configuration
+├── hooks/
+│   ├── hooks.json         # Codex plugin lifecycle configuration
+│   └── arckit-codex-hook.mjs
+├── skills/                # 120 skills (116 commands + 4 reference)
 │   ├── arckit-requirements/
 │   │   ├── SKILL.md       # Command prompt with frontmatter
 │   │   └── agents/
 │   │       └── openai.yaml  # allow_implicit_invocation: false
 │   ├── arckit-principles/
-│   ├── ...                # 55 more command skills
+│   ├── ...                # 108 more command skills
 │   ├── architecture-workflow/  # Reference skill
 │   ├── mermaid-syntax/         # Reference skill
 │   ├── plantuml-syntax/        # Reference skill
 │   └── wardley-mapping/        # Reference skill
-├── prompts/               # 63 prompts (deprecated, use skills instead)
-├── agents/                # 6 agent configs + system prompts
+├── prompts/               # 116 prompts (deprecated, use skills instead)
+├── agents/                # 10 agent configs + system prompts
 │   ├── arckit-research.md
 │   ├── arckit-research.toml
 │   └── ...
 ├── templates/             # Document templates
-├── scripts/               # Helper scripts (bash, python)
+├── config/                # Shared document type metadata
+├── schemas/               # Handoff schemas and scoring rubrics
+├── scripts/               # Helper scripts, validators, bash, python
 └── docs/
     └── guides/            # Command usage guides
 ```
 
 ## Version
 
-**Current Release: v3.1.2 (63 commands, 4 reference skills)**
+**Current Release: v4.20.0 (116 commands, 4 reference skills)**
 
 ---
 

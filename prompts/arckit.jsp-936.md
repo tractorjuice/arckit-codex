@@ -41,7 +41,7 @@ Generate comprehensive JSP 936 AI assurance documentation following this rigorou
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/jsp-936-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/jsp-936-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/jsp-936-template.md` (default)
 

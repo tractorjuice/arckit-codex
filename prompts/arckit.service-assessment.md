@@ -58,7 +58,7 @@ Generate a comprehensive GDS Service Standard assessment preparation report that
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/service-assessment-prep-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/service-assessment-prep-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/service-assessment-prep-template.md` (default)
 

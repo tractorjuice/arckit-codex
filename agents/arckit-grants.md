@@ -119,7 +119,7 @@ Extract from requirements and user arguments:
 
 - Read any **external documents** listed in the project context (`external/` files) — extract funding-relevant information
 - Read any **enterprise standards** in `projects/000-global/external/` — extract existing funding policies or constraints
-- **Citation traceability**: When referencing content from external documents, follow the citation instructions in `${CLAUDE_PLUGIN_ROOT}/references/citation-instructions.md`. Place inline citation markers (e.g., `[PP-C1]`) next to findings informed by source documents and populate the "External References" section in the template.
+- **Citation traceability**: When referencing content from external documents, follow the citation instructions in `.arckit/references/citation-instructions.md`. Place inline citation markers (e.g., `[PP-C1]`) next to findings informed by source documents and populate the "External References" section in the template.
 
 ### Step 4: Research UK Grant Bodies
 
@@ -171,11 +171,11 @@ Include a rationale for each score explaining what matches and what gaps exist.
 ### Step 7: Read Template and Write Report
 
 1. **Read the template** (with user override support):
-   - **First**, check if `.arckit/templates/grants-template.md` exists in the project root
+   - **First**, check if `.arckit/templates-custom/grants-template.md` exists in the project root
    - **If found**: Read the user's customized template (user override takes precedence)
-   - **If not found**: Read `${CLAUDE_PLUGIN_ROOT}/templates/grants-template.md` (default)
+   - **If not found**: Read `.arckit/templates/grants-template.md` (default)
 
-2. Before writing, read `${CLAUDE_PLUGIN_ROOT}/references/quality-checklist.md` and verify all **Common Checks** pass. Fix any failures before proceeding.
+2. Before writing, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** pass. Fix any failures before proceeding.
 
 3. Generate the document ID: `ARC-{PROJECT_ID}-GRNT-{NNN}-v1.0` where `{NNN}` is the next available sequence number. Check existing files with Glob: `projects/{project-dir}/research/ARC-*-GRNT-*.md`
 
@@ -209,7 +209,7 @@ Examples:
 For each grant programme researched in depth (2+ substantive facts gathered):
 
 1. Check whether a tech note already exists: Glob for `projects/{project-dir}/tech-notes/*{grant-slug}*`
-2. **If no tech note exists**: Read the tech note template at `${CLAUDE_PLUGIN_ROOT}/templates/tech-note-template.md` and create a new file at `projects/{project-dir}/tech-notes/{grant-slug}.md`. Populate from research findings.
+2. **If no tech note exists**: Read the tech note template at `.arckit/templates/tech-note-template.md` and create a new file at `projects/{project-dir}/tech-notes/{grant-slug}.md`. Populate from research findings.
 3. **If a tech note exists**: Read the existing note and apply these merge rules per section:
    - **Summary**: Update only if understanding has significantly changed; otherwise keep existing
    - **Key Findings**: Append new findings; mark outdated ones with "(superseded as of YYYY-MM-DD)" rather than removing
@@ -253,7 +253,7 @@ Return ONLY a concise summary including:
 
 ## Toolchain
 
-- **Templates** — `${CLAUDE_PLUGIN_ROOT}/templates/grants-template.md` (override at `.arckit/templates/grants-template.md`)
-- **Helpers** — `${CLAUDE_PLUGIN_ROOT}/scripts/bash/create-project.sh` · `${CLAUDE_PLUGIN_ROOT}/scripts/bash/generate-document-id.sh`
+- **Templates** — `.arckit/templates/grants-template.md` (override at `.arckit/templates-custom/grants-template.md`)
+- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/bash/generate-document-id.sh`
 - **External tools** — `WebSearch` · `WebFetch` (no MCP)
 - **Related commands** — `/arckit:requirements` (input) · `/arckit:stakeholders` (input) · `/arckit:sobc` (downstream business case)

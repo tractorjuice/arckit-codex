@@ -68,7 +68,7 @@ Load the roadmap template structure:
 
 **Read the template** (with user override support):
 
-- **First**, check if `.arckit/templates/roadmap-template.md` exists in the project root
+- **First**, check if `.arckit/templates-custom/roadmap-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/roadmap-template.md` (default)
 
@@ -76,7 +76,7 @@ Load the roadmap template structure:
 
 ### 3b. Interactive Configuration
 
-Before generating the roadmap, use the **AskUserQuestion** tool to gather strategic preferences. **Skip any question the user has already specified in their arguments.**
+Before generating the roadmap, ask the user for strategic preferences. **Skip any question the user has already specified in their arguments.**
 
 **Gathering rules** (apply to all questions in this section):
 
