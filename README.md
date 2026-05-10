@@ -58,6 +58,7 @@ Enable Codex lifecycle hooks in your user or project config:
 ```toml
 [features]
 hooks = true
+plugin_hooks = true
 ```
 
 Restart Codex, open the plugin directory, choose **ArcKit Plugins**, then install

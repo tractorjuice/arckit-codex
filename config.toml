@@ -3,6 +3,7 @@
 
 [features]
 hooks = true
+plugin_hooks = true
 
 # ── Lifecycle Hooks ─────────────────────────────────
 # Resolve hook scripts from the git root so Codex can start in subdirectories.
