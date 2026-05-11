@@ -3,6 +3,9 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSy
 import { execFileSync } from "node:child_process";
 import { basename, dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { buildProjectContext } from "./project-context-builder.mjs";
+import { runGraphInjectHook } from "./graph-inject.mjs";
+import { runSyncGuidesHook } from "./sync-guides.mjs";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const PLUGIN_ROOT = resolve(SCRIPT_DIR, "..");
@@ -47,6 +50,17 @@ const ALLOWED_MCP_PREFIXES = [
   "mcp__datacommons-mcp__",
   "mcp__govreposcrape__",
 ];
+
+const PLUGIN_SCRIPT_ALLOWLIST = new Set([
+  "validate-handoff.mjs",
+  "bash/common.sh",
+  "bash/create-project.sh",
+  "bash/generate-document-id.sh",
+  "bash/check-prerequisites.sh",
+  "bash/list-projects.sh",
+  "bash/migrate-filenames.sh",
+  "bash/detect-stale-artifacts.sh",
+]);
 
 const DOC_TYPES = {
   REQ: { name: "Requirements", category: "Discovery" },
@@ -223,6 +237,16 @@ function denyTool(reason) {
   });
 }
 
+function allowTool(reason) {
+  writeJson({
+    hookSpecificOutput: {
+      hookEventName: "PreToolUse",
+      permissionDecision: "allow",
+      permissionDecisionReason: reason,
+    },
+  });
+}
+
 function warnTool(reason) {
   writeJson({
     systemMessage: reason,
@@ -238,6 +262,15 @@ function allowPermission() {
       },
     },
   });
+}
+
+function hookAdditionalContext(output) {
+  return output?.hookSpecificOutput?.additionalContext || output?.additionalContext || "";
+}
+
+function promptMatchesCommand(prompt, command) {
+  const escaped = command.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`(?:^|\\s)(?:\\$arckit-${escaped}|/arckit[.:]${escaped})\\b`, "i").test(prompt);
 }
 
 function detectSecrets(text) {
@@ -304,6 +337,46 @@ function pathLooksProtected(filePath) {
     return true;
   }
   return [...PROTECTED_EXTENSIONS].some((extension) => lowerName.endsWith(extension));
+}
+
+function isUnderPluginRoot(filePath) {
+  if (!filePath || typeof filePath !== "string") {
+    return false;
+  }
+  const absolute = resolve(filePath);
+  return absolute === PLUGIN_ROOT || absolute.startsWith(`${PLUGIN_ROOT}/`);
+}
+
+function isArcKitTempfile(filePath) {
+  return typeof filePath === "string"
+    && /^\/tmp\/(?:arckit-)?[a-z][a-z0-9-]*-handoff(?:-[a-z][a-z0-9-]*)?[A-Za-z0-9.-]*\.json$/.test(filePath);
+}
+
+function escapeRegex(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function commandTouchesPluginScripts(command) {
+  if (!command || typeof command !== "string") {
+    return false;
+  }
+  const scriptsDir = resolve(PLUGIN_ROOT, "scripts").replaceAll("\\", "/");
+  const prefixes = [
+    `${scriptsDir}/`,
+    "${CODEX_PLUGIN_ROOT}/scripts/",
+    "${CLAUDE_PLUGIN_ROOT}/scripts/",
+  ];
+  const refs = [];
+  for (const prefix of prefixes) {
+    if (!command.includes(prefix)) {
+      continue;
+    }
+    const re = new RegExp(`${escapeRegex(prefix)}([A-Za-z0-9_./-]+)`, "g");
+    for (const match of command.matchAll(re)) {
+      refs.push(match[1]);
+    }
+  }
+  return refs.length > 0 && refs.every((ref) => PLUGIN_SCRIPT_ALLOWLIST.has(ref));
 }
 
 function extractPatchDetails(command) {
@@ -488,6 +561,24 @@ function handlePreToolUse(data) {
   const command = stringifyToolInput(toolInput);
   const explicitPaths = extractExplicitPaths(toolInput);
 
+  if (toolName === "Read") {
+    const filePath = explicitPaths[0] || "";
+    if (isUnderPluginRoot(filePath)) {
+      allowTool(`ArcKit: auto-allowed Read of plugin-internal file (${relative(PLUGIN_ROOT, resolve(filePath))})`);
+      return;
+    }
+    if (isArcKitTempfile(filePath)) {
+      allowTool("ArcKit: auto-allowed Read of ArcKit-managed tempfile");
+      return;
+    }
+    return;
+  }
+
+  if (toolName === "Bash" && commandTouchesPluginScripts(command)) {
+    allowTool("ArcKit: auto-allowed Bash invocation of plugin-internal helper script");
+    return;
+  }
+
   if (toolName === "apply_patch" || command.includes("*** Begin Patch")) {
     const patch = extractPatchDetails(command);
     const invalidArcFilename = [...explicitPaths, ...patch.paths]
@@ -662,9 +753,14 @@ function buildContext(data) {
     `Workspace root: ${workspaceRoot}`,
   ];
 
-  const inventory = buildProjectInventory(workspaceRoot);
-  if (inventory.length) {
-    lines.push("", ...inventory);
+  const projectContext = buildProjectContext(workspaceRoot);
+  if (projectContext) {
+    lines.push("", projectContext);
+  } else {
+    const inventory = buildProjectInventory(workspaceRoot);
+    if (inventory.length) {
+      lines.push("", ...inventory);
+    }
   }
 
   const memoryPath = join(workspaceRoot, ".arckit", "memory", "sessions.md");
@@ -893,9 +989,21 @@ function handleUserPromptSubmit(data) {
     contexts.push(buildContext(data));
   }
 
-  const graphCommand = detectGraphCommand(prompt);
-  if (graphCommand) {
-    contexts.push(buildGraphContext(data, graphCommand, prompt));
+  const graphContext = hookAdditionalContext(runGraphInjectHook(data));
+  if (graphContext) {
+    contexts.push(graphContext);
+  } else {
+    const graphCommand = detectGraphCommand(prompt);
+    if (graphCommand) {
+      contexts.push(buildGraphContext(data, graphCommand, prompt));
+    }
+  }
+
+  if (promptMatchesCommand(prompt, "pages")) {
+    const pagesContext = hookAdditionalContext(runSyncGuidesHook(data));
+    if (pagesContext) {
+      contexts.push(pagesContext);
+    }
   }
 
   if (contexts.length) {
