@@ -98,7 +98,7 @@ style wardley
 <details>
 <summary>Mermaid Value Chain Map (renders in GitHub, VS Code, and other Mermaid-enabled viewers)</summary>
 
-> **Note**: Mermaid Wardley Maps use the `wardley-beta` keyword. This feature is in Mermaid's develop branch and may not render in all viewers yet. No sourcing decorators at the value chain stage — those are added when creating the full Wardley Map.
+> **Note**: Mermaid Wardley Maps use the `wardley-beta` keyword, supported from Mermaid 11.14.0 onward. ArcKit generated pages use Mermaid 11.15.0. No sourcing decorators at the value chain stage — those are added when creating the full Wardley Map.
 
 ```mermaid
 wardley-beta
@@ -122,7 +122,7 @@ component {InfrastructureF} [0.12, 0.90]
 {ComponentC} -> {InfrastructureF}
 ```
 
-> When substituting placeholders, wrap the replacement in double quotes if it contains any character outside `[A-Za-z0-9_()& ]` (e.g. hyphens, dots, slashes) or starts with a digit. Simple multi-word names stay unquoted.
+> When substituting placeholders, quote non-simple names for compatibility. Mermaid 11.15.0 allows unquoted hyphenated names, but quotes remain valid and preserve rendering in 11.14.0; dots, slashes, bare numeric words, and keyword-like names should still be quoted.
 
 </details>
 

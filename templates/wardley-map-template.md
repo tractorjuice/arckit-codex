@@ -41,7 +41,7 @@ style wardley
 <details>
 <summary>Mermaid Wardley Map (renders in GitHub, VS Code, and other Mermaid-enabled viewers)</summary>
 
-> **Note**: Mermaid Wardley Maps use the `wardley-beta` keyword. This feature is in Mermaid's develop branch and may not render in all viewers yet.
+> **Note**: Mermaid Wardley Maps use the `wardley-beta` keyword, supported from Mermaid 11.14.0 onward. ArcKit generated pages use Mermaid 11.15.0.
 
 ```mermaid
 wardley-beta

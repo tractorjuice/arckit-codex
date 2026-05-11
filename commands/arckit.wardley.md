@@ -210,7 +210,7 @@ style wardley
 
 ### Mermaid Wardley Map (Enhanced)
 
-After generating the OWM code block, generate the Mermaid `wardley-beta` equivalent **by running the bundled converter** rather than re-emitting the syntax by hand. Hand-rolled `wardley-beta` is brittle: the parser eagerly tokenises hyphens as `->`, treats bare numeric words (`NIS 2031`) as numeric literals, and matches keywords (`label`, `evolve`, `pipeline`) at any word boundary, so a single missed quote breaks rendering. The converter resolves this by emitting every name as a double-quoted STRING, and it also handles pipeline child detection, `evolve`-label stripping, and sourcing-decorator pass-through.
+After generating the OWM code block, generate the Mermaid `wardley-beta` equivalent **by running the bundled converter** rather than re-emitting the syntax by hand. Hand-rolled `wardley-beta` is brittle across Mermaid versions: 11.14.0 tokenises hyphens as `->`, 11.15.0 fixes hyphenated names but still requires care around bare numeric words (`NIS 2031`), keyword prefixes (`label`, `evolve`, `pipeline`), slashes, dots, and other punctuation. The converter resolves this by emitting every name as a double-quoted STRING for cross-version compatibility, and it also handles pipeline child detection, `evolve`-label stripping, and sourcing-decorator pass-through.
 
 **Procedure**:
 

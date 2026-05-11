@@ -10,16 +10,14 @@
  * by hand.
  *
  * Strategy: always emit double-quoted names. Mermaid's wardley-beta grammar
- * (packages/parser/src/language/wardley/wardley.langium) accepts
- * `STRING | ID | NAME_WITH_SPACES` everywhere a name is expected; using
- * STRING (double-quoted) sidesteps every collision at once.
+ * accepts `STRING | ID | NAME_WITH_SPACES` everywhere a name is expected;
+ * using STRING (double-quoted) sidesteps every collision at once and keeps
+ * output compatible with both 11.14.0 and newer renderers.
  *
  * Why quoting matters:
- *   - NAME_WITH_SPACES is defined as
- *     /(?!title\s|accTitle|accDescr)[A-Za-z][A-Za-z0-9_()&]*(?:[ \t]+[A-Za-z(][A-Za-z0-9_()&]*)*\/
- *     so hyphens and slashes aren't allowed in bare names. A name like
- *     `real-time processing` splits into `real` + stray `-time` and parsing
- *     fails (the `-` is mistaken for the start of `->`).
+ *   - Mermaid 11.14.0 does not allow hyphens or slashes in bare names.
+ *     Mermaid 11.15.0 allows hyphens that are not part of `->`, but quoted
+ *     names remain valid and preserve compatibility with 11.14.0 dashboards.
  *   - Keyword terminals (`label`, `evolve`, `note`, `pipeline`, …) are
  *     matched eagerly at any word boundary; a bare name starting with one
  *     (e.g. `labelling`) is lexed as keyword+suffix and fails.
