@@ -71,7 +71,7 @@ function extractFirstHeading(filePath) {
 }
 
 function parseRepoInfo(repoRoot) {
-  const info = { repo: basename(repoRoot), owner: '', repoUrl: '', contentBaseUrl: '' };
+  const info = { repo: basename(repoRoot), owner: '', repoUrl: '', contentBaseUrl: '', siteUrl: '' };
   const gitConfig = readText(join(repoRoot, '.git', 'config'));
   if (!gitConfig) return info;
 
@@ -86,6 +86,18 @@ function parseRepoInfo(repoRoot) {
     info.repo = m[2];
     info.repoUrl = `https://github.com/${m[1]}/${m[2]}`;
     info.contentBaseUrl = `https://raw.githubusercontent.com/${m[1]}/${m[2]}/main`;
+    // Best-effort published site URL for canonical / og:url. A docs/CNAME
+    // (custom domain on GitHub Pages) wins; otherwise fall back to the default
+    // project Pages URL. Users deploying elsewhere (Netlify/Vercel) can override
+    // the canonical in the generated HTML.
+    const cname = (readText(join(repoRoot, 'docs', 'CNAME')) || '').trim();
+    if (cname) {
+      info.siteUrl = `https://${cname}/`;
+    } else {
+      info.siteUrl = info.repo.toLowerCase() === `${info.owner.toLowerCase()}.github.io`
+        ? `https://${info.owner}.github.io/`
+        : `https://${info.owner}.github.io/${info.repo}/`;
+    }
   }
   return info;
 }
@@ -437,6 +449,31 @@ function scanProject(repoRoot, projectName) {
         title: heading || meta.title,
         documentId: extractDocId(f),
         extension: ext,
+      });
+    }
+  }
+
+  // Clinical safety (NHS DCB0129 + DCB0160 — Marcus Baw SAFETY.md spec)
+  // These files deliberately do NOT carry the ARC- prefix (verbatim filenames
+  // are part of the spec), so they slip through the ARC-* glob above. Scan
+  // clinical-safety/ and clinical-safety/deployment/ explicitly and surface
+  // their contents under the project documents list with category
+  // "Clinical Safety" so the manifest, dashboard, and search index pick them
+  // up. Title is the file's first heading, falling back to the basename.
+  for (const dirRel of ['clinical-safety', 'clinical-safety/deployment']) {
+    const safetyDir = join(projectDir, dirRel);
+    if (!isDir(safetyDir)) continue;
+    for (const f of listDir(safetyDir)) {
+      if (f === 'README.md' || f.startsWith('.')) continue;
+      const fp = join(safetyDir, f);
+      if (!isFile(fp) || !f.endsWith('.md')) continue;
+      const heading = extractFirstHeading(fp) || basename(f, '.md');
+      project.documents.push({
+        path: `${projectPath}/${dirRel}/${f}`,
+        title: heading,
+        category: 'Clinical Safety',
+        documentId: basename(f, '.md'),
+        extension: '.md',
       });
     }
   }
@@ -947,8 +984,10 @@ function escapeHtml(str) {
 if (templatePath) {
   let html = readFileSync(templatePath, 'utf8');
   html = html.replace(/\{\{REPO\}\}/g, escapeHtml(repoInfo.repo));
+  html = html.replace(/\{\{REPO_OWNER\}\}/g, escapeHtml(repoInfo.owner));
   html = html.replace(/\{\{REPO_URL\}\}/g, escapeHtml(repoInfo.repoUrl));
   html = html.replace(/\{\{CONTENT_BASE_URL\}\}/g, escapeHtml(repoInfo.contentBaseUrl));
+  html = html.replace(/\{\{SITE_URL\}\}/g, escapeHtml(repoInfo.siteUrl));
   html = html.replace(/\{\{VERSION\}\}/g, escapeHtml(version));
 
   const docsDir = join(repoRoot, 'docs');
