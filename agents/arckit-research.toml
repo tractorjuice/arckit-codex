@@ -1,4 +1,4 @@
-# Auto-generated from arckit-claude/agents/arckit-research.md
+# Auto-generated from plugins/arckit-claude/agents/arckit-research.md
 # Do not edit — edit the source and re-run scripts/converter.py
 
 name = "arckit-research"
