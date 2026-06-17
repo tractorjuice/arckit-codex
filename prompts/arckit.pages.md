@@ -119,7 +119,7 @@ projects/000-global/
 ├── policies/                # Governance policies
 │   └── *.pdf, *.docx, *.md
 ├── external/                # Enterprise-wide reference documents
-│   └── *.pdf, *.docx, *.md
+│   └── *.pdf, *.docx, *.md, *.srt, *.vtt
 └── {other global documents}
 ```
 
@@ -180,7 +180,8 @@ projects/
 │   └── external/
 │       ├── README.md             # (excluded from listing)
 │       ├── rfp-document.pdf
-│       └── legacy-spec.docx
+│       ├── legacy-spec.docx
+│       └── architecture-board.vtt
 ├── 002-{another-project}/
 │   └── ...
 └── ...
