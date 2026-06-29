@@ -273,7 +273,7 @@ three groups:
 3. **Derived fields** from Step 5 — `concentration_flag`, `source_health`,
    `incumbency_narrative`, `key_findings`, `citations`.
 
-`classification` = `${user_config.default_classification}` if set, else
+`classification` = `${default_classification}` if set, else
 `OFFICIAL`. `date_iso` = today (ISO `YYYY-MM-DD`).
 
 ```json

@@ -319,7 +319,7 @@ carries three groups:
    `key_findings`, `citations`, `focal` (supplier-focus only),
    `head_to_head`, `rival_detail_narrative`.
 
-`classification` = `${user_config.default_classification}` if set, else
+`classification` = `${default_classification}` if set, else
 `OFFICIAL`. `date_iso` = today (ISO `YYYY-MM-DD`).
 
 ```json

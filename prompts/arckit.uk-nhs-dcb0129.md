@@ -68,7 +68,7 @@ NHS DCB0129 ("Clinical Risk Management: its Application in the Manufacture of He
    - `product-name`, `version` (from REQ / project metadata)
    - `standard` (`DCB0129` for this command's output; `both` if the deployer DCB0160 case will also live in the same repo)
    - `clinical-safety-officer` — populate as `[PENDING — CSO name and GMC/NMC/HCPC registration number]`; the CSO appoints themselves
-   - `organisation` — manufacturer legal entity (substitute `${user_config.organisation_name}` where appropriate)
+   - `organisation` — manufacturer legal entity (substitute `${organisation_name}` where appropriate)
    - `safety-case-status` — `draft`
    - `hazard-log-url` — relative link `./HAZARD-LOG.md`
    - `last-reviewed` — today's date

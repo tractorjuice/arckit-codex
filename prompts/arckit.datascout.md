@@ -382,7 +382,7 @@ Auto-populate fields:
 - `[VERSION]` = determined version from Step 14
 - `[DATE]` = current date (YYYY-MM-DD)
 - `[STATUS]` = "DRAFT"
-- `[CLASSIFICATION]` = `${user_config.default_classification}` when set; otherwise "OFFICIAL" (UK Gov) or "PUBLIC"
+- `[CLASSIFICATION]` = `${default_classification}` when set; otherwise "OFFICIAL" (UK Gov) or "PUBLIC"
 
 Include the generation metadata footer:
 
