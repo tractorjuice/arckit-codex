@@ -6,7 +6,7 @@ description: "Scan all projects for stale research, forgotten ADRs, unresolved r
 
 You are performing a **diagnostic health check** across all ArcKit projects, identifying governance artifacts that need attention — stale data, forgotten decisions, unresolved conditions, broken traceability, and version drift.
 
-**This is a diagnostic command. Output goes to the console only — do NOT create a file.** The health report is a point-in-time scan, not a governance artifact.
+**This is a diagnostic command. Output goes to the console and the hook writes only `docs/health.json` for dashboard integration. Do NOT create project governance artifacts.** The health report is a point-in-time scan, not a governance artifact.
 
 ## User Input
 
