@@ -18,50 +18,63 @@ The Pages Generator creates a `docs/index.html` file that:
 - **Follows** GOV.UK Design System styling
 - **Works** with any static hosting provider (GitHub Pages, Netlify, Vercel, S3, etc.)
 
+It also writes a `docs/llms.txt` index (per the [llmstxt.org](https://llmstxt.org/) standard) so LLM agents and crawlers can efficiently discover and fetch every artifact in the repository. The file is regenerated on each run, except when it exists without the ArcKit generation marker — hand-curated `docs/llms.txt` files are preserved.
+
 ## Your Task
 
 **User Request**: $ARGUMENTS
 
 Generate a documentation site for this ArcKit repository.
 
-## Step 0: Determine Repository Info
+## Steps 0–4: Handled by Hook
 
-Determine the repository name and URL:
+**The `sync-guides` hook runs before this command and handles everything:**
 
-1. Read the `.git/config` file and find the `[remote "origin"]` section to get the remote URL
-2. Extract the repo name and owner from the URL (e.g. `https://github.com/owner/repo-name` → repo name is `repo-name`, owner is `owner`)
-3. If `.git/config` doesn't exist or has no remote, use the current directory name as the repo name
+1. Syncs all guide `.md` files from plugin to `docs/guides/`
+2. Extracts titles from each guide
+3. Reads `.git/config` for repo name, owner, URL
+4. Reads plugin VERSION
+5. Processes `pages-template.html` → writes `docs/index.html`
+6. Scans all projects, artifacts, vendors, external files → writes `docs/manifest.json`
+7. Generates `docs/llms.txt` (llmstxt.org format) for LLM/agent discovery, unless a hand-curated version exists without the ArcKit generation marker
 
-## Step 1: Discover Repository Structure
+**CRITICAL: The hook's hook context contains ALL document stats you need. Use ONLY those stats for the Step 5 summary. Do NOT call any tools — no Read, Write, Glob, Grep, or Bash. Do NOT read manifest.json or any other file. The hook has already written docs/index.html, docs/manifest.json, and docs/llms.txt with correct data. Go directly to Step 5 and output the summary using the stats from the hook context.**
 
-Use **Glob** and **Read** tools to scan the repository. Do NOT use `ls`, `find`, `for` loops, `head`, `grep`, `sed`, or any Bash commands for file discovery.
+The following reference sections document the manifest structure and data tables used by the hook. They are preserved here for maintenance reference only — the command does not need to process them.
 
-### 1.1 Guides (Command Documentation)
+---
 
-**Guide sync and title extraction are handled automatically by the `sync-guides` hook** which runs before this command executes. The hook copies all guide `.md` files from the plugin to `docs/guides/` and extracts the first `#` heading from each file — zero tool round-trips.
-
-- **If the hook systemMessage is present** (mentions "Guide Sync Complete" and contains a `guideTitles` JSON map): guides are synced and titles are pre-extracted. Use the `guideTitles` map directly — do NOT use Glob or Read on guide files. The map keys are repo-relative paths (e.g., `docs/guides/requirements.md`, `docs/guides/roles/enterprise-architect.md`) and values are the extracted titles (with " — ArcKit Command Guide" suffix already stripped for role guides).
-- **If no hook message** (hook unavailable or failed): fall back to manual sync and title extraction:
-  1. Use **Glob** to list all `.md` files in `.arckit/docs/guides/` (and any subdirectories like `uk-government/`, `uk-mod/`, `roles/`)
-  2. For each guide file, **Read** from the plugin path and **Write** to the corresponding path under `docs/guides/`, creating subdirectories as needed
-  3. Use **Glob** to scan `docs/guides/*.md` then **Read** (with `limit: 5`) each file to extract the `#` title
-
-Use the titles (from hook or manual extraction) to build the `guides` array for top-level guides (excluding `roles/` subdirectory) and the `roleGuides` array for role guides. Role guides in `docs/guides/roles/` are added to a separate `roleGuides` array in manifest.json (see DDaT Role Guides section below).
+### Reference: Guide Categories
 
 **Guide Categories** (based on filename):
 
 | Category | Guide Files |
 |----------|-------------|
-| Discovery | requirements, stakeholders, stakeholder-analysis, research, datascout |
-| Planning | sobc, business-case, plan, roadmap, backlog, strategy |
-| Architecture | principles, adr, diagram, wardley, data-model, hld-review, dld-review, design-review, platform-design, data-mesh-contract, c4-layout-science |
-| Governance | risk, risk-management, traceability, principles-compliance, analyze, artifact-health, data-quality-framework, knowledge-compounding |
+| Getting Started | build, init, start, customize, template-builder, upgrading, remote-control, productivity |
+| Discovery | requirements, stakeholders, stakeholder-analysis, research, datascout, gov-reuse, gov-code-search, gov-landscape, grants |
+| Planning | sobc, business-case, plan, roadmap, backlog, strategy, migration |
+| Architecture | principles, adr, diagram, data-model, hld-review, dld-review, design-review, platform-design, data-mesh-contract, c4-layout-science, dfd, framework |
+| Wardley Mapping | wardley, wardley-value-chain, wardley-doctrine, wardley-climate, wardley-gameplay |
+| TOGAF ADM Overlay | adm-preliminary, business-capability-map, application-inventory, application-rationalization, gap-analysis, transition-architecture, architecture-board, architecture-change, architecture-repository |
+| AI Agent Architecture Overlay | agent-inventory, agent-design, agent-governance, agent-integration, agent-security, agent-maturity |
+| Governance | risk, risk-management, traceability, principles-compliance, analyze, artifact-health, data-quality-framework, knowledge-compounding, graph-report, search, impact, conformance, health, maturity-model, navigator |
 | Compliance | tcop, secure, mod-secure, dpia, ai-playbook, atrs, jsp-936, service-assessment, govs-007-security, national-data-strategy, codes-of-practice, security-hooks |
-| Operations | devops, mlops, finops, servicenow, operationalize |
-| Procurement | sow, evaluate, dos, gcloud-search, gcloud-clarify, procurement |
-| Research | aws-research, azure-research, gcp-research |
-| Reporting | pages, story, presentation, trello |
-| Other | migration, customize, upgrading, pinecone-mcp, start, conformance, productivity, remote-control, mcp-servers |
+| Operations | devops, mlops, finops, operationalize |
+| Procurement | sow, evaluate, dos, gcloud-search, gcloud-clarify, procurement, score, tenders, competitors |
+| UK G-Cloud Supplier Overlay | supplier-profile, service-design, sdd-lot1, sdd-lot2, sdd-lot3, declaration, pricing, security, gcloud-competitors, review, submission-pack |
+| Interoperability | export-okf, import-okf |
+| Integrations | aws-research, azure-research, gcp-research, mcp-servers, pinecone-mcp, trello, servicenow |
+| Reporting | pages, story, presentation, glossary |
+| FDE Site Generator | create |
+| Community overlays — EU | eu-ai-act, eu-cra, eu-data-act, eu-dora, eu-dsa, eu-nis2, eu-rgpd |
+| Community overlays — France | fr-algorithme-public, fr-anssi, fr-anssi-carto, fr-code-reuse, fr-dinum, fr-dr, fr-ebios, fr-irn, fr-marche-public, fr-pssi, fr-rgpd, fr-secnumcloud |
+| Community overlays — Austria | at-bvergg, at-dsgvo, at-nisg |
+| Canada Federal Overlay | ca-aia, ca-atip, ca-charter, ca-cloud-residency, ca-fitaa, ca-gc-digital-standards, ca-itsg-33, ca-ocap, ca-ola, ca-pia, ca-pspc, ca-soia |
+| UAE Federal Overlay | uae-ai-autonomy-tier, uae-ai-charter, uae-classification, uae-cloud-residency, uae-data-sharing, uae-digital-records, uae-ias, uae-pdpl, uae-priorities-alignment, uae-procurement, uae-uaepass, uae-zero-bureaucracy |
+| Australian Federal / Energy Overlay | au-aescsf, au-ai-assurance, au-disp-attestation, au-dss, au-e8-posture, au-energy-compliance, au-ism-controls, au-ndb-playbook, au-ot-security, au-pia, au-pspf, au-soci-cirmp |
+| USA Federal Civilian Overlay | us-ai-impact, us-ai-rmf, us-fedramp-readiness, us-fedramp-ssp, us-fisma-categorization, us-icam, us-nist-800-53, us-privacy-pia, us-sbom-eo-14028, us-zero-trust |
+| UK Finance Payments Overlay | uk-fs-consumer-duty, uk-fs-ctp-dependency, uk-fs-safeguarding, uk-fs-sca-rts |
+| UK NHS Clinical Safety Overlay | uk-mdr-classification, uk-nhs-dcb0129, uk-nhs-dcb0160, uk-nhs-dtac |
 
 **DDaT Role Guides** (in `docs/guides/roles/`):
 
@@ -76,7 +89,7 @@ Role guides map ArcKit commands to [DDaT Capability Framework](https://ddat-capa
 | IT Operations | it-service-manager |
 | Software Development | devops-engineer |
 
-Add role guides to a separate `roleGuides` array in manifest.json (not the `guides` array). If the hook provided `guideTitles`, use titles from the map for `docs/guides/roles/*.md` paths (suffix already stripped). Otherwise, use **Glob** to scan `docs/guides/roles/*.md` (excluding `README.md`) and **Read** (with `limit: 5`) to extract the title from the first `#` heading (strip " — ArcKit Command Guide" suffix). Map the DDaT family from the filename using the table above. Count the rows in the "Primary Commands" table to populate `commandCount`.
+Add role guides to a separate `roleGuides` array in manifest.json (not the `guides` array). Use titles from the hook's `guideTitles` map for `docs/guides/roles/*.md` paths (suffix already stripped). Map the DDaT family from the filename using the table above. Use the commandCount reference table below to populate `commandCount`.
 
 **Role guide commandCount reference**:
 
@@ -105,10 +118,11 @@ Add role guides to a separate `roleGuides` array in manifest.json (not the `guid
 
 | Status | Description | Guide Files |
 |--------|-------------|-------------|
-| live | Production-ready | plan, principles, stakeholders, stakeholder-analysis, risk, sobc, requirements, data-model, diagram, traceability, principles-compliance, story, sow, evaluate, customize, risk-management, business-case |
-| beta | Feature-complete | dpia, research, strategy, roadmap, adr, hld-review, dld-review, backlog, servicenow, analyze, service-assessment, tcop, secure, presentation, artifact-health, design-review, procurement, knowledge-compounding, c4-layout-science, security-hooks, codes-of-practice, data-quality-framework, govs-007-security, national-data-strategy, upgrading, start, conformance, productivity, remote-control, mcp-servers |
+| live | Production-ready | build, plan, principles, stakeholders, stakeholder-analysis, risk, sobc, requirements, data-model, diagram, traceability, principles-compliance, story, sow, evaluate, customize, risk-management, business-case, navigator, graph-report |
+| beta | Feature-complete | dpia, research, strategy, roadmap, adr, hld-review, dld-review, backlog, servicenow, analyze, service-assessment, tcop, secure, presentation, artifact-health, design-review, procurement, knowledge-compounding, c4-layout-science, security-hooks, codes-of-practice, data-quality-framework, govs-007-security, national-data-strategy, upgrading, start, conformance, productivity, remote-control, mcp-servers, search, score, impact, competitors, tenders, export-okf, import-okf |
 | alpha | Working, limited testing | data-mesh-contract, ai-playbook, atrs, pages |
-| experimental | Early adopters | platform-design, wardley, azure-research, aws-research, gcp-research, datascout, dos, gcloud-search, gcloud-clarify, trello, devops, mlops, finops, operationalize, mod-secure, jsp-936, migration, pinecone-mcp |
+| experimental | Early adopters | platform-design, wardley, wardley-value-chain, wardley-doctrine, wardley-climate, wardley-gameplay, azure-research, aws-research, gcp-research, datascout, dos, gcloud-search, gcloud-clarify, trello, devops, mlops, finops, operationalize, mod-secure, jsp-936, migration, pinecone-mcp, dfd, framework, health, maturity-model, glossary, init, gov-reuse, gov-code-search, gov-landscape, grants |
+| community | Community-contributed overlay | adm-preliminary, business-capability-map, application-inventory, application-rationalization, gap-analysis, transition-architecture, architecture-board, architecture-change, architecture-repository, agent-inventory, agent-design, agent-governance, agent-integration, agent-security, agent-maturity, create, supplier-profile, service-design, sdd-lot1, sdd-lot2, sdd-lot3, declaration, pricing, security, gcloud-competitors, review, submission-pack, eu-ai-act, eu-cra, eu-data-act, eu-dora, eu-dsa, eu-nis2, eu-rgpd, fr-algorithme-public, fr-anssi, fr-anssi-carto, fr-code-reuse, fr-dinum, fr-dr, fr-ebios, fr-irn, fr-marche-public, fr-pssi, fr-rgpd, fr-secnumcloud, at-bvergg, at-dsgvo, at-nisg, au-aescsf, au-ai-assurance, au-disp-attestation, au-dss, au-e8-posture, au-energy-compliance, au-ism-controls, au-ndb-playbook, au-ot-security, au-pia, au-pspf, au-soci-cirmp, ca-aia, ca-atip, ca-charter, ca-cloud-residency, ca-fitaa, ca-gc-digital-standards, ca-itsg-33, ca-ocap, ca-ola, ca-pia, ca-pspc, ca-soia, uae-ai-autonomy-tier, uae-ai-charter, uae-classification, uae-cloud-residency, uae-data-sharing, uae-digital-records, uae-ias, uae-pdpl, uae-priorities-alignment, uae-procurement, uae-uaepass, uae-zero-bureaucracy, uk-fs-consumer-duty, uk-fs-ctp-dependency, uk-fs-safeguarding, uk-fs-sca-rts, uk-mdr-classification, uk-nhs-dcb0129, uk-nhs-dcb0160, uk-nhs-dtac, us-ai-impact, us-ai-rmf, us-fedramp-readiness, us-fedramp-ssp, us-fisma-categorization, us-icam, us-nist-800-53, us-privacy-pia, us-sbom-eo-14028, us-zero-trust |
 
 ### 1.2 Global Documents
 
@@ -137,7 +151,6 @@ projects/
 │   ├── ARC-001-RISK-v1.0.md     # Risk Register
 │   ├── ARC-001-SOBC-v1.0.md     # Strategic Outline Business Case
 │   ├── ARC-001-DATA-v1.0.md     # Data Model
-│   ├── ARC-001-RSCH-v1.0.md     # Research Findings
 │   ├── ARC-001-TRAC-v1.0.md     # Traceability Matrix
 │   ├── ARC-001-SOW-v1.0.md      # Statement of Work
 │   ├── ARC-001-EVAL-v1.0.md     # Evaluation Criteria
@@ -157,6 +170,7 @@ projects/
 │   ├── ARC-001-AIPB-v1.0.md     # AI Playbook Assessment
 │   ├── ARC-001-ATRS-v1.0.md     # ATRS Record
 │   ├── ARC-001-PRIN-COMP-v1.0.md # Principles Compliance
+│   ├── ARC-001-DECK-v1.0.html    # Executive Deck (HTML — e.g. AntV Infographic, Reveal.js)
 │   │
 │   ├── # Multi-instance Documents (subdirectories)
 │   ├── diagrams/
@@ -167,6 +181,15 @@ projects/
 │   │   └── ARC-001-WARD-{NNN}-v1.0.md  # Wardley Maps
 │   ├── data-contracts/
 │   │   └── ARC-001-DMC-{NNN}-v1.0.md   # Data Mesh Contracts
+│   ├── research/
+│   │   ├── ARC-001-RSCH-{NNN}-v1.0.md  # Research Findings
+│   │   ├── ARC-001-DSCT-{NNN}-v1.0.md  # Data Source Discovery
+│   │   ├── ARC-001-AWRS-{NNN}-v1.0.md  # AWS Research
+│   │   ├── ARC-001-AZRS-{NNN}-v1.0.md  # Azure Research
+│   │   ├── ARC-001-GCRS-{NNN}-v1.0.md  # GCP Research
+│   │   ├── ARC-001-GOVR-{NNN}-v1.0.md  # Government Reuse Assessment
+│   │   ├── ARC-001-GCSR-{NNN}-v1.0.md  # Government Code Search Report
+│   │   └── ARC-001-GLND-{NNN}-v1.0.md  # Government Landscape Analysis
 │   ├── reviews/
 │   │   ├── ARC-001-HLDR-v1.0.md        # HLD Review
 │   │   └── ARC-001-DLDR-v1.0.md        # DLD Review
@@ -176,8 +199,10 @@ projects/
 │   │       ├── hld*.md
 │   │       ├── dld*.md
 │   │       └── proposal*.md
-│   ├── tech-notes/                       # Tech notes
+│   ├── tech-notes/                       # Tech notes (from $arckit-research)
 │   │   └── {topic-slug}.md
+│   ├── data-sources/                     # Data-source profiles (from $arckit-datascout)
+│   │   └── {provider-slug}-profile.md
 │   └── external/
 │       ├── README.md             # (excluded from listing)
 │       ├── rfp-document.pdf
@@ -211,11 +236,38 @@ Only include these known artifact types. Match by type code pattern `ARC-{PID}-{
 | | DATA | `ARC-*-DATA-*.md` | Data Model |
 | | WARD | `ARC-*-WARD-*.md` | Wardley Map |
 | | DIAG | `ARC-*-DIAG-*.md` | Architecture Diagrams |
+| | DFD | `ARC-*-DFD-*.md` | Data Flow Diagram |
 | | ADR | `ARC-*-ADR-*.md` | Architecture Decision Records |
+| | WDOC | `ARC-*-WDOC-*.md` | Wardley Doctrine Assessment |
+| | WGAM | `ARC-*-WGAM-*.md` | Wardley Gameplay Analysis |
+| | WCLM | `ARC-*-WCLM-*.md` | Wardley Climate Assessment |
+| | WVCH | `ARC-*-WVCH-*.md` | Wardley Value Chain |
+| **Architecture (Community-contributed — TOGAF ADM Overlay)** | | | |
+| | ADMP | `ARC-*-ADMP-*.md` | ADM Preliminary / Architecture Vision |
+| | BPCM | `ARC-*-BPCM-*.md` | Business Capability Map |
+| | APP | `ARC-*-APP-*.md` | Application Inventory |
+| | APPR | `ARC-*-APPR-*.md` | Application Rationalisation |
+| | TRANS | `ARC-*-TRANS-*.md` | Transition Architecture |
+| | REPO | `ARC-*-REPO-*.md` | Architecture Repository |
+| **Architecture (Community-contributed — AI Agent Architecture Overlay)** | | | |
+| | AAGI | `ARC-*-AAGI-*.md` | Agent Inventory |
+| | AAGR | `ARC-*-AAGR-*.md` | Agent Architecture Specification |
+| | AAIN | `ARC-*-AAIN-*.md` | Agent Integration Architecture |
 | **Governance** | | | |
 | | RISK | `ARC-*-RISK-*.md` | Risk Register |
 | | TRAC | `ARC-*-TRAC-*.md` | Traceability Matrix |
 | | PRIN-COMP | `ARC-*-PRIN-COMP-*.md` | Principles Compliance |
+| | ANAL | `ARC-*-ANAL-*.md` | Analysis Report |
+| | CONF | `ARC-*-CONF-*.md` | Conformance Assessment |
+| | GAPS | `ARC-*-GAPS-*.md` | Gap Analysis |
+| **Governance (Community-contributed — TOGAF ADM Overlay)** | | | |
+| | GAPA | `ARC-*-GAPA-*.md` | TOGAF Gap Analysis |
+| | BORD | `ARC-*-BORD-*.md` | Architecture Board Charter |
+| | ACHG | `ARC-*-ACHG-*.md` | Architecture Change Request |
+| **Governance (Community-contributed — AI Agent Architecture Overlay)** | | | |
+| | AAOV | `ARC-*-AAOV-*.md` | Agent Governance Framework |
+| | AASE | `ARC-*-AASE-*.md` | Agent Security Architecture |
+| | AAMT | `ARC-*-AAMT-*.md` | Agent Maturity Assessment |
 | **Compliance** | | | |
 | | TCOP | `ARC-*-TCOP-*.md` | TCoP Assessment |
 | | SECD | `ARC-*-SECD-*.md` | Secure by Design |
@@ -238,20 +290,139 @@ Only include these known artifact types. Match by type code pattern `ARC-{PID}-{
 | | DOS | `ARC-*-DOS-*.md` | DOS Requirements |
 | | GCLD | `ARC-*-GCLD-*.md` | G-Cloud Search |
 | | GCLC | `ARC-*-GCLC-*.md` | G-Cloud Clarifications |
+| | SUPP | `ARC-*-SUPP-*.md` | Supplier Profile |
+| | SVCD | `ARC-*-SVCD-*.md` | Service Design |
+| | SDD | `ARC-*-SDD-*.md` | Service Definition Document |
+| | DECL | `ARC-*-DECL-*.md` | Supplier Declaration |
+| | PRIC | `ARC-*-PRIC-*.md` | Pricing Document |
+| | SECA | `ARC-*-SECA-*.md` | Security Assertions |
+| | GCMP | `ARC-*-GCMP-*.md` | G-Cloud Competitor Benchmark |
+| | GCRV | `ARC-*-GCRV-*.md` | G-Cloud Submission Review |
 | | DMC | `ARC-*-DMC-*.md` | Data Mesh Contract |
+| | VEND | `ARC-*-VEND-*.md` | Vendor Evaluation |
 | | | `vendors/*/*.md` | Vendor Documents |
 | **Research** | | | |
 | | AWRS | `ARC-*-AWRS-*.md` | AWS Research |
 | | AZRS | `ARC-*-AZRS-*.md` | Azure Research |
 | | GCRS | `ARC-*-GCRS-*.md` | GCP Research |
 | | DSCT | `ARC-*-DSCT-*.md` | Data Source Discovery |
+| | TNDR | `ARC-*-TNDR-*.md` | Procurement Market Intelligence |
+| | CMPT | `ARC-*-CMPT-*.md` | Competitor Landscape |
+| | GOVR | `ARC-*-GOVR-*.md` | Government Reuse Assessment |
+| | GCSR | `ARC-*-GCSR-*.md` | Government Code Search Report |
+| | GLND | `ARC-*-GLND-*.md` | Government Landscape Analysis |
+| | GRNT | `ARC-*-GRNT-*.md` | Grants Research |
+| | | `data-sources/*-profile.md` | Data Source Profiles (from `$arckit-datascout`) |
+| | | `tech-notes/*.md` | Tech Notes (from `$arckit-research`) |
+| | | `vendors/*-profile.md` | Vendor Profiles (from `$arckit-research`) |
 | **Reporting** | | | |
 | | STORY | `ARC-*-STORY-*.md` | Project Story |
-| | ANAL | `ARC-*-ANAL-*.md` | Analysis Report |
+| | PRES | `ARC-*-PRES-*.md` | Presentation (MARP) |
+| | DECK | `ARC-*-DECK-*.html` | Executive Deck (HTML) |
+| **Compliance (Community-contributed — EU)** | | | |
+| | RGPD | `ARC-*-RGPD-*.md` | GDPR Compliance Assessment |
+| | NIS2 | `ARC-*-NIS2-*.md` | NIS2 Compliance Assessment |
+| | AIACT | `ARC-*-AIACT-*.md` | EU AI Act Compliance Assessment |
+| | DORA | `ARC-*-DORA-*.md` | DORA Compliance Assessment |
+| | CRA | `ARC-*-CRA-*.md` | EU Cyber Resilience Act Assessment |
+| | DSA | `ARC-*-DSA-*.md` | EU Digital Services Act Assessment |
+| | DATAACT | `ARC-*-DATAACT-*.md` | EU Data Act Compliance Assessment |
+| **Compliance (Community-contributed — French Government)** | | | |
+| | CNIL | `ARC-*-CNIL-*.md` | CNIL / French GDPR Assessment |
+| | SECNUM | `ARC-*-SECNUM-*.md` | SecNumCloud 3.2 Assessment |
+| | DINUM | `ARC-*-DINUM-*.md` | DINUM Standards Assessment |
+| | ANSSI | `ARC-*-ANSSI-*.md` | ANSSI Security Posture Assessment |
+| | DR | `ARC-*-DR-*.md` | Diffusion Restreinte Handling Assessment |
+| | ALGO | `ARC-*-ALGO-*.md` | Public Algorithm Transparency Notice |
+| | PSSI | `ARC-*-PSSI-*.md` | Information System Security Policy |
+| **Architecture (Community-contributed — French Government)** | | | |
+| | CARTO | `ARC-*-CARTO-*.md` | ANSSI Information System Cartography |
+| **Governance (Community-contributed — French Government)** | | | |
+| | IRN | `ARC-*-IRN-*.md` | IRN — Indice de Résilience Numérique |
+| | EBIOS | `ARC-*-EBIOS-*.md` | EBIOS Risk Manager Study |
+| **Procurement (Community-contributed — French Government)** | | | |
+| | MARPUB | `ARC-*-MARPUB-*.md` | French Public Procurement |
+| | REUSE | `ARC-*-REUSE-*.md` | Public Code Reuse Assessment |
+| **Compliance (Community-contributed — Austrian Government)** | | | |
+| | ATDSG | `ARC-*-ATDSG-*.md` | Austrian Data Protection Assessment |
+| | ATNISG | `ARC-*-ATNISG-*.md` | Austrian NISG (NIS2) Assessment |
+| **Procurement (Community-contributed — Austrian Government)** | | | |
+| | BVERGG | `ARC-*-BVERGG-*.md` | Austrian Public Procurement (BVergG 2018) |
+| **Compliance (Community-contributed — UAE Federal Overlay)** | | | |
+| | PDPL | `ARC-*-PDPL-*.md` | UAE PDPL Compliance Assessment |
+| | IAS | `ARC-*-IAS-*.md` | UAE IAS Statement of Applicability |
+| | AICH | `ARC-*-AICH-*.md` | UAE AI Charter Compliance Assessment |
+| **Architecture (Community-contributed — UAE Federal Overlay)** | | | |
+| | CRES | `ARC-*-CRES-*.md` | UAE Sovereign Cloud Residency Assessment |
+| | UPASS | `ARC-*-UPASS-*.md` | UAE Pass Integration Design |
+| | AUTI | `ARC-*-AUTI-*.md` | UAE AI Autonomy Tier Posture |
+| **Governance (Community-contributed — UAE Federal Overlay)** | | | |
+| | CLAS | `ARC-*-CLAS-*.md` | UAE Smart Data Classification Register |
+| | ZBUR | `ARC-*-ZBUR-*.md` | UAE Zero Bureaucracy Service Review |
+| | DREC | `ARC-*-DREC-*.md` | UAE Digital Records Plan |
+| | DSHR | `ARC-*-DSHR-*.md` | UAE Data Sharing Agreement |
+| | NPRA | `ARC-*-NPRA-*.md` | UAE National Priorities Alignment Statement |
+| **Procurement (Community-contributed — UAE Federal Overlay)** | | | |
+| | FPRO | `ARC-*-FPRO-*.md` | UAE Federal Procurement Strategy |
+| **Compliance (Community-contributed — Canada Federal Overlay)** | | | |
+| | FITAA | `ARC-*-FITAA-*.md` | Canada FITAA Compliance Assessment |
+| | PIA | `ARC-*-PIA-*.md` | Canada Privacy Impact Assessment |
+| | ATIP | `ARC-*-ATIP-*.md` | Canada ATIP Reconciliation |
+| | AIA | `ARC-*-AIA-*.md` | Canada Algorithmic Impact Assessment |
+| | SOIA | `ARC-*-SOIA-*.md` | Canada Security of Information Act Handling Plan |
+| | OLA | `ARC-*-OLA-*.md` | Canada Official Languages Act Review |
+| **Architecture (Community-contributed — Canada Federal Overlay)** | | | |
+| | ITSG | `ARC-*-ITSG-*.md` | Canada ITSG-33 Statement of Applicability |
+| | CACR | `ARC-*-CACR-*.md` | Canada Sovereign Cloud Residency Assessment |
+| **Governance (Community-contributed — Canada Federal Overlay)** | | | |
+| | CHRT | `ARC-*-CHRT-*.md` | Canada Charter Rights Design Review |
+| | DIGSTD | `ARC-*-DIGSTD-*.md` | Canada GC Digital Standards Conformance |
+| | OCAP | `ARC-*-OCAP-*.md` | Canada First Nations OCAP Sovereignty Assessment |
+| **Procurement (Community-contributed — Canada Federal Overlay)** | | | |
+| | PROC | `ARC-*-PROC-*.md` | Canada Federal Procurement Strategy |
+| **Compliance (Community-contributed — USA Federal Civilian Overlay)** | | | |
+| | FIPS199 | `ARC-*-FIPS199-*.md` | US FIPS 199 System Categorization |
+| | FRSSP | `ARC-*-FRSSP-*.md` | US FedRAMP System Security Plan |
+| | FRRR | `ARC-*-FRRR-*.md` | US FedRAMP Readiness Assessment Report |
+| | AIRMF | `ARC-*-AIRMF-*.md` | US NIST AI RMF Assessment |
+| | AIIA | `ARC-*-AIIA-*.md` | US AI Impact Assessment (M-24-10 / M-25-21) |
+| | USPIA | `ARC-*-USPIA-*.md` | US Privacy Impact Assessment (E-Gov §208) |
+| | SBOM | `ARC-*-SBOM-*.md` | US SBOM + Secure-Software Self-Attestation |
+| **Architecture (Community-contributed — USA Federal Civilian Overlay)** | | | |
+| | NIST | `ARC-*-NIST-*.md` | US NIST SP 800-53 Rev 5 Tailored Control Set |
+| | ZTA | `ARC-*-ZTA-*.md` | US CISA Zero Trust Maturity Posture |
+| | ICAM | `ARC-*-ICAM-*.md` | US ICAM Architecture |
+| **Compliance (Community-contributed — Australian Federal / DISP-supplier Overlay)** | | | |
+| | AUE8 | `ARC-*-AUE8-*.md` | AU Essential Eight Maturity Posture |
+| | AUISM | `ARC-*-AUISM-*.md` | AU ISM Statement of Applicability |
+| | AUPIA | `ARC-*-AUPIA-*.md` | AU Privacy Impact Assessment (Privacy Act 1988) |
+| | AUNDB | `ARC-*-AUNDB-*.md` | AU Notifiable Data Breach Response Playbook |
+| | AUOT | `ARC-*-AUOT-*.md` | AU OT Security Assessment |
+| | AUSOCI | `ARC-*-AUSOCI-*.md` | AU SOCI CIRMP Governance Pack |
+| | AUAESCSF | `ARC-*-AUAESCSF-*.md` | AU AESCSF Maturity Assessment |
+| | AUENERGY | `ARC-*-AUENERGY-*.md` | AU Energy Compliance Pack |
+| | MMOD | `ARC-*-MMOD-*.md` | Maturity Model Assessment |
+| | AUAIA | `ARC-*-AUAIA-*.md` | AU AI Assurance Baseline (DTA AI Policy v2.0) |
+| | AUDISP | `ARC-*-AUDISP-*.md` | AU DISP Member Self-Attestation Pack |
+| **Governance (Community-contributed — Australian Federal / DISP-supplier Overlay)** | | | |
+| | AUDSS | `ARC-*-AUDSS-*.md` | AU DTA Digital Service Standard Conformance |
+| | AUPSPF | `ARC-*-AUPSPF-*.md` | AU Protective Security Policy Framework Scorecard |
+| **Compliance (Community-contributed — UK Financial Services Payments Overlay)** | | | |
+| | FSSCA | `ARC-*-FSSCA-*.md` | UK PSD2 SCA-RTS Exemption Design |
+| | FSSAFE | `ARC-*-FSSAFE-*.md` | UK EMI / PI Safeguarding Assessment |
+| | FSCD | `ARC-*-FSCD-*.md` | UK FCA Consumer Duty Board Report |
+| | FSCTP | `ARC-*-FSCTP-*.md` | UK Critical Third Parties Dependency Assessment |
+| **Compliance (Community-contributed — UK NHS Clinical Safety Overlay)** | | | |
+| | NHSDTAC | `ARC-*-NHSDTAC-*.md` | NHS Digital Technology Assessment Criteria (DTAC v3) |
+| | NHSMDR | `ARC-*-NHSMDR-*.md` | UK MDR + EU MDR SaMD/AIaMD Classification |
 
-## Step 2: Generate manifest.json
+> **Single source of truth**: this table mirrors [`arckit-claude/config/doc-types.mjs`](../config/doc-types.mjs). When adding new commands, register the type code in `doc-types.mjs` first (so the hook resolves category + display name) and then add the row here so `$arckit-pages` includes the artifact in the dashboard.
 
-Create `docs/manifest.json` with the discovered structure:
+> **NHS DCB0129 / DCB0160 Marcus Baw files**: `SAFETY.md`, `SAFETY-CASE.md`, `HAZARD-LOG.md` (and the `deployment/` variants) deliberately do NOT carry an `ARC-` prefix or a doc-type code — they follow the Marcus Baw SAFETY.md spec convention. They pass through `validate-arc-filename` untouched and do not appear in the `$arckit-pages` dashboard as discrete ARC artefacts. Other artefacts cross-reference them by relative path.
+
+### Reference: Manifest Structure
+
+The hook generates `docs/manifest.json` with this structure:
 
 ```json
 {
@@ -399,6 +570,12 @@ Create `docs/manifest.json` with the discovered structure:
           "title": "AWS Lambda"
         }
       ],
+      "dataSourceProfiles": [
+        {
+          "path": "projects/001-project-name/data-sources/companies-house-profile.md",
+          "title": "Companies House"
+        }
+      ],
       "external": [
         {
           "path": "projects/001-project-name/external/rfp-document.pdf",
@@ -411,82 +588,9 @@ Create `docs/manifest.json` with the discovered structure:
 }
 ```
 
-## Step 3: Generate index.html
-
-### 3.1 Read the template (MANDATORY)
-
-**Read the template** (with user override support):
-
-- **First**, check if `.arckit/templates-custom/pages-template.html` exists in the project root
-- **If found**: Read the user's customized template (user override takes precedence)
-- **If not found**: Read `.arckit/templates/pages-template.html` (default)
-
-> **Tip**: Users can customize templates with `$arckit-customize pages`
-
-This template is the single source of truth for the pages site — it contains all HTML structure, CSS styling, and JavaScript functionality.
-
-1. Read the appropriate template file (custom override or default) using the **Read** tool
-2. Store the entire template content in memory
-3. Replace the placeholder values **in memory** (string replacement) with actual repository details:
-   - `'{{REPO}}'` → the repository name (e.g. `'arckit-test-project-v17-fuel-prices'`)
-   - `'{{REPO_URL}}'` → the full repository URL (e.g. `'https://github.com/tractorjuice/arckit-test-project-v17-fuel-prices'`)
-   - `'{{CONTENT_BASE_URL}}'` → the raw content base URL for fallback loading (e.g. `'https://raw.githubusercontent.com/tractorjuice/arckit-test-project-v17-fuel-prices/main'`). For GitHub repos use `https://raw.githubusercontent.com/{owner}/{repo}/{branch}`. For non-GitHub hosting set to `''` (empty string).
-   - `'{{VERSION}}'` → the ArcKit version from the plugin's VERSION file (`.arckit/VERSION`)
-   - `'{{DEFAULT_DOC}}'` → the default document path (principles if exists, or `''`)
-4. Write the final HTML to `docs/index.html` using the **Write** tool
-
-**IMPORTANT**: Do NOT use `sed`, `cp`, or any Bash commands for template processing. Read the template with the Read tool, perform all placeholder replacements in memory, then write the result with the Write tool. This ensures cross-platform compatibility (Windows, macOS, Linux).
-
-**Do NOT generate HTML from scratch. Do NOT modify the template structure, CSS, or JavaScript. Only replace the `{{...}}` config placeholders.**
-
-**If the template file does not exist, STOP and show an error**: Tell the user to run `arckit init` to install templates, or check that the template exists. Do NOT generate fallback HTML.
-
-## Step 4: Write Output Files
-
-**IMPORTANT**: Use the Write tool to create all three files.
-
-### 4.1 Write manifest.json
-
-```text
-docs/manifest.json
-```
-
-### 4.2 Write index.html
-
-```text
-docs/index.html
-```
-
-### 4.3 Write llms.txt
-
-Generate `docs/llms.txt` following the [llmstxt.org](https://llmstxt.org/) standard so LLM agents and crawlers can discover every artifact. Structure:
-
-- First line: `<!-- Generated by ArcKit $arckit-pages -->` (generation marker)
-- H1: repository name
-- Blockquote: one-paragraph summary of the repository (what it contains, produced with ArcKit)
-- Paragraph: explain the ArcKit traceability chain and artifact layout
-- `## Documentation site` — `./index.html` and `./manifest.json` with descriptions
-- `## Global artifacts` — one `- [Title](url): Category · \`DocId\`.` bullet per entry in `manifest.global`
-- `## Projects` — for each project, an H3 with project name and a bulleted list of all documents, diagrams, decisions, wardley maps, data contracts, research, reviews, vendors, vendor profiles, tech notes
-- `## ArcKit guides` — grouped by category, bullets linking to `./guides/*.md` (relative paths)
-- `## DDaT role guides` — bullets linking to `./guides/roles/*.md`
-- `## Optional` — source repo URL, arckit.org, GitHub ArcKit repo, and any `external/` files
-
-URL rules:
-
-- Project markdown artifacts → `{CONTENT_BASE_URL}/{path}` (raw.githubusercontent.com)
-- Site-local resources (index.html, manifest.json, guides under `docs/`) → relative paths like `./index.html`, `./guides/requirements.md`
-- When `CONTENT_BASE_URL` is empty (non-GitHub hosting), use relative paths like `../projects/{path}`
-
-**Skip logic**: Before writing, use the Read tool to check if `docs/llms.txt` exists. If it exists and does NOT contain the string `<!-- Generated by ArcKit $arckit-pages -->`, it is hand-curated — do not overwrite it. Note this in the Step 5 summary.
-
-```text
-docs/llms.txt
-```
-
 ## Step 5: Provide Summary
 
-After generating, provide this summary:
+Use the stats from the hook's hook context (under "Document Stats") to fill in the summary:
 
 ```text
 Documentation Site Generated
@@ -507,9 +611,15 @@ Document Breakdown:
 - Project Documents: {project_doc_count}
 - Diagrams: {diagram_count}
 - ADRs: {adr_count}
+- Wardley Maps: {wardley_map_count}
+- Data Contracts: {data_contract_count}
+- Research: {research_count}
+- Reviews: {review_count}
 - Vendor Documents: {vendor_doc_count}
 - Vendor Profiles: {vendor_profile_count}
+- Vendor Scores: {scored_vendor_count} scored across {scored_project_count} project(s)
 - Tech Notes: {tech_note_count}
+- Data Source Profiles: {data_source_profile_count}
 
 Features:
 - Dashboard view with KPI cards, charts, and governance checklist (default landing page)
@@ -545,53 +655,13 @@ Next Steps:
 - The dashboard displays KPI cards, category charts, coverage bars, and governance checklist computed from manifest.json
 - Users can navigate to any document via sidebar, search, or dashboard project table
 
-### Cross-Platform Compatibility
+### SEO and canonical URL
 
-**This command MUST work on Windows, macOS, and Linux without modification.** To achieve this:
-
-- Use **Glob** for all file discovery (never `ls`, `find`, or `for` loops in bash)
-- Use **Read** + **Write** for all file copying (never `cp`, `cp -r`, or `mkdir -p` in bash)
-- Use **Read** + in-memory string replacement + **Write** for template processing (never `sed`)
-- Use **Grep** for content searching (never `grep` or `head` in bash)
-- Do NOT use Bash at all — all operations can be done with Glob/Read/Write/Grep
-
-### File Discovery
-
-- Only include files that actually exist in the repository
-- Use **Glob** to discover files (never bash commands)
-- Don't include placeholder entries for missing files
-
-### Error Handling
-
-The generated HTML should handle:
-
-- Missing documents gracefully (show "Document not found")
-- Failed fetch requests (show error message)
-- Invalid markdown (display raw content)
-- Invalid mermaid syntax (show error, display raw code)
-
-### Mobile Responsiveness
-
-- Sidebar should collapse on mobile
-- Content should be readable on all screen sizes
-- Touch-friendly navigation
-
-### Accessibility
-
-- Proper heading hierarchy
-- ARIA labels for navigation
-- Keyboard navigation support
-- Skip to content link
-
-### Performance
-
-- Lazy load documents (only fetch when selected)
-- Cache fetched documents in memory
-- Show loading indicator during fetch
+- The generated `docs/index.html` is search-engine ready: a unique `<title>`, meta description, Open Graph / Twitter cards, a Schema.org `@graph` (Organization / SoftwareSourceCode / WebSite), and a `<link rel="canonical">`.
+- The `sync-guides` hook resolves the canonical and `og:url` to your **published** site URL on a best-effort basis: a `docs/CNAME` (custom domain on GitHub Pages) takes precedence, otherwise the default project Pages URL `https://<owner>.github.io/<repo>/`. Deploying elsewhere (Netlify, Vercel) without a `CNAME`? Update the `canonical` and `og:url` in the generated HTML to match your real URL.
+- Per Google's AI-search guidance no `llms.txt` or AI-specific files are required for indexing — the `docs/llms.txt` this command writes is harmless to Google and only aids non-Google agents.
+- Governance sites can hold sensitive material: enabling GitHub Pages makes them public and indexable. If you do not want the site indexed, add `<meta name="robots" content="noindex">` via a `.arckit/templates-custom/pages-template.html` override.
 
 ---
 
-**Remember**: You MUST read and use `.arckit/templates/pages-template.html` as the base for `docs/index.html`. The template is the source of truth for all HTML, CSS, and JavaScript. Only replace the `{{...}}` config placeholders with actual values.
-
-- **Cross-platform**: Do NOT use Bash for file operations. Use Glob/Read/Write/Grep tools exclusively. The only acceptable Bash use is a single simple `git` command (no pipes, no `&&`, no `$()`).
-- **Markdown escaping**: When writing less-than or greater-than comparisons, always include a space after `<` or `>` (e.g., `< 3 seconds`, `> 99.9% uptime`) to prevent markdown renderers from interpreting them as HTML tags or emoji
+**Remember**: The `sync-guides` hook handles ALL I/O before this command runs — guide sync, title extraction, repo info, template processing, project scanning, and manifest generation. The command MUST output the Step 5 summary using ONLY the stats from the hook's hook context. Do NOT call any tools — no Read, no Glob, no Write, no Bash. The hook's stats are the single source of truth.

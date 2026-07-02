@@ -67,6 +67,8 @@ $arckit-init
 $arckit-principles
 ```
 
+> **Claude Code users — ArcKit "workflows" are unrelated to Claude Code's dynamic-workflows feature.** Throughout this guide, "workflow" means an ArcKit command sequence. Claude Code's built-in dynamic workflows (which fan work out across many agents) are a separate feature; as of Claude Code v2.1.160 their free-text trigger keyword is `ultracode` — the word *workflow* no longer starts one — so the term is safe to type here. ArcKit ships no `ultracode` content, and running a slash command (`/arckit:start`) or the `architecture-workflow` skill never starts a dynamic workflow. Other platforms (Codex, Gemini, OpenCode, Copilot) have no equivalent feature.
+
 ---
 
 ## Vibe Start — The 3-Prompt Super Prompt
@@ -136,7 +138,7 @@ Output: Console only (no file created). This is a navigation aid, not a governan
 
 ```text
 ArcKit — The Enterprise Architecture Governance Harness
-Version 4.7.1 | 70 commands | Plugin mode
+Plugin mode
 
 Your AI-powered harness for strategy, architecture, delivery, and assurance
 — all driven by templates and traceability.

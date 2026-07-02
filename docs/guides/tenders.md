@@ -94,6 +94,20 @@ Outputs: `projects/<id>/research/ARC-<id>-TNDR-<NNN>-v1.0.md`
 
 ---
 
+## Long runs: Remote Control + push notifications
+
+`/arckit:tenders` can take several minutes when the UK Tenders MCP needs to page through large result sets. To avoid babysitting the terminal, pair it with [Claude Code Remote Control](https://code.claude.com/docs/en/remote-control):
+
+```bash
+claude remote-control
+```
+
+Drive the session from claude.ai/code or the mobile app, then enable `/config → Push when Claude decides` so your phone gets a notification on completion. ArcKit's minimum Claude Code floor (v2.1.121) already covers the v2.1.110 RC requirement.
+
+Caveats: Pro/Max plans only (no API keys, no Bedrock/Vertex/Foundry), push is a single on/off so chatty agents can over-notify, and the local `claude` process must keep running.
+
+---
+
 ## Artefact Sections
 
 A completed TNDR artefact contains:
