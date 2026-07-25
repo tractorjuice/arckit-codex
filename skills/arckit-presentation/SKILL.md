@@ -69,7 +69,7 @@ A useful presentation typically requires at least:
 - Stakeholder analysis or requirements
 - Risk register or project plan
 
-Run more /arckit commands first, then re-run $arckit-presentation-
+Run more /arckit commands first, then re-run $arckit-presentation.
 ```
 
 ### Step 3: Interactive Configuration

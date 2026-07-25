@@ -271,5 +271,5 @@ After completing this command, consider running:
 
 - `$arckit-adr` -- CTP exit / multi-vendor / substitution decisions are architectural — record them as ADRs.
 - `$arckit-risk` -- CTP failure scenarios feed Orange Book risk register entries.
-- `$arckit-operationalize` -- DR / exit drills evidence the resilience testing plan — assemble runbooks via $arckit-operationalize-
+- `$arckit-operationalize` -- DR / exit drills evidence the resilience testing plan — assemble runbooks via $arckit-operationalize.
 - `$arckit-uk-fs-safeguarding` -- Safeguarding bank is itself often a CTP-adjacent dependency — cross-reference the safeguarding register.
