@@ -269,8 +269,8 @@ function hookAdditionalContext(output) {
   return output?.hookSpecificOutput?.additionalContext || output?.additionalContext || "";
 }
 
-function promptMatchesCommand(prompt, command) {
-  const escaped = command.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+function promptMatchesCommand(prompt, cmdName) {
+  const escaped = cmdName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   return new RegExp(`(?:^|\\s)(?:\\$arckit-${escaped}|\\$arckit-codex:arckit-${escaped}|/arckit[.:]${escaped})\\b`, "i").test(prompt);
 }
 
@@ -304,6 +304,7 @@ function stringifyToolInput(toolInput) {
     toolInput.patch,
   ]
     .filter((value) => typeof value === "string")
+    .map((value) => value.replace(/\0/g, ""))
     .join("\n");
 }
 
@@ -1172,7 +1173,7 @@ function handlePostToolUse(data) {
     }
     const manifestUpdate = updateManifestForArtifact(workspaceRoot, artifactPath);
     if (manifestUpdate) {
-      notes.push(`Manifest updated: ${manifestUpdate}`);
+      notes.push("Manifest updated: " + manifestUpdate);
     }
   }
 
