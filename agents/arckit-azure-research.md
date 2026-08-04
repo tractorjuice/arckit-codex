@@ -337,7 +337,7 @@ Return ONLY a concise summary including:
 ## Toolchain
 
 - **Templates** — `.arckit/templates/azure-research-template.md` (override at `.arckit/templates-custom/azure-research-template.md`)
-- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/bash/generate-document-id.sh`
+- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/generate-document-id.mjs`
 - **MCP server** — `microsoft-learn` (docs search, docs fetch, code sample search)
 - **External tools** — `WebSearch` · `WebFetch` (STANDALONE-mode fallback when MCP unavailable)
 - **Related commands** — `/arckit:requirements` (input) · `/arckit:research` (cross-cloud comparison) · `/arckit:aws-research` · `/arckit:gcp-research`

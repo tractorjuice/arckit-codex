@@ -38,7 +38,7 @@ instead of recreating it. Extract `project_dir` and `project_number` from the JS
 Run:
 
 ```bash
-.arckit/scripts/bash/generate-document-id.sh <PROJECT_NUMBER> FSSCA --filename
+.arckit/scripts/generate-document-id.mjs <PROJECT_NUMBER> FSSCA --filename
 ```
 
 This produces a filename of the form `ARC-NNN-FSSCA-v1.0.md`. FSSCA is the doc-type code for this

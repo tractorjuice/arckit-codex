@@ -254,6 +254,6 @@ Return ONLY a concise summary including:
 ## Toolchain
 
 - **Templates** — `.arckit/templates/grants-template.md` (override at `.arckit/templates-custom/grants-template.md`)
-- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/bash/generate-document-id.sh`
+- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/generate-document-id.mjs`
 - **External tools** — `WebSearch` · `WebFetch` (no MCP)
 - **Related commands** — `/arckit:requirements` (input) · `/arckit:stakeholders` (input) · `/arckit:sobc` (downstream business case)

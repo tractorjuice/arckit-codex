@@ -340,7 +340,7 @@ Return ONLY a concise summary including:
 ## Toolchain
 
 - **Templates** — `.arckit/templates/aws-research-template.md` (override at `.arckit/templates-custom/aws-research-template.md`)
-- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/bash/generate-document-id.sh`
+- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/generate-document-id.mjs`
 - **MCP server** — `aws-knowledge` (search, read, recommend, regional availability, list regions, retrieve skill)
 - **External tools** — `WebSearch` · `WebFetch` (STANDALONE-mode fallback when MCP unavailable)
 - **Related commands** — `/arckit:requirements` (input) · `/arckit:research` (cross-cloud comparison) · `/arckit:azure-research` · `/arckit:gcp-research`

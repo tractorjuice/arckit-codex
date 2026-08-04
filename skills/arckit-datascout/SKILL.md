@@ -460,7 +460,7 @@ Return ONLY a concise summary including:
 ## Toolchain
 
 - **Templates** — `.arckit/templates/datascout-template.md` (override at `.arckit/templates-custom/datascout-template.md`)
-- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/bash/generate-document-id.sh`
+- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/generate-document-id.mjs`
 - **External tools** — `WebSearch` · `WebFetch` (no MCP)
 - **Related commands** — `$arckit-requirements` (input) · `$arckit-data-model` (downstream) · `$arckit-dpia` (downstream privacy assessment)
 

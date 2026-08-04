@@ -327,7 +327,7 @@ Return ONLY a concise summary including:
 ## Toolchain
 
 - **Templates** — `.arckit/templates/gov-landscape-template.md` (override at `.arckit/templates-custom/gov-landscape-template.md`)
-- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/bash/generate-document-id.sh`
+- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/generate-document-id.mjs`
 - **MCP server** — `govreposcrape` — `search_uk_gov_code` (domain discovery over 24,500+ UK government repositories) · `vulnerability_exposure` (known-CVE blast-radius per org/package via the SBOM graph + OSV.dev)
 - **External tools** — `WebFetch` (organisation profiles, contributor pages, repo READMEs)
 - **Related commands** — `/arckit:gov-reuse` (capability-driven reuse) · `/arckit:gov-code-search` (focused queries)

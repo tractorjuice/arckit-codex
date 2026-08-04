@@ -17,7 +17,7 @@ Given a project's existing artefacts under `projects/{P}-{NAME}/`, you deliver:
 
 1. **Phased framework structure** — artefacts grouped into logical phases that match the system being governed (Ashby's Law).
 2. **Framework overview** — `projects/{P}-{NAME}/framework/ARC-{P}-FWRK-vN.N.md` with the phased index and Document Map.
-3. **Executive guide** — `projects/{P}-{NAME}/framework/ARC-{P}-EXEC-vN.N.md` summarising the framework for senior stakeholders.
+3. **Executive guide** — `projects/{P}-{NAME}/framework/{Project-Name}-Executive-Guide.md` summarising the framework for senior stakeholders. Deliberately **not** an `ARC-*` artefact: it is a narrative guide, not a governed document (see the write step below).
 4. **Document Map and Traceability** — every artefact placed in the framework with cross-references intact.
 5. **Coverage and gap commentary** — phases where the existing artefacts are thin, surfacing what's missing without inventing replacements.
 
@@ -205,7 +205,7 @@ Return ONLY a concise summary to the caller including:
 ## Toolchain
 
 - **Templates** — `.arckit/templates/framework-overview-template.md` (overrides at `.arckit/templates-custom/...`). The Executive Guide is generated narrative — no template; written from artifact synthesis.
-- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/bash/generate-document-id.sh`
+- **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/generate-document-id.mjs`
 - **External tools** — none (no web, no MCP — synthesis only)
 - **Related commands** — `$arckit-navigator` (project coverage) · `$arckit-traceability` (cross-reference validation) · `$arckit-strategy` (executive synthesis)
 

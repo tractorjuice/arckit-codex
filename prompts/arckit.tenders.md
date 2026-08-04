@@ -244,7 +244,7 @@ to the project's `research/` directory. Run the bundled helper (it is
 positional-then-flags):
 
 ```bash
-bash ".arckit/scripts/bash/generate-document-id.sh" \
+node ".arckit/scripts/generate-document-id.mjs" \
      {P} TNDR --next-num "{project_path}/research"
 ```
 
@@ -345,7 +345,7 @@ Return ONLY a concise summary to the user:
 
 - **Template** — `.arckit/templates/tenders-template.md` (read by writer)
 - **Schema** — `.arckit/schemas/tenders-handoff.schema.json`
-- **Helpers** — `.arckit/scripts/validate-handoff.mjs` · `.arckit/scripts/bash/generate-document-id.sh`
+- **Helpers** — `.arckit/scripts/validate-handoff.mjs` · `.arckit/scripts/generate-document-id.mjs`
 - **Subagents dispatched** — `arckit-tenders-reader` (fetch + extract) · `arckit-tenders-writer` (final render)
 - **External tools** — none directly (delegated to reader)
 - **Related commands** — `/arckit:sobc` (downstream Economic Case) · `/arckit:risk` (downstream concentration risk) · `/arckit:research` (build-vs-buy context)

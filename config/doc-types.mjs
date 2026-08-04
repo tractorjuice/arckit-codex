@@ -10,19 +10,23 @@
  * there, generated artifacts are silently omitted from the rendered
  * dashboard sidebar even though the manifest hook records them correctly.
  * See PR #317 for context — long term the two registries should be unified.
+ * scripts/check-doc-type-registry.py enforces this parity in CI, along with
+ * every code referenced by a recipe `output.type` or an `ARC-*-CODE-v`
+ * filename in a command or agent body. A code missing from THIS file but
+ * written by a command is fatal: validate-arc-filename.mjs blocks the write
+ * and the command has no conforming name to fall back to (#712).
  *
- * ⚠️ MULTI_INSTANCE_TYPES IS DUPLICATED IN BASH — keep both in sync.
- * generate-document-id.sh carries its own space-separated MULTI_INSTANCE_TYPES
- * (line ~85) and there are TWO copies of that script: scripts/bash/ and
- * plugins/arckit-claude/scripts/bash/. The plugin copy is what the installed
- * plugin actually runs. All three lists must match.
+ * MULTI_INSTANCE_TYPES used to be duplicated in bash and is not any more.
+ * generate-document-id.sh carried its own space-separated copy, in TWO copies
+ * of the script, and the lists drifted twice: v5.9.0 added TNDR/CMPT without
+ * updating bash, so every /arckit:competitors run emitted the same colliding ID
+ * (fixed v5.9.2, PR #566), and GRNT went the same way, caught in 2026-07 while
+ * adding CDAU. A missing entry was silent -- the helper returned an ID with no
+ * -NNN- sequence and each run of a multi-instance command overwrote the last.
  *
- * This has drifted twice. v5.9.0 added TNDR/CMPT and bash was not updated, so
- * every /arckit:competitors run emitted the same colliding ID (fixed v5.9.2,
- * PR #566). GRNT then went the same way and was only caught in 2026-07 while
- * adding CDAU. A missing entry is silent: the helper returns an ID with no
- * -NNN- sequence and each run of a multi-instance command overwrites the last.
- * Verify with scripts/check-multi-instance-parity.py, which CI runs.
+ * generate-document-id.mjs (#723) imports this file instead, so the set below
+ * is the only copy and there is nothing left to keep in sync. Do not reintroduce
+ * a hardcoded list anywhere; import from here.
  *
  * Schema per entry:
  *   name:      Human-readable display name shown on the dashboard sidebar.
@@ -98,6 +102,8 @@ export const DOC_TYPES = {
   'ANAL':      { name: 'Analysis Report',                  category: 'Governance' },
   'GAPS':      { name: 'Gap Analysis',                     category: 'Governance' },
   'CDAU':      { name: 'Codebase Audit',                   category: 'Governance' },
+  'GLOS':      { name: 'Glossary',                         category: 'Governance' },
+  'FWRK':      { name: 'Framework Overview',               category: 'Governance' },
   // Compliance — UK Gov + MOD officially-maintained
   'TCOP':      { name: 'TCoP Assessment',                  category: 'Compliance', regime: 'UK',  severity: 'HIGH' },
   'SECD':      { name: 'Secure by Design',                 category: 'Compliance',                severity: 'HIGH' },
@@ -164,7 +170,7 @@ export const DOC_TYPES = {
   // Austrian Government (Community-contributed, maintained by @gtonic)
   'ATDSG':     { name: 'Austrian Data Protection Assessment',          category: 'Compliance',  regime: 'AT', severity: 'HIGH' },
   'ATNISG':    { name: 'Austrian NISG (NIS2) Assessment',              category: 'Compliance',  regime: 'AT', severity: 'HIGH' },
-  'BVERGG':    { name: 'Austrian Public Procurement (BVergG 2018)',    category: 'Procurement', regime: 'AT' },
+  'BVERGG':    { name: 'Austrian Public Procurement (BVergG 2018 idF VergabeRG 2026)', category: 'Procurement', regime: 'AT' },
   // UAE Federal Overlay (Community-contributed, maintained by @tractorjuice — recruiting UAE domain co-maintainer) — anchored on 23 April 2026 Cabinet decree
   'PDPL':      { name: 'UAE PDPL Compliance Assessment',               category: 'Compliance',  regime: 'UAE', severity: 'HIGH' },
   'IAS':       { name: 'UAE IAS Statement of Applicability',           category: 'Compliance',  regime: 'UAE', severity: 'HIGH' },
@@ -303,6 +309,7 @@ export const SUBDIR_MAP = {
   'GLND': 'research',
   'GRNT': 'research',
   'CDAU': 'audits',
+  'FWRK': 'framework',
 };
 
 // Derived: set of all valid type codes
