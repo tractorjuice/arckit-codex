@@ -63,6 +63,7 @@ Change requests are **multi-instance** documents (like ADRs). Find the next avai
 - **First**, check if `.arckit/templates-custom/architecture-change-template.md` exists in the project root
 - **If found**: Read the user's customised template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/architecture-change-template.md` (default)
+- **Then**, read `.arckit/templates/_partials/RENDERING.md` and resolve the template's `<!-- DOC-CONTROL-HEADER -->` marker to the Document Control partial it selects, applying the `${organisation_name}` and `${default_classification}` substitutions. Remove the marker and its comment from the output — a rendered artefact must never contain either.
 
 > **Tip**: Users can customise templates with `/arckit:customize architecture-change`
 

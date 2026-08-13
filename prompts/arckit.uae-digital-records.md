@@ -22,7 +22,7 @@ You are an enterprise architect generating a Digital Records Plan under the UAE 
    - **First**, check `.arckit/templates-custom/uae-digital-records-template.md` (user override)
    - **Then**, `.arckit/templates-custom/uae-digital-records-template.md`
    - **Fallback**, `.arckit/templates/uae-digital-records-template.md`
-3. Use `scripts/bash/create-project.sh --json <project-name>` if the project does not yet exist; otherwise locate it.
+3. Use `scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist; otherwise locate it.
 4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> DREC --filename` for the artefact filename.
 5. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`.
 6. Generate the following sections:
@@ -32,8 +32,9 @@ You are an enterprise architect generating a Digital Records Plan under the UAE 
    - **Records Lifecycle** — capture, classification (cross-reference to CLAS register), storage, access, retention, disposal. State where each lifecycle stage is implemented in the technology stack.
    - **Audit & Disposal procedures** — the operational procedure for periodic audit (sampling, integrity checks) and the controlled disposal procedure (approver, evidence of disposal).
 7. Populate the External References section per `.arckit/references/citation-instructions.md`. The 23 April 2026 UAE Cabinet meeting announcement (Government Services Digital Records Policy) MUST appear in the Document Register with its primary URL and the verification date.
-8. Write the artefact via the Write tool to `projects/<project-id>/<filename>`.
-9. Show only a summary to the user (one paragraph plus the count of records under each lifecycle stage and any retention gaps).
+8. Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **DREC** per-type checks pass. Fix any failures before proceeding.
+9. Write the artefact via the Write tool to `projects/<project-id>/<filename>`.
+10. Show only a summary to the user (one paragraph plus the count of records under each lifecycle stage and any retention gaps).
 
 ## Authoritative anchor
 

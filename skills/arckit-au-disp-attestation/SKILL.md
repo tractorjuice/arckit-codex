@@ -46,7 +46,7 @@ The Defence Industry Security Program (DISP) is the security accreditation frame
    - Then: `.arckit/templates-custom/au-disp-attestation-template.md`
    - Fallback: `.arckit/templates/au-disp-attestation-template.md`
 
-3. Use `scripts/bash/create-project.sh --json <project-name>` if needed.
+3. Use `scripts/bash/create-project.sh --json --name "<project-name>"` if needed.
 
 4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> AUDISP --filename` for the artefact filename.
 
@@ -93,9 +93,10 @@ The Defence Industry Security Program (DISP) is the security accreditation frame
 
 7. Populate the External References section per `.arckit/references/citation-instructions.md`. The DISP Membership Pack (with edition) MUST appear in the Document Register.
 
-8. Write the artefact via the Write tool to `projects/<project-id>/<filename>`.
+8. Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **AUDISP** per-type checks pass. Fix any failures before proceeding.
+9. Write the artefact via the Write tool to `projects/<project-id>/<filename>`.
 
-9. Show only a summary to the user (one paragraph plus the Four Security Domains coverage table).
+10. Show only a summary to the user (one paragraph plus the Four Security Domains coverage table).
 
 ## Important Notes
 

@@ -83,7 +83,7 @@ Read all documents from Step 0. Identify:
    - Status: DRAFT
    - Created Date: {current_date}
    - Next Review Date: {current_date + 12 months}
-   - Classification: OFFICIAL-SENSITIVE — under the AT InfoSiG scheme use **Eingeschränkt** (or **Vertraulich** where criminal-law confidentiality applies); privacy assessments contain sensitive risk information. Emit the value from the active `classification_scheme` (UK / UAE Smart Data / AT InfoSiG).
+   - Classification: OFFICIAL-SENSITIVE — under the AT InfoSiG scheme use **Eingeschränkt** (or **Vertraulich** where criminal-law confidentiality applies); privacy assessments contain sensitive risk information. Emit the AT InfoSiG value.
    - Add note: "This document supplements ARC-{PROJECT_ID}-RGPD-v*.md with Austrian/DSB-specific requirements"
 
 3. **Section 1: AT DSG Regulatory Framework**
@@ -226,7 +226,7 @@ Next steps:
 - ✅ Post-Schrems II TIA requirement applied
 - ✅ DSB enforcement priority self-assessment completed
 - ✅ Gap analysis with prioritised action plan generated
-- ✅ Document classified OFFICIAL-SENSITIVE
+- ✅ Document classified Eingeschränkt (or Vertraulich where criminal-law confidentiality applies)
 
 ## Example Usage
 

@@ -43,7 +43,7 @@ The Australian Signals Directorate (ASD) Essential Eight is the baseline cyber-s
    - **Then**, `.arckit/templates-custom/au-e8-posture-template.md`
    - **Fallback**, `.arckit/templates/au-e8-posture-template.md`
 
-3. Use `scripts/bash/create-project.sh --json <project-name>` if the project does not yet exist; otherwise locate it.
+3. Use `scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist; otherwise locate it.
 
 4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> AUE8 --filename` for the artefact filename.
 
@@ -82,9 +82,10 @@ The Australian Signals Directorate (ASD) Essential Eight is the baseline cyber-s
 
 7. Populate the External References section per `.arckit/references/citation-instructions.md`. The ASD Essential Eight Maturity Model MUST appear in the Document Register with its primary URL and verification date.
 
-8. Write the artefact via the Write tool to `projects/<project-id>/<filename>`.
+8. Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **AUE8** per-type checks pass. Fix any failures before proceeding.
+9. Write the artefact via the Write tool to `projects/<project-id>/<filename>`.
 
-9. Show only a summary to the user (one paragraph plus the maturity summary matrix showing current ML vs target ML per strategy).
+10. Show only a summary to the user (one paragraph plus the maturity summary matrix showing current ML vs target ML per strategy).
 
 ## Important Notes
 

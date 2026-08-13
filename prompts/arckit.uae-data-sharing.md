@@ -22,7 +22,7 @@ You are an enterprise architect generating a Data Sharing Agreement under the UA
    - **First**, check `.arckit/templates-custom/uae-data-sharing-template.md` (user override)
    - **Then**, `.arckit/templates-custom/uae-data-sharing-template.md`
    - **Fallback**, `.arckit/templates/uae-data-sharing-template.md`
-3. Use `scripts/bash/create-project.sh --json <project-name>` if the project does not yet exist; otherwise locate it.
+3. Use `scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist; otherwise locate it.
 4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> DSHR --filename` for the artefact filename.
 5. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`.
 6. Generate the following sections:
@@ -33,8 +33,9 @@ You are an enterprise architect generating a Data Sharing Agreement under the UA
    - **Information-Security Safeguards** — encryption (transit + rest), key management, access controls, logging, and incident-response co-ordination between parties.
    - **Data-Subject Rights Implications** — how data subject rights (access, rectification, erasure, restriction, portability, object) flow across the sharing boundary, and which party owns each obligation.
 7. Populate the External References section per `.arckit/references/citation-instructions.md`. The 23 April 2026 UAE Cabinet meeting announcement (Government Services Data Sharing Policy) MUST appear in the Document Register with its primary URL and the verification date.
-8. Write the artefact via the Write tool to `projects/<project-id>/<filename>`.
-9. Show only a summary to the user (one paragraph plus the count of shares per direction and any unresolved lawful-basis gaps).
+8. Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **DSHR** per-type checks pass. Fix any failures before proceeding.
+9. Write the artefact via the Write tool to `projects/<project-id>/<filename>`.
+10. Show only a summary to the user (one paragraph plus the count of shares per direction and any unresolved lawful-basis gaps).
 
 ## Authoritative anchor
 

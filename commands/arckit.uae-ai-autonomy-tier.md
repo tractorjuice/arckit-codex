@@ -22,7 +22,7 @@ You are an enterprise architect generating a three-tier AI Autonomy Posture for 
    - **First**, check `.arckit/templates-custom/uae-ai-autonomy-tier-template.md` (user override)
    - **Then**, `.arckit/templates-custom/uae-ai-autonomy-tier-template.md`
    - **Fallback**, `.arckit/templates/uae-ai-autonomy-tier-template.md`
-3. Use `scripts/bash/create-project.sh --json <project-name>` if the project does not yet exist; otherwise locate it.
+3. Use `scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist; otherwise locate it.
 4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> AUTI --filename` for the artefact filename.
 5. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`.
 6. Generate the following sections:
@@ -35,8 +35,9 @@ You are an enterprise architect generating a three-tier AI Autonomy Posture for 
    - **Audit Obligations per Tier** — logging detail (prompt, response, model version, retrieval context, human reviewer), retention, audit cadence, and reporting line.
    - **Tier-Promotion Criteria** — the criteria that must be evidenced before a use-case is promoted from Tier 1 to Tier 2, or Tier 2 to Tier 3.
 7. Populate the External References section per `.arckit/references/citation-instructions.md`. Where the tier framing references the UAE AI Charter, cite the Charter directly.
-8. Write the artefact via the Write tool to `projects/<project-id>/<filename>`.
-9. Show only a summary to the user (one paragraph plus the count of use-cases per tier and any tier-promotion proposals).
+8. Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **AUTI** per-type checks pass. Fix any failures before proceeding.
+9. Write the artefact via the Write tool to `projects/<project-id>/<filename>`.
+10. Show only a summary to the user (one paragraph plus the count of use-cases per tier and any tier-promotion proposals).
 
 ## Authoritative anchor
 

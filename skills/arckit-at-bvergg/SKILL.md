@@ -106,7 +106,7 @@ Show threshold determination to the user before generating the full document. Co
    - Status: DRAFT
    - Created Date: {current_date}
    - Next Review Date: {current_date + 6 months}
-   - Classification: OFFICIAL — under the AT InfoSiG scheme use **Offen** (rising to **Eingeschränkt** while in draft); procurement docs become public at publication. Emit the value from the active `classification_scheme` (UK / UAE Smart Data / AT InfoSiG).
+   - Classification: OFFICIAL — under the AT InfoSiG scheme use **Offen** (rising to **Eingeschränkt** while in draft); procurement docs become public at publication. Emit the AT InfoSiG value.
    - Auftragswert, procedure and threshold tier captured in header
 
 3. **Section 1: Contracting Authority and Procedure**
@@ -122,7 +122,7 @@ Show threshold determination to the user before generating the full document. Co
    - Integration scope (INT-xxx)
    - Data sovereignty and location requirements
    - Open standards and interoperability requirements
-   - Barrier-free / Accessibility (§107 BVergG / EN 301 549 / WCAG 2.2) requirements
+   - Barrier-free / Accessibility (§107 BVergG / EN 301 549) requirements — cite **EN 301 549 v3.2.1**, the version cited in the Official Journal and therefore the one carrying a presumption of conformity; it normatively references **WCAG 2.1 AA**. Do **not** set WCAG 2.2 AA as the contractual baseline: the revision carrying it (v4.1.1) is expected to be OJ-cited around October 2026 `[NEEDS VERIFICATION: confirm the OJ citation date and version]`, so name 2.2 AA only as a forward-looking requirement where the contract runs past that date
 
 5. **Section 3: Eignung (Suitability Criteria)**
    - Berufliche Zuverlässigkeit (trade registration, no Ausschlussgründe under §78 BVergG — the Vergaberechtsgesetz 2026 harmonised the exclusion-ground offences and clarified the Selbstreinigung/self-cleaning rules)

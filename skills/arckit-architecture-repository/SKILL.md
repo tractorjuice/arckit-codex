@@ -70,6 +70,7 @@ This command operates at **global scope** by default. The repository synthesises
 - **First**, check if `.arckit/templates-custom/architecture-repository-template.md` exists in the project root
 - **If found**: Read the user's customised template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/architecture-repository-template.md` (default)
+- **Then**, read `.arckit/templates/_partials/RENDERING.md` and resolve the template's `<!-- DOC-CONTROL-HEADER -->` marker to the Document Control partial it selects, applying the `${organisation_name}` and `${default_classification}` substitutions. Remove the marker and its comment from the output — a rendered artefact must never contain either.
 
 > **Tip**: Users can customise templates with `$arckit-customize architecture-repository`
 
@@ -323,7 +324,7 @@ Before completing the document, populate ALL document control fields in the head
 
 **Construct Document ID**:
 
-- **Document ID**: `ARC-000-REPO-v{VERSION}` (global) or `ARC-{PROJECT_ID}-REPO-v{VERSION}` (project-scoped)
+- **Document ID**: `ARC-000-REPO-v[VERSION]` (global) or `ARC-[PROJECT_ID]-REPO-v[VERSION]` (project-scoped)
 
 **Populate Required Fields**:
 

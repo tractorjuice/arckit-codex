@@ -81,6 +81,7 @@ Before generating the agent design, ask the user for key parameters. **Skip any 
 - **First**, check if `.arckit/templates-custom/agent-design-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/agent-design-template.md` (default)
+- **Then**, read `.arckit/templates/_partials/RENDERING.md` and resolve the template's `<!-- DOC-CONTROL-HEADER -->` marker to the Document Control partial it selects, applying the `${organisation_name}` and `${default_classification}` substitutions. Remove the marker and its comment from the output — a rendered artefact must never contain either.
 
 > **Tip**: Users can customize templates with `$arckit-customize agent-design`
 
