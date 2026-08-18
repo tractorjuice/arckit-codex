@@ -6,8 +6,6 @@
 
 <!-- DOC-CONTROL-HEADER -->
 <!-- Resolved at command-execution time per _partials/RENDERING.md. -->
-<!-- Classification line, where applicable, MUST be: -->
-<!-- | Classification | UNOFFICIAL / OFFICIAL / OFFICIAL:Sensitive / PROTECTED / SECRET | -->
 <!-- Note: SOCI protected information is distinct from PSPF PROTECTED classification. -->
 
 ## Revision History
@@ -181,6 +179,8 @@ This artefact covers general SOCI/CIRMP obligations. Record sector-specific over
 
 ## External References
 
+### Authoritative Sources
+
 | Ref | Source | Version / Date Verified | Relevance |
 |-----|--------|-------------------------|-----------|
 | SOCI-1 | Security of Critical Infrastructure Act 2018 (SOCI) | [Date verified] | Primary legal framework |
@@ -190,6 +190,24 @@ This artefact covers general SOCI/CIRMP obligations. Record sector-specific over
 | SOCI-5 | Protected information under the SOCI Act | [Date verified] | Protected-information handling |
 | AUE8 | ASD Essential Eight | [Version / date verified] | Cyber baseline evidence |
 | AUISM | ASD Information Security Manual | [Edition / date verified] | Control evidence cross-reference |
+
+### Document Register
+
+| Doc ID | Filename | Type | Source Location | Description |
+|--------|----------|------|-----------------|-------------|
+| *None provided* | — | — | — | — |
+
+### Citations
+
+| Citation ID | Doc ID | Page/Section | Category | Quoted Passage |
+|-------------|--------|--------------|----------|----------------|
+| — | — | — | — | — |
+
+### Unreferenced Documents
+
+| Filename | Source Location | Reason |
+|----------|-----------------|--------|
+| — | — | — |
 
 ---
 

@@ -5,7 +5,7 @@
 ## Document Control
 
 <!-- DOC-CONTROL-HEADER -->
-<!-- Resolved at command-execution time to _partials/document-control-uk.md or _partials/document-control-uae.md based on plugin userConfig classification_scheme + governance_framework. See _partials/RENDERING.md (when present). -->
+<!-- Resolved at command-execution time per _partials/RENDERING.md. -->
 
 <!-- Domain-specific fields, retained after the resolved header per the Document Control Standard. -->
 
@@ -338,6 +338,29 @@ materialised.
 | FCA Consumer Duty — Firms | Consumer Duty information for firms | <https://www.fca.org.uk/firms/consumer-duty/information-firms> |
 | FCA Handbook | FCA Handbook homepage (navigate to PRIN 2A for Consumer Duty rules) | <https://www.handbook.fca.org.uk> |
 | FCA 2022/31 | Consumer Duty instrument — introduces Principle 12 and PRIN 2A | <https://www.fca.org.uk/publication/policy/fca-2022-31.pdf> |
+
+## 11. External References
+
+> This section provides traceability from generated content back to source documents.
+> Follow citation instructions in the project's citation reference guide.
+
+### Document Register
+
+| Doc ID | Filename | Type | Source Location | Description |
+|--------|----------|------|-----------------|-------------|
+| *None provided* | — | — | — | — |
+
+### Citations
+
+| Citation ID | Doc ID | Page/Section | Category | Quoted Passage |
+|-------------|--------|--------------|----------|----------------|
+| — | — | — | — | — |
+
+### Unreferenced Documents
+
+| Filename | Source Location | Reason |
+|----------|-----------------|--------|
+| — | — | — |
 
 ---
 

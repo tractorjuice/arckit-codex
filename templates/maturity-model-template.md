@@ -5,7 +5,7 @@
 ## Document Control
 
 <!-- DOC-CONTROL-HEADER -->
-<!-- Resolved at command-execution time to _partials/document-control-uk.md or _partials/document-control-uae.md based on plugin userConfig classification_scheme + governance_framework. See _partials/RENDERING.md (when present). -->
+<!-- Resolved at command-execution time per _partials/RENDERING.md. -->
 
 ## Revision History
 
@@ -282,11 +282,31 @@ This section maps architecture principles to maturity model dimensions, showing 
 
 ## 11. External References
 
+### Authoritative Sources
+
 | Reference | Type | Source | Relevance |
 |-----------|------|--------|-----------|
 | [REFERENCE_NAME] | [Standard / Framework / Guidance] | [SOURCE_ORGANISATION] | [How this reference informed the maturity model] |
 | [REFERENCE_NAME] | [Standard / Framework / Guidance] | [SOURCE_ORGANISATION] | [How this reference informed the maturity model] |
 | [REFERENCE_NAME] | [Standard / Framework / Guidance] | [SOURCE_ORGANISATION] | [How this reference informed the maturity model] |
+
+### Document Register
+
+| Doc ID | Filename | Type | Source Location | Description |
+|--------|----------|------|-----------------|-------------|
+| *None provided* | — | — | — | — |
+
+### Citations
+
+| Citation ID | Doc ID | Page/Section | Category | Quoted Passage |
+|-------------|--------|--------------|----------|----------------|
+| — | — | — | — | — |
+
+### Unreferenced Documents
+
+| Filename | Source Location | Reason |
+|----------|-----------------|--------|
+| — | — | — |
 
 ---
 

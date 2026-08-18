@@ -5,7 +5,7 @@
 ## Document Control
 
 <!-- DOC-CONTROL-HEADER -->
-<!-- Resolved at command-execution time to _partials/document-control-uk.md or _partials/document-control-uae.md based on plugin userConfig classification_scheme + governance_framework. See _partials/RENDERING.md (when present). -->
+<!-- Resolved at command-execution time per _partials/RENDERING.md. -->
 
 <!-- Domain-specific fields, retained after the resolved header per the Document Control Standard. -->
 
@@ -252,6 +252,29 @@ to the FCA on request (PSRs 2017 Reg 100 + FCA Handbook SYSC 9.1).
 | FCA SCA coronavirus statement | FCA SCA extension — COVID-19 (30 April 2020) | <https://www.fca.org.uk/news/statements/strong-customer-authentication-and-coronavirus> |
 | UK Finance SCA Guidance | UK Finance Industry Guidance on Strong Customer Authentication (2025) | <https://www.ukfinance.org.uk/system/files/2025-07/UK-Finance-Industry-Guidance-Strong-Customer-Authentication.pdf> |
 | FCA key publications | FCA EMI and Payment Institutions — key publications | <https://www.fca.org.uk/firms/emi-payment-institutions-key-publications> |
+
+## 8. External References
+
+> This section provides traceability from generated content back to source documents.
+> Follow citation instructions in the project's citation reference guide.
+
+### Document Register
+
+| Doc ID | Filename | Type | Source Location | Description |
+|--------|----------|------|-----------------|-------------|
+| *None provided* | — | — | — | — |
+
+### Citations
+
+| Citation ID | Doc ID | Page/Section | Category | Quoted Passage |
+|-------------|--------|--------------|----------|----------------|
+| — | — | — | — | — |
+
+### Unreferenced Documents
+
+| Filename | Source Location | Reason |
+|----------|-----------------|--------|
+| — | — | — |
 
 ---
 

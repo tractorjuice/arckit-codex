@@ -69,6 +69,7 @@ Read all documents from Step 0. Identify:
 - **First**, check if `.arckit/templates-custom/at-nisg-template.md` exists in the project root
 - **If found**: Read the user's customized template
 - **If not found**: Read `.arckit/templates/at-nisg-template.md`
+- **Then read** `.arckit/templates/_partials/RENDERING.md` and resolve the `<!-- DOC-CONTROL-HEADER -->` marker in the template before writing. `ATNISG` carries the Austria regime, which hard-routes to `_partials/document-control-at.md` whatever the operator's user config says.
 
 ### Step 4: Entity Classification (Austrian specifics)
 

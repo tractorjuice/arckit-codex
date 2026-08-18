@@ -6,8 +6,6 @@
 
 <!-- DOC-CONTROL-HEADER -->
 <!-- Resolved at command-execution time per _partials/RENDERING.md. -->
-<!-- Classification line MUST be: -->
-<!-- | Classification | UNOFFICIAL / OFFICIAL / OFFICIAL:Sensitive / PROTECTED / SECRET | -->
 
 ## Revision History
 
@@ -217,6 +215,18 @@ National AI Centre (NAIC) operational practices for safe and responsible AI adop
 | AUPIA | ARC-{P}-AUPIA-v* | ArcKit Artefact | projects/ | APP 6 + APP 11 cross-ref |
 | AUE8 | ARC-{P}-AUE8-v* | ArcKit Artefact | projects/ | E8 cross-ref |
 | AUISM | ARC-{P}-AUISM-v* | ArcKit Artefact | projects/ | ISM cross-ref |
+
+### Citations
+
+| Citation ID | Doc ID | Page/Section | Category | Quoted Passage |
+|-------------|--------|--------------|----------|----------------|
+| — | — | — | — | — |
+
+### Unreferenced Documents
+
+| Filename | Source Location | Reason |
+|----------|-----------------|--------|
+| — | — | — |
 
 ### Verification
 

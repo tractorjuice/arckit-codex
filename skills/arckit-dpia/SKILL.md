@@ -95,6 +95,7 @@ Read the DPIA template:
 - **First**, check if `.arckit/templates-custom/dpia-template.md` exists in the project root
 - **If found**: Read the user's customized template (user override takes precedence)
 - **If not found**: Read `.arckit/templates/dpia-template.md` (default)
+- **Then read** `.arckit/templates/_partials/RENDERING.md` and resolve the `<!-- DOC-CONTROL-HEADER -->` marker in the template before writing. Do not hand-write the Document Control table: the partial `RENDERING.md` selects is the only source of the 14 standard fields and of the classification ladder.
 
 > **Tip**: Users can customize templates with `$arckit-customize dpia`
 

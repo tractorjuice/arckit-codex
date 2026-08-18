@@ -9,7 +9,7 @@ templateVersion: "1.0"
 ## Document Control
 
 <!-- DOC-CONTROL-HEADER -->
-<!-- Resolved at command-execution time to _partials/document-control-uk.md or _partials/document-control-uae.md based on plugin userConfig classification_scheme + governance_framework. See _partials/RENDERING.md (when present). -->
+<!-- Resolved at command-execution time per _partials/RENDERING.md. -->
 
 ## Revision History
 
@@ -372,11 +372,28 @@ gantt
 | Governance updates | ARC-{P}-AAOV-v{NEXT} | [Governance initiative outputs] |
 | Roadmap | ARC-{P}-ROAD-v{VERSION} | [Improvement roadmap integration] |
 
-### 6.3 External References
+## 7. External References
 
-| Reference | Source | Citation |
-|-----------|--------|----------|
-| [External benchmark / framework] | [Source name] | [Citation ID] |
+> This section provides traceability from generated content back to source documents.
+> Follow citation instructions in the project's citation reference guide.
+
+### Document Register
+
+| Doc ID | Filename | Type | Source Location | Description |
+|--------|----------|------|-----------------|-------------|
+| *None provided* | — | — | — | — |
+
+### Citations
+
+| Citation ID | Doc ID | Page/Section | Category | Quoted Passage |
+|-------------|--------|--------------|----------|----------------|
+| — | — | — | — | — |
+
+### Unreferenced Documents
+
+| Filename | Source Location | Reason |
+|----------|-----------------|--------|
+| — | — | — |
 
 ---
 

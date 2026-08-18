@@ -69,6 +69,7 @@ Read all documents from Step 0. Extract key information for the procurement file
 - **First**, check if `.arckit/templates-custom/at-bvergg-template.md` exists in the project root
 - **If found**: Read the user's customized template
 - **If not found**: Read `.arckit/templates/at-bvergg-template.md`
+- **Then read** `.arckit/templates/_partials/RENDERING.md` and resolve the `<!-- DOC-CONTROL-HEADER -->` marker in the template before writing. `BVERGG` carries the Austria regime, which hard-routes to `_partials/document-control-at.md` whatever the operator's user config says.
 
 ### Step 4: Threshold Analysis
 
@@ -106,7 +107,7 @@ Show threshold determination to the user before generating the full document. Co
    - Status: DRAFT
    - Created Date: {current_date}
    - Next Review Date: {current_date + 6 months}
-   - Classification: OFFICIAL — under the AT InfoSiG scheme use **Offen** (rising to **Eingeschränkt** while in draft); procurement docs become public at publication. Emit the AT InfoSiG value.
+   - Classification: **Offen** (rising to **Eingeschränkt** while in draft); procurement docs become public at publication.
    - Auftragswert, procedure and threshold tier captured in header
 
 3. **Section 1: Contracting Authority and Procedure**

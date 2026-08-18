@@ -7,8 +7,6 @@
 <!-- DOC-CONTROL-HEADER -->
 <!-- Resolved at command-execution time per _partials/RENDERING.md. -->
 <!-- Document Type: AUENERGY -->
-<!-- Classification line, where applicable, MUST be: -->
-<!-- | Classification | UNOFFICIAL / OFFICIAL / OFFICIAL:Sensitive / PROTECTED / SECRET | -->
 
 ## Revision History
 
@@ -157,6 +155,8 @@
 
 ## External References
 
+### Authoritative Sources
+
 | Ref | Source | Version / Date Verified | Access Date | Relevance |
 |-----|--------|-------------------------|-------------|-----------|
 | AER-RF | AER ring-fencing guideline | [Version / date verified] | [YYYY-MM-DD] | Ring-fencing obligations |
@@ -167,9 +167,27 @@
 | CISC-SOCI | CISC SOCI Act 2018 guidance | [Date verified] | [YYYY-MM-DD] | Critical-infrastructure obligations |
 | OAIC | OAIC Privacy Act and Australian Privacy Principles | [Date verified] | [YYYY-MM-DD] | Customer and personal information |
 
+### Document Register
+
+| Doc ID | Filename | Type | Source Location | Description |
+|--------|----------|------|-----------------|-------------|
+| *None provided* | — | — | — | — |
+
+### Citations
+
+| Citation ID | Doc ID | Page/Section | Category | Quoted Passage |
+|-------------|--------|--------------|----------|----------------|
+| — | — | — | — | — |
+
+### Unreferenced Documents
+
+| Filename | Source Location | Reason |
+|----------|-----------------|--------|
+| — | — | — |
+
 ---
 
-## Document Register
+## Document Metadata
 
 | Item | Value |
 |------|-------|

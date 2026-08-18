@@ -6,8 +6,6 @@
 
 <!-- DOC-CONTROL-HEADER -->
 <!-- Resolved at command-execution time per _partials/RENDERING.md. -->
-<!-- Classification line MUST be: -->
-<!-- | Classification | UNOFFICIAL / OFFICIAL / OFFICIAL:Sensitive / PROTECTED / SECRET | -->
 
 ## Revision History
 
@@ -265,6 +263,18 @@ Conducted within 90 days of incident closure.
 | AUPIA | ARC-{P}-AUPIA-v* | ArcKit Artefact | projects/ | APP 11 cross-ref |
 | AUE8 | ARC-{P}-AUE8-v* | ArcKit Artefact | projects/ | Security baseline |
 | AUISM | ARC-{P}-AUISM-v* | ArcKit Artefact | projects/ | Domain 2 (incidents) cross-ref |
+
+### Citations
+
+| Citation ID | Doc ID | Page/Section | Category | Quoted Passage |
+|-------------|--------|--------------|----------|----------------|
+| — | — | — | — | — |
+
+### Unreferenced Documents
+
+| Filename | Source Location | Reason |
+|----------|-----------------|--------|
+| — | — | — |
 
 ### Verification
 

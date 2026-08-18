@@ -7,7 +7,7 @@
 ## Document Control
 
 <!-- DOC-CONTROL-HEADER -->
-<!-- Resolved at command-execution time to _partials/document-control-uk.md or _partials/document-control-uae.md based on plugin userConfig classification_scheme + governance_framework. See _partials/RENDERING.md (when present). -->
+<!-- Resolved at command-execution time per _partials/RENDERING.md. -->
 
 ## Revision History
 
@@ -92,6 +92,29 @@
 | If yes: supervisory authority | Rijksinspectie Digitale Infrastructuur (RDI) |
 
 **Next steps**: Run `/arckit:nl-cloud` if hosting decisions depend on this conformance status. Run `/arckit:risk` to reflect open gaps in the risk register.
+
+## 8. External References
+
+> This section provides traceability from generated content back to source documents.
+> Follow citation instructions in the project's citation reference guide.
+
+### Document Register
+
+| Doc ID | Filename | Type | Source Location | Description |
+|--------|----------|------|-----------------|-------------|
+| WEB-1 | [primary URL — BIO2 is not linked from a stable source; verify the current text before citing] | Web URL | digitaleoverheid.nl | BIO2 — Baseline Informatiebeveiliging Overheid 2, v1.3 dated 9 January 2026 (established by the OBDO 23 September 2025). Verified [YYYY-MM-DD] |
+
+### Citations
+
+| Citation ID | Doc ID | Page/Section | Category | Quoted Passage |
+|-------------|--------|--------------|----------|----------------|
+| — | — | — | — | — |
+
+### Unreferenced Documents
+
+| Filename | Source Location | Reason |
+|----------|-----------------|--------|
+| — | — | — |
 
 ---
 

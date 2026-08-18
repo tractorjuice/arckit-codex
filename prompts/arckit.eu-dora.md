@@ -67,6 +67,7 @@ Read all documents from Step 0. Identify:
 - **First**, check if `.arckit/templates-custom/eu-dora-template.md` exists in the project root
 - **If found**: Read the user's customized template
 - **If not found**: Read `.arckit/templates/eu-dora-template.md`
+- **Then read** `.arckit/templates/_partials/RENDERING.md` and resolve the `<!-- DOC-CONTROL-HEADER -->` marker in the template before writing. Do not hand-write the Document Control table: the partial `RENDERING.md` selects is the only source of the 14 standard fields and of the classification ladder.
 
 ### Step 4: Entity Scoping (Article 2)
 

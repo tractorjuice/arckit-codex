@@ -7,7 +7,7 @@
 ## Document Control
 
 <!-- DOC-CONTROL-HEADER -->
-<!-- Resolved at command-execution time to _partials/document-control-uk.md or _partials/document-control-uae.md based on plugin userConfig classification_scheme + governance_framework. See _partials/RENDERING.md (when present). -->
+<!-- Resolved at command-execution time per _partials/RENDERING.md. -->
 
 ## Revision History
 
@@ -89,6 +89,29 @@ Clause 3.2 of the Herziening rijksbreed cloudbeleid 2026 requires a mandatory, d
 | [e.g. Provider does not cooperate under disruptive-interruption scenario] | [Likelihood] | [Impact] | [Mitigation] |
 
 **Next steps**: Confirm this plan satisfies clause 4.5(b) if applicable and update `/arckit:nl-cloud` Section 3.2 accordingly. Run `/arckit:risk` to add residual exit risks to the risk register.
+
+## 8. External References
+
+> This section provides traceability from generated content back to source documents.
+> Follow citation instructions in the project's citation reference guide.
+
+### Document Register
+
+| Doc ID | Filename | Type | Source Location | Description |
+|--------|----------|------|-----------------|-------------|
+| WEB-1 | <https://www.tweedekamer.nl/downloads/document?id=2026D35295> | Web URL | tweedekamer.nl | Herziening rijksbreed cloudbeleid 2026, clause 3.2 (Exit-plan) (3 July 2026, definitief). Verified [YYYY-MM-DD] |
+
+### Citations
+
+| Citation ID | Doc ID | Page/Section | Category | Quoted Passage |
+|-------------|--------|--------------|----------|----------------|
+| — | — | — | — | — |
+
+### Unreferenced Documents
+
+| Filename | Source Location | Reason |
+|----------|-----------------|--------|
+| — | — | — |
 
 ---
 

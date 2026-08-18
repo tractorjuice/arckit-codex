@@ -5,7 +5,7 @@
 ## Document Control
 
 <!-- DOC-CONTROL-HEADER -->
-<!-- Resolved at command-execution time to _partials/document-control-uk.md or _partials/document-control-uae.md based on plugin userConfig classification_scheme + governance_framework. See _partials/RENDERING.md (when present). -->
+<!-- Resolved at command-execution time per _partials/RENDERING.md. -->
 
 <!-- Domain-specific fields, retained after the resolved header per the Document Control Standard. -->
 
@@ -298,6 +298,29 @@ regulatory mandate — cite it but do not treat it as a binding regulatory requi
 | FCA 2024/41 | FCA CTP Sourcebook instrument implementing PS24/16 | <https://www.handbook.fca.org.uk/instrument/2024/FCA_2024_41.pdf> |
 | FINOS CCC | FINOS Common Cloud Controls — open cloud control library for financial services | <https://www.finos.org/common-cloud-controls-project> |
 | FCA Op Res | FCA Operational Resilience — firms guidance | <https://www.fca.org.uk/firms/operational-resilience> |
+
+## 11. External References
+
+> This section provides traceability from generated content back to source documents.
+> Follow citation instructions in the project's citation reference guide.
+
+### Document Register
+
+| Doc ID | Filename | Type | Source Location | Description |
+|--------|----------|------|-----------------|-------------|
+| *None provided* | — | — | — | — |
+
+### Citations
+
+| Citation ID | Doc ID | Page/Section | Category | Quoted Passage |
+|-------------|--------|--------------|----------|----------------|
+| — | — | — | — | — |
+
+### Unreferenced Documents
+
+| Filename | Source Location | Reason |
+|----------|-----------------|--------|
+| — | — | — |
 
 ---
 
