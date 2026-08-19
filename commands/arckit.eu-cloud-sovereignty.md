@@ -69,6 +69,7 @@ Read all documents from Step 0. Identify:
 - **If found**: Read the user's customized template
 - **If not found**: Read `.arckit/templates/eu-cloud-sovereignty-template.md`
 - **Also read** `.arckit/templates/_partials/RENDERING.md` — needed to resolve the `<!-- DOC-CONTROL-HEADER -->` marker in Step 5
+- **Also read** `.arckit/data/csf-criteria-calculator-2026-06-01.json` — the transcribed official Annex calculator. This is the ONLY source for `Score(SOVn)`, `Max.Score(SOVn)`, and each criterion's SEAL level used in Step 5, Section 3 and Appendix A. Never invent, estimate, or paraphrase these values (arc-kit#782 — the previous version of this command stated the scoring formula without defining its terms, so the model had to invent a scale and two runs over identical evidence could disagree)
 
 ### Step 4: Assessment Context and Minimum SEAL Determination
 
@@ -103,20 +104,38 @@ Show this scoping summary before generating the full document.
    - Table: objective (SOV-1 to SOV-8), Minimum SEAL required, Source
    - **Mandatory callout** stated plainly: minimum SEAL levels are set by the contracting authority in the tender specification as a Minimum Assurance Level — they are **not** fixed by the framework. A tender that does not consistently reach the required minimum across all objectives is rejected. This is the single most common misreading of the framework — do not let the document imply otherwise.
 
-5. **Section 3: Sovereignty Score — Methodology and Result**
+5. **Section 3: Sovereignty Score and Overall SEAL — Methodology and Result**
    - Reproduce the five SEAL level definitions in full (do not paraphrase or abbreviate):
-     - **SEAL-0 No Sovereignty**: service, technology or operations under exclusive control of non-EU third parties, governed entirely in non-EU jurisdictions
+     - **SEAL-0 No Sovereignty**: service, technology or operations under exclusive control of non-EU third parties, governed entirely by non-EU jurisdictions
      - **SEAL-1 Jurisdictional Sovereignty**: EU law formally applies with limited practical enforceability; service, technology or operations under exclusive control of non-EU third parties
-     - **SEAL-2 Data Sovereignty**: EU law applicable and enforceable, with material non-EU dependencies remaining; under indirect control of non-EU third parties
-     - **SEAL-3 Digital Resilience**: EU law applicable and enforceable, EU actors exercising meaningful but not full influence; under marginal control of non-EU third parties
-     - **SEAL-4 Full Digital Sovereignty**: technology and operations under complete EU control, subject only to EU law, with no critical non-EU dependencies
-   - State the formula: Sovereignty Score = Σ over the eight objectives of (Score(SOVn) / Max.Score(SOVn)) × Weight(SOVn), expressed as a percentage
+     - **SEAL-2 Data Sovereignty**: EU jurisdictions apply, with material dependencies remain; service, technology or operations under indirect control of non-EU third parties
+     - **SEAL-3 Technological Sovereignty**: EU jurisdictions apply, EU actors exercising meaningful but not full influence; service, technology or operations under marginal control of non-EU third parties
+     - **SEAL-4 Full Digital Sovereignty**: technology and operations under complete EU control, subject only to EU jurisdiction, with no critical non-EU dependencies
+   - SEAL-2's *"with material dependencies remain"* is ungrammatical **in the source** (Implementation guidance p.2-3) and is reproduced verbatim on purpose. Do not correct it — "do not paraphrase" above governs, and a silent repair would put the artefact out of step with the normative text a tender is assessed against.
+   - Reproduce the per-objective SEAL-2/3/4 requirements table from Guidance p.10 (Section 3.0b of the template). It starts at SEAL-2 because SEAL-2 was the minimum level set for the Commission's own competition — carry that note verbatim so a reader assessing a tender with a lower floor does not read the missing SEAL-0/SEAL-1 rows as "not assessable"; fall back to the general SEAL level definitions above for those levels.
+   - **Define `Score(SOVn)` and `Max.Score(SOVn)` before stating the formula — do not state the formula without its terms** (arc-kit#782):
+     - **Score(SOVn)** = the SUM of the `value` fields of the answers selected for objective n's criteria, read from the catalogue at `.arckit/data/csf-criteria-calculator-2026-06-01.json` (calculator: `E4=SUM(E5:E44)` for SOV-1, and analogously per objective). A criterion with no evidence is left unanswered and contributes nothing — it is not defaulted to zero as a "score", it is simply excluded and flagged as a gap.
+     - **Max.Score(SOVn)** = a NOMINAL **1000** for every objective (n = 1 to 8), by construction — not each objective's own computed maximum. The catalogue's `scoring.actualPerObjectiveMaxima` records each objective's real maximum (1000.03 / 1002.00 / 1000.00 / 1002.00 / 1001.00 / 1000.00 / 1001.00 / 1000.00 for SOV-1 to SOV-8, a consequence of the workbook rounding answer values to 2dp) for verification only — the divisor in the formula below is always the shared nominal 1000, never an objective's own actual maximum.
+   - State the formula with its terms resolved: **Sovereignty Score = Σ over the eight objectives of (Score(SOVn) / 1000) × Weight(SOVn)**, expressed as a percentage. Because each objective's actual maximum slightly exceeds 1000 (see above), a **maximal response scores 100.0756%, not 100%** — this is the framework's own documented rounding behaviour; report it faithfully and do not clamp the result to 100%.
+   - **SEAL is not an input to the Score, and the Score does not determine SEAL.** Per the Implementation guidance (p.9): "The same answers are used to determine the SEAL of each row, with each answer defining the SEAL level of the question." Score and SEAL are two independent readings of the same 48 answers — never derive one from the other, and never imply a high Score guarantees a high SEAL or vice versa.
+   - **Overall SEAL** = `SEAL-{N}` where N is the **minimum** SEAL level across every answered criterion in the whole assessment (calculator: `="SEAL-"&MIN(H5:H251)`) — not an average, and not derived from the per-objective "SEAL evidenced" values alone; compute it across all 48 answers directly.
+   - **Compute per-criterion, showing the arithmetic**: for every one of the 48 criteria, record the selected answer, its Score value, and its SEAL level in **Appendix A** (Step 5.12) — this is what makes the Sovereignty Score checkable without re-running any scorer. If `scripts/csf-score.mjs` is present in this environment, run `node scripts/csf-score.mjs --answers <selections>.json --json` and use its output for Score(SOVn), the Sovereignty Score, and the overall SEAL. Non-Claude runtimes (Codex, Gemini, OpenCode, Copilot) do not carry it — if it is not present, compute the identical arithmetic by hand directly from the catalogue and show every step in Appendix A — the artefact must be checkable without the scorer either way.
    - Weight table for all eight objectives (must sum to exactly 100%)
-   - Scored table: objective, Score, Max Score, Weight, Weighted Contribution
+   - Scored table: objective, Score, Max Score (always 1000), Weight, Weighted Contribution — cross-reference the corresponding rows in Appendix A rather than restating their derivation
    - State clearly: the Sovereignty Score contributes to the tender's quality score as an **award criterion** — this is separate from, and does not override, the minimum-SEAL rejection gate in Section 2
+   - **Overall SEAL determination (Section 3.3 of the template)** — the framework defines an aggregate SEAL and it is a **minimum**, never an average and never a mode. State both levels of the derivation and cite them separately:
+     - **Per-objective SEAL** = the minimum SEAL across every criterion answered within that objective. This is a property of the framework, not a cell you can cite: the Annex calculator does not compute a per-objective SEAL anywhere, and the workbook contains exactly one `MIN()`. Do not attribute this level to the calculator.
+     - **Overall SEAL** = the minimum SEAL evidenced across all eight objectives. Quote Implementation guidance p.9 verbatim: "The overall SEAL level is **the lowest SEAL level achieved in any of the objectives**." The Annex calculator XLSX implements exactly this at cell F2: `="SEAL-"&MIN(H5:H251)`. That range spans every answer row in the workbook across all eight objectives — their header rows are 4, 45, 76, 102, 133, 169, 195 and 231, the same rows the weights are read from — and each row's SEAL is `=IF(E<n>,1*F<n>,"")`, so the formula is the minimum over every answered criterion, each carrying its own SEAL in column F.
+     - These two levels agree only because an objective's SEAL is itself the minimum across its criteria — the overall SEAL is a minimum-of-minimums. Never average or take the mode at either level.
+     - **Inert-criterion property**: quote Guidance p.9 verbatim: "When all responses grant SEAL-4, it must be understood that the criterion has no impact on the SEAL calculation." A criterion whose every recorded answer is SEAL-4 can never bind the minimum and can never be cited as the governing criterion — state this as a property of the derivation, not a footnote. It still contributes to the weighted Sovereignty Score.
+     - **Prevalence of SEAL over Sovereignty Score** — quote Guidance p.10 verbatim: "It is important to emphasize the prevalence of the SEAL criterion over the Sovereignty Score. In the context of cloud services procurement, the Contracting Authority decides what is the minimum SEAL required. Sovereignty score is used to compare the offers that have reached the minimum required SEAL." State plainly that the **Overall SEAL, not the Sovereignty Score, is the framework's actual rejection gate**.
+     - **SEAL-4 attainability caveat** — quote Guidance p.13 ("Lessons learnt") verbatim, attributed to the European Commission and dated (published 1 June 2026): "The level SEAL-4, however relevant, since it describes the highest level of Sovereignty, is not today relevant in the context of EU Sovereignty considering existing dependence to specific supply chains (chips, hardware). Relaxing the level SEAL-4, at least temporarily, would allow to make more difference between providers, especially when it comes to sensitiveness to hostile take-overs." Frame this as a limitation the Commission itself proposes to revisit, not a permanent property of SEAL-4 — it does not change how the Overall SEAL is computed here.
+     - Record the **Overall SEAL** value and its **governing criterion**: the objective (and, where identifiable, the specific contributing factor within it) whose evidenced SEAL set the minimum.
+   - Record the framework's adaptability caveats from the catalogue's `scoring.adaptabilityCaveats`: answer values may be adapted by the contracting authority, the weight column is captioned "Score (examples)" rather than a mandated regulatory weighting, and the calculator's own worked example column holds fictitious illustrative values that must never be presented as a real provider assessment
 
 6. **Section 4: Objective-by-Objective Assessment (SOV-1 to SOV-8)**
    - One subsection per objective, each with: weight, SEAL claimed vs. SEAL evidenced, an evidence table built from that objective's contributing factors (see reference list below), and identified gaps
+   - **SEAL evidenced**, per objective, is the minimum SEAL across every contributing factor evidenced in that objective's table — never an average. Where the binding factor is not obvious, name it explicitly; Section 3.3's Overall SEAL cites this as the "governing criterion" for whichever objective sets the overall minimum.
    - Use the following contributing factors as the evidence-column basis for each objective — do not invent additional criteria:
      - **SOV-1 Strategic Sovereignty**: EU jurisdiction of bodies with decisive authority; assurances against change of control; EU-sourced financing; EU investment/jobs/value creation; ability to sustain operations against cessation, suspension, or vendor support withdrawal
      - **SOV-2 Legal & Jurisdictional Sovereignty**: governing national legal system; exposure to non-EU laws with cross-border reach (e.g. US CLOUD Act, Chinese Cybersecurity Law); channels through which non-EU authorities could compel access; applicability of international transfer/usage restrictions; jurisdiction of IP creation and registration
@@ -149,6 +168,13 @@ Show this scoping summary before generating the full document.
 
 11. **Section 9: External References**
     - Populate the External References section per `.arckit/references/citation-instructions.md`. The EU Cloud Sovereignty Framework v1.2.1 MUST appear in the Document Register as a `Web URL` row — its primary URL in the **Filename** column and the publishing domain in **Source Location**, per the register's column semantics — with the date the URL was verified recorded in **Description**. Do not cite a URL you have not fetched in this session; if the framework could not be retrieved, say so in the Description rather than seeding a link.
+    - The Annex calculator (`csf-criteria-calculator-2026-06-01.json`, transcribed from the workbook published 2026-06-01) MUST also appear as a `Web URL` row citing `provenance.sourceUrl` from the catalogue — it is the sole authority for every Score, Max Score, and SEAL value in Appendix A, and its Commission attribution (`provenance.reuse.attribution` in the catalogue) belongs in the Description column.
+
+12. **Appendix A: Per-Criterion Scoring Detail**
+    - One table per objective (SOV-1 to SOV-8), each row: criterion #, criterion description, selected answer, Score value, SEAL level — 48 rows total across the eight tables
+    - Source every description, answer label, value, and SEAL level from `.arckit/data/csf-criteria-calculator-2026-06-01.json` — do not invent or paraphrase them
+    - This appendix is what makes Section 3.2's Scored Result table checkable by a reader with no access to the scorer: every Score(SOVn) in Section 3.2 must equal the sum of that objective's rows here
+    - A criterion with no evidence is recorded as unanswered/gap, not defaulted to a zero-value answer — leaving it silently at zero would understate the true gap in Section 7
 
 Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** pass.
 
@@ -171,20 +197,28 @@ projects/{project_id}/ARC-{PROJECT_ID}-EUCSF-v{VERSION}.md
 🧭 Framework Version: EU Cloud Sovereignty Framework v1.2.1 (October 2025)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔒 Overall SEAL (rejection gate)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Overall SEAL: {SEAL-0 to SEAL-4} — the lowest SEAL evidenced across all eight objectives (minimum, never an average or mode)
+Governing objective: {SOV-n — objective name}
+Governing criterion: {contributing factor that set the minimum}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📊 Sovereignty Score
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Sovereignty Score: {N}% (award-criterion contribution)
+Sovereignty Score: {N}% (award-criterion contribution — the Overall SEAL above, not this score, is the framework's rejection gate)
 
 | Objective | Weight | SEAL Claimed | SEAL Evidenced | Min. SEAL (tender) | Meets Min.? |
 |-----------|--------|-------------|-----------------|--------------------|-------------|
-| SOV-1 Strategic Sovereignty            | 15% | {SEAL} | {SEAL} | {SEAL / not set} | {Y/N} |
+| SOV-1 Strategic Sovereignty            | 20% | {SEAL} | {SEAL} | {SEAL / not set} | {Y/N} |
 | SOV-2 Legal & Jurisdictional Sovereignty | 10% | {SEAL} | {SEAL} | {SEAL / not set} | {Y/N} |
 | SOV-3 Data & AI Sovereignty            | 10% | {SEAL} | {SEAL} | {SEAL / not set} | {Y/N} |
 | SOV-4 Operational Sovereignty          | 15% | {SEAL} | {SEAL} | {SEAL / not set} | {Y/N} |
-| SOV-5 Supply Chain Sovereignty         | 20% | {SEAL} | {SEAL} | {SEAL / not set} | {Y/N} |
+| SOV-5 Supply Chain Sovereignty         | 10% | {SEAL} | {SEAL} | {SEAL / not set} | {Y/N} |
 | SOV-6 Technology Sovereignty           | 15% | {SEAL} | {SEAL} | {SEAL / not set} | {Y/N} |
-| SOV-7 Security & Compliance Sovereignty | 10% | {SEAL} | {SEAL} | {SEAL / not set} | {Y/N} |
+| SOV-7 Security & Compliance Sovereignty | 15% | {SEAL} | {SEAL} | {SEAL / not set} | {Y/N} |
 | SOV-8 Environmental Sustainability     |  5% | {SEAL} | {SEAL} | {SEAL / not set} | {Y/N} |
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -203,6 +237,10 @@ Next steps:
 
 - **Minimum SEAL levels come from the tender specification, not the framework**: the framework defines the eight objectives, their weights, and the five SEAL levels — it does not prescribe which minimum SEAL a given procurement must reach per objective. That is a Minimum Assurance Level set by the contracting authority. Confusing the two is the most common misreading; never state or imply a "framework-mandated minimum."
 - **Two independent scoring mechanisms**: the weighted Sovereignty Score is an award criterion that contributes to the tender's quality score; the per-objective minimum SEAL is a pass/fail rejection gate. A high Sovereignty Score does not excuse failing a minimum SEAL on a single objective.
+- **The Overall SEAL is a minimum, never an average or a mode**: it is the lowest SEAL evidenced across all eight objectives (Guidance p.9; Annex calculator, cell F2), and each objective's own SEAL is already the minimum across its contributing factors (a property of the framework — the calculator has no per-objective SEAL cell) — the overall figure is a minimum-of-minimums. A contributing factor whose every answer is SEAL-4 can never be the governing criterion (Guidance p.9); it still counts toward the Sovereignty Score. Guidance p.10 states the framework's actual priority verbatim: "It is important to emphasize the prevalence of the SEAL criterion over the Sovereignty Score... Sovereignty score is used to compare the offers that have reached the minimum required SEAL." Treat the Overall SEAL, not the Sovereignty Score, as the rejection gate.
+- **`Score(SOVn)` and `Max.Score(SOVn)` come only from the calculator catalogue** (`.arckit/data/csf-criteria-calculator-2026-06-01.json`) — never invent a scale. `Max.Score(SOVn)` is a nominal 1000 for every objective; because the workbook rounds answer values to 2dp, a maximal response scores slightly over 100% (100.0756%) — this is the framework's own rounding behaviour, not an error to correct away.
+- **SEAL and Score are independent readings of the same 48 answers**: neither is derived from the other. Never present a high Score as implying a high SEAL, or vice versa.
+- **The calculator's worked example is fictitious**: the workbook's own example column holds illustrative values that "do not refer to any specific example," per the guidance. Never present a computed score against those example values as a real provider assessment, and never present the 43-question count from the Implementation guidance narrative as authoritative over the 48 criteria the published calculator actually scores — record both, with the discrepancy stated, rather than silently reconciling them.
 - **Self-declared SEAL is unverified until evidenced**: never present a supplier's or project's self-declared SEAL level as fact in the executive summary or anywhere else without flagging it as unverified pending the evidence log in Section 5.
 - **No provider naming**: there is no published EU list of providers assessed against this framework. Do not name any commercial cloud provider as sovereign, compliant, or achieving a specific SEAL level anywhere in the generated document.
 - **No vendor-analyst market reports**: do not cite Gartner or similar analyst research as a source for sovereignty claims, anywhere in the document.
@@ -214,6 +252,8 @@ Next steps:
 | Document | Publisher | URL |
 |----------|-----------|-----|
 | EU Cloud Sovereignty Framework v1.2.1 (October 2025) | European Commission — Directorate-General for Digital Services | https://commission.europa.eu/document/download/09579818-64a6-4dd5-9577-446ab6219113_en |
+| Cloud Sovereignty Framework — Implementation guidance (source of the p.9 Overall SEAL rule, p.10 prevalence statement and per-objective requirements table, p.13 SEAL-4 caveat) | European Commission | https://commission.europa.eu/document/download/2ad80a48-166f-4c77-a513-80c53ca2a128_en?filename=Cloud+Sovereignty+Framework+-+Implementation+guidance.pdf |
+| Annex — Sovereignty assessment calculator (XLSX; published 2026-06-01; cell F2 implements the Overall SEAL as a minimum; transcribed at `plugins/arckit-eu/data/csf-criteria-calculator-2026-06-01.json`) | European Commission | https://commission.europa.eu/document/download/3acb8fe8-8a4a-4339-ae74-f56138d913d1_en?filename=Annex+-+Sovereignty+assessment+calculator.xlsx |
 | Notitie: Verkenning Overheidsbrede Soevereine Clouddiensten (NDS Cloudprogramma, v1.0, 11 June 2026) | Dutch NDS Cloudprogramma | https://www.tweedekamer.nl/downloads/document?id=2026D34382 |
 | Herziening rijksbreed cloudbeleid 2026 (Kamerstuk 26643, nr. 1541, 3 juli 2026) | Ministerie van Economische Zaken en Klimaat — Staatssecretaris W.J.M. Aerdts | Kamerbrief: https://www.tweedekamer.nl/kamerstukken/brieven_regering/detail?id=2026Z15738&did=2026D35294 · Policy PDF: https://www.tweedekamer.nl/downloads/document?id=2026D35295 |
 | GDPR full text (personal data intersection with SOV-3, SOV-7) | EUR-Lex | https://eur-lex.europa.eu/eli/reg/2016/679/oj |
@@ -221,7 +261,7 @@ Next steps:
 | Data Act (Regulation 2023/2854) — full text (SOV-4/5 switching and supply chain intersection) | EUR-Lex | https://eur-lex.europa.eu/eli/reg/2023/2854/oj |
 | SecNumCloud qualification scheme — official page (complementary security assurance, France) | ANSSI | https://cyber.gouv.fr/secnumcloud |
 
-> **Note for reviewers**: The EU Cloud Sovereignty Framework (v1.2.1, October 2025) is a European Commission instrument that supplements security assurance schemes with sovereignty-specific safeguards for cloud procurement. It defines eight weighted sovereignty objectives (SOV-1 to SOV-8, weights summing to 100%) and five Sovereignty Effectiveness Assurance Levels (SEAL-0 to SEAL-4). The contracting authority computes a weighted Sovereignty Score used as a tender award criterion, and separately sets a minimum SEAL per objective in the tender specification as a rejection gate — the framework itself fixes neither. No published EU list of assessed providers exists; any SEAL claim is unverified until an assessor records objective-by-objective evidence. Member states are beginning to adopt the framework nationally — the Netherlands is the first documented example via the NDS Cloudprogramma.
+> **Note for reviewers**: The EU Cloud Sovereignty Framework (v1.2.1, October 2025) is a European Commission instrument that supplements security assurance schemes with sovereignty-specific safeguards for cloud procurement. It defines eight weighted sovereignty objectives (SOV-1 to SOV-8, weights summing to 100%) and five Sovereignty Effectiveness Assurance Levels (SEAL-0 to SEAL-4). The framework's actual rejection gate is the **Overall SEAL** — the lowest SEAL evidenced across all eight objectives, a minimum never an average or mode (Implementation guidance p.9) — compared against the contracting authority's stated minimum; the weighted Sovereignty Score is a separate award criterion used only to compare offers that have already cleared the minimum SEAL (Implementation guidance p.10). No published EU list of assessed providers exists; any SEAL claim is unverified until an assessor records objective-by-objective evidence. Member states are beginning to adopt the framework nationally — the Netherlands is the first documented example via the NDS Cloudprogramma.
 
 ## Success Criteria
 
@@ -230,6 +270,10 @@ Next steps:
 - ✅ Minimum SEAL levels sourced only from a tender specification, or explicitly marked "not yet set" — never derived from the framework itself
 - ✅ All eight sovereignty objectives (SOV-1 to SOV-8) present with their exact weights, summing to 100%
 - ✅ Sovereignty Score computed with the stated formula and reported as an award-criterion contribution, distinct from the minimum-SEAL rejection gate
+- ✅ Overall SEAL computed as the minimum SEAL evidenced across all eight objectives — never an average or a mode — with its governing objective/criterion named, and presented as the framework's actual rejection gate ahead of the Sovereignty Score
+- ✅ Sovereignty Score computed with `Score(SOVn)` and `Max.Score(SOVn)` defined exactly as the catalogue specifies (sum of selected answer values; nominal 1000 for every objective) and reported as an award-criterion contribution, distinct from the minimum-SEAL rejection gate
+- ✅ Appendix A shows the per-criterion arithmetic for all 48 criteria, sourced from the calculator catalogue, so the Sovereignty Score is checkable without re-running any scorer
+- ✅ SEAL stated as independent from Score — computed as the minimum SEAL across all answered criteria, never derived from or determining the weighted Score
 - ✅ All five SEAL levels (SEAL-0 to SEAL-4) used with the correct definitions
 - ✅ Evidence table per objective drawn only from that objective's contributing factors
 - ✅ Self-declared SEAL explicitly flagged as an unverified claim pending evidence
