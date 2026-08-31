@@ -28,10 +28,32 @@
 
 | Location | Purpose |
 |----------|---------|
-| `.arckit/templates/` | Default templates (refreshed by `arckit init`) |
+| `${CLAUDE_PLUGIN_ROOT}/templates/` | Default templates (Claude Code plugin) |
+| `.arckit/templates/` | Default templates (CLI and non-Claude extensions, refreshed by `arckit init`) |
 | `.arckit/templates-custom/` | Your customizations (preserved across updates) |
 
 Commands automatically check for custom templates first, falling back to defaults.
+
+### Scope
+
+In Claude Code, `${CLAUDE_PLUGIN_ROOT}` resolves to the core `arckit` plugin, which also bundles a copy of every community overlay (`arckit-uae`, `arckit-ca`, `arckit-uk-nhs`, `arckit-repo` and the rest). Both halves are reachable, and the overlays are the larger half of the catalogue:
+
+| Action | Scope |
+|--------|-------|
+| `list` | Core and overlays, grouped by plugin |
+| `/arckit:customize <name>` | Core and overlays |
+| `all` | Core only, deliberately |
+
+`all` stays core-only because a UK project has no use for twelve UAE templates. Copy overlay templates by name instead:
+
+```bash
+/arckit:customize codebase-audit     # ships in arckit-repo
+/arckit:customize uae-ai-charter     # ships in arckit-uae
+```
+
+Whichever action you use, the command states the scope it applied. The overlay copy is the version bundled with your installed core plugin, which can lag a separately installed overlay.
+
+On the CLI and the non-Claude extensions this distinction does not apply: `arckit init` writes every template into a single flat `.arckit/templates/` directory.
 
 ---
 
@@ -105,4 +127,6 @@ rm .arckit/templates-custom/requirements-template.md
 | `data-model-template.md` | `/arckit:data-model` |
 | `sow-template.md` | `/arckit:sow` |
 | `pages-template.html` | `/arckit:pages` |
-| ... | (run `/arckit:customize list` for full list) |
+| ... | (run `/arckit:customize list` for the full list) |
+
+The core plugin ships 65 templates and the overlays add well over a hundred more, so the extract above is a sample rather than a catalogue. `/arckit:customize list` is the authoritative list and covers both.
