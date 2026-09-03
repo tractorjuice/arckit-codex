@@ -66,7 +66,7 @@ claude remote-control
 
 Drive the worktree session from claude.ai/code or the mobile app, then enable `/config → Push when Claude decides` so your phone pings when an iteration keeps a change above the score threshold or when the loop hits a decision point. Combined with `ENABLE_PROMPT_CACHING_1H=1` (see Tips below), you can run autoresearch overnight and check progress from anywhere.
 
-Caveats: Pro/Max plans only (no API keys, no Bedrock/Vertex/Foundry), push is a single on/off, and the local `claude` process must keep running. ArcKit's minimum Claude Code floor (v2.1.234) already covers the v2.1.110 RC requirement.
+Caveats: Pro/Max plans only (no API keys, no Bedrock/Vertex/Foundry), push is a single on/off, and the local `claude` process must keep running. ArcKit's minimum Claude Code floor (v2.1.251) already covers the v2.1.110 RC requirement.
 
 ---
 
@@ -209,7 +209,7 @@ For Self-Harness runs, the editable scope depends on the selected mode and is de
 - **Simplicity criterion** -- marginal improvement + added complexity = not worth it; simplification + same score = keep
 - **Log everything** -- every iteration gets a row in `results.tsv`
 - **No git reset --hard** -- use targeted `git checkout` + revert commits
-- **Session-wide budgets apply** -- Claude Code caps each session at 200 WebSearch calls and 200 subagent spawns (v2.1.212), with 20 subagents running concurrently (v2.1.217). A long autoresearch loop that repeatedly re-runs a research-heavy command can exhaust the search budget mid-run. Raise with `CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION` / `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION`, or let the loop start fresh sessions -- `/clear` resets the subagent budget.
+- **Session-wide budgets apply** -- Claude Code caps each session at 200 WebSearch calls (v2.1.212) and 20 concurrently-running subagents (v2.1.217). The 200-spawns-per-session cap was removed in v2.1.224; `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` is still accepted but never read. A long autoresearch loop that repeatedly re-runs a research-heavy command can exhaust the search budget mid-run, and that cap soft-degrades rather than failing -- searches return a "not performed" result and the loop carries on with thinner evidence. Raise it with `CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION`, or let the loop start fresh sessions -- `/clear` resets it. `WebFetch` is uncounted but cached per URL for 15 minutes (`CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS`, v2.1.233+), so a loop that re-reads the same page inside that window gets the cached copy.
 
 ---
 

@@ -60,11 +60,11 @@ Identify the target project from the hook context. If the user specifies a proje
 
 > **Tip**: Users can customise templates with `$arckit-customize gap-analysis`
 
-### 3. direct user question: Gap Severity Weighting
+### 3. A question to the user: Gap Severity Weighting
 
 Before generating the analysis, ask the user how to weight gap severity scoring:
 
-**direct user question**: "How should gap severity be weighted?"
+**A question to the user**: "How should gap severity be weighted?"
 
 - Options: `Balanced` | `Strategic-risk` | `Operational`
 - Default: `Balanced`

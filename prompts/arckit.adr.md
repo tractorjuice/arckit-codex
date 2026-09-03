@@ -48,13 +48,13 @@ $ARGUMENTS
 
 ### 1c. **Interactive Configuration**
 
-Before creating the ADR, use the **AskUserQuestion** tool to gather key decision parameters. **Skip any question where the user has already provided a clear answer in their arguments.**
+Before creating the ADR, ask the user for key decision parameters. **Skip any question where the user has already provided a clear answer in their arguments.**
 
-**Gathering rules** (apply to all questions in this section):
+**Gathering rules** — the one-message interview in `.arckit/references/interview-pattern.md`:
 
-- Ask the most important question first; fill in secondary details from context or reasonable defaults.
-- **Maximum 2 rounds of questions.** After that, pick the best option from available context.
-- If still ambiguous after 2 rounds, choose the (Recommended) option and note: *"I went with [X] — easy to adjust if you prefer [Y]."*
+- Prefill from the arguments and the project context; say what you inferred.
+- Ask every remaining question in **one** call. There is no second round.
+- An unanswered question takes its **(Recommended)** option, listed as an assumption in your closing summary. With no question tool available, take every default and never block.
 
 **Question 1** — header: `Escalation`, multiSelect: false
 > "What escalation level does this architectural decision require?"

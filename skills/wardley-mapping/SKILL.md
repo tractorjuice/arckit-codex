@@ -1,8 +1,11 @@
 ---
 name: wardley-mapping
-description: This skill should be used when the user asks about Wardley Mapping, evolution
-  stages, strategic positioning, creating maps, value chain decomposition, gameplay
-  patterns, doctrine assessment, climatic patterns, build vs. buy, or inertia analysis.
+description: 'Wardley Mapping reference for a map, a positioning question or a strategic
+  read: value-chain decomposition, evolution stages, OnlineWardleyMaps syntax, gameplay,
+  doctrine and climatic patterns, build-versus-buy and inertia. Also loaded while
+  a WARD artefact is being written. Not needed when the request is for a governed
+  Wardley artefact with document control; the $arckit-wardley, wardley.value-chain,
+  wardley.doctrine, wardley.gameplay and wardley.climate commands produce those.'
 ---
 
 # Wardley Mapping
@@ -59,11 +62,11 @@ Follow these steps in order when the user asks to create or analyze a Wardley Ma
 
 ### Step 1: Gather Context
 
-ask the user for the information needed to create the map. Ask up to 3 questions at a time.
+Ask the user for the information needed to create the map. Ask up to 3 questions at a time.
 
 **First, identify the anchor and scope:**
 
-ask the user:
+Ask the user:
 
 - **Who is the primary user?** — Options might include: "External customers", "Internal developers", "Business analysts", or let the user specify
 - **What is the user need?** — e.g., "Purchase products online", "Deploy applications reliably", "Generate analytical reports"
@@ -71,7 +74,7 @@ ask the user:
 
 **Then, gather strategic context:**
 
-ask the user:
+Ask the user:
 
 - **What is the primary goal?** — Options: "Identify investment priorities", "Evaluate build vs. buy", "Assess competitive position", "Plan technology evolution"
 - **What industry/domain?** — Let the user specify (affects how components are positioned on the evolution axis)
@@ -86,7 +89,7 @@ Work backwards from the user need. List every component required to deliver it, 
 - Map both **technical and business** components
 - Ask: "What components are needed?", "What does each depend on?", "What is hidden from the user?"
 
-If component identification is uncertain, ask the user the user about key capabilities, technologies, and processes in their domain.
+If component identification is uncertain, ask the user about key capabilities, technologies, and processes in their domain.
 
 ### Step 3: Position on Evolution
 
@@ -101,7 +104,7 @@ Key questions for each component:
 
 Avoid common mistakes: don't position based on age (use market maturity), don't confuse internal unfamiliarity with market-wide genesis, and always consider industry context.
 
-If positioning is ambiguous for key components, ask the user to clarify — e.g., "Is your recommendation engine a custom differentiator or are you using an off-the-shelf product?"
+If positioning is ambiguous for key components, clarify with the user — e.g., "Is your recommendation engine a custom differentiator or are you using an off-the-shelf product?"
 
 ### Step 4: Add Movement
 
@@ -115,7 +118,7 @@ Add arrows showing how components are evolving. All components naturally drift r
 
 After drawing the map, apply the analysis checklist below, then review gameplay patterns in [references/gameplay-patterns.md](references/gameplay-patterns.md) and climatic patterns in [references/climatic-patterns.md](references/climatic-patterns.md) to identify strategic moves.
 
-ask the user to confirm priorities with the user before finalizing recommendations — e.g., "The map suggests these three strategic moves. Which areas are most important to your organization right now?"
+Confirm priorities with the user before finalizing recommendations — e.g., "The map suggests these three strategic moves. Which areas are most important to your organization right now?"
 
 ### Step 6: Quantitative Analysis (Optional)
 
@@ -151,7 +154,7 @@ These produce OWM text for <https://create.wardleymaps.ai>. The renderer is stri
 
 ### Process mistakes
 
-- **Skipping the direct user question triage.** Inventing the user need, scope, or positioning instead of asking produces a confident-but-wrong map. When positioning is ambiguous for a key component, ask (Step 3) rather than guess.
+- **Skipping the triage questions.** Inventing the user need, scope, or positioning instead of asking produces a confident-but-wrong map. When positioning is ambiguous for a key component, ask (Step 3) rather than guess.
 - **Listing only technology.** A value chain includes people, practices, and data — not just systems. Maps that are all boxes-of-software miss the inertia and doctrine insights that make the exercise worthwhile.
 - **Recommendations with no rationale.** Every strategic move must tie back to a position or movement on the map ("commoditize X because it sits Product-right with three vendors"), not generic advice.
 

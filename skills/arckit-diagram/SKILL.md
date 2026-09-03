@@ -44,13 +44,13 @@ Read existing artifacts from the project context to understand what to diagram:
 
 ## Step 1c: Interactive Configuration
 
-**IMPORTANT**: Ask **both** questions below in a **single message** so the user sees them together. Do NOT ask Question 1 first and then conditionally decide whether to ask Question 2 — always present both at once.
+**IMPORTANT**: Ask **both** questions below **together, in one message** so the user sees them together. Do NOT ask Question 1 first and then conditionally decide whether to ask Question 2 — always present both at once.
 
-**Gathering rules** (apply to all questions in this section):
+**Gathering rules** — the one-message interview in `.arckit/references/interview-pattern.md`:
 
-- Ask the most important question first; fill in secondary details from context or reasonable defaults.
-- **Maximum 2 rounds of questions.** After that, pick the best option from available context.
-- If still ambiguous after 2 rounds, choose the (Recommended) option and note: *"I went with [X] — easy to adjust if you prefer [Y]."*
+- Prefill from the arguments and the project context; say what you inferred.
+- Ask every remaining question in **one** call. There is no second round.
+- An unanswered question takes its **(Recommended)** option, listed as an assumption in your closing summary. With no question tool available, take every default and never block.
 
 **Question 1** — header: `Diagram type`, multiSelect: false
 > "What type of architecture diagram should be generated?"

@@ -10,7 +10,7 @@ This guide covers installing the ArcKit plugin, configuring MCP servers, and com
 
 ### Prerequisites
 
-- **Claude Code** v2.1.234 or later (or **Claude Cowork** desktop app)
+- **Claude Code** v2.1.251 or later (or **Claude Cowork** desktop app)
 - **Bash** shell (for helper scripts)
 
 ### Step 0: Make sure Claude Code is up to date
@@ -20,7 +20,7 @@ claude install latest
 claude --version
 ```
 
-`claude install` accepts `stable`, `latest`, or a specific version (e.g. `claude install 2.1.234`). If you don't have the `claude` CLI yet, follow the [official Claude Code install guide](https://docs.claude.com/en/docs/claude-code/quickstart) first.
+`claude install` accepts `stable`, `latest`, or a specific version (e.g. `claude install 2.1.251`). If you don't have the `claude` CLI yet, follow the [official Claude Code install guide](https://docs.claude.com/en/docs/claude-code/quickstart) first.
 
 ### Optional: Long-session prompt cache (Claude Code v2.1.108+)
 
@@ -241,6 +241,7 @@ Invalid MCP server config for 'datacommons-mcp': Missing environment variables: 
 2. Restart Claude Code (MCP servers load at startup)
 3. Check the plugin UI — errors should disappear once the key is valid
 4. Run `claude mcp list` or `/mcp`. As of Claude Code v2.1.218 a failed server reports its **HTTP status and error text**, so an invalid key shows as a real `401` rather than a bare "failed to connect". The same release warns about config values carrying hidden leading or trailing whitespace — a common cause of a key that looks correct but is rejected.
+5. On Amazon Bedrock, Google Vertex AI and Microsoft Foundry — and in any session with telemetry disabled — Claude Code v2.1.246+ tells the model when a configured server failed to connect. Before that the model concluded the server's tools did not exist, so a keyless session on those providers made `/arckit:gcp-research` and Data Commons lookups fail with a confusing "no such tool" instead of a connection error. If you see that symptom, update the client and re-check `/mcp`.
 
 ### API key works but commands fail
 

@@ -1,11 +1,10 @@
 ---
 name: architecture-workflow
-description: This skill should be used when the user is starting an architecture project
-  or asking what to run next. Load whenever the task sounds like 'I'm starting a new
-  project', 'guide me through', 'what command should I run', 'what comes next', 'how
-  do I begin', 'help me get started', 'which $arckit-* in what order', 'set up a new
-  project', 'new system build', or 'where do I start'. Recommends a tailored command
-  sequence based on sector, project type, current stage, and timeline.
+description: Recommends which $arckit-* commands to run, and in what order, for a
+  new or in-flight architecture project, from a short triage of sector, project type,
+  current stage and timeline. Backs $arckit-start. Not needed when the user has already
+  named the command they want, or is asking about the content of an artefact rather
+  than the sequence.
 ---
 
 # Architecture Workflow
@@ -28,7 +27,7 @@ A 30-command sequence helps nobody. The skill's job is to recommend the *right* 
 
 ## Process
 
-Follow these steps in order. Ask questions one at a time by asking the user. Prefer multiple-choice options.
+Follow these steps in order. Ask questions one at a time. Prefer multiple-choice options.
 
 ### Step 1: Detect Project State
 
@@ -59,7 +58,7 @@ Project State: No project structure found. Starting fresh.
 
 ### Step 2: Triage Questions
 
-Ask these questions one at a time. Each uses multiple-choice options.
+Ask these questions one at a time. Each offers multiple-choice options.
 
 **Question 1 — Sector:**
 

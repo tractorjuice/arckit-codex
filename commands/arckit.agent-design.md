@@ -49,7 +49,7 @@ $ARGUMENTS
 
 ### 3. Interactive Configuration
 
-Before generating the agent design, use the **AskUserQuestion** tool to gather key parameters. **Skip any question where the user has already provided a clear answer in their arguments.**
+Before generating the agent design, ask the user for key parameters. **Skip any question where the user has already provided a clear answer in their arguments.**
 
 **Gathering rules** (apply to all questions in this section):
 

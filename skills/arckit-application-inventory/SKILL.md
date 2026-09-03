@@ -61,7 +61,7 @@ Identify the target project from the hook context. If the user specifies a proje
 
 Before generating the inventory, ask the user about the scope of this assessment:
 
-**direct user question**: "What is the scope of this application inventory?"
+**A question to the user**: "What is the scope of this application inventory?"
 
 - Options: `All applications` | `Business Unit` | `Specific Project`
 - Default: `All applications`

@@ -63,7 +63,7 @@ Identify the target project from the hook context. If the user specifies a proje
 
 ### 3. Clarify Capability Depth with User
 
-**direct user question**: "What level of capability detail do you need?"
+**A question to the user**: "What level of capability detail do you need?"
 
 - Options: `Level 1` (Domains only) | `Level 2` (Domains + Sub-capabilities) | `Level 3` (Full hierarchy)
 - Default: `Level 3`

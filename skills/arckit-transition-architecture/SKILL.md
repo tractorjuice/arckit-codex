@@ -60,11 +60,11 @@ Identify the target project from the hook context. If the user specifies a proje
 
 > **Tip**: Users can customise templates with `$arckit-customize transition-architecture`
 
-### 3. direct user question: Number of Transition Architectures
+### 3. A question to the user: Number of Transition Architectures
 
-Before generating the transition architecture, use the **direct user question** tool to determine the number of transition architectures (intermediate states between baseline and target):
+Before generating the transition architecture, use a question to the user to determine the number of transition architectures (intermediate states between baseline and target):
 
-**direct user question**: "How many transition architectures (migration waves) should the plan cover?"
+**A question to the user**: "How many transition architectures (migration waves) should the plan cover?"
 
 - Options: `2 waves` | `3 waves (Recommended)` | `4 waves`
 - Default: `3 waves`

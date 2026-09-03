@@ -60,7 +60,7 @@ Identify the target project from the hook context. If the user specifies a proje
 
 Before generating the document, ask the user about the scope of this ADM engagement:
 
-**direct user question**: "What is the scope of this ADM engagement?"
+**A question to the user**: "What is the scope of this ADM engagement?"
 
 - Options: `Enterprise-wide` | `Business Unit` | `Project-specific`
 - Default: `Business Unit`

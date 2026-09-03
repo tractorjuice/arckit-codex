@@ -42,7 +42,7 @@ Outputs: `projects/<id>/ARC-<id>-RSCH-v1.0.md` plus optional CSV of suppliers.
 claude remote-control
 ```
 
-Drive the session from claude.ai/code or the mobile app, then enable `/config → Push when Claude decides` so your phone gets a notification on completion or when the agent reaches a decision point (vendor shortlist confirmation, build vs buy direction). ArcKit's minimum Claude Code floor (v2.1.234) already covers the v2.1.110 RC requirement.
+Drive the session from claude.ai/code or the mobile app, then enable `/config → Push when Claude decides` so your phone gets a notification on completion or when the agent reaches a decision point (vendor shortlist confirmation, build vs buy direction). ArcKit's minimum Claude Code floor (v2.1.251) already covers the v2.1.110 RC requirement.
 
 Caveats: Pro/Max plans only (no API keys, no Bedrock/Vertex/Foundry), push is a single on/off so chatty agents can over-notify, and the local `claude` process must keep running.
 
@@ -58,6 +58,8 @@ claude
 ```
 
 The cap exists to stop runaway search loops, so raise it deliberately rather than as a default. `WebFetch` calls are not counted against it.
+
+`WebFetch` has a session cache instead: a URL fetched in the last 15 minutes is served from memory rather than re-fetched. `CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS` (Claude Code v2.1.233+) adjusts that window in milliseconds — raise it when a long run re-reads the same policy pages, lower it when the source is changing underneath you. Before v2.1.239 expired entries stayed in memory for the whole session; that leak is fixed.
 
 ---
 

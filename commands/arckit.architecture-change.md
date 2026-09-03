@@ -69,7 +69,7 @@ Change requests are **multi-instance** documents (like ADRs). Find the next avai
 
 ### 4. Interactive Configuration
 
-Before creating the change request, use the **AskUserQuestion** tool to gather key parameters. **Skip any question where the user has already provided a clear answer in their arguments.**
+Before creating the change request, ask the user for key parameters. **Skip any question where the user has already provided a clear answer in their arguments.**
 
 **Gathering rules** (apply to all questions in this section):
 
