@@ -39,6 +39,9 @@ $ARGUMENTS
   Map* procedure for where this runs. (The Mermaid `wardley-beta` block is always
   tidied automatically by the `tidy-wardley-labels.mjs` hook on write —
   `--tidy-owm` is only about the OWM block.)
+- `--no-html` — skip the self-contained interactive HTML map. By default the
+  command renders one alongside the artefact via `owm-to-html.mjs`. See the
+  **Interactive HTML Map** step.
 
 ## Step 1: Read Available Documents
 
@@ -278,6 +281,35 @@ After generating the OWM code block, generate the Mermaid `wardley-beta` equival
 
 **Do not re-author the wardley-beta block by hand.** If the converter output is missing something the source OWM expressed, fix the OWM input and re-run — do not edit the Mermaid output directly. The Stop hook (`validate-wardley-math.mjs`) checks both blocks for consistency.
 
+### Interactive HTML Map
+
+Render the same OWM source as a self-contained interactive map. This is on by
+default; skip it only if `--no-html` was passed in `$ARGUMENTS`.
+
+```bash
+node .arckit/scripts/owm-to-html.mjs /tmp/arckit-wardley.owm \
+  projects/{project_number}-{project_name}/wardley-maps/ARC-{PROJECT_ID}-WARD-{NUM}-v{VERSION}.html \
+  --title "{Map Title}" --json
+```
+
+Run it on the **same temp file** the Mermaid conversion used, after any
+`--tidy-owm` pass, so all three renderings describe one map.
+
+The output is a single HTML file: inline SVG, dark/light themes, pan/zoom,
+click-to-trace dependencies, and a Download SVG button. It makes **no external
+requests**, so it is safe for OFFICIAL-SENSITIVE work and opens in an
+air-gapped review. It also embeds the OWM source so the map round-trips.
+
+The `--json` receipt reports `components`, `links`, `annotations` and
+`warnings`. **Act on warnings** — `Link references unknown component "X"` means
+the OWM block has a dependency pointing at a component that was never
+declared, usually a typo or a renamed component. Fix the OWM source and re-run
+both converters; never ship a map with unresolved warnings.
+
+This HTML is a *rendering*, not the artefact. The OWM code block inside the
+WARD markdown stays canonical, and pasting it into
+<https://create.wardleymaps.ai> remains available for anyone who prefers it.
+
 ### Strategic Analysis
 
 For each component, determine:
@@ -480,6 +512,27 @@ The Wardley Map document must include:
 3. **Component Inventory**:
    - All components with visibility, evolution, stage classification
    - Strategic notes for each component
+   - **Source** for each component — this column is a rule, not decoration:
+     - The document ID of an artefact in this repository, exactly as it is on disk.
+       Value chains and research artefacts are multi-instance, so their IDs carry a
+       sequence number: `ARC-nnn-WVCH-001-v1.0`, `ARC-nnn-RSCH-001-v1.0`; single-instance
+       artefacts do not: `ARC-nnn-REQ-v1.0`, `ARC-000-PRIN-v1.0`. Copy the ID from the
+       project context rather than composing it. A citation ID declared in this map's
+       own Citations table (`[WVCH-C1]`), a doc-type code the project holds (`WVCH`),
+       an external Doc ID from the Document Register, or the literal `Assumption` for a
+       component that is your analytical judgement with no source document behind it,
+       are the other accepted forms.
+     - A Source naming a document that is not in the repository is a fabricated
+       provenance. Where the plugin's map check runs before a write (a pre-write hook,
+       not available on every runtime) it rejects the file and tells you why; where it
+       does not, this is a rule you hold yourself. Either way, do not invent a document
+       ID to fill the cell — write `Assumption` and say so in the Assumptions section
+       instead.
+     - **Where the Source is a value chain, copy its visibility verbatim.** That WVCH
+       artefact owns visibility; this map owns evolution. A component sourced to a
+       value chain but absent from it, or carrying a different visibility, fails the
+       same check. If the value chain is wrong, fix it with `/arckit:wardley.value-chain`
+       and re-run — do not silently diverge here.
 
 4. **Evolution Analysis**:
    - Components by evolution stage (Genesis, Custom, Product, Commodity)
@@ -796,9 +849,16 @@ annotation 1,[0.48, 0.45] "Build custom - competitive advantage"
 
 ### Visualization
 
-Always remind users:
+Point users at the interactive map ArcKit rendered alongside the artefact:
 
-**"View this map by pasting the code into https://create.wardleymaps.ai"**
+**"Open `ARC-{PROJECT_ID}-WARD-{NUM}-v{VERSION}.html` — it opens offline, with
+no external requests."**
+
+The OWM code block remains canonical and portable, so also mention:
+
+**"Or paste the OWM code into https://create.wardleymaps.ai"** — noting that
+this sends the map to a third-party site, which may not be appropriate for
+OFFICIAL-SENSITIVE work.
 
 The visualization helps:
 
@@ -835,8 +895,10 @@ After creating the map, provide a summary to the user:
 ✅ Wardley Map Created: {map_name}
 
 📁 Location: projects/{project}/wardley-maps/ARC-{PROJECT_ID}-WARD-{NUM}-v{VERSION}.md
+📁 Interactive: projects/{project}/wardley-maps/ARC-{PROJECT_ID}-WARD-{NUM}-v{VERSION}.html
 
-🗺️ View Map: Paste the Wardley code into https://create.wardleymaps.ai
+🗺️ View Map: open the .html file — offline, no external requests
+             (or paste the OWM code into https://create.wardleymaps.ai)
 
 📊 Key Insights:
 - {insight_1}
