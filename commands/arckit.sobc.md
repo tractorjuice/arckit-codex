@@ -214,6 +214,7 @@ This command creates a **Strategic Outline Business Case (SOBC)** following HM T
    ```
 
 9. **Include decision framework**:
+   - **Executive Summary opens with the verdict**: the Go/No-Go recommendation and the recommended option come first, then the rationale, then context, costs and risks, as `.arckit/references/executive-summary-pattern.md` sets out. Every figure in the summary already appears in the five cases.
    - **Recommendation**: Which option to proceed with?
    - **Rationale**: Why this option? (reference stakeholder goals met)
    - **Go/No-Go Criteria**: Under what conditions do we proceed?
