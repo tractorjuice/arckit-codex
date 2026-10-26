@@ -57,12 +57,20 @@ Identify the target project from the hook context. If the user specifies a proje
 
 ### 3. Clarify Scope with User
 
-Before generating the document, ask the user about the scope of this ADM engagement:
+Unless the arguments or the project context already settle it, ask the user about the scope of this ADM engagement.
 
-**A question to the user**: "What is the scope of this ADM engagement?"
+**Gathering rules** — the one-message interview in `.arckit/references/interview-pattern.md`:
 
-- Options: `Enterprise-wide` | `Business Unit` | `Project-specific`
-- Default: `Business Unit`
+- Prefill from the arguments and the project context; say what you inferred.
+- Ask every remaining question in **one** call. There is no second round.
+- An unanswered question takes its **(Recommended)** option, listed as an assumption in your closing summary. With no question tool available, take every default and never block.
+
+**Question 1** — header: `ADM scope`, multiSelect: false
+> "What is the scope of this ADM engagement?"
+
+- **Business Unit (Recommended)**: One business unit or division — the usual scope for an ADM cycle
+- **Enterprise-wide**: The whole organisation — every business unit, shared capability and platform
+- **Project-specific**: A single programme or project
 
 ### 4. Generate Architecture Vision Document
 
@@ -70,7 +78,7 @@ Create the Architecture Vision document following the template structure. Popula
 
 #### Document Control
 
-- Generate Document ID: `ARC-{P}-ADMP-v1.0` (for filename: `ARC-{P}-ADMP-v1.0.md`)
+- Generate Document ID: `ARC-{P}-ADMP-v{VERSION}` (for filename: `ARC-{P}-ADMP-v{VERSION}.md`) Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 - Set owner, dates, status, classification
 - Review cycle: Monthly during active ADM cycle
 
@@ -175,7 +183,7 @@ Before writing the file, read `.arckit/references/quality-checklist.md` and veri
 Create the file at:
 
 ```text
-projects/{P}/ARC-{P}-ADMP-v1.0.md
+projects/{P}/ARC-{P}-ADMP-v{VERSION}.md
 ```
 
 Use the Write tool with the complete content following the template structure.
@@ -187,8 +195,8 @@ After writing the file, show a concise summary (NOT the full document):
 ```markdown
 ## Architecture Vision Created
 
-**Document**: `projects/{P}/ARC-{P}-ADMP-v1.0.md`
-**Document ID**: ARC-{P}-ADMP-v1.0
+**Document**: `projects/{P}/ARC-{P}-ADMP-v{VERSION}.md`
+**Document ID**: ARC-{P}-ADMP-v{VERSION}
 
 ### Vision Scope
 - **Scope**: [Enterprise-wide / Business Unit / Project-specific]
@@ -218,7 +226,7 @@ After writing the file, show a concise summary (NOT the full document):
 ### Next Steps
 1. Review Architecture Vision with Architecture Board / Sponsor
 2. Validate scope boundaries with key stakeholders
-3. Begin Phase A (Architecture Vision refinement): `/arckit:business-capability-map`
+3. Begin Phase B (Business Architecture): `/arckit:business-capability-map`
 4. Perform gap analysis: `/arckit:gap-analysis`
 
 ### Traceability
@@ -226,7 +234,7 @@ After writing the file, show a concise summary (NOT the full document):
 - Addresses [N] stakeholder drivers
 - Defines [N] success criteria
 
-**File location**: `projects/{P}/ARC-{P}-ADMP-v1.0.md`
+**File location**: `projects/{P}/ARC-{P}-ADMP-v{VERSION}.md`
 ```
 
 ## Important Notes
@@ -244,10 +252,10 @@ After writing the file, show a concise summary (NOT the full document):
 6. **Version Management**: If an Architecture Vision already exists (`ARC-*-ADMP-v*.md`), create a new version (v2.0) rather than overwriting. Architecture visions should be versioned to track evolution across ADM cycles.
 
 7. **Integration with Other Commands**:
-   - ADMP feeds into: `/arckit:business-capability-map` (Phase A — Business Architecture), `/arckit:gap-analysis` (Phase E — Opportunities & Solutions)
+   - ADMP feeds into: `/arckit:business-capability-map` (Phase B — Business Architecture), `/arckit:gap-analysis` (Phase E — Opportunities & Solutions)
    - ADMP is informed by: `/arckit:principles`, `/arckit:stakeholders`, `/arckit:strategy`
 
-8. **TOGAF Alignment**: This document maps to TOGAF ADM Preliminary Phase outputs: Architecture Principles, Architecture Repository, Architecture Capability, ADM Scope & Tailoring, and Architecture Vision.
+8. **TOGAF Alignment**: This document maps to TOGAF ADM Preliminary Phase outputs (Architecture Principles, Architecture Repository, Architecture Capability, ADM Scope & Tailoring) and to the Phase A (Architecture Vision) output, the Architecture Vision.
 
 9. **Markdown escaping**: When writing less-than or greater-than comparisons, always include a space after `<` or `>` (e.g., `< 3 seconds`, `> 99.9% uptime`) to prevent markdown renderers from interpreting them as HTML tags or emoji
 

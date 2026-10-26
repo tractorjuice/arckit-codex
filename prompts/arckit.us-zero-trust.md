@@ -41,7 +41,7 @@ NIST SP 800-207 is the foundational Zero Trust Architecture specification (logic
 1. Read prerequisites:
    - `projects/000-global/ARC-000-PRIN-*.md` (architecture principles, if present)
    - The project's NIST 800-53 control-tailoring artefact (if present) — for AC, IA, SC, SI control evidence
-   - The project's HLD / DLD and architecture diagrams — for network architecture, segmentation posture, identity flows
+   - Any vendor HLD / DLD documents under `projects/<id>/vendors/` and the project's architecture diagrams (DIAG, in `projects/<id>/diagrams/`) — for network architecture, segmentation posture, identity flows
    - The project's FedRAMP SSP (if present) — for Types-of-Users, interconnections, network architecture sections
    - `.arckit/templates/_partials/RENDERING.md`
 
@@ -50,9 +50,9 @@ NIST SP 800-207 is the foundational Zero Trust Architecture specification (logic
    - **Then**, `.arckit/templates-custom/us-zero-trust-template.md`
    - **Fallback**, `.arckit/templates/us-zero-trust-template.md`
 
-3. Use `scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist; otherwise locate it.
+3. Use `bash .arckit/scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist; otherwise locate it.
 
-4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> ZTA --filename` for the artefact filename. The type code for this command is `ZTA`.
+4. Use `node .arckit/scripts/generate-document-id.mjs <PROJECT_ID> ZTA {VERSION} --filename` for the artefact filename. The type code for this command is `ZTA`. Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 
 5. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md` before writing the artefact. `RENDERING.md` hard-routes the US regime to `_partials/document-control-us.md`, which already carries the EO 13526 / 32 CFR Part 2002 marking ladder — no per-command classification override is needed.
 

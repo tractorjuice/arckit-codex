@@ -103,7 +103,7 @@ Show scope determination and classification before proceeding.
    - Existing file → minor increment if refreshed, major if classification changed
 
 2. **Auto-populate Document Control**:
-   - Document ID: `ARC-{PROJECT_ID}-CRA-v{VERSION}`
+   - Document ID: `ARC-{PROJECT_ID}-CRA-v{VERSION}` Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
    - Status: DRAFT
    - Created Date: {current_date}
    - Next Review Date: {current_date + 12 months}

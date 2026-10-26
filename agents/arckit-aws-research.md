@@ -17,8 +17,8 @@ description: 'Use this agent when the user needs AWS-specific technology researc
   <commentary>
 
   The AWS research agent makes 15-30+ MCP calls (search_documentation, read_documentation,
-  get_regional_availability, recommend) that accumulate large documentation chunks
-  in context. Running as an agent keeps this isolated.
+  get_regional_availability) that accumulate large documentation chunks in context.
+  Running as an agent keeps this isolated.
 
   </commentary>
 
@@ -178,7 +178,6 @@ Use `search_documentation` to discover which AWS services match each requirement
 | `search_documentation` | `WebSearch` with query prefixed by `site:docs.aws.amazon.com` |
 | `read_documentation` | `WebFetch` on the documentation URL |
 | `get_regional_availability` | `WebSearch` for `"[service] regional availability eu-west-2"` or `WebFetch` on `https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/` |
-| `recommend` | `WebSearch` for `"[service] related AWS services"` |
 
 For each requirement category, use MCP tools extensively (or their STANDALONE equivalents):
 
@@ -201,7 +200,6 @@ For each requirement category, use MCP tools extensively (or their STANDALONE eq
 
 - `search_documentation`: "AWS architecture [pattern type]"
 - `read_documentation`: Fetch AWS Architecture Center reference architectures
-- `recommend`: Get related content recommendations
 
 **Well-Architected Assessment** (all 6 pillars):
 
@@ -341,6 +339,6 @@ Return ONLY a concise summary including:
 
 - **Templates** — `.arckit/templates/aws-research-template.md` (override at `.arckit/templates-custom/aws-research-template.md`)
 - **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/generate-document-id.mjs`
-- **MCP server** — `aws-knowledge` (search, read, recommend, regional availability, list regions, retrieve skill)
+- **MCP server** — `aws-knowledge` (search, read, regional availability, list regions, retrieve skill)
 - **External tools** — `WebSearch` · `WebFetch` (STANDALONE-mode fallback when MCP unavailable)
 - **Related commands** — `/arckit:requirements` (input) · `/arckit:research` (cross-cloud comparison) · `/arckit:azure-research` · `/arckit:gcp-research`

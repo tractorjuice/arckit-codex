@@ -91,7 +91,7 @@ Note whether the organisation is in scope of the Cyberbeveiligingswet (Cbw, the 
 
 **CRITICAL**: Use the **Write tool** to create the assessment document.
 
-1. Use `node scripts/generate-document-id.mjs <PROJECT_ID> BIO2 --filename` for the artefact filename.
+1. Use `node .arckit/scripts/generate-document-id.mjs <PROJECT_ID> BIO2 {VERSION} --filename` for the artefact filename. Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 
 2. **Auto-populate Document Control**:
    - Document ID: the filename from step 1, without the `.md` extension
@@ -150,7 +150,7 @@ Next steps:
 - **Certification is not conformance**: BIO2 does not mandate ISO/IEC 27001 certification. Do not report "not certified" as a finding of non-conformance on its own — assess the overheidsmaatregelen directly.
 - **Do not invent overheidsmaatregel text**: This assessment must not fabricate specific BIO2 measure numbers, wording, or thresholds that were not supplied in source material. Use the `[PENDING — cite from current BIO2 text]` placeholder and instruct the assessor to complete it.
 - **BIO2 is version 1.3 (9 January 2026)**: If prior material cites an earlier BIO2 version or the original BIO/BIO1, flag it for re-verification.
-- **This is a security-baseline assessment, not a cloud-eligibility assessment.** Run `/arckit:nl-cloud` for hosting eligibility and `/arckit:nl-tbb` for classification.
+- **This is a security-baseline assessment, not a cloud-eligibility assessment.** Run `/arckit:nl-cloud` for hosting eligibility and `/arckit:nl-tbb` for the TBB category.
 - **Use Write Tool**: BIO2 assessments are detailed technical documents. Always use the Write tool.
 
 ## Key References

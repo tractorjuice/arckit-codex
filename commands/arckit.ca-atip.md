@@ -19,14 +19,14 @@ You are an enterprise architect generating a Canada ATIP (Access to Information 
 
 1. Read prerequisites:
    - `projects/000-global/ARC-000-PRIN-*.md` (federal principles, if present)
-   - The project's REQ, DR, and DMOD artefacts (if present)
+   - The project's REQ (including its `DR-*` data requirements) and DATA (data model) artefacts (if present)
    - The project's PIA artefact if present (`projects/<project-id>/ARC-<project-id>-PIA-v*.md`) — its personal-information inventory is the authoritative source for the Privacy Act §4–§8 register here
    - `.arckit/templates/_partials/RENDERING.md`
 2. Read the template:
    - **First**, check `.arckit/templates-custom/ca-atip-template.md` (user override)
    - **Then**, `.arckit/templates-custom/ca-atip-template.md`
    - **Fallback**, `.arckit/templates/ca-atip-template.md`
-3. Use `node scripts/generate-document-id.mjs <PROJECT_ID> ATIP --filename` for the artefact filename.
+3. Use `node .arckit/scripts/generate-document-id.mjs <PROJECT_ID> ATIP {VERSION} --filename` for the artefact filename. Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 4. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md` before writing the artefact. `RENDERING.md` hard-routes the CA regime to `_partials/document-control-ca.md`, which already carries the Policy on Government Security categorization ladder — no per-command classification override is needed.
 5. Generate the following sections (the template provides skeletons for each):
    - **Information Holdings Inventory** — categorise every dataset / holding as Public, Protected, or Classified. Map each holding to its Personal Information Bank (PIB) where applicable, and identify the owner and lifecycle stage. The inventory MUST account for every data element that surfaces in the data model, not just personal information.

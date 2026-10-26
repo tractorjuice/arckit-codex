@@ -145,5 +145,5 @@ description = "Use this agent when the user needs technology and service market 
 config_file = "agents/arckit-research.toml"
 
 [agents.arckit-tenders]
-description = "Use this agent when the user needs UK procurement market intelligence — award-value benchmarks, top suppliers, incumbency and concentration — drawn from the UK Tenders MCP over roughly 677,000 UK contracting processes. Examples:"
+description = "Use this agent when the user needs UK procurement market intelligence — award-value benchmarks, top suppliers, incumbency and concentration — drawn from the UK Tenders MCP over more than 700,000 UK contracting processes (October 2026). Examples:"
 config_file = "agents/arckit-tenders.toml"

@@ -21,12 +21,10 @@ $ARGUMENTS
 
 **RECOMMENDED** (read if available, note if missing):
 
-- **PRIN** (Architecture Principles) — Extract: Guiding principles, compliance requirements, technology standards, design constraints
+- **PRIN** (Architecture Principles, in 000-global) — Extract: Guiding principles, decision framework, compliance requirements, technology standards, design constraints, governance standards
   - If missing: note in assumptions that principle alignment could not be validated
 - **STRAT** (Architecture Strategy) — Extract: Strategic vision, target state description, strategic themes, investment priorities
   - If missing: note in assumptions that strategic alignment could not be validated
-- **PRIN** (Architecture Principles, in 000-global) — Extract: Enterprise-level principles, decision framework, governance standards
-  - If missing: note in assumptions that enterprise-level principle alignment could not be validated
 
 ### Prerequisites 1b: Read external documents and policies
 
@@ -61,16 +59,18 @@ Identify the target project from the hook context. If the user specifies a proje
 
 ### 3. A question to the user: Gap Severity Weighting
 
-Before generating the analysis, ask the user how to weight gap severity scoring:
+Unless the arguments already settle it, ask the user how to weight gap severity scoring.
 
-**A question to the user**: "How should gap severity be weighted?"
+**Gathering rules** — the one-message interview in `.arckit/references/interview-pattern.md`:
 
-- Options: `Balanced` | `Strategic-risk` | `Operational`
-- Default: `Balanced`
+- Prefill from the arguments and the project context; say what you inferred.
+- Ask every remaining question in **one** call. There is no second round.
+- An unanswered question takes its **(Recommended)** option, listed as an assumption in your closing summary. With no question tool available, take every default and never block.
 
-**Weighting profiles**:
+**Question 1** — header: `Weighting`, multiSelect: false
+> "How should gap severity be weighted?"
 
-- **Balanced**: Equal weight to strategic impact and operational cost of the gap
+- **Balanced (Recommended)**: Equal weight to strategic impact and operational cost of the gap
 - **Strategic-risk**: Heavier weighting on strategic impact — gaps that threaten business outcomes are prioritised regardless of effort
 - **Operational**: Heavier weighting on effort/cost — gaps that can be closed quickly with high business value are prioritised
 
@@ -94,7 +94,7 @@ Create a comprehensive Gap Analysis document following the template structure.
 
 #### Document Control
 
-- Generate Document ID: `ARC-{P}-GAPA-v1.0` (for filename: `ARC-{P}-GAPA-v1.0.md`)
+- Generate Document ID: `ARC-{P}-GAPA-v{VERSION}` (for filename: `ARC-{P}-GAPA-v{VERSION}.md`) Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 - Set owner, dates, status, classification
 - Review cycle: Monthly during active ADM cycle
 
@@ -199,7 +199,7 @@ Before writing the file, read `.arckit/references/quality-checklist.md` and veri
 Create the file at:
 
 ```text
-projects/{P}/ARC-{P}-GAPA-v1.0.md
+projects/{P}/ARC-{P}-GAPA-v{VERSION}.md
 ```
 
 Use the Write tool with the complete content following the template structure.
@@ -211,8 +211,8 @@ After writing the file, show a concise summary (NOT the full document):
 ```markdown
 ## Gap Analysis Created
 
-**Document**: `projects/{P}/ARC-{P}-GAPA-v1.0.md`
-**Document ID**: ARC-{P}-GAPA-v1.0
+**Document**: `projects/{P}/ARC-{P}-GAPA-v{VERSION}.md`
+**Document ID**: ARC-{P}-GAPA-v{VERSION}
 
 ### Analysis Overview
 - **Severity Weighting**: [Balanced / Strategic-risk / Operational]
@@ -240,9 +240,8 @@ After writing the file, show a concise summary (NOT the full document):
 
 ### Synthesised From
 - ✅ Business Capability Model: ARC-{P}-BPCM-v[N].md
-- [✅/⚠️] Architecture Principles: ARC-{P}-APP-v[N].md
 - [✅/⚠️] Architecture Strategy: ARC-{P}-STRAT-v[N].md
-- [✅/⚠️] Principles: ARC-000-PRIN-v[N].md
+- [✅/⚠️] Architecture Principles: ARC-000-PRIN-v[N].md
 
 ### Next Steps
 1. Review gap analysis with Architecture Board: `/arckit:architecture-board`
@@ -256,7 +255,7 @@ After writing the file, show a concise summary (NOT the full document):
 - [N] workstreams linked to [N] strategic themes
 - [N] gaps cross-referenced to risk register
 
-**File location**: `projects/{P}/ARC-{P}-GAPA-v1.0.md`
+**File location**: `projects/{P}/ARC-{P}-GAPA-v{VERSION}.md`
 ```
 
 ## Important Notes
@@ -265,7 +264,7 @@ After writing the file, show a concise summary (NOT the full document):
 
 2. **Use Write Tool**: The gap analysis document is typically 250-400 lines. ALWAYS use the Write tool to create it. Never output the full content in chat.
 
-3. **Mandatory Prerequisites**: BPCM is the only mandatory prerequisite. Without a capability baseline, gap analysis cannot be performed. STRAT and APP are recommended for target state and principle alignment.
+3. **Mandatory Prerequisites**: BPCM is the only mandatory prerequisite. Without a capability baseline, gap analysis cannot be performed. STRAT and PRIN are recommended for target state and principle alignment.
 
 4. **Severity Scoring**: The severity matrix (Size × Urgency) is the core analytical engine. The user's chosen weighting profile (Balanced/Strategic-risk/Operational) determines which gaps rise to the top.
 

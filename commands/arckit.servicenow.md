@@ -7,7 +7,7 @@ description: "Create comprehensive ServiceNow service design with CMDB, SLAs, in
 You are an expert ServiceNow architect and ITSM consultant with deep knowledge of:
 
 - ServiceNow platform (ITSM, CMDB, Change Management, Incident Management)
-- ITIL v4 service management framework
+- ITIL 4 service management framework
 - UK Government GDS Service Standard and Technology Code of Practice
 - Enterprise architecture and service design
 - Operational best practices for complex systems
@@ -68,7 +68,7 @@ Read existing artifacts from the project context:
 
 ### Phase 1: Context Gathering
 
-Read all documents listed in the "Read Available Documents" section above before proceeding.
+Read all documents listed in the "Input Context Required" section above before proceeding.
 
 **IMPORTANT**: Parse the user's request for:
 
@@ -217,7 +217,7 @@ Generate:
 **11. UK Government Specific Considerations** (if TCoP assessment exists):
 
 - GDS Service Standard compliance points
-- ITIL v4 practices implemented
+- ITIL 4 practices implemented
 - Digital Marketplace (G-Cloud) requirements if applicable
 
 ### Phase 4: Validation
@@ -247,14 +247,14 @@ After generation, validate the design:
 
 - [ ] WCAG 2.2 AA monitoring mentioned (if public-facing)
 - [ ] UK GDPR considerations in CMDB attributes (PII processing)
-- [ ] ITIL v4 practices correctly implemented
+- [ ] ITIL 4 practices correctly implemented
 - [ ] GDS Service Standard points addressed
 
 ### Phase 5: Output and Recommendations
 
 After generating the ServiceNow design:
 
-2. **Save the file** to `projects/{project-name}/ARC-{PROJECT_ID}-SNOW-v1.0.md`
+2. **Save the file** to `projects/{project-name}/ARC-{PROJECT_ID}-SNOW-v{VERSION}.md`. Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier design, never over it
 
 3. **Provide a summary** to the user:
    - Number of CMDB CIs created
@@ -280,7 +280,7 @@ After generating the ServiceNow design:
 
 ### File Location
 
-Save output to: `projects/{project-name}/ARC-{PROJECT_ID}-SNOW-v1.0.md`
+Save output to: `projects/{project-name}/ARC-{PROJECT_ID}-SNOW-v{VERSION}.md`
 
 ### Content Structure
 
@@ -381,9 +381,10 @@ Do NOT:
 - For HIGH-RISK AI, flag additional oversight in change management
 - For PII processing, include UK GDPR compliance monitoring
 
-### 5. ITIL v4 Alignment
+### 5. ITIL 4 Alignment
 
-- Use ITIL v4 terminology (Service Value Chain, not Service Lifecycle)
+- Use ITIL 4 terminology (Service Value Chain, not Service Lifecycle)
+- PeopleCert now publishes ITIL (Version 5) alongside ITIL 4 (<https://www.peoplecert.org/browse-certifications/it-governance-and-service-management/ITIL-1>). Keep the design in ITIL 4 terms unless the user or the organisation's service management policy names ITIL (Version 5); if it does, use that version's terms and state the version in Section 1 (Service Overview). Do not recommend moving from one version to the other unless the user asks
 - Include continual improvement (post-incident reviews, quarterly runbook reviews)
 - Focus on value to business, not just technical process
 
@@ -400,7 +401,7 @@ Before completing the document, populate document information fields:
 ### Auto-populated fields
 
 - `[PROJECT_ID]` → Extract from project path (e.g., "001")
-- `[VERSION]` → Start with "1.0" for new documents
+- `[VERSION]` → from `.arckit/references/version-detection.md`: "1.0" only when no earlier `ARC-{PROJECT_ID}-SNOW-v*.md` exists
 - `[DATE]` / `[YYYY-MM-DD]` → Current date in YYYY-MM-DD format
 - `[DOCUMENT_TYPE_NAME]` → Document purpose
 - `ARC-[PROJECT_ID]-SNOW-v[VERSION]` → Generated document ID
@@ -504,7 +505,7 @@ Before completing the document, populate document information fields:
 ### Section 11: UK Government Specific Considerations
 
 **Purpose**: Address UK Gov compliance and best practices.
-**Key Content**: GDS Service Standard, ITIL v4, G-Cloud requirements.
+**Key Content**: GDS Service Standard, ITIL 4, G-Cloud requirements.
 **CRITICAL**: Only include if TCoP assessment exists.
 
 ## Validation Checklist
@@ -542,7 +543,7 @@ Before presenting the ServiceNow design to the user, verify:
 ### UK Government (if applicable)
 
 - [ ] GDS Service Standard points addressed
-- [ ] ITIL v4 practices correctly implemented
+- [ ] ITIL 4 practices correctly implemented
 - [ ] UK GDPR compliance mentioned (if PII processing)
 - [ ] WCAG 2.2 AA monitoring mentioned (if public-facing)
 - [ ] ATRS transparency mentioned (if algorithmic decision-making)
@@ -578,7 +579,7 @@ Before writing the file, read `.arckit/references/quality-checklist.md` and veri
 ServiceNow designs are typically very large documents (500+ lines) due to the comprehensive nature of CMDB structures, SLAs, incident management, and runbooks.
 
 To avoid exceeding the 32K token output limit:
-2. **ALWAYS use the Write tool** to create the file at `projects/{project-name}/ARC-{PROJECT_ID}-SNOW-v1.0.md`
+2. **ALWAYS use the Write tool** to create the file at `projects/{project-name}/ARC-{PROJECT_ID}-SNOW-v{VERSION}.md`
 3. **Do NOT output the full document** in your response to the user
 4. **Only show a summary** (use the template below)
 
@@ -608,7 +609,7 @@ After generating the ServiceNow design, provide this summary:
 - Assignment groups: [list key groups]
 
 **Key Files Created**:
-- projects/{project-name}/ARC-{PROJECT_ID}-SNOW-v1.0.md
+- projects/{project-name}/ARC-{PROJECT_ID}-SNOW-v{VERSION}.md
 
 **Next Steps**:
 1. Review SLA targets with service owner

@@ -1,8 +1,8 @@
 ---
-description: "Map business capabilities, value streams, and maturity for Phase A Business Architecture"
+description: "Map business capabilities, value streams, and maturity for Phase B Business Architecture"
 ---
 
-You are helping an enterprise architect create a **Business Capability Map** for TOGAF ADM Phase A (Business Architecture). This document maps the enterprise's capabilities, value streams, and maturity levels to establish the business architecture baseline.
+You are helping an enterprise architect create a **Business Capability Map** for TOGAF ADM Phase B (Business Architecture). This document maps the enterprise's capabilities, value streams, and maturity levels to establish the business architecture baseline, building on the capabilities and value streams first identified at a high level in the Phase A Architecture Vision (ADMP).
 
 ## User Input
 
@@ -62,10 +62,20 @@ Identify the target project from the hook context. If the user specifies a proje
 
 ### 3. Clarify Capability Depth with User
 
-**A question to the user**: "What level of capability detail do you need?"
+Unless the arguments already settle it, ask the user how deep the hierarchy should go.
 
-- Options: `Level 1` (Domains only) | `Level 2` (Domains + Sub-capabilities) | `Level 3` (Full hierarchy)
-- Default: `Level 3`
+**Gathering rules** — the one-message interview in `.arckit/references/interview-pattern.md`:
+
+- Prefill from the arguments and the project context; say what you inferred.
+- Ask every remaining question in **one** call. There is no second round.
+- An unanswered question takes its **(Recommended)** option, listed as an assumption in your closing summary. With no question tool available, take every default and never block.
+
+**Question 1** — header: `Depth`, multiSelect: false
+> "What level of capability detail do you need?"
+
+- **Level 3 (Recommended)**: Full hierarchy — domains, sub-capabilities and detailed capabilities
+- **Level 2**: Domains and sub-capabilities
+- **Level 1**: Domains only
 
 ### 4. Generate Business Capability Map
 
@@ -73,7 +83,7 @@ Create a comprehensive Business Capability Map following the template structure.
 
 #### Document Control
 
-- Generate Document ID: `ARC-{P}-BPCM-v1.0` (for filename: `ARC-{P}-BPCM-v1.0.md`)
+- Generate Document ID: `ARC-{P}-BPCM-v{VERSION}` (for filename: `ARC-{P}-BPCM-v{VERSION}.md`) Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 - Set owner, dates, classification, status
 - Review cycle: Monthly during active ADM cycle
 
@@ -188,7 +198,7 @@ Before writing the file, read `.arckit/references/quality-checklist.md` and veri
 Create the file at:
 
 ```text
-projects/{P}/ARC-{P}-BPCM-v1.0.md
+projects/{P}/ARC-{P}-BPCM-v{VERSION}.md
 ```
 
 Use the Write tool with the complete content following the template structure.
@@ -200,8 +210,8 @@ After writing the file, show a concise summary (NOT the full document):
 ```markdown
 ## Business Capability Map Created
 
-**Document**: `projects/{P}/ARC-{P}-BPCM-v1.0.md`
-**Document ID**: ARC-{P}-BPCM-v1.0
+**Document**: `projects/{P}/ARC-{P}-BPCM-v{VERSION}.md`
+**Document ID**: ARC-{P}-BPCM-v{VERSION}
 
 ### Capability Overview
 - **Capability Depth**: [Level 1 / Level 2 / Level 3]
@@ -254,7 +264,7 @@ After writing the file, show a concise summary (NOT the full document):
 - Aligned to [N] architecture principles
 - Supports [N] stakeholder value expectations
 
-**File location**: `projects/{P}/ARC-{P}-BPCM-v1.0.md`
+**File location**: `projects/{P}/ARC-{P}-BPCM-v{VERSION}.md`
 ```
 
 ## Important Notes
@@ -275,7 +285,7 @@ After writing the file, show a concise summary (NOT the full document):
    - BPCM feeds into: `/arckit:gap-analysis` (Phase E — gap identification), `/arckit:application-inventory` (Phase C — application architecture)
    - BPCM is informed by: `/arckit:adm-preliminary`, `/arckit:requirements`, `/arckit:stakeholders`, `/arckit:principles`
 
-8. **TOGAF Alignment**: This document maps to TOGAF ADM Phase A outputs: Business Architecture description, business capability definition, and value stream analysis.
+8. **TOGAF Alignment**: This document maps to TOGAF ADM Phase B (Business Architecture) outputs: the Business Capability map, Value Stream map and Business Capabilities catalog in the baseline and target Business Architecture. Phase A (Architecture Vision), which the ADMP covers, identifies capabilities and value streams only at a high level; this map details them.
 
 9. **Markdown escaping**: When writing less-than or greater-than comparisons, always include a space after `<` or `>` (e.g., `< 3 seconds`, `> 99.9% uptime`) to prevent markdown renderers from interpreting them as HTML tags or emoji
 

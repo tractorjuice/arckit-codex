@@ -54,9 +54,9 @@ Appendix I of M-24-10 lists **presumed-impacting** use cases (those agencies mus
    - **Then**, `.arckit/templates-custom/us-ai-impact-template.md`
    - **Fallback**, `.arckit/templates/us-ai-impact-template.md`
 
-3. Use `scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist; otherwise locate it.
+3. Use `bash .arckit/scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist; otherwise locate it.
 
-4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> AIIA --filename` for the artefact filename. The type code for this command is `AIIA`.
+4. Use `node .arckit/scripts/generate-document-id.mjs <PROJECT_ID> AIIA {VERSION} --filename` for the artefact filename. The type code for this command is `AIIA`. Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 
 5. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md` before writing the artefact. `RENDERING.md` hard-routes the US regime to `_partials/document-control-us.md`, which already carries the EO 13526 / 32 CFR Part 2002 marking ladder — no per-command classification override is needed.
 
@@ -67,7 +67,7 @@ Appendix I of M-24-10 lists **presumed-impacting** use cases (those agencies mus
    - **Rights-Impacting Determination** — apply the M-24-10 definition: does the AI output serve as a principal basis for a decision affecting civil rights, civil liberties, equal opportunity, access to benefits/services, or privacy? Record verdict (Yes / No / Rebuttal-of-presumption) with named decision and affected population.
    - **Safety-Impacting Determination** — does the AI output meaningfully control or influence decisions affecting human safety, climate / environment, critical infrastructure, or strategic assets? Record verdict and named decision-flow.
    - **Minimum Risk-Management Practices Checklist** — per M-24-10 §5, document satisfaction of: pre-deployment testing for performance and fairness; impact assessment; ongoing monitoring; risk-based human override and remedy options; consultation with affected communities; AI Use Case Inventory submission; CAIO sign-off; cost-benefit analysis for high-cost systems. For each: status (Met / Partial / Not Met / Not Applicable), evidence reference, action.
-   - **Waiver Posture** — if any minimum practice cannot be met, document the M-24-10 waiver criteria and CAIO determination record, including period of waiver and compensating measures.
+   - **Waiver Posture** — if any minimum practice cannot be met, document the waiver test (M-24-10 §5(c)(iii); M-25-21 §4(a)(ii), which rescinded and replaced M-24-10, keeps it) and the CAIO's written determination record: ground, risk-assessment reference, compensating measures, OMB report date (within 30 days), annual certification date (the waiver period) and public summary.
    - **M-25-21 Acquisition Controls** — for AI procured from a vendor, document the contract clauses and evaluation criteria implemented: AI RMF alignment requirement, model provenance documentation, training-data disclosure, bias-testing access, fairness reporting, incident-reporting obligations, exit / portability.
    - **Public Disclosure Obligations** — confirm the entry has been (or will be) submitted to the agency AI Use Case Inventory (federal.ai.gov); note any redactions required for sensitive law-enforcement or national-security carve-outs.
    - **CAIO Sign-Off Block** — agency Chief AI Officer review and approval section: reviewer, date, scope of approval, conditions, next review.

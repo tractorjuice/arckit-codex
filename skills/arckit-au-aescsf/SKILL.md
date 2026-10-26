@@ -45,9 +45,9 @@ The Australian Energy Sector Cyber Security Framework is an energy-sector cyber 
    - Then: `.arckit/templates-custom/au-aescsf-template.md`
    - Fallback: `.arckit/templates/au-aescsf-template.md`
 
-3. Use `scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist.
+3. Use `bash .arckit/scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist.
 
-4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> AUAESCSF --filename` for the artefact filename.
+4. Use `node .arckit/scripts/generate-document-id.mjs <PROJECT_ID> AUAESCSF {VERSION} --filename` for the artefact filename. Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 
 5. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`. Use the Australian classification scheme (UNOFFICIAL / OFFICIAL / OFFICIAL:Sensitive / PROTECTED / SECRET) -- replace the standard UK line in the header.
 
@@ -69,7 +69,7 @@ The Australian Energy Sector Cyber Security Framework is an energy-sector cyber 
 
    - **Asset, Interface, and Evidence Inventory** - identify source-of-truth registers for OT assets, IT systems, DERMS / DOE platforms, market interfaces, APIs, telemetry links, metering assets, vendor remote-access paths, data catalogues, control evidence, owners, criticality, and inventory gaps. Where ServiceNow or another CMDB exists, cross-reference `$arckit-servicenow` output and ensure inventory rows can be visualised with colour-coded criticality, maturity, or risk status.
 
-   - **Diagram and Traceability Handoffs** - list required `$arckit-dfd`, `$arckit-diagram`, `$arckit-data-model`, `$arckit-traceability`, and `$arckit-risk` updates.
+   - **Diagram and Traceability Handoffs** - list required `$arckit-dfd`, `$arckit-diagram`, `$arckit-data-model`, `$arckit-servicenow`, `$arckit-traceability`, `$arckit-risk`, and `$arckit-graph-report` updates.
 
    - **AESCSF Anti-Pattern Register** - call out flat OT networks, undocumented market interfaces, unmanaged vendor remote access, stale DER integration assumptions, missing data ownership, and unsupported control-room dependencies.
 
@@ -102,6 +102,7 @@ After completing this command, consider running:
 - `$arckit-au-ism-controls` -- ISM applicability provides control evidence and government security cross-references for AESCSF gaps.
 - `$arckit-au-ot-security` -- OT security findings provide zone, conduit, connectivity, and remote-access evidence for energy OT environments.
 - `$arckit-au-soci-cirmp` -- SOCI/CIRMP evidence supports critical-infrastructure risk treatment and incident escalation context.
+- `$arckit-au-energy-compliance` -- The energy compliance pack reads this AESCSF assessment, when present, as cyber-posture context for its ring-fencing, AEMO interface, and SOCI escalation findings.
 - `$arckit-dfd` -- Data-flow diagrams provide IT/OT, market, DERMS, DOE, CSIP-AUS, and vendor-access evidence.
 - `$arckit-diagram` -- Architecture diagrams provide OT/IT zone, conduit, ring, market, and grid-edge context.
 - `$arckit-data-model` -- Energy data-model dependencies identify asset, metering, settlement, DER, telemetry, and customer data impacts.

@@ -16,14 +16,14 @@ You are an enterprise architect generating a Data Sharing Agreement under the UA
 
 1. Read prerequisites:
    - `projects/000-global/ARC-000-PRIN-*.md` (federal principles, if present)
-   - The project's REQ, INT, DR, DMOD, CLAS (UAE Smart Data Classification Register), and PDPL artefacts (if present)
+   - The project's REQ (including its `INT-*` and `DR-*` requirements), DATA (data model), CLAS (UAE Smart Data Classification Register) and PDPL artefacts (if present)
    - `.arckit/templates/_partials/RENDERING.md`
 2. Read the template:
    - **First**, check `.arckit/templates-custom/uae-data-sharing-template.md` (user override)
    - **Then**, `.arckit/templates-custom/uae-data-sharing-template.md`
    - **Fallback**, `.arckit/templates/uae-data-sharing-template.md`
-3. Use `scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist; otherwise locate it.
-4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> DSHR --filename` for the artefact filename.
+3. Use `bash .arckit/scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist; otherwise locate it.
+4. Use `node .arckit/scripts/generate-document-id.mjs <PROJECT_ID> DSHR {VERSION} --filename` for the artefact filename. Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 5. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md`.
 6. Generate the following sections:
    - **Sharing Parties** — provider entity, consumer entity, joint-controller status, service-level commitments.

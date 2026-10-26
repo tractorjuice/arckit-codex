@@ -111,26 +111,25 @@ Use `search_documents` to discover which Google Cloud services match each requir
 | MCP tool (SUPERCHARGED) | Web fallback (STANDALONE) |
 |---|---|
 | `search_documents` | `WebSearch` with query prefixed by `site:cloud.google.com` |
-| `get_document` | `WebFetch` on the documentation URL |
-| `batch_get_documents` | Multiple `WebFetch` calls on each documentation URL |
+| `get_documents` | `WebFetch` on each documentation URL |
 
 For each requirement category, use MCP tools extensively (or their STANDALONE equivalents):
 
 **Service Discovery**:
 
 - `search_documents`: "[requirement] Google Cloud service" for each category
-- Follow up with `get_document` for detailed service pages
+- Follow up with `get_documents` for detailed service pages
 
 **Service Deep Dive** (for each identified service):
 
-- `get_document`: Fetch full docs from cloud.google.com/[service-name]/docs
+- `get_documents`: Fetch full docs from cloud.google.com/[service-name]/docs
 - Extract: features, pricing models, SLA, security features, integration capabilities
-- Use `batch_get_documents` when fetching multiple related pages for a service
+- Pass several document names to one `get_documents` call when fetching related pages for a service
 
 **Architecture Patterns**:
 
 - `search_documents`: "Google Cloud architecture [pattern type]"
-- `get_document`: Fetch Google Cloud Architecture Center reference architectures
+- `get_documents`: Fetch Google Cloud Architecture Center reference architectures
 
 **Architecture Framework Assessment** (all 6 pillars):
 

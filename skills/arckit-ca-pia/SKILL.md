@@ -20,13 +20,13 @@ You are an enterprise architect generating a Canada Privacy Impact Assessment (P
 
 1. Read prerequisites:
    - `projects/000-global/ARC-000-PRIN-*.md` (federal principles, if present)
-   - The project's REQ, DR, DMOD, and STKE artefacts (if present)
+   - The project's REQ (including its `DR-*` data requirements), DATA (data model) and STKE artefacts (if present)
    - `.arckit/templates/_partials/RENDERING.md`
 2. Read the template:
    - **First**, check `.arckit/templates-custom/ca-pia-template.md` (user override)
    - **Then**, `.arckit/templates-custom/ca-pia-template.md`
    - **Fallback**, `.arckit/templates/ca-pia-template.md`
-3. Use `node scripts/generate-document-id.mjs <PROJECT_ID> PIA --filename` for the artefact filename.
+3. Use `node .arckit/scripts/generate-document-id.mjs <PROJECT_ID> PIA {VERSION} --filename` for the artefact filename. Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 4. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md` before writing the artefact. `RENDERING.md` hard-routes the CA regime to `_partials/document-control-ca.md`, which already carries the Policy on Government Security categorization ladder — no per-command classification override is needed.
 5. Generate the following sections (the template provides skeletons for each):
    - **Programme / System Description** — what the system does, who operates it, the personal information lifecycle (collect → use → disclose → retain → dispose) and the subject populations affected.

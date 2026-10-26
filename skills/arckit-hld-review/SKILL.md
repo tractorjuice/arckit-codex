@@ -81,7 +81,7 @@ $ARGUMENTS
 
    Example:
    - NFR-P-001 (Response time <2s): Does architecture support this? CDN? Caching? Database indexing?
-   - NFR-S-001 (PCI-DSS): Is there a clear security architecture? Token vault? Encryption?
+   - NFR-SEC-001 (PCI-DSS): Is there a clear security architecture? Token vault? Encryption?
 
    ### C. Architecture Quality Assessment
 
@@ -179,7 +179,7 @@ Before completing the document, populate ALL document control fields in the head
 *Auto-populated fields* (populate these automatically):
 
 - `[PROJECT_ID]` → Extract from project path (e.g., "001" from "projects/001-project-name")
-- `[VERSION]` → "1.0" (or increment if previous version exists)
+- `[VERSION]` → from `.arckit/references/version-detection.md`: "1.0" only when no earlier `ARC-{PROJECT_ID}-HLDR-v*.md` exists
 - `[DATE]` / `[YYYY-MM-DD]` → Current date in YYYY-MM-DD format
 - `[DOCUMENT_TYPE_NAME]` → "High-Level Design Review"
 - `ARC-[PROJECT_ID]-HLDR-v[VERSION]` → Construct using format above
@@ -225,7 +225,7 @@ The footer should be populated with:
 Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **HLDR** per-type checks pass. Fix any failures before proceeding.
 
 8. **Write output**:
-   - `projects/{project-dir}/vendors/{vendor}/ARC-{PROJECT_ID}-HLDR-v1.0.md` - Full review report (include vendor comparison summary section if reviewing multiple vendors)
+   - `projects/{project-dir}/vendors/{vendor}/ARC-{PROJECT_ID}-HLDR-v{VERSION}.md` - Full review report (include vendor comparison summary section if reviewing multiple vendors)
    - Update traceability matrix with design references
 
    **CRITICAL - Show Summary Only**:
@@ -247,7 +247,7 @@ You should:
   - ✅ Security: PCI-DSS compliant architecture with token vault
 - Check requirements coverage:
   - ✅ NFR-P-001 (Response time): CDN + Redis caching supports <2s
-  - ✅ NFR-S-001 (PCI-DSS): Compliant architecture
+  - ✅ NFR-SEC-001 (PCI-DSS): Compliant architecture
   - ⚠️  NFR-R-001 (99.99% uptime): Single region deployment (RISK - needs multi-AZ)
 - Assess quality:
   - Scalability: 7/10 (good horizontal scaling, but monolith limits)

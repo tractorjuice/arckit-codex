@@ -101,7 +101,7 @@ $ARGUMENTS
      - Example: "BR-001 addresses CFO's goal G-1: Reduce infrastructure costs 40% by end of Year 1"
      - Example: "NFR-P-001 supports Operations Director's outcome O-3: Maintain 99.95% uptime"
    - Reference relevant principles from `projects/000-global/ARC-000-PRIN-*.md`:
-     - Example: "NFR-S-001 aligns with Security by Design principle (SEC-001)"
+     - Example: "NFR-SEC-001 aligns with Security by Design principle (SEC-001)"
    - Ensure high-priority stakeholder drivers get MUST requirements
    - Document which stakeholder benefits from each requirement
 
@@ -145,17 +145,10 @@ Before completing the document, populate ALL document control fields in the head
 
 ### Step 0: Detect Version
 
-Before generating the document ID, check if a previous version exists:
+Follow `.arckit/references/version-detection.md` for `ARC-{PROJECT_ID}-REQ-v*.md` in the project directory. For requirements:
 
-1. Look for existing `ARC-{PROJECT_ID}-REQ-v*.md` files in the project directory
-2. **If no existing file**: Use VERSION="1.0"
-3. **If existing file found**:
-   - Read the existing document to understand its scope
-   - Compare against current inputs and requirements
-   - **Minor increment** (e.g., 1.0 → 1.1): Scope unchanged — refreshed content, updated details, corrections
-   - **Major increment** (e.g., 1.0 → 2.0): Scope materially changed — new requirement categories, removed categories, significant new requirements added
-4. Use the determined version for document ID, filename, Document Control, and Revision History
-5. For v1.1+/v2.0+: Add a Revision History entry
+- **Minor increment** (e.g., 1.0 → 1.1): Scope unchanged — refreshed content, updated details, corrections
+- **Major increment** (e.g., 1.0 → 2.0): Scope materially changed — new requirement categories, removed categories, significant new requirements added
 
 ### Step 1: Construct Document ID
 
@@ -231,7 +224,7 @@ The footer should be populated with:
    ## Requirements Complete ✅
 
    **Project**: [Project Name]
-   **File Created**: `projects/[PROJECT]/ARC-{PROJECT_ID}-REQ-v1.0.md`
+   **File Created**: `projects/[PROJECT]/ARC-{PROJECT_ID}-REQ-v{VERSION}.md`
 
    ### Requirements Summary
 
@@ -270,7 +263,7 @@ The footer should be populated with:
 
    ### Next Steps
 
-   - Review `ARC-{PROJECT_ID}-REQ-v1.0.md` for full details
+   - Review `ARC-{PROJECT_ID}-REQ-v{VERSION}.md` for full details
    - [If DR-xxx exist]: Run `$arckit-data-model` to create comprehensive data model
    - [If no DR-xxx]: Run `$arckit-research` to research technology options
    ```

@@ -53,11 +53,11 @@ DTAC was introduced by NHSX (now part of NHS England's Transformation Directorat
 2. **Read the template**:
    - `.arckit/templates-custom/uk-nhs-dtac-template.md` → `.arckit/templates-custom/uk-nhs-dtac-template.md` → `.arckit/templates/uk-nhs-dtac-template.md`
 
-3. **Resolve the project**: locate the target `projects/{NNN}-<slug>/` from the ArcKit Project Context; only if no project exists, create one with `scripts/bash/create-project.sh --json --name "<project-name>"`. `create-project.sh` is create-only — invoked with no `--name` it exits 1 without returning a path.
+3. **Resolve the project**: locate the target `projects/{NNN}-<slug>/` from the ArcKit Project Context; only if no project exists, create one with `bash .arckit/scripts/bash/create-project.sh --json --name "<project-name>"`. `create-project.sh` is create-only — invoked with no `--name` it exits 1 without returning a path.
 
-4. **Generate the filename** via `node scripts/generate-document-id.mjs <PROJECT_ID> NHSDTAC --filename` (this is a single-instance artefact; no `--next-num`).
+4. **Generate the filename** via `node .arckit/scripts/generate-document-id.mjs <PROJECT_ID> NHSDTAC {VERSION} --filename` (this is a single-instance artefact; no `--next-num`). Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 
-5. **Resolve the `<!-- DOC-CONTROL-HEADER -->` marker** per `RENDERING.md`. The DTAC artefact is a conventional ArcKit `ARC-{NNN}-NHSDTAC-v1.0.md` file.
+5. **Resolve the `<!-- DOC-CONTROL-HEADER -->` marker** per `RENDERING.md`. The DTAC artefact is a conventional ArcKit `ARC-{NNN}-NHSDTAC-v{VERSION}.md` file.
 
 6. **Generate the five sections** (each with explicit pass / partial / fail status and evidence):
 
@@ -116,7 +116,7 @@ DTAC was introduced by NHSX (now part of NHS England's Transformation Directorat
 7. **Populate the External References section** per `.arckit/references/citation-instructions.md`. DTAC v3, NHS DCB0129, NHS DCB0160, UK GDPR, DSPT, WCAG 2.2, and ATRS (if AI) MUST appear in the Document Register.
 
 8. **Before writing the file**, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **NHSDTAC** per-type checks pass. Fix any failures before proceeding.
-9. **Write the artefact via the Write tool** to `projects/{NNN}-<slug>/ARC-{NNN}-NHSDTAC-v1.0.md`.
+9. **Write the artefact via the Write tool** to `projects/{NNN}-<slug>/ARC-{NNN}-NHSDTAC-v{VERSION}.md`.
 
 10. **Show only a summary to the user**: pass / partial / fail counts per section, list of `[PENDING]` items requiring human input, recommended next commands.
 

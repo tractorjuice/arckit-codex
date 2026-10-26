@@ -49,9 +49,9 @@ Australian Government agencies covered by the Privacy Act 1988 must conduct PIAs
    - **Then**, `.arckit/templates-custom/au-pia-template.md`
    - **Fallback**, `.arckit/templates/au-pia-template.md`
 
-3. Use `scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist; otherwise locate it.
+3. Use `bash .arckit/scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist; otherwise locate it.
 
-4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> AUPIA --filename` for the artefact filename.
+4. Use `node .arckit/scripts/generate-document-id.mjs <PROJECT_ID> AUPIA {VERSION} --filename` for the artefact filename. Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 
 5. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md` before writing the artefact. `RENDERING.md` hard-routes the AU regime to `_partials/document-control-au.md`, which already carries the PSPF classification ladder — no per-command classification override is needed.
 

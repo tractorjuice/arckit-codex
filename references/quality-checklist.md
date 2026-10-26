@@ -48,9 +48,9 @@ All artifacts must pass these 10 checks:
 - Five Case Model structure present (Strategic, Economic, Commercial, Financial, Management)
 - Cost-benefit analysis with quantified figures and assumptions stated
 - Green Book / Orange Book methodology referenced where applicable
-- Preferred option clearly identified with rationale
+- Preferred way forward (the preferred option, from OBC stage) clearly identified with rationale
 - Executive Summary opens with the Go/No-Go recommendation and the recommended option, and every figure in it appears in the five cases
-- Every option in the options appraisal, including Do Nothing and rejected options, has its own costs, benefits, **Risks** and pros/cons
+- Every option in the options appraisal, including business as usual (BAU) and rejected options, has its own costs, benefits, **Risks** and pros/cons
 
 ### STKE -- Stakeholder Analysis
 
@@ -103,7 +103,7 @@ All artifacts must pass these 10 checks:
 ### GCRS -- GCP Research
 
 - Service comparison table with feature/pricing columns
-- Google Cloud Architecture Framework alignment noted
+- Google Cloud Well-Architected Framework alignment noted
 - Architecture diagram (Mermaid) showing service relationships
 - Pricing tier analysis with estimated monthly costs
 
@@ -497,6 +497,7 @@ All artifacts must pass these 10 checks:
 - Qualification vs Visa distinction explicitly noted (critical procurement risk)
 - Extraterritorial legal risk assessed per provider (Cloud Act, FISA-702 at minimum)
 - OIV/OSE designation status determined with LPM obligations mapped (or explicitly marked N/A)
+- Binding obligation under the arrêté du 12 août 2026 assessed independently of OIV/OSE status (not marked N/A solely because the entity is not OIV/OSE)
 - Architecture pattern (A/B/C) recommended based on data sensitivity level
 - Decision matrix includes clear recommendation with rationale
 - ANSSI position on FISA-702 residual risk documented
@@ -569,7 +570,7 @@ All artifacts must pass these 10 checks:
 - System scope and deployment environment (cloud / on-premise / hybrid) documented
 - All 42 hygiene measures assessed with status (✅ Implemented / ⚠️ Partial / ❌ Not implemented / N/A)
 - Not-applicable measures documented with justification
-- Cloud security recommendations (ANSSI 2021) assessed if cloud services are used
+- ANSSI cloud hosting recommendations for sensitive IS (v1.0, July 2024) assessed if cloud services are used
 - Cloud provider qualification status (SecNumCloud / EU-qualified / Other) assessed if applicable
 - Gap analysis produced with priority (🔴 High / 🟠 Medium / 🟡 Low), owner, and remediation action for each gap
 - Summary score (N / 42 implemented) reported
@@ -628,7 +629,7 @@ All artifacts must pass these 10 checks:
 - At least 8 security principles defined, consistent with ANSSI recommendations
 - Organisational structure documented: Highest Authority (AA), RSSI, (FSSI,) DPO, DSI, CSSI
 - Security governance committees documented (steering, operational, homologation board)
-- All 7 security domains covered: access management, network, workstations, applications, data, physical, business continuity
+- All 8 security domains covered: access management, network, workstations, applications, data, physical, business continuity, vulnerability management
 - User obligations defined
 - Incident management framework defined (declaration, qualification, ANSSI/CERT-FR notification, containment)
 - Applicable standards referenced (RGS, ANSSI hygiene, EBIOS, ISO 27001, sector-specific)
@@ -647,7 +648,7 @@ All artifacts must pass these 10 checks:
 - Publication obligation assessed: which project code must be published on code.gouv.fr
 - Exceptions to publication obligation documented with justification (security, trade secret, third-party IP)
 - Reused components register populated (source, version, licence, integration method)
-- Circulaire PM n°6264-SG (2021) compliance — evidence that reuse was assessed before commissioning new development
+- Circulaire PM n°6264/SG (27 April 2021) — evidence that reuse was assessed before commissioning new development
 
 ### ATBFR -- Austrian Accessibility Assessment (BaFG / WZG)
 
@@ -842,12 +843,12 @@ All artifacts must pass these 10 checks:
 
 ### ACHG -- Architecture Change Request
 
-- Change classified as EVOLUTIONARY, TRANSFORMATIONAL or CORRECTIVE with justification
+- Change classified as SIMPLIFICATION, INCREMENTAL or RE-ARCHITECTING (the TOGAF Phase H classification) with justification
 - Priority set (CRITICAL / HIGH / MEDIUM / LOW) and consistent with the impact assessment
 - Impact assessed across all four dimensions: capability, application, technology, governance
 - Affected artefacts listed by document ID, each with the action required
 - ADM re-entry point determined per phase (A–H) with the scope of re-entry, not just YES/NO
-- Re-entry point consistent with the change type — transformational changes re-enter at Phase A or B
+- Re-entry point consistent with the change type — a re-architecting change starts a new ADM cycle (usually at Phase A); a simplification change stays within Phase H
 - Cost and benefit both quantified
 - Approval workflow names the approving authority for the assessed priority
 
@@ -864,9 +865,10 @@ All artifacts must pass these 10 checks:
 
 ### OASTR -- O-AA Agile Strategy
 
-- Dual transformation framed explicitly: both the legacy-modernisation track and the greenfield-innovation track are described, or one is ruled out with a reason
-- Each strategic bet states the outcome it buys and the measure that would show it worked
-- Product portfolio mapped to the transformation tracks, so no product is left unassigned
+- Dual transformation framed as C208 frames it: both the digital dimension (technology, product, operating model) and the agile dimension (organisational, cultural and team agility) are described, or an area is ruled out with a reason
+- The two dimensions are planned together in each transformation wave, not one after the other
+- Each product outcome and each wave states the outcome it buys and the measure that would show it worked
+- Every value stream is mapped to a product team and a transformation wave, so none is left unassigned
 - Funding and team-topology implications stated, not left as an exercise for delivery
 - Every O-AA axiom cited is quoted from the C208 standard by its published number and name, and is used to justify a specific choice rather than listed decoratively
 - Strategy traces to stakeholder goals and business drivers from STKE and REQ
@@ -916,8 +918,8 @@ All artifacts must pass these 10 checks:
 - Every agent has a unique AGT-xxx ID used consistently across all sections
 - Model and deployment environment recorded per agent (Prod / Staging / Dev / Planned)
 - Risk level assigned (Critical / High / Medium / Low)
-- Oversight stated as human-in-the-loop, human-on-the-loop or human-out-of-loop — no other values
-- No Critical-risk agent left at human-out-of-loop without a documented justification
+- Oversight stated as human-in-the-loop, human-on-the-loop or human-out-of-the-loop — no other values
+- No Critical-risk agent left at human-out-of-the-loop without a documented justification
 - Capability matrix lists tools, memory types and output types per agent
 - Security classification records data sensitivity, access level and isolation for every agent
 - Audit requirement set per agent, and set to Yes wherever data sensitivity is High
@@ -1143,7 +1145,7 @@ All artifacts must pass these 10 checks:
 
 - Every dataset assessed by its Dataset ID from the CLAS register rather than re-enumerated
 - Classification, required residency, chosen CSP, region and compliance check recorded per dataset
-- Confidential, Secret and Top Secret datasets resolve to UAE-resident sovereign infrastructure under the National Cloud Security Policy v2, with any exception raised rather than left implicit
+- Confidential, Sensitive and Secret datasets resolve to UAE-resident sovereign infrastructure under the National Cloud Security Policy v2, with any exception raised rather than left implicit
 - CSP due diligence recorded per candidate (Core42 / G42, Microsoft UAE North and UAE Central, TDRA FedNet, e& Sovereign Launchpad on AWS) covering certification posture (DESC for Dubai entities, CSC accreditation), regional footprint, sovereign-data scope and documented limitations
 - Shared-responsibility matrix divides responsibility across infrastructure, platform, application, data, identity and operational layers for each chosen CSP
 - Shared platform components (identity, observability, backups) assessed for residency, not only the primary services
@@ -1151,8 +1153,9 @@ All artifacts must pass these 10 checks:
 
 ### CLAS -- UAE Smart Data Classification Register
 
-- Every dataset assigned exactly one Smart Data level (Open / Shared / Confidential / Secret / Top Secret) — no other values
-- Level definitions cited to the UAE Smart Data Classifications publication, which appears in the Document Register with its primary URL and verification date
+- Every dataset assigned exactly one of the four Smart Data Framework classes (Open / Confidential / Sensitive / Secret) — no other values; `Shared` and `Top Secret` are not classes
+- Class definitions cited to the UAE Smart Data Framework (Part 1, Data Classification Standard DC1; Part 2, Guidance Note 5.1), which appears in the Document Register with its primary URL and verification date
+- Every dataset classified above Open carries a documented rationale, since Open is the framework's default for non-personal data
 - Handling, storage and declassification rules stated per dataset, not per level alone
 - Each dataset cross-referenced upstream to the BR / DR requirements that drove its capture and downstream to the INT requirements that consume it
 - PDPL lawful basis referenced for every dataset containing personal data
@@ -1416,8 +1419,8 @@ All artifacts must pass these 10 checks:
 ### AUNDB -- Notifiable Data Breaches Playbook
 
 - Eligibility test stated as an explicit decision tree over the three statutory limbs: unauthorised access, disclosure or loss; serious harm likely; remediable by reasonable steps
-- The eligibility conclusion follows the logic — limbs 1 and 2 satisfied with limb 3 unsatisfied yields an eligible data breach requiring notification within 30 days
-- 30-day timeline planned day by day from Day 0 awareness through Day 30 notification, with the intermediate phases named
+- The eligibility conclusion follows the logic — limbs 1 and 2 satisfied with limb 3 unsatisfied yields an eligible data breach requiring notification to the OAIC and affected individuals as soon as practicable (ss 26WK, 26WL)
+- Timeline keeps the two clocks separate: the s 26WH assessment of a suspected breach completed within 30 days of awareness, and notification as soon as practicable from the point the entity believes an eligible data breach has occurred; no milestone schedules notification for Day 30 or treats 30 days as a notification deadline
 - RACI covers Privacy Officer, Security Officer, CISO, Legal, Communications and the accountable executive
 - Detection and containment procedures name the channels by which breaches become known, the immediate containment steps and evidence preservation
 - Serious-harm assessment criteria stated (financial loss, identity theft, emotional distress, physical safety, reputational harm), together with the reasonable-steps mitigation that can remove eligibility
@@ -1480,27 +1483,27 @@ All artifacts must pass these 10 checks:
 
 ### AUDSS -- Digital Service Standard Assessment
 
-- All 13 Digital Service Standard criteria assessed, each with status, evidence summary, gap description and remediation with owner and target date
-- Service phase recorded (Discovery / Alpha / Beta / Live) alongside user base and transaction volume
-- Accessibility assessed against WCAG 2.2 AA with assistive-technology testing and a published accessibility statement
-- Privacy criterion evidenced by a completed PIA and APP compliance rather than an assertion
-- Security criterion cross-referenced to the E8 posture rather than described independently
-- Open-source criterion states the strategy, repository and licence, or records the exemption
-- Performance measures name the KPIs (completion rate, user satisfaction, cost per transaction, digital take-up)
-- Non-digital experience addressed with assisted digital, phone and in-person channel design — not deferred as out of scope
+- All 10 criteria of the current Digital Service Standard assessed by their current names and numbers (Have a clear intent; Know your user; Leave no one behind; Connect services; Build trust in design; Don't reinvent the wheel; Do no harm; Innovate with purpose; Monitor your service; Keep it relevant), each with status, evidence summary, gap description and remediation with owner and target date — no criterion from the earlier 13-criterion Standard is used
+- Service context records the service type (informational or transactional; public- or staff-facing), whether it is new, a replacement or existing, IOF applicability and the date the Standard applies from, alongside phase and transaction volume
+- Criterion 3 (Leave no one behind) records the WCAG version and conformance level achieved against the latest WCAG version, with assistive-technology testing and a feedback mechanism
+- Criterion 5 (Build trust in design) cross-referenced to the E8 posture rather than described independently
+- Criterion 7 (Do no harm) evidenced by a completed PIA and APP compliance rather than an assertion
+- Criterion 9 (Monitor your service) names the baseline and the performance indicators measured
+- Any exemption sought names the criterion and its rationale
 - Compliance summary table reconciles with the per-criterion assessments
-- Services approaching an assessment gate identify the top three risks to passing, with mitigations
+- Assessment readiness identifies the top three risks to meeting all 10 criteria and reporting compliance to the DTA, with mitigations
 
 ### AUPSPF -- Protective Security Policy Framework
 
-- All four PSPF outcomes assessed: security governance, information security, personnel security, physical security
-- All 16 core requirements (CR1–CR16) assessed individually, each with compliance status, supporting evidence, gap description, remediation with owner and date, and the self-assessment level achieved
-- Compliance summary carries 16 rows and reconciles with the individual core-requirement assessments
-- Entity type recorded (non-corporate Commonwealth, corporate Commonwealth, contractor, panel member, state government under flow-down) together with the applicability driver — direct or contractual flow-down
-- Chief Security Officer designated
-- Evidence cites the ISM, E8, PIA and DISP artefacts where they exist rather than restating their content
-- Non-corporate Commonwealth entities record Annual Self-Assessment status, last submission to AGD and current self-assessed maturity
-- Recommendations grouped Quick Wins / Short-Term / Medium-Term, each tagged to a specific core requirement
+- The PSPF release assessed is named (e.g. Release 2026), and the assessment uses that release's six security domains — Governance (GOV), Risk (RISK), Information (INFO), Technology (TECH), Personnel (PER), Physical (PHYS) — not the four outcomes and 16 core requirements of earlier editions
+- Requirement scoping lists the requirements in scope per domain from the PSPF List of Requirements, with any scoped out and the reason
+- Each in-scope requirement is cited by its PSPF number and domain code, with its reporting type, status, evidence, gap and remediation with owner and date; no requirement number is invented — unverified numbers are marked `[VERIFY]`
+- Compliance summary carries one row per domain and reconciles with the requirement-level assessments
+- Entity type recorded (non-corporate Commonwealth, corporate Commonwealth, wholly-owned Commonwealth company, state or territory agency, service provider under deed or agreement) together with the applicability driver
+- Chief Security Officer and Chief Information Security Officer designated
+- Technology domain evidence cites the ISM and E8 artefacts (ISM applied; Essential Eight Maturity Level Two), and other evidence cites the PIA and DISP artefacts where they exist, rather than restating their content
+- Entities that must report record the annual protective security report position: reporting period, submission to the Department of Home Affairs, Accountable Authority approval, report to the Minister and the ASD Cyber Security Survey
+- Recommendations grouped Quick Wins / Short-Term / Medium-Term, each tagged to a domain and requirement number
 
 ### AUDISP -- Defence Industry Security Programme Attestation
 
@@ -1689,12 +1692,12 @@ All artifacts must pass these 10 checks:
 
 ### FSSCA -- SCA-RTS Exemption Assessment
 
-- All nine in-scope exemptions assessed (Articles 10, 10A, 11, 13, 14, 15, 16, 17, 18), each with a decision of APPLY, DO_NOT_APPLY or CONDITIONAL
-- Article 12 explicitly excluded as out of scope — AISP payment account access is covered by Article 10A post-PS21/19
+- All ten UK SCA-RTS exemptions assessed (Articles 10, 10A, 11, 12, 13, 14, 15, 16, 17, 18), each with a decision of APPLY, DO_NOT_APPLY or CONDITIONAL — Article 12 (unattended terminals for transport fares and parking fees) is an exemption like the others, not an AISP rule
+- Article titles match the UK SCA-RTS: 10 payment account information accessed directly, 10A accessed through an AISP, 11 contactless payments at point of sale, 12 unattended terminals for transport fares and parking fees, 13 trusted beneficiaries, 14 recurring transactions, 15 credit transfers between accounts held by the same person, 16 low-value transactions, 17 secure corporate payment processes and protocols, 18 transaction risk analysis
 - Every decision justified against the firm's actual payment channels and risk profile rather than asserted
-- Where Article 18 TRA is applied, the firm's current fraud rate per payment category is stated
-- The applicable reference fraud-rate band cited, and the targeted exemption threshold consistent with that band — a threshold cannot be claimed while the corresponding fraud-rate condition is unmet
-- The continuous nature of the TRA fraud-rate condition stated, not treated as a one-off test
+- Where Article 18 TRA is applied, the firm's current fraud rate per payment type is stated, calculated under Article 19 on a rolling quarterly basis
+- The reference fraud rate and exemption threshold value cited from the UK SCA-RTS Appendix (ETVs £85 / £220 / £440), and the targeted ETV consistent with the firm's fraud rate — an ETV cannot be claimed while the corresponding fraud-rate condition is unmet
+- The continuous nature of the TRA fraud-rate condition stated, not treated as a one-off test, with the Article 20 rule (immediate report to the FCA when a reference rate is exceeded; cessation after two consecutive quarters above it) — no percentage-of-reference trigger presented as regulatory
 - Exemption decisions consistent with each other where they interact
 
 ### FSSAFE -- Safeguarding Arrangements
@@ -1703,10 +1706,11 @@ All artifacts must pass these 10 checks:
 - Safeguarding method stated with justification: segregation, insurance, or comparable guarantee
 - SPI safeguarding correctly characterised as voluntary — registered SPIs are not required to safeguard, and where elected the Reg 23 mechanics and insolvency priority follow
 - Designated accounts record institution name, FCA FRN, account type, sort code or IBAN, and date designated
-- Segregation trigger stated against the correct deadline for the authorisation type — end of business on the day of receipt under PSRs 2017 Reg 23(2), or within five business days of issuance for EMIs under EMR 2011 Reg 20(4)
+- Segregation trigger stated against the correct rule — funds kept segregated from receipt, and placed in a designated account or invested in relevant assets if still held at the end of the business day following the day of receipt (PSRs 2017 Reg 23(5)–(6); EMR 2011 Reg 21(1)–(2)); for EMIs, funds received by payment instrument safeguarded by the end of five business days after the e-money is issued (EMR 2011 Reg 20(4))
 - Controls preventing commingling with operational funds documented, along with the controls keeping the designated account to safeguarding use only
 - Where insurance or a comparable guarantee is used, the insurer or guarantor, coverage amount, sublimits and insolvency trigger are recorded, with confirmation the cover was in place before any relevant funds were received
-- Reconciliation approach documented with frequency and break-resolution process
+- Reconciliation approach documented with frequency and break-resolution process — internal and external safeguarding reconciliations at least once each reconciliation day (CASS 15.8.19R and 15.8.42R, from 7 May 2026)
+- Monthly safeguarding return cited as REP027 under SUP 16.14A and SUP 16 Annex 29BR — not REP-CRIM, which is the annual financial crime report
 
 ### FSCD -- Consumer Duty Assessment
 

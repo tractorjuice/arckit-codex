@@ -54,6 +54,10 @@ Use this command when **any** of the following conditions are met:
 
   - If missing: note that strategy context is limited
 
+- **REQ** (Requirements) — Extract: Security non-functional requirements (NFR-SEC) and any compliance requirements, so every security story traces to a requirement
+
+  - If missing: note that security stories cannot be traced to NFR-SEC requirements, and suggest `/arckit:requirements`
+
 ### Prerequisites 1b: Read external documents and policies
 
 - Read any **external documents** listed in the project context (`external/` files) — extract security policies, compliance requirements, threat models, regulatory obligations
@@ -121,7 +125,7 @@ Create the Agile Security document following the template structure.
 
 #### Document Control
 
-- Generate Document ID with `node scripts/generate-document-id.mjs {P} OASEC --filename` (canonical form: `ARC-{P}-OASEC-v1.0`)
+- Generate Document ID with `node .arckit/scripts/generate-document-id.mjs {P} OASEC {VERSION} --filename` (canonical form: `ARC-{P}-OASEC-v{VERSION}`) Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 
 - Set owner, dates, status, classification
 
@@ -137,9 +141,11 @@ Create the Agile Security document following the template structure.
 
 - **Acceptance criteria**: Each security story includes testable security acceptance criteria
 
+- **Requirements traceability**: Each security story traces to an NFR-SEC requirement from REQ where one exists; NFR-SEC entries with no story are listed as gaps
+
 #### Threat Modeling per Sprint
 
-- **Sprint 0 threat model**: Initial threat model covering product architecture (STRIDE or equivalent)
+- **Sprint 0 threat model**: Initial threat model covering product architecture, structured by STRIDE category (Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege) or an equivalent method named in the document
 
 - **Sprint N threat updates**: Each sprint updates threat model based on new features, identified vulnerabilities, and environment changes
 
@@ -167,6 +173,14 @@ Create the Agile Security document following the template structure.
 
 - **Security review gates**: Lightweight sprint-level security reviews, not heavy-gate audits
 
+#### Security Exception Path
+
+- **Trigger**: A security check fails and the delivery date cannot move
+
+- **Decision**: Who may accept the risk at each severity, and who signs the exception off
+
+- **Record**: The exception is logged as accepted risk with a severity and a resolution deadline, and reviewed at each sprint boundary
+
 #### AI/ML Security Considerations
 
 - **Algorithmic transparency**: ATRS compliance per sprint for AI/ML features
@@ -192,7 +206,7 @@ Before writing the file, read `.arckit/references/quality-checklist.md` and veri
 Create the file at:
 
 ```text
-projects/{P}/ARC-{P}-OASEC-v1.0.md
+projects/{P}/ARC-{P}-OASEC-v{VERSION}.md
 ```
 
 ### 9. Show Summary to User
@@ -202,8 +216,8 @@ After writing the file, show a concise summary (NOT the full document):
 ```markdown
 ## Agile Security Document Created
 
-**Document**: `projects/{P}/ARC-{P}-OASEC-v1.0.md`
-**Document ID**: ARC-{P}-OASEC-v1.0
+**Document**: `projects/{P}/ARC-{P}-OASEC-v{VERSION}.md`
+**Document ID**: ARC-{P}-OASEC-v{VERSION}
 
 ### Security Backlog Profile
 - **Security epic categories**: [N] categories defined
@@ -242,13 +256,15 @@ After writing the file, show a concise summary (NOT the full document):
 
 - [✅/⚠️] Agile Strategy: ARC-{P}-OASTR-v[N].md
 
+- [✅/⚠️] Requirements: ARC-{P}-REQ-v[N].md
+
 ### Next Steps
 1. Create security epics for Sprint 0
 2. Run initial threat model: STRIDE analysis for product architecture
 3. Establish governance cadence: `/arckit:agile-governance`
 4. Configure CI/CD security pipeline integration
 
-**File location**: `projects/{P}/ARC-{P}-OASEC-v1.0.md`
+**File location**: `projects/{P}/ARC-{P}-OASEC-v{VERSION}.md`
 ```
 
 ## Important Notes
@@ -272,4 +288,4 @@ After writing the file, show a concise summary (NOT the full document):
 After completing this command, consider running:
 
 - `/arckit:agile-governance` -- Establish governance cadence including security review gates
-- `/arckit:agile-strategy` -- Align security strategy with dual transformation tracks
+- `/arckit:agile-strategy` -- Align security strategy with the dual transformation dimensions

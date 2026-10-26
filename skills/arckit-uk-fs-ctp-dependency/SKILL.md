@@ -36,7 +36,7 @@ $ARGUMENTS
 Run:
 
 ```bash
-.arckit/scripts/bash/create-project.sh --json --name "<product-context>"
+bash .arckit/scripts/bash/create-project.sh --json --name "<product-context>"
 ```
 
 If the project already exists, locate it by scanning `projects/` for the matching numbered directory
@@ -44,13 +44,15 @@ instead of recreating it. Extract `project_dir` and `project_number` from the JS
 
 ### Step 2 — Generate the document ID
 
+Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
+
 Run:
 
 ```bash
-.arckit/scripts/generate-document-id.mjs <PROJECT_NUMBER> FSCTP --filename
+node .arckit/scripts/generate-document-id.mjs <PROJECT_NUMBER> FSCTP {VERSION} --filename
 ```
 
-This produces a filename of the form `ARC-NNN-FSCTP-v1.0.md`. FSCTP is the doc-type code for this
+This produces a filename of the form `ARC-NNN-FSCTP-v{VERSION}.md`. FSCTP is the doc-type code for this
 artefact.
 
 ### Step 3 — Read the templates and rendering partials

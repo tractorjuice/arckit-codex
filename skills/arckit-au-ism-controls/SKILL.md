@@ -15,7 +15,7 @@ $ARGUMENTS
 
 ## Context
 
-The Australian Signals Directorate (ASD) Information Security Manual (ISM) is the comprehensive set of cyber-security controls for Australian Government information systems. Where the Essential Eight is a mitigation framework targeting attack-vector defence, the ISM is the comprehensive control set covering governance, personnel, physical, communications, ICT system, networking, cryptography, gateway, data-transfer, evaluation, working-off-site, and incident-response domains. ISM compliance is the core technical-controls evidence for PSPF Information Security outcome and a primary input to DISP attestation.
+The Australian Signals Directorate (ASD) Information Security Manual (ISM) is the comprehensive set of cyber-security controls for Australian Government information systems. Where the Essential Eight is a mitigation framework targeting attack-vector defence, the ISM is the comprehensive control set covering governance, personnel, physical, communications, ICT system, networking, cryptography, gateway, data-transfer, evaluation, working-off-site, and incident-response domains. ISM compliance is the core technical-controls evidence for the PSPF Technology domain (which requires the ISM to be applied) and a primary input to DISP attestation.
 
 **Authoritative anchor**: ASD Information Security Manual — <https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/ism>
 
@@ -48,9 +48,9 @@ The Australian Signals Directorate (ASD) Information Security Manual (ISM) is th
    - Then: `.arckit/templates-custom/au-ism-controls-template.md`
    - Fallback: `.arckit/templates/au-ism-controls-template.md`
 
-3. Use `scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist.
+3. Use `bash .arckit/scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist.
 
-4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> AUISM --filename` for the artefact filename.
+4. Use `node .arckit/scripts/generate-document-id.mjs <PROJECT_ID> AUISM {VERSION} --filename` for the artefact filename. Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 
 5. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md` before writing the artefact. `RENDERING.md` hard-routes the AU regime to `_partials/document-control-au.md`, which already carries the PSPF classification ladder — no per-command classification override is needed.
 

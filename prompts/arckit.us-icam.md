@@ -56,9 +56,9 @@ Federal employees and contractors authenticate using **PIV** (Personal Identity 
    - **Then**, `.arckit/templates-custom/us-icam-template.md`
    - **Fallback**, `.arckit/templates/us-icam-template.md`
 
-3. Use `scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist; otherwise locate it.
+3. Use `bash .arckit/scripts/bash/create-project.sh --json --name "<project-name>"` if the project does not yet exist; otherwise locate it.
 
-4. Use `node scripts/generate-document-id.mjs <PROJECT_ID> ICAM --filename` for the artefact filename. The type code for this command is `ICAM`.
+4. Use `node .arckit/scripts/generate-document-id.mjs <PROJECT_ID> ICAM {VERSION} --filename` for the artefact filename. The type code for this command is `ICAM`. Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 
 5. Resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `RENDERING.md` before writing the artefact. `RENDERING.md` hard-routes the US regime to `_partials/document-control-us.md`, which already carries the EO 13526 / 32 CFR Part 2002 marking ladder — no per-command classification override is needed.
 
@@ -66,7 +66,7 @@ Federal employees and contractors authenticate using **PIV** (Personal Identity 
 
    - **User Populations and Use Cases** — enumerate the user populations the system serves: Federal Employees, Contractors, Citizens (public-facing), Partner Agencies, Privileged Administrators, Service Accounts. For each population list the use cases (e.g. "claim a benefit", "process a case", "administer the cloud account").
    - **IAL / AAL / FAL Determination Matrix** — for each use case score IAL (1/2/3), AAL (1/2/3), FAL (1/2/3) per the SP 800-63-3 risk assessment methodology. Capture the rationale referencing the impact categories (inconvenience/distress, financial loss, harm to programs, unauthorized release of sensitive info, personal safety, civil/criminal violations).
-   - **Identity Proofing Architecture** — for IAL2/IAL3 use cases, document the proofing process: collected evidence (STRONG / SUPERIOR / FAIR), in-person vs remote (supervised) proofing, identity-proofing provider (login.gov, ID.me, agency-operated), proofing data retention and disposal policy. Cross-reference the PIA.
+   - **Identity Proofing Architecture** — for IAL2/IAL3 use cases, document the proofing process: collected evidence (STRONG / SUPERIOR / FAIR), in-person vs remote (supervised) proofing, identity-proofing provider (login.gov, ID.me, agency-operated), proofing data retention and disposal policy. Cross-reference the US PIA (`USPIA`; `PIA` is Canada's code).
    - **Authenticator Selection** — for each AAL tier select acceptable authenticators per SP 800-63B (e.g. AAL2: Multi-Factor OTP + Memorised Secret, MF Cryptographic Software; AAL3: MF Cryptographic Hardware such as PIV card or FIDO2 hardware key with verifier impersonation resistance).
    - **Federal Employee / Contractor Pattern** — PIV-card-as-primary-credential per HSPD-12 and FIPS 201-3. Document PIV derivation for mobile (Derived PIV per SP 800-157 Rev 1). Identify cross-agency PIV interoperability requirements via the Federal PKI.
    - **Public-Facing Citizen Pattern** — login.gov as the default per M-19-17 direction. Document login.gov tenant configuration: IAL/AAL requirements, attribute bundles, redirect/logout flows, SAML vs OIDC, branded vs unbranded interface.

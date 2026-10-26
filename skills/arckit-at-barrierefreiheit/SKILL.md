@@ -50,7 +50,7 @@ $ARGUMENTS
 
 ### Step 1: Identify or Create Project
 
-Identify the target project from the hook context. If the project doesn't exist, create it with `.arckit/../arckit-claude/scripts/bash/create-project.sh --json --name "<project-name>"` — the `--name` is required, and without it the script exits 1 rather than returning a path.
+Identify the target project from the hook context. If the project doesn't exist, create it with `bash .arckit/scripts/bash/create-project.sh --json --name "<project-name>"` — the `--name` is required, and without it the script exits 1 rather than returning a path.
 
 ### Step 2: Read Source Artifacts
 
@@ -62,7 +62,7 @@ Read `.arckit/templates-custom/at-barrierefreiheit-template.md` if it exists, ot
 
 ### Step 4: Generate the Austrian Accessibility Assessment
 
-1. **Detect version**: Check for existing `ARC-{PROJECT_ID}-ATBFR-v*.md` files. Increment the minor version if one exists; otherwise start at `v1.0`.
+1. **Detect version**: Check for existing `ARC-{PROJECT_ID}-ATBFR-v*.md` files. Increment the minor version if one exists; otherwise start at `v1.0`. Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier file, never over it.
 
 2. **Auto-populate Document Control**: resolve the `<!-- DOC-CONTROL-HEADER -->` marker per `.arckit/templates/_partials/RENDERING.md`.
    - Classification: **Offen** once the accessibility statement is published, **Eingeschränkt** while non-conformances are open, since the gap list is an unremediated to-do list.

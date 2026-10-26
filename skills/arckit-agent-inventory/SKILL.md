@@ -87,7 +87,7 @@ $ARGUMENTS
    - **Deployment**: Current deployment status (Prod, Staging, Dev, Planned)
    - **Owner**: Business or technical owner
    - **Risk Level**: Critical, High, Medium, Low
-   - **Oversight Level**: Human-in-the-loop, Human-on-the-loop, Autonomous with Audit
+   - **Oversight Level**: Human-in-the-loop, Human-on-the-loop, Human-out-of-the-loop
 
    > **If fewer than 3 agents are found**, ask the user: *"I've identified fewer than 3 agents. Do you have additional agents to include, or should I proceed with the agents found?"*
 
@@ -97,7 +97,7 @@ $ARGUMENTS
    - Create a complete table of all agents with ID, name, purpose, model, deployment status, owner, risk level, and oversight level
 
    **B. Capability Matrix**:
-   - For each agent, document: tools available, skills/capabilities, memory type (Session, Durable, Vector), and output types (Text, API, File, Action)
+   - For each agent, document: tools available, skills/capabilities, memory type (Session, Durable, Vector, Episodic), and output types (Text, API, File, Action)
 
    **C. Agent Dependencies** (Mermaid flowchart):
    - Create a dependency map showing how agents interact
@@ -112,19 +112,19 @@ $ARGUMENTS
    - Document current status (Active, In Development, Deprecating, Retired), creation date, last updated date, and version
    - Include lifecycle stage rationale
 
-   **F. Human Oversight Level**:
-   - Define oversight model per agent:
+   **F. Oversight Model**:
+   - Define the oversight level per agent, using exactly these three names (the same tiers `$arckit-agent-governance` assigns):
      - **Human-in-the-loop**: Critical decisions require explicit human approval
      - **Human-on-the-loop**: Human monitors and can intervene but doesn't approve each action
-     - **Autonomous with Audit**: Agent operates independently with comprehensive logging and periodic review
-   - Link oversight level to risk classification
+     - **Human-out-of-the-loop**: Agent operates independently with no human approval or real-time monitoring of each action; comprehensive logging and periodic (post-facto) review
+   - Link oversight level to risk classification, and record the approval gates, monitoring and escalation criteria for each agent
 
 7. **Read the quality checklist**:
 
    Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **AAGI** per-type checks pass. Fix any failures before proceeding.
 
 8. **Write the output**:
-   - Write to `projects/{project-dir}/ARC-{PROJECT_ID}-AAGI-v1.0.md`
+   - Write to `projects/{project-dir}/ARC-{PROJECT_ID}-AAGI-v{VERSION}.md`
    - Use the exact template structure from `agent-inventory-template.md`
    - Include Mermaid dependency diagram
    - Include all sections even if some are marked as "No agents found" or "TBD"
@@ -136,7 +136,7 @@ Before completing the document, populate document information fields:
 ### Auto-populated fields
 
 - `[PROJECT_ID]` → Extract from project path (e.g., "001")
-- `[VERSION]` → Start with "1.0" for new documents
+- `[VERSION]` → from `.arckit/references/version-detection.md`: "1.0" only when no earlier `ARC-{PROJECT_ID}-AAGI-v*.md` exists
 - `[DATE]` / `[YYYY-MM-DD]` → Current date in YYYY-MM-DD format
 - `[DOCUMENT_TYPE_NAME]` → Document purpose
 - `ARC-[PROJECT_ID]-AAGI-v[VERSION]` → Generated document ID
@@ -169,7 +169,7 @@ Before completing the document, populate document information fields:
 - Total number of agents inventoried (AGT-001, AGT-002, etc.)
 - Breakdown by deployment status (Prod, Staging, Dev, Planned)
 - Breakdown by risk level (Critical, High, Medium, Low)
-- Breakdown by oversight level (Human-in-the-loop, Human-on-the-loop, Autonomous)
+- Breakdown by oversight level (Human-in-the-loop, Human-on-the-loop, Human-out-of-the-loop)
 - Number of unique tools across all agents
 - Agent dependency count (number of agent-to-agent connections)
 - Agents requiring audit (count)
@@ -200,7 +200,7 @@ You should:
 - **Agent inventory is the foundation** for all subsequent agent architecture work (design, governance, security, maturity)
 - **Every agent MUST have an owner** — unowned agents are a governance risk
 - **Risk classification drives oversight**: Critical/High risk agents require Human-in-the-loop or Human-on-the-loop
-- **Low risk agents** can operate autonomously with audit logging
+- **Low risk agents** can run Human-out-of-the-loop, with audit logging
 - **Security classification is mandatory** — every agent needs sensitivity, access, isolation, and audit status defined
 - **Dependency map must show all agent-to-agent communication** — orphan agents indicate design gaps
 - **Use Mermaid flowchart TD syntax** for dependency diagrams (GitHub-renderable)
@@ -239,7 +239,7 @@ Create the comprehensive agent inventory following the template structure with a
 
 ### 2. Write Directly to File
 
-**Use the Write tool** to create `projects/{project-dir}/ARC-{PROJECT_ID}-AAGI-v1.0.md` with the complete agent inventory.
+**Use the Write tool** to create `projects/{project-dir}/ARC-{PROJECT_ID}-AAGI-v{VERSION}.md` with the complete agent inventory.
 
 **DO NOT** output the full document in your response. This would exceed token limits.
 
@@ -251,7 +251,7 @@ After writing the file, show ONLY a concise summary:
 ## Agent Inventory Complete ✅
 
 **Project**: [Project Name]
-**File Created**: `projects/[PROJECT]/ARC-{PROJECT_ID}-AAGI-v1.0.md`
+**File Created**: `projects/[PROJECT]/ARC-{PROJECT_ID}-AAGI-v{VERSION}.md`
 
 ### Inventory Summary
 
@@ -270,7 +270,7 @@ After writing the file, show ONLY a concise summary:
 **Oversight**:
 - Human-in-the-loop: [Number]
 - Human-on-the-loop: [Number]
-- Autonomous with Audit: [Number]
+- Human-out-of-the-loop: [Number]
 
 **Dependencies**: [Number] agent-to-agent connections mapped
 
@@ -281,7 +281,7 @@ After writing the file, show ONLY a concise summary:
 - Dependency Map (Mermaid flowchart)
 - Security Classification (sensitivity, access, isolation, audit)
 - Agent Lifecycle (status, dates, versions)
-- Oversight Levels (per-agent governance model)
+- Oversight Model (per-agent oversight level, approval gates, monitoring, escalation)
 - Traceability (ADMP, APP, PRIN links)
 
 ### Next Steps

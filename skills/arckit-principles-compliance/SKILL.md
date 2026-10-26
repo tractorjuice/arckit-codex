@@ -148,7 +148,7 @@ Load only the information needed for assessment. Do NOT read entire files - extr
 - Business requirements (BR-xxx) count and examples
 - Functional requirements (FR-xxx) count and examples
 - Non-functional requirements by category:
-  - Security (NFR-SEC-xxx or NFR-S-xxx)
+  - Security (NFR-SEC-xxx)
   - Performance (NFR-P-xxx)
   - Scalability (NFR-S-xxx)
   - Compliance (NFR-C-xxx)
@@ -331,7 +331,9 @@ Generate actionable next steps:
 Before writing the file, read `.arckit/references/quality-checklist.md` and verify all **Common Checks** plus the **PRIN-COMP** per-type checks pass. Fix any failures before proceeding.
 
 Use the **Write tool** to create:
-`projects/{project-dir}/ARC-{PROJECT_ID}-PRIN-COMP-v1.0.md`
+`projects/{project-dir}/ARC-{PROJECT_ID}-PRIN-COMP-v{VERSION}.md`
+
+Work out `{VERSION}` first with `.arckit/references/version-detection.md`: a re-run writes the next version beside the earlier scorecard, never over it, so compliance can be compared across gates.
 
 **Document Structure** (see template below)
 
@@ -390,7 +392,7 @@ Display concise summary (NOT full document):
 
 | Field | Value |
 |-------|-------|
-| **Document ID** | ARC-{PROJECT_ID}-PRIN-COMP-v1.0 |
+| **Document ID** | ARC-{PROJECT_ID}-PRIN-COMP-v{VERSION} |
 | **Project** | {PROJECT_NAME} (Project {PROJECT_ID}) |
 | **Document Type** | Principles Compliance Assessment |
 | **Classification** | [OFFICIAL / OFFICIAL-SENSITIVE] |
