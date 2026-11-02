@@ -107,6 +107,4 @@ Authority: FNIGC (federal-level OCAP training and certification); the affected F
 
 After completing this command, consider running:
 
-- `/arckit:data-model` -- OCAP-mapped data classifications and access controls feed the data model's stewardship and access policies.
-- `/arckit:ca-pia` -- Personal-information processing of Indigenous data inherits the PIA controls plus OCAP-derived restrictions.
 - `/arckit:ca-atip` -- ATIP severance design must reflect OCAP access and control determinations for Indigenous datasets.

@@ -130,7 +130,7 @@ After completing this command, consider running:
 - `/arckit:data-model` -- Data model evidence identifies training, inference, prompt, output, personal, sensitive, and derived data entities.
 - `/arckit:au-pia` -- AI fairness + automated decision-making findings feed APP 6 + APP 11 in the PIA.
 - `/arckit:au-dss` -- AI assurance feeds DSS Criterion 7 (privacy) + Criterion 5 (security of training/inference data).
-- `/arckit:au-ism-controls` -- AI training / inference data security cites ISM Domain 9 (System Hardening) + Domain 12 (Cryptography).
+- `/arckit:au-ism-controls` -- AI training / inference data security cites the ISM Guidelines for system hardening, system access, software development (AI application development) and cryptography.
 - `/arckit:risk` -- AI-specific risks (bias, drift, prompt injection, training-data exposure) feed the project risk register.
 - `/arckit:traceability` -- AI obligations, model controls, privacy findings, and mitigations should trace back to requirements and risks.
 - `/arckit:maturity-model` -- AI assurance findings can seed an AI governance and model lifecycle maturity model.

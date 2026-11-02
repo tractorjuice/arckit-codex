@@ -295,11 +295,11 @@ You should:
 - Prompt injection defences must cover both direct and indirect attack vectors
 - Output validation must be automated with human review escalation for flagged content
 - Secret management must follow zero-trust principles — no hardcoded credentials
-- Security architecture feeds into governance requirements — handoff to `/arckit:agent-governance` after completion
+- Security architecture runs after `/arckit:agent-governance` (it reads AAOV when present) and before `/arckit:agent-integration`, which reads AASE — handoff to `/arckit:agent-integration` after completion
 - **Markdown escaping**: When writing less-than or greater-than comparisons, always include a space after `<` or `>` (e.g., `< 15 min response`, `> 99% coverage`) to prevent markdown renderers from interpreting them as HTML tags or emoji
 
 ## Suggested Next Steps
 
 After completing this command, consider running:
 
-- `/arckit:agent-governance` -- Align security controls with governance requirements
+- `/arckit:agent-integration` -- Design inter-agent contracts within these security controls

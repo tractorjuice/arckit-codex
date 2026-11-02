@@ -65,6 +65,5 @@ The FITAA Regulations status MUST be flagged as "verified as of [date]" in the E
 After completing this command, consider running:
 
 - `/arckit:ca-charter` -- Charter §2 expression and association analysis is required for any registration scheme that engages protected speech or association.
-- `/arckit:ca-pia` -- Privacy Impact Assessment for personal information collected during arrangement registration.
-- `/arckit:ca-atip` -- Reconciles the public-facing register against the protected investigative dataset; required severance design for hybrid views.
-- `/arckit:ca-aia` -- Triggered when registration triage uses any automated decision-making, scoring, or risk classification.
+- `/arckit:ca-soia` -- The protected investigative dataset overlaps with Special Operational Information; the RCMP / CSIS coordination touchpoints in the Commissioner Liaison Protocol are set out in the handling plan. *(when Classified material (PROTECTED C / SECRET / TOP SECRET) is in scope)*
+- `/arckit:ca-ola` -- The public register, registration forms, acknowledgements and notices trigger Official Languages Act Part IV obligations.

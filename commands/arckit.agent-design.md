@@ -383,8 +383,9 @@ The footer should be populated with:
 - [ ] Set up tool contracts and MCP servers
 - [ ] Implement guardrails and safety layer
 - [ ] Develop testing framework
-- [ ] Run `/arckit:agent-integration` for multi-agent coordination
-- [ ] Run `/arckit:agent-security` for security review
+- [ ] Run `/arckit:agent-governance` for oversight, approvals and audit
+- [ ] Run `/arckit:agent-security` for security review (it reads the governance framework)
+- [ ] Run `/arckit:agent-integration` for multi-agent coordination (it reads the governance and security artefacts)
 
 ### Files Created
 
@@ -404,5 +405,4 @@ The footer should be populated with:
 
 After completing this command, consider running:
 
-- `/arckit:agent-integration` -- Design integration contracts for multi-agent systems
-- `/arckit:agent-security` -- Design security architecture for agents
+- `/arckit:agent-governance` -- Set oversight tiers, approvals and audit for the designed agents

@@ -22,7 +22,7 @@ $ARGUMENTS
 **RECOMMENDED** (read if available, note if missing):
 
 - **STKE** (Stakeholder Analysis) — Extract: Stakeholder drivers, goals, measurable outcomes, conflicts, engagement strategies
-- **STRAT** (Architecture Strategy) — Extract: Strategic vision, investment envelope, strategic themes, high-level direction
+- **STRAT** (Architecture Strategy, in this project or in 000-global) — Extract: Strategic vision, investment envelope, strategic themes, high-level direction
 
 ### Prerequisites 1b: Read external documents and policies
 
@@ -221,7 +221,7 @@ After writing the file, show a concise summary (NOT the full document):
 ### Synthesised From
 - ✅ Architecture Principles: ARC-000-PRIN-v[N].md
 - [✅/⚠️] Stakeholder Analysis: ARC-{P}-STKE-v[N].md
-- [✅/⚠️] Architecture Strategy: ARC-{P}-STRAT-v[N].md
+- [✅/⚠️] Architecture Strategy: ARC-{P}-STRAT-v[N].md (or ARC-000-STRAT-v[N].md in 000-global)
 
 ### Next Steps
 1. Review Architecture Vision with Architecture Board / Sponsor

@@ -173,7 +173,7 @@ Before completing the document, populate document information fields:
 - Number of unique tools across all agents
 - Agent dependency count (number of agent-to-agent connections)
 - Agents requiring audit (count)
-- Suggested next steps (e.g., "Run `$arckit-agent-security` to assess security posture" or "Run `$arckit-agent-design` for new agent architecture")
+- Suggested next steps (e.g., "Run `$arckit-agent-design` for new agent architecture", followed by `$arckit-agent-governance`, `$arckit-agent-security` and `$arckit-agent-integration` in that order; each of those reads the agent design)
 
 ## Example Usage
 
@@ -213,8 +213,8 @@ You should:
 ## Integration with Other Commands
 
 - **Output**: Feeds into `$arckit-agent-design` (architecture for new or modified agents based on inventory gaps)
-- **Output**: Feeds into `$arckit-agent-security` (security assessment for each inventoried agent)
 - **Output**: Feeds into `$arckit-agent-governance` (oversight framework built on inventory)
+- **Output**: Feeds into `$arckit-agent-security` (security assessment for each inventoried agent)
 - **Output**: Feeds into `$arckit-agent-integration` (integration patterns between inventoried agents)
 - **Output**: Feeds into `$arckit-agent-maturity` (maturity assessment across all agents)
 
@@ -286,9 +286,9 @@ After writing the file, show ONLY a concise summary:
 
 ### Next Steps
 
-- Run `$arckit-agent-security` to assess security posture for inventoried agents
 - Run `$arckit-agent-design` to design architecture for new or modified agents
-- Run `$arckit-agent-governance` to establish oversight frameworks
+- Then run `$arckit-agent-governance` to establish oversight frameworks
+- Then run `$arckit-agent-security` to assess security posture for inventoried agents
 ```
 
 **Statistics to Include**:
@@ -307,4 +307,3 @@ Generate the agent inventory now, write to file using Write tool, and show only 
 After completing this command, consider running:
 
 - `$arckit-agent-design` -- Design architecture for new or modified agents
-- `$arckit-agent-security` -- Assess security posture for inventoried agents

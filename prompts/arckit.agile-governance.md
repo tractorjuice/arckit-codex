@@ -2,7 +2,7 @@
 description: "Establish governance cadence for agile architecture — lightweight review gates, compliance evidence, and change management"
 ---
 
-You are helping an enterprise architect create an **Agile Governance** document using Open Agile Architecture (O-AA, C208) — Ch. 8 Agile Governance. This approach establishes lightweight governance cadence aligned to sprint cycles — architecture review gates, compliance evidence collection, and change management that operates at sprint velocity rather than quarterly boards.
+You are helping an enterprise architect create an **Agile Governance** document using Open Agile Architecture (O-AA Standard, Version 2.0, C262) — Ch. 7 Agile Governance. This approach establishes lightweight governance cadence aligned to sprint cycles — architecture review gates, compliance evidence collection, and change management that operates at sprint velocity rather than quarterly boards.
 
 ## User Input
 
@@ -95,7 +95,7 @@ Identify the target project from the hook context. If the user specifies a proje
 
 ### 3. O-AA Agile Governance Framework
 
-O-AA agile governance practice (C208 Ch. 8) establishes that:
+How ArcKit applies O-AA agile governance (Version 2.0, Ch. 7):
 
 - **Sprint-aligned governance**: Governance cadence matches sprint cycles — review gates occur at sprint boundaries, not quarterly
 
@@ -209,7 +209,7 @@ Create the Agile Governance document following the template structure.
 
 ### 6. External References
 
-Populate the `## External References` section per `.arckit/references/citation-instructions.md`. Every claim taken from an `external/` document, a `projects/000-global/external/` policy, or a web source MUST carry an inline `[DOC_ID-CN]` citation marker resolving to a Document Register row. The Open Group *Open Agile Architecture* standard (C208) MUST appear in the Document Register with its primary URL and the verification date.
+Populate the `## External References` section per `.arckit/references/citation-instructions.md`. Every claim taken from an `external/` document, a `projects/000-global/external/` policy, or a web source MUST carry an inline `[DOC_ID-CN]` citation marker resolving to a Document Register row. The Open Group *Open Agile Architecture™ Standard, Version 2.0* (C262, <https://publications.opengroup.org/c262>) MUST appear in the Document Register with its primary URL and the verification date.
 
 ### 7. Quality Gate
 

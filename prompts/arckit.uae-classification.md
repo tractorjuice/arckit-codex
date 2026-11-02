@@ -58,5 +58,5 @@ This citation MUST be present in the artefact's External References section.
 After completing this command, consider running:
 
 - `/arckit:data-model` -- The classification register feeds the data model entity-by-entity sensitivity tags.
-- `/arckit:uae-cloud-residency` -- Residency obligations follow from the classification level (Confidential and above require UAE-resident sovereign cloud).
+- `/arckit:uae-cloud-residency` -- Residency obligations follow from the classification level (under the National Cloud Security Policy v2.0, Confidential and above are stored in the UAE on a Partial Sovereign or Sovereign Cloud).
 - `/arckit:uae-data-sharing` -- Data sharing agreements depend on per-dataset classification.

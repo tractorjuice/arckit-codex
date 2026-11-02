@@ -107,7 +107,7 @@ After completing this command, consider running:
 - `/arckit:dfd` -- DFDs make OT data flows, protocols, stores, and cross-boundary transfers explicit for cyber and safety review.
 - `/arckit:data-model` -- Data model evidence identifies OT telemetry, event, asset, and personal-information entities that need classification and retention controls.
 - `/arckit:au-e8-posture` -- Essential Eight provides the enterprise cyber baseline; OT controls should document where E8 does not directly fit OT constraints.
-- `/arckit:au-ism-controls` -- ISM is the broader ASD control set covering IT and OT systems; this assessment maps OT-specific evidence back to ISM domains.
+- `/arckit:au-ism-controls` -- ISM is the broader ASD control set covering IT and OT systems; this assessment maps OT-specific evidence back to ISM guidelines.
 - `/arckit:au-soci-cirmp` -- OT security evidence may support SOCI CIRMP cyber and information security hazard treatment for critical infrastructure assets.
 - `/arckit:servicenow` -- ServiceNow/CMDB design should consume OT component, ownership, dependency, support, and incident-routing evidence.
 - `/arckit:risk` -- OT exposure, safety, availability, and remote-access gaps should feed the project risk register.

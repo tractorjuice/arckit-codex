@@ -71,5 +71,4 @@ Access to Information Act (R.S.C., 1985, c. A-1) and Privacy Act (R.S.C., 1985, 
 
 After completing this command, consider running:
 
-- `/arckit:data-model` -- Severance rules in the ATIP reconciliation feed back into the data model's classification flags and access controls.
-- `/arckit:ca-pia` -- Personal-information register from the Privacy Impact Assessment is the authoritative source for the §4–§8 use/disclosure register here.
+- `/arckit:adr` -- Severance design choices for hybrid public/protected views (what the public view suppresses, under which exemption, and how redaction is logged) warrant Architecture Decision Records.

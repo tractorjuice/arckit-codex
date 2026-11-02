@@ -143,6 +143,6 @@ This command focuses on **software-as-medical-device** (SaMD) and **AI-as-medica
 After completing this command, consider running:
 
 - `/arckit:uk-nhs-dcb0129` -- DCB0129 hazard log feeds the ISO 14971 risk file expected by both UK MDR and EU MDR — run uk-nhs-dcb0129 first if clinical-safety/HAZARD-LOG.md is not present.
-- `/arckit:uk-nhs-dtac` -- DTAC consumes the classification statement to determine procurement assurance route.
+- `/arckit:uk-nhs-dtac` -- DTAC question C1.1.1 asks whether the product is Software or AI as a Medical Device under UK MDR 2002; a Yes needs a completed Pre-Acquisition Questionnaire.
 - `/arckit:risk` -- Project risk register cross-references regulatory-classification risks (misclassification, market-access risk, post-market surveillance failure).
 - `/arckit:adr` -- Major regulatory routing decisions (e.g. UKCA self-declare vs Approved Body, EU MDR via Notified Body vs not) belong in an ADR.
