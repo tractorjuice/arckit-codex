@@ -142,6 +142,7 @@ All artifacts must pass these 10 checks:
 - Evaluation criteria weighted and weights total 100%
 - Scoring methodology defined (scale, definitions per score)
 - Vendor comparison matrix present with scores per criterion
+- Integrity Findings recorded for every scored vendor: each instance gives the type, file and location, with no supplier text, or it states None found
 
 ### TRAC -- Traceability Matrix
 
@@ -319,12 +320,14 @@ All artifacts must pass these 10 checks:
 - Search parameters and filters documented
 - Results filtered and ranked by relevance
 - Supplier capabilities and pricing summarized per result
+- Integrity Findings section present: each instance gives the source, location and short quote, or it states None found
 
 ### GCLC -- G-Cloud Clarification
 
 - Each question linked to an evaluation criterion
 - Expected response format specified per question
 - Scoring guidance included for evaluating responses
+- Integrity Findings stated in each service's risk assessment, carried over from the GCLD, or it states None found
 
 ### DIAG -- Architecture Diagram
 
@@ -361,6 +364,7 @@ All artifacts must pass these 10 checks:
 - Architecture patterns assessed against requirements
 - Non-functional requirements coverage evaluated
 - Technical risks and technical debt identified
+- Integrity Findings section present: each instance gives the file, location and short quote, or it states None found
 - Executive Summary is section 1 and its first sentence states the verdict
 
 ### DLDR -- Detailed-Level Design Review
@@ -368,6 +372,7 @@ All artifacts must pass these 10 checks:
 - Detailed design validated against HLD
 - Interface specifications reviewed for completeness
 - Performance and scalability implications assessed
+- Integrity Findings section present: each instance gives the file, location and short quote, or it states None found
 - Executive Summary is section 1 and its first sentence states the verdict
 
 ### PRIN -- Architecture Principles
@@ -768,6 +773,39 @@ All artifacts must pass these 10 checks:
 - Annual review cycle set with a named owner and next review date
 - Residual risks (data-format lock-in, proprietary managed-service coupling, provider non-cooperation) identified with likelihood, impact, and mitigation
 
+### NORA -- NORA Conformance Assessment
+
+- `nl-references.py` was run first, and a `manual` or `offline` status is recorded under Source limitations with the note and error the script gave
+- The NORA extract used is named in Scope and Source with its source version, and is registered in External References with the CC BY-ND 3.0 NL licence line
+- All 17 architectuurprincipes (NAP01–NAP17) are assessed in ID order; no retired basisprincipe (BP) or afgeleid principe (AP) is assessed
+- Every stelling is quoted verbatim from the extract with a citation row — no NORA text is paraphrased, summarised or translated
+- Every NAP, implicatie and kwaliteitsdoel ID, title and relation matches the extract exactly — none is invented, renumbered or "corrected"
+- Every implicatie listed under a NAP in the extract has a status, evidence and gap; missing evidence is recorded as Unknown, never as Implemented
+- Each NAP's conformance follows the stated derivation rule, and *Not applicable* always carries a justification
+- No overall percentage or single NORA score is reported — the distribution across the 17 NAPs is shown instead
+- The Vijflaagsmodel view counts each NORA implicatie once per layer it is tagged with, not once per NAP, and leaves GEMMA implicaties out
+- Kwaliteitsdoel and kernwaarde roll-ups use only relations stated in the extract; unresolved relations from the extract's Data notes are listed under Source limitations
+- Deviations are separated from gaps, and each deviation has an ADR reference or "ADR required"
+- Every gap has an owner and a target date, *To be assigned* where the input and the project context give none
+- Non-conformance is not described as a legal breach
+- GEMMA mode is recorded with its reason; it is on only for a gemeente (or an explicit override) with a GEMMA principles extract present
+- In GEMMA mode, each GAP is matched to its NAP by title or NORA link, never by number alone, and every GEMMA implicatie is quoted verbatim and numbered `GAPnn.i` in extract order, with that numbering declared in Scope and Source
+- NAP conformance and GAP conformance are reported separately and never merged into one result
+- In GEMMA mode, Section 3b assesses every principle whose Bron is GEMMA (GAP18 onwards) in ID order; otherwise it says GEMMA mode is off
+
+### GEMMA -- GEMMA Alignment Assessment
+
+- `nl-references.py` was run first, and a `manual` or `offline` status is recorded under Source limitations with the note and error the script gave
+- The GEMMA referentiecomponenten extract and at least one landscape source are named in Scope and Sources with their versions or dates
+- Every referentiecomponent, bedrijfsfunctie, applicatieservice and standaard name matches the extract exactly — none is invented, merged or renamed
+- Every application carries a confidence: Stated mappings cite their source, Inferred mappings give a rationale, and Unmapped applications are not forced onto a component
+- Overlaps are examined for sector-specific use before a rationalisation candidate is proposed
+- Unfilled components carry a relevance judgement (Expected / Possibly not needed / To be confirmed) with a reason
+- Bedrijfsfunctie coverage distinguishes *Not supported* (landscape gap) from *No GEMMA component* (reference-model property)
+- Standards support and data exchange are evidence-based, with Unknown as the default where evidence is missing
+- Every roadmap candidate traces to a finding in Sections 3–6, and no product or supplier is recommended or called GEMMA-compliant
+- Every roadmap candidate has a priority (High / Medium / Low) with a reason
+
 ### ADMP -- TOGAF ADM Preliminary Phase
 
 - Architecture Vision stated as an outcome, not a restatement of scope
@@ -918,6 +956,59 @@ All artifacts must pass these 10 checks:
 - Exception handling records accepted risk with sign-off and a resolution deadline
 - Distributed model justified against a traditional review board, with the conditions for reverting stated
 - Governance outputs feed the compliance evidence consumed by OASEC, so the two are not parallel universes
+
+### ARC42 -- arc42 Architecture Description
+
+- All 12 arc42 sections present in order, none removed or renumbered
+- Every populated section cites the source artefact(s) it summarises by Document ID
+- Content summarised from sources, not copied wholesale; diagram code reproduced unchanged from its cited DIAG or DFD artefact
+- Nothing invented: a section with no source says so and has a matching Gap Register entry, rather than plausible filler
+- Anything inferred rather than stated in a source is marked "Inferred"
+- Requirement, ADR and risk IDs used exactly as they appear in their source artefacts
+- Gap Register names the arc42 section, what is missing and the `/arckit:*` command that would fill it
+- Source Artefacts table lists the version of every artefact read, so a reader can tell when the description is out of date
+- arc42 attribution notice (CC BY-SA 4.0, Peter Hruschka and Gernot Starke) kept in the document; the template's YAML frontmatter and `SPDX-License-Identifier` comment not copied into it
+
+### QUAL -- Quality Scenarios
+
+- Every quality goal cites the requirement, stakeholder goal or principle that states it; none is added without a source
+- Each goal has one primary Q42 dimension, chosen by what it constrains
+- Three to five Top quality goals marked, with what the ranking is based on ("Inferred" when no source ranks them)
+- A scenario exists only for a goal with a measurable target, and its response measure quotes that target exactly
+- Every scenario is marked "Inferred" and cites the requirement it derives from
+- Goals without a measurable target are listed as "Target needed" with the command that would add one, never given an estimated target
+- Verification approaches not stated in a source are marked "Proposed"; scenarios with no approach say "No approach recorded"
+- Q42 attribution line (CC BY-SA 4.0, Gernot Starke) kept in the document; Q42's own definitions not copied into it; the template's YAML frontmatter and `SPDX-License-Identifier` comment not copied into it
+
+### CONC -- Crosscutting Concepts
+
+- Every catalogue concept has exactly one status: Decided, Partially decided, Open, Not applicable or Not assessed
+- Decided and Partially decided concepts cite the ADR, design or mandatory principle that settles them; Not applicable cites the source that shows it
+- Rules summarise their sources, reusing ADR numbers and requirement IDs exactly
+- Open concepts state why they are needed, list candidate approaches labelled "Proposed — not decided", and name the `/arckit:adr` command that would decide them
+- No concept raised to Decided on the strength of a proposal, a common practice or a vendor default
+- As-built differences from a codebase audit recorded as findings, not corrections
+
+### DEBT -- Technical Debt Register
+
+- Every item links the source that recorded it (CDAU finding, CONF ATD item, review condition, ADR consequence, accepted risk or exception) by ID
+- Duplicates across sources merged into one item that links every source
+- No item added that no source records; debt and risk kept apart and linked
+- Interest, principal and severity taken from sources, or written "Not stated" / "Not rated" — never estimated
+- Item IDs (TD-NNN) kept stable across versions; repaid items marked Resolved, not deleted
+- Repayment candidates labelled "Proposed"
+
+### SDDH -- SDD Handover Pack
+
+- Built from the latest arc42 description, with any source newer than it recorded in the Gap Register
+- Every carried requirement, decision and principle tagged `[ArcKit <ID>]`, with requirement IDs exactly as REQ writes them
+- The tag convention tells the delivery team to keep Spec Kit's local IDs (FR-001, SC-001) and add the ArcKit tag after the statement
+- Every Specify Input starts with the project's ownership tag, `[ArcKit Project NNN]`, so traceability can tell this project's features from another project's with the same requirement IDs
+- Constitution rules each cite a principle, constraint or decided concept; no rule without a source
+- Shared Plan Context lists accepted ADRs only, with Proposed ADRs separate and marked not yet decided
+- One feature brief per epic (or per business requirement, marked "Inferred"), each with Specify Input, Requirements Carried, Success Criteria Candidates and Plan Input
+- Gaps the sources leave open written as `[NEEDS CLARIFICATION: ...]`, never filled with assumptions
+- Evidence Loop names `/arckit:traceability`, `/arckit:conformance` and `/arckit:repo-audit`
 
 ### AAGI -- AI Agent Inventory
 

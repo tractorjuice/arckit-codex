@@ -1,6 +1,6 @@
 {
   "name": "arckit-codex",
-  "version": "6.19.0",
+  "version": "6.20.0",
   "description": "Enterprise architecture governance, procurement, research, and delivery workflows for Codex.",
   "author": {
     "name": "ArcKit",
@@ -8,7 +8,7 @@
   },
   "homepage": "https://github.com/tractorjuice/arckit-codex",
   "repository": "https://github.com/tractorjuice/arckit-codex",
-  "license": "MIT",
+  "license": "MIT AND CC-BY-SA-4.0",
   "keywords": [
     "enterprise-architecture",
     "governance",

@@ -103,6 +103,14 @@ export const DOC_TYPES = {
   'OAAL':      { name: 'ADM Lite Sprint Mapping',          category: 'Architecture' },
   'OASEC':     { name: 'Agile Security',                   category: 'Governance', severity: 'HIGH' },
   'OAGOV':     { name: 'Agile Governance',                 category: 'Governance' },
+  // arc42 overlay (arckit-arc42, community) — an arc42 architecture description
+  // assembled from the project's existing artefacts, one per project, plus the
+  // source artefacts for its sections 8, 10 and 11 and the SDD handover pack.
+  'ARC42':     { name: 'arc42 Architecture Description',   category: 'Architecture' },
+  'QUAL':      { name: 'Quality Scenarios',                category: 'Architecture' },
+  'CONC':      { name: 'Crosscutting Concepts',            category: 'Architecture' },
+  'DEBT':      { name: 'Technical Debt Register',          category: 'Architecture' },
+  'SDDH':      { name: 'SDD Handover Pack',                category: 'Planning' },
   // Governance — universal best-practice (no regime tag, HIGH-severity)
   'RISK':      { name: 'Risk Register',                    category: 'Governance', severity: 'HIGH' },
   'TRAC':      { name: 'Traceability Matrix',              category: 'Governance', severity: 'HIGH' },
@@ -251,6 +259,8 @@ export const DOC_TYPES = {
   'TBB':       { name: 'Te Beschermen Belangen (TBB) Category Determination', category: 'Compliance', regime: 'NL', severity: 'HIGH' },
   'BIO2':      { name: 'BIO2 Conformance Assessment',                   category: 'Compliance',  regime: 'NL', severity: 'HIGH' },
   'NLEXIT':    { name: 'NL Cloud Exit Plan',                            category: 'Governance',  regime: 'NL' },
+  'NORA':      { name: 'NORA Conformance Assessment',                   category: 'Governance',  regime: 'NL' },
+  'GEMMA':     { name: 'GEMMA Alignment Assessment',                    category: 'Architecture', regime: 'NL' },
   // UK Financial Services Payments Overlay (arckit-uk-finance) — community-contributed,
   // EXPERIMENTAL. Outputs require review by qualified UK FS regulatory counsel + firm
   // MLRO / Compliance Officer before reliance.

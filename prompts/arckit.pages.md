@@ -249,6 +249,12 @@ Only include these known artifact types. Match by type code pattern `ARC-{PID}-{
 | **Architecture (Community-contributed — Open Agile Architecture Overlay)** | | | |
 | | OAPR | `ARC-*-OAPR-*.md` | Product Architecture |
 | | OAAL | `ARC-*-OAAL-*.md` | ADM Lite Sprint Mapping |
+| **Architecture (Community-contributed — arc42 Overlay)** | | | |
+| | ARC42 | `ARC-*-ARC42-*.md` | arc42 Architecture Description |
+| | QUAL | `ARC-*-QUAL-*.md` | Quality Scenarios |
+| | CONC | `ARC-*-CONC-*.md` | Crosscutting Concepts |
+| | DEBT | `ARC-*-DEBT-*.md` | Technical Debt Register |
+| | SDDH | `ARC-*-SDDH-*.md` | SDD Handover Pack |
 | **Governance** | | | |
 | | RISK | `ARC-*-RISK-*.md` | Risk Register |
 | | TRAC | `ARC-*-TRAC-*.md` | Traceability Matrix |
@@ -426,6 +432,9 @@ Only include these known artifact types. Match by type code pattern `ARC-{PID}-{
 | | BIO2 | `ARC-*-BIO2-*.md` | BIO2 Conformance Assessment |
 | **Governance (Community-contributed — Netherlands Public Sector Overlay)** | | | |
 | | NLEXIT | `ARC-*-NLEXIT-*.md` | NL Cloud Exit Plan |
+| | NORA | `ARC-*-NORA-*.md` | NORA Conformance Assessment |
+| **Architecture (Community-contributed — Netherlands Public Sector Overlay)** | | | |
+| | GEMMA | `ARC-*-GEMMA-*.md` | GEMMA Alignment Assessment |
 | **Compliance (Community-contributed — UK NHS Clinical Safety Overlay)** | | | |
 | | NHSDTAC | `ARC-*-NHSDTAC-*.md` | NHS Digital Technology Assessment Criteria (DTAC) |
 | | NHSMDR | `ARC-*-NHSMDR-*.md` | UK MDR + EU MDR SaMD/AIaMD Classification |
