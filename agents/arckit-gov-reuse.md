@@ -345,4 +345,4 @@ Return ONLY a concise summary including:
 - **Helpers** — `.arckit/scripts/bash/create-project.sh` · `.arckit/scripts/generate-document-id.mjs`
 - **MCP server** — `govreposcrape` (`search_uk_gov_code` over 24,500+ UK government repositories)
 - **External tools** — `WebFetch` (GitHub repo pages for deeper assessment)
-- **Related commands** — `/arckit:requirements` (input) · `/arckit:research` (build-vs-buy comparison) · `/arckit:gov-code-search` · `/arckit:gov-landscape`
+- **Related commands** — `/arckit:requirements` (input) · `/arckit:research` (market options) · `/arckit:gov-code-search` · `/arckit:gov-landscape`

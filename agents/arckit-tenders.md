@@ -282,7 +282,7 @@ Return ONLY a concise summary to the user:
 - **Helpers** — `.arckit/scripts/generate-document-id.mjs`
 - **MCP server** — `uk-tenders` (read-only tools only; `query_sql` never granted)
 - **External tools** — none
-- **Related commands** — `/arckit:sobc` (downstream Economic Case) · `/arckit:risk` (downstream concentration risk) · `/arckit:research` (build-vs-buy context) · `/arckit:competitors` (rival landscape)
+- **Related commands** — `/arckit:sobc` (downstream Economic Case) · `/arckit:risk` (downstream concentration risk) · `/arckit:research` (market context) · `/arckit:competitors` (rival landscape)
 
 ## Important Notes
 
