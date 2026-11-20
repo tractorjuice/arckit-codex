@@ -46,7 +46,7 @@ Reads the JSON backlog produced by `/arckit:backlog FORMAT=json` and pushes it t
 Find the project directory:
 
 - Look in `projects/` for subdirectories
-- If multiple projects, ask which one
+- If multiple projects and the argument does not name exactly one, list them, then ask the user which, offering them as the choices with none marked as recommended (`.arckit/references/interview-pattern.md`, section 5). With no answer, stop: do not pick one
 - If single project, use it
 
 Locate the backlog JSON file:

@@ -20,7 +20,7 @@ $ARGUMENTS
 
 - Example: `001` or `001-payment-gateway`
 - If omitted in a single-project repo, the only project is auto-selected.
-- If omitted in a multi-project repo, the hook exits silently and you should ask the user which project they meant.
+- If omitted in a multi-project repo, the hook exits silently. Then, or when the argument matches more than one project, list the projects, then ask the user which, offering them as the choices with none marked as recommended (`.arckit/references/interview-pattern.md`, section 5). With no answer, stop: do not pick one.
 
 ---
 

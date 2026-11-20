@@ -74,7 +74,7 @@ $ARGUMENTS
 
 6. **If no impacts found**, report that the document has no downstream dependencies. Note this may indicate a traceability gap — suggest running `/arckit:traceability` to check coverage.
 
-7. **If the query matches multiple documents**, list them and ask the user to specify which one to analyse.
+7. **If the query matches multiple documents**, list them, then ask the user which, offering them as the choices with none marked as recommended (`.arckit/references/interview-pattern.md`, section 5). With no answer, stop: the list is the result.
 
 ## Suggested Next Steps
 
